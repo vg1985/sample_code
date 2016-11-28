@@ -1,0 +1,142 @@
+<% provide(:title, 'SMS Report') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Reports</li>
+  <li class="active">SMS Report</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'reports'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.SMSReportHandler.init();
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+      <div class="panel panel-default">
+        <%=form_tag '/reports/sms', method: :get, id: 'include_all_form' do%>
+          <%=hidden_field_tag :include_all%>
+        <%end%>
+
+        <%=form_tag '/reports/get_sms', id: 'adv_sms_form' do%>
+        <%=hidden_field_tag :format, 'pdf' %>
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="#" class="adv-sms">−</a>
+          </div><!-- panel-btns -->
+          <div class="row">
+            <div class='col-sm-1 mt10 text-center' style="width:6%;">
+              Period:
+            </div>
+            <div class='col-sm-2'>
+              <%= select_tag :date_range, options_for_select(date_range_options), {include_blank: 'Custom', id: 'date_range_select' } %>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              From:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :from_date, Time.now.in_time_zone.strftime('%Y-%m-%d 00:00:00'), id: 'from_date', class: 'form-control', readonly: false%>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              To:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :to_date, Time.now.in_time_zone.strftime('%Y-%m-%d 23:59:59'), id: 'to_date', class: 'form-control', readonly: false%>
+            </div>
+          </div>
+        </div>
+        <%if policy(:report).select_carrier? -%>
+        <div style="display: block;" class="panel-body">
+          <div class='row'>
+            <div class='col-sm-4'>
+              <h4>Adv. Filters</h4>
+            </div>
+            <div class='col-sm-4'>
+              <h4>Group By</h4>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-sm-1 mt10'>
+              Carrier
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :sms_carrier_id, options_for_select(@carriers), {prompt: 'All Carriers', id: 'sms_carrier_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Option
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :group_by, options_for_select(sms_group_by_options(true)), {include_blank: false, id: 'group_option_select'} %>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              Use TZone:
+            </div>
+            <div class='col-sm-2'>
+              <%=time_zone_select('', 'time_zone', ActiveSupport::TimeZone.all.sort, {default: 'UTC'}, {id: 'tz_select'})%>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              &nbsp;
+            </div>
+            <div class='col-sm-3 mt10'>
+              <div class="ckbox ckbox-primary">
+                <%=check_box_tag :include_all_chk, 1, params[:include_all] == '1'%>
+                <label for="include_all_chk">Show all disabled/deleted.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%else%>
+        <div style="display: block;" class="panel-body">
+          <div class='row'>
+            <div class='col-sm-4'>
+              <h4>Adv. Filters</h4>
+            </div>
+            <div class='col-sm-4'>
+              <h4>Group By</h4>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-sm-1 mt10'>
+              Use TZone:
+            </div>
+            <div class='col-sm-2'>
+              <%=time_zone_select('', 'time_zone', ActiveSupport::TimeZone.all.sort, {default: 'UTC'}, {id: 'tz_select'})%>
+            </div>
+            <div class='col-sm-1 col-sm-offset-1 mt10'>
+              Option
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :group_by, options_for_select(sms_group_by_options(false)), {id: 'group_option_select'} %>
+            </div>
+          </div>
+        </div>
+        <%end -%>
+        <div class="panel-footer"> 
+          <div class='row'>
+            <div class='col-sm-12 text-center'>
+              <%=link_to 'Generate Report', 'javascript:void(0);', class: 'btn btn-primary submit-btn' %>
+              <!--<input type="submit" name="action" value="Generate Report" class='btn btn-primary submit-btn' />-->
+              <%=link_to 'Reset', '/reports/sms', class: 'btn btn-white', onclick: 'App.overlayModal.show();' %>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+      <div class="panel panel-default reports-container">
+        <div class="panel-body" style="display:none;">
+          <div class="row">
+            <div class="col-sm-6 text-right"></div>
+          </div>
+          <div class="table-responsive sip-style-selectable" id="report_data_container">
+            
+          </div>
+        </div>
+      </div>
+  </div>    
+</div>

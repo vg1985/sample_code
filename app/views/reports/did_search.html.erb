@@ -1,0 +1,229 @@
+<% provide(:title, 'DID Search Report') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Reports</li>
+  <li class="active">DID Search Report</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'reports' %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.CdrSearchReportHandler.setUrls(['/reports/check_template_name', '<%=reports_did_search_path%>', '<%=reports_paginated_did_search_path%>']);
+  App.DidSearchReportHandler.init();
+  <%if @user_filter.present? && @query.present?%>
+    App.DidSearchReportHandler.initializeWithValues(<%=@user_filter.id.to_s%>, <%=@query.to_json.html_safe%>);
+  <%end%>
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+      <div class="panel panel-default">
+        <%=form_tag '/reports/did_search', method: :get, id: 'include_all_form' do%>
+          <%=hidden_field_tag :include_all%>
+        <%end%>
+
+        <%=form_tag reports_get_did_search_path, id: 'adv_crit_form' do%>
+        <%=hidden_field_tag :format, 'pdf' %>
+        <%=hidden_field_tag :page_action %>
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <%if params[:filter].present?%>
+              <a href="#" class="adv-crit">-</a>
+            <%else%>
+              <a href="#" class="adv-crit maximize">+</a>
+            <%end%>
+          </div><!-- panel-btns -->
+          <div class="row">
+            
+            <div class='col-sm-1 mt10 text-center' style="width:6%;">
+              Period:
+            </div>
+            <div class='col-sm-2'>
+              <%= select_tag :date_range, options_for_select(date_range_options), {include_blank: 'Custom', id: 'date_range_select' } %>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              From:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :from_date, Time.now.in_time_zone.strftime("%Y-%m-%d 00:00:00"), id: 'from_date', class: 'form-control', readonly: false%>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              To:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :to_date, Time.now.in_time_zone.strftime("%Y-%m-%d 23:59:59"), id: 'to_date', class: 'form-control', readonly: false%>
+            </div>
+          </div>
+        </div>
+        <%if params[:filter].present?%>
+          <div class="panel-body">
+        <%else%>
+          <div style="display: none;" class="panel-body">
+        <%end%>
+          <div class="row">
+           
+            <div class="col-sm-6">
+              <div class="row">
+                <div class='col-sm-4'>&nbsp;</div>
+              </div>
+              
+              <div class="row mt20" style="margin">
+                <div class='col-sm-4 mt10'>
+                  Carrier
+                </div>
+                <div class='col-sm-6'>
+                  <%= select_tag :ingress_carrier_id, options_for_select(@carriers), {prompt: 'All Carriers', id: 'ingress_carrier_select'} %>
+                </div>
+              </div>
+              
+              <div class="row mt20" style="margin">
+                <div class='col-sm-4 mt10'>
+                  Duration
+                </div>
+                <div class='col-sm-6'>
+                  <%= select_tag :duration_id, options_for_select({'Zero': 0, 'Non-zero': 1}), {prompt: 'All Durations', id: 'duration_select'} %>
+                </div>
+              </div>
+              
+              <div class="row mt20" style="margin">
+                <div class='col-sm-4 mt10'>
+                  Vendor
+                </div>
+                <div class='col-sm-6'>
+                   <%= text_field_tag :callid%>
+                </div>
+               
+              </div>
+            </div>
+            
+            <div class="col-sm-6">
+              <div class="row">
+                <div class='col-sm-4'>
+                    <h4>Other</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class='col-sm-2 mt10'>
+                  Columns
+                </div>
+                <div class='col-sm-10' id="orig_group_options">
+                  <div>
+                    <a href="javascript:void(0);" id="sel_all_cols">Select All</a> | 
+                    <a href="javascript:void(0);" id="remove_all_cols">Remove All</a> |
+                    <a href="javascript:void(0);" id="invert_cols">Invert</a>
+                  </div>
+                  <div class="multiselect">
+                    <%
+                    if policy(:report).select_carrier?
+                      columns_select = cdr_columns_select(true)
+                      default_cols = cdr_search_default_cols
+                      sortby_cols = cdr_sortby_cols
+                    else
+                      columns_select = cdr_columns_select(false)
+                      default_cols = carrier_cdr_search_default_cols
+                      sortby_cols = cdr_carrier_sortby_cols
+                    end 
+                    -%>
+                    <%columns_select.each do |k, v| -%>
+                      <div class="ckbox ckbox-success">
+                        <%=check_box_tag 'sel_cols[]', k, default_cols.keys.include?(k), id: k, class: 'display-col' %>
+                        <label for="<%=k%>"><%=v%></label>
+                      </div>
+                    <%end -%>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt20" style="margin">
+                <div class='col-sm-2'>
+                  Use TZone
+                </div>
+                <div class='col-sm-6'>
+                  <%=time_zone_select('', 'time_zone', ActiveSupport::TimeZone.all.sort, {default: 'UTC'}, {id: 'tz_select'})%>
+                </div>
+              </div>
+              <div class="row mt10" style="margin">
+                <div class='col-sm-2 mt10'>
+                  Sort By
+                </div>
+                <div class='col-sm-6'>
+                  <%= select_tag :sort_by, options_for_select(sortby_cols.invert), {include_blank: true, id: 'sort_by_select'} %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer"> 
+            <div class='row'>
+                <div class='col-sm-12 text-center'>
+                    <div class="btn-group mr5 mt10">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">
+                            Generate Report
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <%=link_to 'On Screen', 'javascript:void(0);', class: 'submit-btn', data: {action: 'onscreen'} %>
+                        </li>
+                        <li>
+                            <%=link_to 'Export to CSV', 'javascript:void(0);', class: 'submit-btn', data: {action: 'export'} %>
+                        <li>
+                        </ul>
+                    </div>
+                    
+                    <!--<input type="submit" name="action" value="Generate Report" class='btn btn-primary submit-btn' />-->
+                    <%=link_to 'Reset', '/reports/did_search', class: 'btn btn-white', onclick: 'App.overlayModal.show();' %>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+      <div class="panel panel-default reports-container">
+        <div class="panel-body" style="display:none;">
+          <div class="row">
+            <div class="col-sm-6 text-right"></div>
+          </div>
+          <div class="table-responsive dataTables_nowrap cdr-search-container sip-style-selectable" id="report_data_container">
+            
+          </div>
+        </div>
+      </div>
+  </div>    
+</div>
+
+<div class="modal fade save-template-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Save As Search Template</h4>
+          </div>
+          <%=form_for :search_template, url: '/reports/save_cdr_template', remote: true, method: :post, html: {id: 'save_template_form', class: 'form-bordered'} do |f|%>
+            <%=f.hidden_field :query%>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Template Name:</label>
+              <div class="col-sm-9">
+                <%=f.text_field :name, class: 'form-control', maxlength: 25, style: 'width:50%' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class='col-sm-3 mt10'>
+                Description:
+              </label>
+              <div class='col-sm-6'>
+                <%=f.text_area :description, class: 'form-control'%>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+              <label class="col-sm-3"></label>
+              <%= f.submit 'Save', class: 'btn btn-primary' %>
+              <%=link_to 'Cancel', '#', class: 'btn btn-white', data: {dismiss: 'modal'}, 'aria-hidden': true%>
+          </div><!-- panel-footer -->
+          <%end%>
+        </div>      
+    </div>
+</div>
+

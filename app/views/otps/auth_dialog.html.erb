@@ -1,0 +1,93 @@
+<div class="modal-header">
+	<h4 class="modal-title">
+		<span class="glyphicon glyphicon-user"></span> OTP Authorization Required
+	</h4>
+</div>
+<%both_option_enabled = @otp_settings[:sms_enabled] == '1' && @otp_settings[:email_enabled] == '1'%>
+
+<div class="modal-body">
+	<%if both_option_enabled -%>
+	<div class="row">
+		<div class="col-md-3">Send OTP via:</div>
+		<div class="col-md-2">
+			<div class="rdio rdio-primary">
+			<input id="viaEmailRadio" type="radio" value="email" name="send_via" style="margin:0px;">
+			<label for="viaEmailRadio">Email</label>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="rdio rdio-primary">
+			<input id="viaSmsRadio" type="radio" value="sms" name="send_via" style="margin:0px;">
+			<label for="viaSmsRadio">SMS</label>
+			</div>
+		</div>
+	</div>
+	<%end -%>
+
+	<%if @otp_settings[:sms_enabled] == '1' -%>
+	<div class="row mobile_options" <%=both_option_enabled ? 'style=display:none;' : ''%>>
+		<div class="col-md-12">
+            <p>Please select the mobile number to receive your One Time Password (OTP) on.</p>
+        </div>
+	</div>
+	<%end -%>
+
+	<%if @otp_settings[:email_enabled] == '1' -%>
+	<div class="row email_options" <%=both_option_enabled ? 'style=display:none;' : ''%>>
+		<div class="col-md-12">
+            <p>Please select the email to receive your One Time Password (OTP) on.</p>
+        </div>
+	</div>
+	<%end%>
+
+	<div class="row">
+		<div class="col-md-8">
+			<%if @otp_settings[:sms_enabled] == '1' -%>
+			<span class="mobile_options" <%=both_option_enabled ? 'style=display:none;' : ''%>>
+        		<%= select :otp, :mobile, options_for_select(@contact_numbers), {}, {id: 'select_otp_mobile', class: '', required: true, data: { placeholder: 'Choose number...' }} %>
+        	</span>
+        	<%end%>
+        	<%if @otp_settings[:email_enabled] == '1' -%>
+        	<span class="email_options" <%=both_option_enabled ? 'style=display:none;' : ''%>>
+        		<%= select :otp, :email, options_for_select(@contact_emails), {}, {id: 'select_otp_email', class: '', required: true, data: { placeholder: 'Choose email...' }} %>
+        	</span>
+        	<%end%>
+        </div>
+        <div class="col-md-4">
+        	<a href="javascript:void(0);" id="send_otp_btn" class="btn btn-success disabled">Send OTP</a>
+        	<a href="javascript:void(0);" id="cancel_otp_btn1" class="btn btn-white">Cancel</a>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p class="text-primary" id="otp_auth_dlg_message"></p>
+		</div>
+	</div>
+	<span id="otp_fields" style="display:none;">
+		<div class="row">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Time Left:</label>
+				<div class="col-sm-10 control-label" id="time_left"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">OTP ID:</label>
+				<div class="col-sm-10 control-label" id="otp_id"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">OTP Code:</label>
+				<div class="col-sm-2"><input type="text" name="otp[otp_code]" id="otp_code" style="width:90%" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class='col-sm-12 text-center'>
+				<a href="javascript:void(0);" class="btn btn-primary disabled" id="submit_otp_btn">Submit</a>
+				<a href="javascript:void(0);" class="btn btn-white" id="cancel_otp_btn2">Cancel</a>
+			</div>
+		</div>
+	</span>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		App.OTPAuth.initAuthDlg([<%=@otp_settings[:email_enabled] == '1'%>, <%=@otp_settings[:sms_enabled] == '1'%>]);
+	});
+</script>

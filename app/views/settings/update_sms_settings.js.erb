@@ -1,0 +1,32 @@
+var gritter_opts = {
+	title: 'SMS Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @sms_setting.present? %>
+	<%if 'test' == params[:form][:action]%>
+		<%if @api_error %>
+			gritter_opts.text = "SMS API connection cannot be establsihed.";
+			gritter_opts.class_name = 'growl-danger';
+		<%else%>
+			gritter_opts.text = "SMS API connection successful.";
+			gritter_opts.class_name = 'growl-success';
+		<%end%>
+	<%else%>
+		<%unless @sms_setting.errors.any?%>
+			gritter_opts.text = "SMS settings have been updated.";
+			gritter_opts.class_name = 'growl-success';
+			
+		<%else%>
+			gritter_opts.text = "The data seems to be invalid. Failed to update the SMS settings.";
+			gritter_opts.class_name = 'growl-danger';
+		<%end%>
+	<%end%>
+<%else%>
+	gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>	
+
+jQuery("span.sms_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

@@ -1,0 +1,69 @@
+<% provide(:title, 'CDR Logs') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Reports</li>
+  <li class="active">CDR Logs</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'reports' %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.CdrLogsHandler.setUrls(['<%=reports_cdr_logs_path%>', '<%=reports_paginated_cdr_logs_path%>']);
+  App.CdrLogsHandler.init(<%=policy(:report).select_carrier?%>, <%=params[:refresh].present?%>);
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+      <div class="panel panel-default">
+        <%=form_tag reports_get_cdr_logs_path, id: 'adv_crit_form' do -%>
+        <div class="panel-heading">
+          <div class="row">
+            <%if policy(:report).select_carrier? -%>
+            <div class='col-sm-2'>
+              <input type="text" id="username_select" name="username" />
+            </div>
+            <%end -%>
+            <div class='col-sm-1 mt10 text-center' style="width:6%;">
+              Period:
+            </div>
+            <div class='col-sm-2'>
+              <%= select_tag :date_range, options_for_select(date_range_options, 8), {include_blank: 'Custom', id: 'date_range_select' } %>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              From:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :from_date, Time.now.in_time_zone.strftime('%Y-01-01 00:00:00'), id: 'from_date', class: 'form-control', readonly: false%>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              To:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :to_date, Time.now.in_time_zone.strftime('%Y-12-31 23:59:59'), id: 'to_date', class: 'form-control', readonly: false%>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer"> 
+            <div class='row'>
+                <div class='col-sm-12 text-center'>
+                    <%=link_to 'Search', 'javascript:void(0);', class: 'btn btn-primary submit-btn' %>
+                </div>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+      <div class="panel panel-default reports-container">
+        <div class="panel-body" style="display:none;">
+          <div class="row">
+            <div class="col-sm-6 text-right"></div>
+          </div>
+          <div class="table-responsive dataTables_nowrap cdr-logs-container sip-style-selectable" id="report_data_container">
+            
+          </div>
+        </div>
+      </div>
+  </div>    
+</div>

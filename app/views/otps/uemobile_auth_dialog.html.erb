@@ -1,0 +1,44 @@
+<div class="modal-header">
+	<h4 class="modal-title">
+		<span class="glyphicon glyphicon-user"></span> OTP Verification
+	</h4>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-12">
+			<p class="text-primary" id="otp_auth_dlg_message"><%=@message%></p>
+		</div>
+	</div>
+	<span id="otp_fields">
+		<div class="row">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Time Left:</label>
+				<div class="col-sm-10 control-label" id="time_left"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">OTP ID:</label>
+				<div class="col-sm-10 control-label" id="otp_id"><%=@otp.id%></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">OTP Code:</label>
+				<div class="col-sm-2"><input type="text" name="otp[otp_code]" id="otp_code" style="width:90%" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class='col-sm-12 text-center'>
+				<a href="javascript:void(0);" class="btn btn-primary disabled" id="submit_otp_btn">Submit</a>
+				<a href="javascript:void(0);" class="btn btn-white" id="cancel_otp_btn2">Cancel</a>
+			</div>
+		</div>
+	</span>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		<%if 'mobile' == params[:element] -%>
+			App.OTPAuth.initUnRegAuthDlg('mobile');
+		<%end -%>
+		<%if 'email' == params[:element] -%>
+			App.OTPAuth.initUnRegAuthDlg('email');
+		<%end -%>
+	});
+</script>

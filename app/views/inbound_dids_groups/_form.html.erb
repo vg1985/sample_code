@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+    <h4 class="modal-title"><%=group.new_record? ? 'Create Group' : 'Edit Group'%></h4>
+</div>
+<div class="modal-body">
+	<%
+	if group.new_record?
+		id = 'create_group_form'
+		url = inbound_dids_groups_path
+	else
+		id = 'edit_group_form'
+		url = inbound_dids_group_path(group)
+	end
+	%>
+	<%=form_for group, url: url, remote: true, html: {class: 'form-horizontal', id: id} do |f|%>
+		<div class="panel-body panel-body-nopadding">
+	        <div class="row">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Name:<span class="asterisk">*</span></label>
+		        	<div class="col-sm-8"><%=f.text_field :name, class: 'form-control', placeholder: 'Enter group name' %></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Description:</label>
+		        	<div class="col-sm-8"><%=f.text_area :description, class: 'form-control', rows: 4, placeholder: "Add some description"%></div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer" style="text-align:center;">
+			<button class="btn btn-primary" type="submit"><%=group.new_record? ? 'Create' : 'Update'%></button>
+			<a href="javascript:void(0);" class="btn btn-default close_modal">Close</a>
+		</div>
+	<%end%>
+</div>
+
+<%unless group.new_record?%>
+<script type="text/javascript">
+	App.CarrierManageDids.initEditGroupForm("<%=group.name%>");
+</script>
+<%end%>

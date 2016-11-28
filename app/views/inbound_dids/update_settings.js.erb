@@ -1,0 +1,25 @@
+gritter_opts.title = 'Update DID settings';
+
+<%module_name = ('update_sms_settings' == action_name ? 'SMS' : 'Voice')%>
+<%if @did.present? || @dids.present?%>
+	<%if @valid_error %>
+		gritter_opts.text = "Sorry! There is some error while updating the settings.";
+	<%else%>
+		<%if @did.present?%>
+			gritter_opts.text = "<%=module_name%> settings for <%=@did.did%> saved successfully.";
+		<%else%>
+			gritter_opts.text = "<%=module_name%> settings for selected DIDs saved successfully.";
+		<%end%>
+		gritter_opts.class_name = 'growl-success';
+	<%end%>
+	
+<%else%>
+	gritter_opts.text = "Sorry! You are not authorized to update <%=module_name%> settings for <%=@did.did%>.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);
+jQuery('a.close_modal').click();
+<%if @dids.present?%>
+	jQuery("div.checkbox_toggler_container .result_deselect_all").click();
+<%end%>

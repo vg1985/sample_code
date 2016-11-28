@@ -1,0 +1,35 @@
+<div class="headerbar">
+      
+  <a class="menutoggle"><i class="fa fa-bars"></i></a>
+      
+  <form class="searchform" action="http://themepixels.com/demo/webpage/bracket/index.html" method="post">
+    <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+  </form>
+      
+  <div class="header-right">
+    <ul class="headermenu">
+      <li>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <%= image_tag "photos/loggeduser.png" %>
+            John Doe
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fa fa-sign-out"></i> <span>Sign Out</span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button id="chatview" class="btn btn-default tp-icon chat-icon">
+          <i class="glyphicon glyphicon-comment"></i>
+        </button>
+      </li>
+    </ul>
+  </div><!-- header-right -->
+      
+</div>

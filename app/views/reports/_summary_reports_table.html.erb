@@ -1,0 +1,78 @@
+<p class="text-right">
+  Export:&nbsp;
+  <%=link_to 'javascript:void(0);', title: 'PDF', data: {format: 'pdf'}, class: 'export-link' do -%>
+    <span class="fa fa-file-pdf-o" style="font-size:20px;"></span>
+  <%end%>&nbsp;
+  <%=link_to 'javascript:void(0);', title: 'Excel', data: {format: 'xls'}, class: 'export-link' do -%>
+    <span class="fa fa-file-excel-o" style="font-size:20px;"></span>
+  <%end%>&nbsp;
+  <%=link_to 'javascript:void(0);', title: 'CSV', data: {format: 'csv'}, class: 'export-link' do -%>
+    <span class="fa fa-file-text-o" style="font-size:20px;"></span>
+  <%end%>
+</p>
+
+<table id="reports_table" cellspacing="0" class="table table-striped dataTable table-hover table-bordered">
+  <thead>
+    <tr>
+      <th rowspan="2" class="text-center <%=(@data['id_group'].blank? && @data['date_group'].blank?) ? 'no-sort' : ''%>" style="width:12%; vertical-align: middle;">
+        <%=group_by_title(@data['id_group'] || @data['date_group'])%>
+      </th>
+      <th class="text-center" rowspan="2" style="width:6%; vertical-align: middle;">ASR</th>
+      <th class="text-center" rowspan="2" style="width:6%; vertical-align: middle;">ACD</th>
+      <th class="text-center" rowspan="2" style="width:6%; vertical-align: middle;">PDD</th>
+      <th class="text-center" colspan="2" style="width:10%">Duration</th>
+      <th class="text-center" rowspan="2" style="width:10%; vertical-align: middle;">Usage (cost)</th>
+      <th class="text-center" rowspan="2" style="width:10%; vertical-align: middle;">Avg Rate</th>
+      <th class="text-center" colspan="3" style="width:24%">No. of Calls</th>
+      <th class="text-center" colspan="2" style="width:16%">Jurisdiction</th>
+    </tr>
+    <tr>
+      <th class="text-center">Raw</th>
+      <th class="text-center">Billed</th>
+      <th class="text-center">Total</th>
+      <th class="text-center">Non-zero</th>
+      <th class="text-center">LRN Calls</th>
+      <th class="text-center">Interstate</th>
+      <th class="text-center">Intrastate</th>
+    </tr>
+  </thead>
+  <tfoot>
+      <tr>
+        <th class="text-center">Total:</th>
+        <th class="text-center"><%=@result['avg_asr']%></th>
+        <th class="text-center"><%=@result['avg_acd']%></th>
+        <th class="text-center"><%=@result['avg_pdd']%></th>
+        <th class="text-center"><%=@result['total_duration']%></th>
+        <th class="text-center"><%=@result['total_billtime']%></th>
+        <th class="text-center"><%=@result['total_cost']%></th>
+        <th class="text-center"><%=@result['avg_rate']%></th>
+        <th class="text-center"><%=@result['total_calls']%></th>
+        <th class="text-center"><%=@result['total_nonzero']%></th>
+        <th class="text-center"><%=@result['total_lrn_calls']%></th>
+        <th class="text-center"><%=@result['total_inter']%></th>
+        <th class="text-center"><%=@result['total_intra']%></th>
+      </tr>
+  </tfoot>
+  <tbody>
+    <%@result['group'].each do |group| -%>
+      <tr>
+        <td class="text-center">
+          <%=group_by_col_val(@data['id_group'] || @data['date_group'], group['id'])%>
+        </td>
+        <td class="text-center"><%=group['asr']%></td>
+        <td class="text-center"><%=group['acd']%></td>
+        <td class="text-center"><%=group['pdd']%></td>
+        <td class="text-center"><%=group['duration']%></td>
+        <td class="text-center"><%=group['billtime']%></td>
+        <td class="text-center"><%=group['cost']%></td>
+        <td class="text-center"><%=group['avg_rate']%></td>
+        <td class="text-center"><%=group['calls']%></td>
+        <td class="text-center"><%=group['nonzero']%></td>
+        <td class="text-center"><%=group['lrn_calls']%></td>
+        <td class="text-center"><%=group['inter_rate']%></td>
+        <td class="text-center"><%=group['intra_rate']%></td>
+      </tr>
+    <%end -%>
+  </tbody>
+</table>
+<div class="text-center">Query Time: <%=@result['query_time']%></div>

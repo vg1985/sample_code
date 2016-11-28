@@ -1,0 +1,18 @@
+<% provide(:title, 'Routing - Edit Routing Plan') %>
+
+<%=content_for :breadcrumb do%>
+    <li>Routing</li>
+    <li><%=link_to 'Manage Routing Plans', routings_path%></li>
+    <li>Edit Routing Plan</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'routings', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+    App.RoutingPlanFormHandler.setUrls(['<%=check_name_routings_path%>']);
+    App.RoutingPlanFormHandler.init();
+<%end%>
+
+<%=render partial: 'form'%>

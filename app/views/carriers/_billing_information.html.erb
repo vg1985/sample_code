@@ -1,0 +1,109 @@
+<%=content_for :stylesheets do%>
+  <%= stylesheet_link_tag 'intl-tel-input' %>
+<%end%>
+<div class="panel-body">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.fields_for :user, setup_new_obj(carrier, :user) do |user| %>
+        <%= user.label :name, raw('Name <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+        <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+          <div class="col-sm-7"><%= user.text_field :name, class: 'form-control input-sm' %></div>
+        <%else%>
+          <div class="col-sm-7 mt10"><%=user.object.name%></div>
+        <%end%>
+        
+      <%end%>
+    </div>
+    <div class="form-group">
+    	<%=f.hidden_field :id%>
+      <%= f.label :company_name, raw('Company <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.text_field :company_name, class: 'form-control input-sm', required: 'required'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.company_name%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :address1, raw('Address1 <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.text_field :address1, class: 'form-control input-sm'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.address1%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :address2, class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.text_field :address2, class: 'form-control input-sm'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.address2%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :city, raw('City <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.text_field :city, class: 'form-control input-sm'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.city%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :state, raw('State <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.select :state, options_for_select(US_STATES, f.object.state), {}, {class: 'select2', data:{placeholder: 'Choose State...'}} %></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.state%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :country, raw('Country <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%=f.country_select(:country, { include_blank: true, priority_countries: %w(US CA IN) }, {class: 'select2', data:{placeholder: 'Choose Country...'}} )%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.country%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :zip, class: 'col-sm-4 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-7"><%= f.text_field :zip, class: 'form-control input-sm'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=@carrier.zip%></div>
+      <%end%>
+    </div>
+    <div class="form-group">
+      <%= f.label :timezone, raw('TimeZone <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <div class="col-sm-7"><%= f.time_zone_select :timezone, nil, { include_blank: true }, {class: 'select2', data: {placeholder: 'Choose TimeZone...'}} %></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :phone1, raw('Phone1 <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <div class="col-sm-7">
+        <%= f.text_field :phone1, class: 'form-control input-sm', style: 'color:#636e7b'%>
+        <%=hidden_field_tag 'carrier[phone1_code]'%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone2, class: 'col-sm-4 control-label' %>
+      <div class="col-sm-7">
+        <%= f.text_field :phone2, class: 'form-control input-sm', style: 'color:#636e7b'%>
+        <%=hidden_field_tag 'carrier[phone2_code]'%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :mobile, raw('Mobile <span class="asterisk">*</span>'), class: 'col-sm-4 control-label' %>
+      <div class="col-sm-7">
+        <%= f.text_field :mobile, class: 'form-control input-sm', style: 'color:#636e7b'%>
+        <%=hidden_field_tag 'carrier[mobile_code]'%>
+        <%unless user_signed_in?%> 
+        <div id="mobile_verify_links">
+          <span class="fa fa-times-circle validity-fail" id="unverified_mobile_msg" style="display:none; font-size: 15px; margin-top:5px;"> Unverfied Mobile Number.</span>
+          <span class="fa fa-check-circle validity-success" id="verified_mobile_msg" style="display:none; font-size: 15px; margin-top:5px;"> Verified</span>
+          <span id="verify_mobile_now_link" style="display:none;"><a href="#">Verify Now</a></span>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

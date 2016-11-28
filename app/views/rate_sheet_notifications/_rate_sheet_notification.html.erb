@@ -1,0 +1,11 @@
+<tr id="notification<%= rate_sheet_notification.id %>">
+  <td>
+    <% if rate_sheet_notification.partial_successful? %>
+      <%= "log/ratesheets/ratesheet#{@rate_sheet.id}#{rate_sheet_notification.id}.log" %>
+    <% else %>
+      No logfile created
+    <% end %>
+  </td>
+  <td><%= rate_sheet_notification.status %></td>
+  <td><%= rate_sheet_notification.error || "-" %></td>
+</tr>

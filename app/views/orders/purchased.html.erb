@@ -1,0 +1,98 @@
+<% provide(:title, "Order##{@order.sipsurge_order_id}") %>
+
+<%=content_for :breadcrumb do%>
+	<li>Inbound DID</li>
+	<li><%=link_to 'Orders', orders_path %></li>
+	<li class="active">Order#<%=@order.sipsurge_order_id%></li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'orders', 'data-turbolinks-track' => true %>
+<%end%>
+
+<div class="panel panel-default">
+    
+    <div class="panel-heading">
+        <%
+        status_klass = 
+            case @order.status
+            when 1
+                'text-success'
+            when 2
+                ''
+            when 3
+                'text-warning'
+            else
+                'text-danger'
+            end
+        %>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class='text-default'>Order Type: Purchase</strong></h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <h4 class='<%=status_klass%>'>Order Status: <strong><%=Order::STATUS_NAMES[@order.status]%></strong></h4>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-primary mb30 table-order-confirm">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Activation Fee</th>
+                        <th>Monthly Fee</th>
+                        <th>Usage Rate</th>
+                        <th>Due Amount</th>
+                        <th>Status</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    
+                    <%if Order::STATUS_ERROR == @order.status
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                        total_price = '-NA-'
+                    %>
+                        <%=render partial: 'purchased_order_detail_row', collection: dids, as: :number, locals: {status: '<span>-NA-</span>'}%>
+                    <%elsif Order::STATUS_PENDING == @order.status
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                        total_price = '$' + (@order.rate_info[:unit_price]*dids.size).to_s
+                    %>                        
+                        <%=render partial: 'purchased_order_detail_row', collection: dids, as: :number, locals: {status: '<span>Pending</span>'}%>
+                    <%else
+                        completed_numbers = @order.additional_info[:completed_numbers]
+                        failed_numbers = @order.additional_info[:failed_numbers]
+                    %>
+                        <%=render partial: 'purchased_order_detail_row', collection: completed_numbers, as: :number, locals: {status: '<span class="text-success">Fullfilled</span>'}%>
+                        <%=render partial: 'purchased_order_detail_row', collection: failed_numbers, as: :number, locals: {status: '<span class="text-danger">Failed</span>'}%>
+                    <%
+                        total_price = '$' + (@order.rate_info[:unit_price]*completed_numbers.size).to_s
+                    end
+                    %>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td class='text-right'><h4>Total:</h4></td>
+                        <td><h4><%=total_price.to_s%></h4></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->      
+        <div>
+            <%=form_tag '#', id: 'order_now', class: 'form-horizontal' do %>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email order confirmation to:</label>
+                    <span class="col-sm-2">
+                        <%=text_field_tag :order_email, @order.email, class: 'form-control', readonly: true, title: @order.email%>
+                    </span>
+                </div>
+            <%end%>
+        </div>
+        <div class="text-center btn-invoice">
+            <%=link_to orders_path, class: "btn btn-white" do%>
+            	<i class="fa fa-mail-reply"></i> Back to orders
+            <%end%>
+        <div class="mb40"></div>
+	</div>
+</div>
+

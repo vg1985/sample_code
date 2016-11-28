@@ -1,0 +1,368 @@
+<% provide(:title, "Ratesheet - #{@rate_sheet.name}") %>
+<%blank_rows = @rate_sheet.rates.count == RateSheet::US_JURISDICTION%>
+<%=content_for :subtitle do%>
+  LRN <%=@rate_sheet.lrn? ? 'Enabled' : 'Disabled' %>,
+  <%= RateSheet::JURISDICTION_TYPES[@rate_sheet.rate_sheet_type] %>
+<%end%>
+
+<%=content_for :breadcrumb do-%>
+  <li>Ratesheets</li>
+  <li><%=link_to 'Manage Ratesheet', rate_sheets_path%></li>
+  <li class="active">View Ratesheet</li>
+<%end%>
+
+<%=content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'dropzone', media: 'all', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'dropzone.min', 'ratesheets', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.AdminRateSheetDataHandler.setUrls(['<%=check_code_rates_path%>', '<%=rate_sheet_path(@rate_sheet)%>', '<%=import_rate_sheet_path(@rate_sheet)%>']);
+  App.AdminRateSheetDataHandler.init(['<%=@rate_sheet.id%>', <%=@rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION%>, <%=blank_rows%>]);
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-sm-2">
+          <input id="global_search_q" class="form-control" type="search" placeholder="Search Code...">
+        </div>
+        <div class="col-sm-8 text-right mt10 col-sm-offset-2">
+          <span><strong>Actions:</strong></span>&nbsp;&nbsp;
+          <button class="btn-small btn-primary" id="import_btn" data-toggle="modal" data-target=".import-csv-dlg" title="Import CSV"><span class="glyphicon glyphicon-import"></span>
+          </button>
+          <button class="btn-small btn-primary <%=blank_rows ? 'disabled': ''%>" id="export_btn" data-url="<%= export_rate_sheet_path(@rate_sheet)%>" title="Export CSV"><span class="glyphicon glyphicon-export"></span></button>
+          <button class="btn-small btn-primary" id="sample_download_btn" data-url="<%=template_rate_sheets_path(type: @rate_sheet.rate_sheet_type)%>" title="Download Sample CSV"><span class="glyphicon glyphicon-download"></span></button> | 
+          <button class="btn-small btn-primary <%=blank_rows ? 'disabled': ''%>" id="bulk_edit_btn" data-url="<%=update_bulk_status_ingress_trunks_path%>" data-toggle="modal" data-target=".batch-edit-dlg" title="Batch Edit"><span class="glyphicon glyphicon-edit"></span></button>
+          <button class="btn-small btn-danger bulk-operation disabled" id="bulk_delete_btn" data-url="<%=bulk_destroy_rates_path%>" data-toggle="modal" data-target=".delete-rate-confirm-dlg" title="Delete Selected"><span class="glyphicon glyphicon-trash"></span></button>
+          <button class="btn-small btn-danger <%=blank_rows ? 'disabled': ''%>" id="empty_btn" data-toggle="modal" data-target=".empty-confirm-dlg" title="Empty Ratesheet"><span class="glyphicon glyphicon-remove"></span></button> |
+          <button class="btn-small btn-primary" id="user_actions_btn" data-url="<%=polymorphic_path([@rate_sheet, UserAction])%>" title="List User Actions"><span class="glyphicon  glyphicon-list"></span></button>
+
+        </div>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_rates_form' do -%>
+      <div class="panel panel-default sip-style rate-sheet-container">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <span>Show</span>
+              <%=select_tag 'per_page', options_for_select((10..100).step(10).to_a, 20)%>
+              <span> Entries </span>
+            </div>
+            <div class="col-sm-4 mb10 text-center" id="rate_page_info">
+              <%= page_entries_info @rates %>
+            </div>
+            <div class="col-sm-4 text-right">
+              <a href="javascript:void(0);" title="Add new rate" class="btn btn-success btn-sm" style='font-size:12px;' id="add_new_btn"><span class="glyphicon glyphicon-plus-sign"></span> &nbsp;Add New</a>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="ratesheet_data_table" class="dataTable table table-striped table-hover table-bordered">
+              <thead>
+                <tr class="rate-new-fields" style="display:none;">
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><%= text_field_tag :code, '', data: {toggle: "tooltip", placement: 'top'}, class: 'form-control text-box input-sm', maxlength: 25, placeholder: 'Code', title: t(:code_validvalues)%></td>
+                  <td><%= text_field_tag :code_name, '', data: {toggle: "tooltip", placement: 'top'}, class: 'form-control text-box input-sm', maxlength: 25, placeholder: 'Code Name', title: t(:codename_validvalues)%></td>
+                  <td><%= text_field_tag :code_country, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control text-box input-sm', placeholder: 'Code Country', maxlength: 10, title:  t(:codecountry_validvalues) %></td>
+                  <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION -%>
+                    <td><%= text_field_tag :inter_rate, '0', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: "form-control input-sm spinner", placeholder: 'Inter Rate', step: '0.000001', maxlength: 10, title: t(:rate_validvalues) %></td>
+                    <td><%= text_field_tag :intra_rate, '0', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Intra Rate', step: '0.000001', maxlength: 10, title: t(:rate_validvalues)%></td>
+                  <%end -%>
+                  <td><%= text_field_tag :rate, '0', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Rate', step: '0.000001', maxlength: 10, title: t(:rate_validvalues) %></td>
+                  <td><%= text_field_tag :bill_start, '6', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Bill Start', step: '1', maxlength: 2, title: t(:billstart_validvalues) %></td>
+                  <td><%= text_field_tag :bill_increment, '6', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Bill Increment', step: '1', maxlength: 4, title: t(:billinc_validvalues)  %></td>
+                  <td><%= text_field_tag :setup_fee, '0', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Setup Fee', step:' 0.0001', maxlength: 10, title: t(:setupfees_validvalues) %></td>
+                  <td>
+                    <div class="input-group">
+                      <%= text_field_tag :effective_time, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control datetimepicker fg-adj-row', placeholder: 'yyyy-mm-dd hh:ss', title: t(:effectivetime_validvalues) %>
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                      </span>
+                    </div>
+                  </td>
+                  <td class='no-dblclick'>
+                     <a href="javascript:void(0);" title="Save Rate" data-html="true" data-toggle="popover" data-placement="top" class="btn btn-success btn-xs save_new_row"><span class="glyphicon glyphicon-ok"></span></a>
+                    <a class="btn btn-warning btn-xs cancel-new" title="Cancel" rel="nofollow" href="javascript:void(0);">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION%>
+                  <th width="2%" class="no-sort"><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+                  <th width="3%" class="no-sort">#</th>
+                  <th width="9%" data-col="code" class="sorting_asc">Code</th>
+                  <th width="8%" data-col="code_name" class="sorting">Name</th>
+                  <th width="9%" data-col="code_country" class="sorting">Country</th>
+                  <th width="8%" data-col="inter_rate" class="sorting">Inter Rate</th>
+                  <th width="8%" data-col="intra_rate" class="sorting">Intra Rate</th>
+                  <th width="7%" data-col="rate" class="sorting">Rate</th>
+                  <th width="8%" data-col="bill_start" class="sorting">Bill Start</th>
+                  <th width="7%" data-col="bill_increment" class="sorting">Bill Inc.</th>
+                  <th width="8%" data-col="setup_fee" class="sorting">Setup Fee</th>
+                  <th width="15%" data-col="effective_time" class="sorting">Eff. Time</th>
+                  <th class="no-sort">Actions</th>
+                <%else%>
+                  <th width="2%" class="no-sort"><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+                  <th width="4%" class="no-sort">#</th>
+                  <th width="11%" data-col="code" class="sorting_asc">Code</th>
+                  <th width="10%" data-col="code_name" class="sorting">Name</th>
+                  <th width="10%" data-col="code_country" class="sorting">Country</th>
+                  <th width="8%" data-col="rate" class="sorting">Rate</th>
+                  <th width="10%" data-col="bill_start" class="sorting">Bill Start</th>
+                  <th width="9%" data-col="bill_increment" class="sorting">Bill Inc.</th>
+                  <th width="10%" data-col="setup_fee" class="sorting">Setup Fee</th>
+                  <th width="17%" data-col="effective_time" class="sorting">Eff. Time</th>
+                  <th class="no-sort">Actions</th>
+                <%end%>
+                </tr>
+              </thead>
+              <tbody>
+                  <%=render partial: 'rates/rate_rows'%>
+              <tfoot>
+                <tr>
+                  <td colspan="13" class='text-right' id="rate_page_links">
+                    <%= paginate @rates, params: {controller: 'rate_sheets', action: 'show'}, remote: true %>
+                  </td>
+                <tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade empty-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to empty this ratesheet? This action is irreversible.</h4>
+                <%=link_to 'OK', empty_rate_sheet_path(@rate_sheet), id: 'empty_confirm_ok', method: :delete, class: 'btn btn-danger'%>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade delete-rate-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete these rate(s)? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_rate_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade import-csv-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Import CSV</h4>
+          </div>
+
+          <div class="modal-body">
+            <%=form_for :rate_sheet, url: import_rate_sheet_path(@rate_sheet), method: :post, html: {multipart: true, id: 'upload_csv_file'} do |f|%>
+              <div class="form-group">
+                <label class="col-sm-3 mt10">Decimal Precision:</label>
+                <div class="col-sm-2">
+                  <%= text_field_tag :decimal_rounding_val, '6', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'disable form-control input-sm', id: 'decimal_precision_spinner', placeholder: 'Value', maxlength: 1, readonly: true, title: t(:decimal_rounding_validvalues) %>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class='col-sm-3 mt10'>
+                  Import Options:
+                </label>
+                <div class='col-sm-4'>
+                  <%=select_tag 'import_option', options_for_select({'Import & Append': 1, 'Delete All & Import': 2, 'Import & Update': 3}), class: 'select2'%>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-12 dropzone" id="csv_file" style="min-height:130px;">
+                      <div class='dz-message'><h4>Drop Files here</h4> or click here to upload.</h4></div>
+                      <div class="fallback">
+                          Your system does not support File Drag 'n' Drop. Please select files to upload.
+                          <%=f.file_field :file, name: 'file' %>
+                      </div>
+                  </div>
+                  <span class='helptext text-warning'></span>
+                  <div class="col-sm-12 text-center mt10">
+                      <button type="submit" class="btn btn-primary done-btn" style="display:none;">Done</button>
+                  </div>
+              </div>
+              <%#hidden_field_tag :uploaded_docs %>  
+            <%end%>
+          </div>
+        </div>      
+    </div>
+</div>
+
+<div class="modal fade batch-edit-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">Batch Edit</h4>
+          </div>
+          <%=form_tag mass_update_rate_sheet_path, method: :post, remote: true, id: 'bulk_edit_form' do -%>
+          <%=hidden_field :bulk_edit, :rate_ids %>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Rates:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'rate', Rate::EDIT_OPERATIONS.invert, {include_blank: 'Preserve'}, data:{ spinner: 'rate_val'}, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3" id="rate_val_nmul_spinner_cont">
+                <%= text_field_tag :rate_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'rate_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 10, title: t(:rate_validvalues) %>
+              </div>
+              <div class="col-sm-3" id="rate_val_mul_spinner_cont" style="display:none;">
+                <%= text_field_tag :rate_mval, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'rate_val_mul_spinner', class: 'disable form-control input-sm bulk-edit-spinner bulk-edit-multiply-spinner', placeholder: 'Value',  maxlength: 3, title: t(:multiply_validvalues) %>
+              </div>
+              <div class="col-sm-3 bulk_edit_errors" id="rate_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION%>
+              <div class="form-group">
+                <label class="col-sm-3 mt10">Intra Rates:</label>
+                <div class="col-sm-3">
+                  <%=select :bulk_edit, 'intra_rate', Rate::EDIT_OPERATIONS.invert, {include_blank: 'Preserve'}, data:{ spinner: 'intra_rate_val'}, class: 'bulk-edit-select2'%>
+                </div>
+                <div class="col-sm-3" id="intra_rate_val_nmul_spinner_cont">
+                  <%= text_field_tag :intra_rate_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'intra_rate_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 10, title: t(:rate_validvalues) %>
+                </div>
+                <div class="col-sm-3" id="intra_rate_val_mul_spinner_cont" style="display:none;">
+                  <%= text_field_tag :intra_rate_mval, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'intra_rate_val_mul_spinner', class: 'disable form-control input-sm bulk-edit-spinner bulk-edit-multiply-spinner', placeholder: 'Value', maxlength: 3, title: t(:multiply_validvalues) %>
+                </div>
+                <div class="col-sm-3 bulk_edit_errors" id="intra_rate_error" style="display:none;">
+                  <span class="text-danger">This is an invalid value.</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 mt10">Inter Rates:</label>
+                <div class="col-sm-3">
+                  <%=select :bulk_edit, 'inter_rate', Rate::EDIT_OPERATIONS.invert, {include_blank: 'Preserve'}, data:{ spinner: 'inter_rate_val'}, class: 'bulk-edit-select2'%>
+                </div>
+                <div class="col-sm-3" id="inter_rate_val_nmul_spinner_cont">
+                  <%= text_field_tag :inter_rate_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'inter_rate_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 10, title: t(:rate_validvalues) %>
+                </div>
+                <div class="col-sm-3" id="inter_rate_val_mul_spinner_cont" style="display:none;">
+                  <%= text_field_tag :inter_rate_mval, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'inter_rate_val_mul_spinner', class: 'disable form-control input-sm bulk-edit-spinner bulk-edit-multiply-spinner', placeholder: 'Value', maxlength: 3, title: t(:multiply_validvalues) %>
+                </div>
+                <div class="col-sm-3 bulk_edit_errors" id="inter_rate_error" style="display:none;">
+                  <span class="text-danger">This is an invalid value.</span>
+                </div>
+              </div>
+            <%end%>
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Bill Start:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'bill_start', Rate::EDIT_OPERATIONS.select {|k,v| k != Rate::EDIT_MULTIPLY}.invert, {include_blank: 'Preserve'}, data:{ spinner: 'bill_start_val' }, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3">
+                <%= text_field_tag :bill_start_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'bill_start_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 2, title: t(:billstart_validvalues) %>
+              </div>
+              <div class="col-sm-3 bulk_edit_errors" id="bill_start_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Bill Increment:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'bill_increment', Rate::EDIT_OPERATIONS.select {|k,v| k != Rate::EDIT_MULTIPLY}.invert, {include_blank: 'Preserve'}, data:{ spinner: 'bill_increment_val' }, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3">
+                <%= text_field_tag :bill_increment_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'bill_increment_val_nmul_spinner',class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 4, title: t(:billinc_validvalues) %>
+              </div>
+              <div class="col-sm-3 bulk_edit_errors" id="bill_inc_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Setup Fee:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'setup_fee', Rate::EDIT_OPERATIONS.invert, {include_blank: 'Preserve'}, data:{ spinner: 'setup_fee_val' }, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3" id="setup_fee_val_nmul_spinner_cont">
+                <%= text_field_tag :setup_fee_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'setup_fee_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 10, title: t(:setupfees_validvalues) %>
+              </div>
+              <div class="col-sm-3" id="setup_fee_val_mul_spinner_cont" style="display:none;">
+                  <%= text_field_tag :setup_fee_mval, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'setup_fee_val_mul_spinner', class: 'disable form-control input-sm bulk-edit-spinner bulk-edit-multiply-spinner', placeholder: 'Value', maxlength: 3, title: t(:multiply_validvalues) %>
+                </div>
+              <div class="col-sm-3 bulk_edit_errors" id="setup_fee_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Decimal Precision:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'decimal_precision', {'Edit': Rate::EDIT_SET_TO}, {include_blank: 'Preserve'}, data:{ spinner: 'decimal_rounding_val' }, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3">
+                <%= text_field_tag :decimal_rounding_val, '6', data: {toggle: "tooltip", placement: 'top', container: 'body'}, id: 'decimal_rounding_val_nmul_spinner', class: 'disable form-control input-sm bulk-edit-spinner', placeholder: 'Value', maxlength: 1, title: t(:decimal_rounding_validvalues) %>
+              </div>
+              <div class="col-sm-3 bulk_edit_errors" id="precision_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 mt10">Effective Time:</label>
+              <div class="col-sm-3">
+                <%=select :bulk_edit, 'effective_time', {'Edit': Rate::EDIT_SET_TO}, {include_blank: 'Preserve'}, data:{ dtpicker: 'effective_time_val' }, class: 'bulk-edit-select2'%>
+              </div>
+              <div class="col-sm-3">
+                <%= text_field_tag :effective_time_val, '', data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control bulk-edit-datetimepicker', disabled: true, placeholder: 'yyyy-mm-dd hh:ss', title: t(:effectivetime_validinput) %>
+              </div>
+              <div class="col-sm-3 bulk_edit_errors" id="effective_time_error" style="display:none;">
+                <span class="text-danger">This is an invalid value.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox block col-sm-12">
+                <label><input type="checkbox" id="iagreecb" /> I understand that this action is irreversible.</label>
+              </div>
+            </div>
+            <div class="text-center">
+              <a class="btn btn-lightblue disabled" id="bulkedit_apply_selected_btn">Apply To Selected</a>
+              <a class="btn btn-primary disabled" id="bulkedit_apply_all_btn">Apply To All</a>
+              <a class="btn btn-default" id="reset_bulk_edit" type="reset">Reset</a>
+              <a href="javascript:void(0);" class="btn btn-white close_modal">Cancel</a>
+            </div>
+          </div>
+          <%end%>
+        </div>      
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<%is_admin = current_user.is_admin? %>
+<div class="panel-body">
+  <div class="col-md-6">
+	  <div class="form-group">
+   		<%= f.label :address1, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.text_field :address1, class: 'form-control input-sm'%>
+        <%else -%>
+          <label class="mt2"><%=user.address1%></label>
+        <%end -%>
+      </div>
+  	</div>
+  	<div class="form-group">
+   		<%= f.label :address2, class: 'col-sm-3 control-label' %>
+    		<div class="col-sm-7">
+          <%if is_admin -%>
+            <%=f.text_field :address2, class: 'form-control input-sm'%>
+          <%else -%>
+            <label class="mt2"><%=user.address2%></label>
+          <%end -%>
+        </div>
+  	</div>	
+	  <div class="form-group">
+   		<%= f.label :city, class: 'col-sm-3 control-label' %>
+    		<div class="col-sm-7">
+          <%if is_admin -%>
+            <%=f.text_field :city, class: 'form-control input-sm'%>
+          <%else -%>
+            <label class="mt2"><%=user.city%></label>
+          <%end -%>
+        </div>
+  	</div>
+  	<div class="form-group">
+    		<%= f.label :state, class: 'col-sm-3 control-label' %>
+    		<div class="col-sm-7">
+          <%if is_admin -%>
+            <%= f.select :state, options_for_select(US_STATES, f.object.state), {}, {class: 'select2', data:{placeholder: 'Choose State'}} %>
+          <%else%>
+            <label class="mt2"><%=user.state%></label>
+          <%end%>
+        </div>
+  	</div>
+    <div class="form-group">
+      <%= f.label :country, class: 'col-sm-3 control-label' %>
+      <div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.country_select(:country, { include_blank: true, priority_countries: %w(US CA IN)}, {class: 'select2', data:{ placeholder: 'Choose Country'}} )%>
+        <%else -%>
+          <label class="mt2"><%=user.country%></label>
+        <%end -%>
+      </div>
+    </div>
+  	<div class="form-group">
+   		<%= f.label :zip, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.text_field :zip, class: 'form-control input-sm'%>
+        <%else -%>
+          <label class="mt2"><%=user.zip%></label>
+        <%end -%>
+      </div>
+  	</div>
+  	<div class="form-group">
+    	<%= f.label :timezone, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7"><%= f.time_zone_select :timezone, nil, {include_blank: true}, {class: 'select2', data: {placeholder: 'Choose TimeZone'}} %></div>
+  	</div>
+  	<div class="form-group">
+   		<%= f.label :phone1, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.text_field :phone1, class: 'form-control input-sm'%>
+        <%else -%>
+          <label class="mt2"><%=user.phone1%></label>
+        <%end -%>
+      </div>
+  	</div>	
+  	<div class="form-group">
+   		<%= f.label :phone2, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.text_field :phone2, class: 'form-control input-sm'%>
+        <%else -%>
+          <label class="mt2"><%=user.phone2%></label>
+        <%end -%>
+      </div>
+  	</div>
+  	<div class="form-group">
+   		<%= f.label :mobile, class: 'col-sm-3 control-label' %>
+    	<div class="col-sm-7">
+        <%if is_admin -%>
+          <%=f.text_field :mobile, class: 'form-control input-sm'%>
+        <%else -%>
+          <label class="mt2"><%=user.mobile%></label>
+        <%end -%>
+      </div>
+  	</div>
+  </div>
+</div>

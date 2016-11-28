@@ -1,0 +1,55 @@
+<h5>
+  <%= submit_tag "Apply To Selected Rates", name: "submit", class: "btn btn-xs btn-success apply-selected" %>
+  <%= submit_tag "Apply To All Rates", name: "apply_all", class: "btn btn-xs btn-success apply-all" %>
+  <%= submit_tag "Delete Selected Rates", name: "delete_selected", class: "btn btn-xs btn-danger delete-selected" %>
+  <%= render "mass_edit_modals", rate_sheet: rate_sheet %>
+</h5>
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label col-sm-3">Rates</label>
+    <div class="col-sm-4"><%= select_tag "rate[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "rate[value]", nil, step: "0.000001",class: "form-control input-sm spinner" %></div>
+	</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3">Inter Rates</label>
+    <div class="col-sm-4"><%= select_tag "inter_rate[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "inter_rate[value]", nil, step: "0.000001",class: "form-control input-sm spinner" %></div>
+	</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Intra Rates</label>
+    <div class="col-sm-4"><%= select_tag "intra_rate[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "intra_rate[value]", nil, step: "0.000001",class: "form-control input-sm spinner" %></div>
+	</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Decimal Rounding</label>
+    <div class="col-sm-4"><%= text_field_tag "decimal_rounding[value]", nil, class: "form-control input-sm spinner" %></div>
+	</div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Bill Start</label>
+    <div class="col-sm-4"><%= select_tag "bill_start[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "bill_start[value]", nil, class: "form-control input-sm spinner" %></div>
+	</div>
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Bill Increment</label>
+    <div class="col-sm-4"><%= select_tag "bill_increment[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "bill_increment[value]", nil, class: "form-control input-sm spinner" %></div>
+	</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Setup Fee</label>
+    <div class="col-sm-4"><%= select_tag "setup_fee[action]", options_for_select(rates_mass_edit_select), prompt: "Preserve", include_blank: true, class: "chosen-select form-control" %></div>
+    <div class="col-sm-4"><%= text_field_tag "setup_fee[value]", nil, step: "0.000001",class: "form-control input-sm spinner" %></div>
+	</div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3"> Effective Time </label>
+    <div class="col-sm-8"><%= hidden_field_tag "effective_time[action]", "set", class: "form-control datepicker input-sm" %></div>
+    <div class="col-sm-8"><%= text_field_tag "effective_time[value]", nil, class: "form-control datepicker input-sm", id: 'datepicker' %></div>
+	</div>
+</div>

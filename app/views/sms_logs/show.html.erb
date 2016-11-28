@@ -1,0 +1,123 @@
+<div class="modal-header">
+    <h4>SMS Log Details</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+              <tbody>
+              	<tr>
+              	    <td width="30%">Message ID</td> 
+              	    <td><%=@sms_log.id%></td>
+              	</tr>
+                <%if policy(:sms_log).select_carrier? -%>
+                    <tr>
+                        <td width="40%">Carrier</td> 
+                        <td title="<%=@sms_log.carrier_name%>"><%=@sms_log.carrier_name.truncate(30)%></td>
+                    </tr>
+                <%end%>
+                <tr>
+                    <td>Date</td>
+                    <%if current_user.internal?%>
+                        <td><%=@sms_log.created_at.in_time_zone(current_user.timezone).to_s(:carrier)%></td>
+                    <%else%>
+                        <td><%=@sms_log.created_at.in_time_zone(carrier.timezone).to_s(:carrier)%></td>
+                    <%end%>
+                </tr>
+                <tr>
+                    <td>Direction</td> 
+                    <td><%=@sms_log.direction.titleize%></td>
+                </tr>
+                <tr>
+                    <td width="30%">Status</td> 
+                    <td><%=@sms_log.status.capitalize%></td>
+                </tr>
+                <tr>
+                    <td width="30%">Sender</td> 
+                    <td>
+                    	<% if @sms_log.direction != 'forward' && @sms_log.from_did_no.present? -%>
+                    		<%=@sms_log.from_did_no%>
+                    	<%else -%>
+                    		<%=@sms_log.from%>
+                    	<%end -%>
+                    </td>
+                </tr>
+                <% if @sms_log.direction == 'forward' -%>
+                  <tr>
+                      <td width="30%">Recipient(s)</td> 
+                      <td><%=@sms_log.from_did_no%></td>
+                  </tr>
+                  <tr>
+                      <td width="30%">Forwarded To</td> 
+                      <td><%=@sms_log.recipients.join(', ')%></td>
+                  </tr>
+                  <tr>
+                      <td width="30%">Incoming Rate</td> 
+                      <td><%=@sms_log.additional_info[1][:inbound_rate] %></td>
+                  </tr>
+                  <tr>
+                      <td width="30%">Outgoing Rate</td> 
+                      <td><%= @sms_log.additional_info[1][:forward_rate] %></td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Effective Rate</td> 
+                    <td>$<%=@sms_log.unit_price%></td>
+                  </tr>
+                <%else -%>
+                  <%if @sms_log.status == 'partial success'%>
+                    <%r = recipients_status(@sms_log.recipients, @sms_log.additional_info)%>
+                    <tr>
+                        <td width="30%">Successful Recipient(s)</td>
+                        <td><%=r[0].join(', ')%></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Failed Recipient(s)</td>
+                        <td><%=r[1].join(', ')%></td>
+                    </tr>
+                  <%else%>
+                    <tr>
+                        <td width="30%">Recipient(s)</td> 
+                        <td><%=@sms_log.recipients.join(', ')%></td>
+                    </tr>
+                  <%end%>
+                  <tr>
+                    <td width="30%">Rate</td> 
+                    <td>$<%=@sms_log.unit_price%></td>
+                  </tr>
+                <% end -%> 
+                <tr>
+                    <td width="30%">Cost</td> 
+                    <td>$<%=@sms_log.total_price%></td>
+                </tr>
+                <tr>
+                    <td width="30%">Message</td> 
+                    <td><%=@sms_log.message%></td>
+                </tr>
+                <tr>
+                    <td width="30%">Length</td>
+                    <%
+                        text_size = @sms_log.message.size
+                        single_sms_length = APP_CONFIG['single_sms_length']
+                    %>
+                    <td><%=text_size%> | <%=(text_size/single_sms_length.to_f).ceil%></td>
+                </tr>
+                <%if @sms_log.direction == 'incoming' -%>
+                <tr>
+                    <td width="30%">Description</td> 
+                    <td><%=@sms_log.description%></td>
+                </tr>
+                <%end%>
+               	<%if policy(:sms_log).select_carrier? -%>
+               	    <tr>
+               	        <td width="40%">Additional Info</td> 
+               	        <td><%=@sms_log.additional_info%></td>
+               	    </tr>
+               	<%end%>
+              </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 text-center mt10" >
+            <a class="btn btn-default close_modal">Close</a>
+        </div>
+    </div>
+</div>

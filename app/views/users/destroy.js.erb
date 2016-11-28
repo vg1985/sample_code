@@ -1,0 +1,12 @@
+$('#users_table').DataTable().draw();
+
+var gritter_opts = {
+	title: 'Users',
+	sticky: false,
+	time: '5000'
+};
+
+gritter_opts.text = 'User has been deleted successfully';
+gritter_opts.class_name = 'growl-success';
+
+jQuery.gritter.add(gritter_opts);

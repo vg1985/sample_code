@@ -1,0 +1,54 @@
+<%if @result['error'].present?%>
+  <p class="text-center text-danger"><%=@result['message']%></p>
+<%else%>
+  <table id="reports_table" cellspacing="0" class="text-center table table-striped dataTable table-hover table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center no-sort">ID</th>
+        <th class="text-center no-sort">Date</th>
+        <%if policy(:report).select_carrier? -%>
+        <th class="text-center no-sort">User</th>
+        <%end%>
+        <th class="text-center no-sort">Start Time</th>
+        <th class="text-center no-sort">End Time</th>
+        <th class="text-center no-sort">Status</th>
+        <th class="text-center no-sort">Rows</th>
+        <th class="text-center no-sort">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%page_start = (@result['page'] - 1)*@result['rows']%>
+      <%@result['list'].each_with_index do |rec, i| -%>
+        <tr class="text-center">
+          <td class="text-center"><%=i + page_start + 1%></td>
+          <td class="text-center">
+            <%if rec['timestamp'].present?%>
+              <%=Time.parse(rec['timestamp']).in_time_zone(current_user.timezone).to_s(:reporting)%>
+            <%end%>
+          </td>
+          <%if policy(:report).select_carrier? -%>
+          <td>
+            <%if rec['username'].present?%>
+              <%=User.find_by(username: rec['username']).name%>
+            <%end%>
+          </td>
+          <%end -%>
+          <td class="text-center">
+            <%if rec['start'].present?%>
+              <%=Time.parse(rec['start']).in_time_zone(current_user.timezone).to_s(:reporting)%>
+            <%end%>
+          </td>
+          <td class="text-center">
+            <%if rec['end'].present?%>
+              <%=Time.parse(rec['end']).in_time_zone(current_user.timezone).to_s(:reporting)%>
+            <%end%>
+          </td>
+          <td class="text-center"><%=rec['status'].humanize%></td>
+          <td class="text-center"><%=rec['rows']%></td>
+          <td class="text-center"><%=rec['link']%></td>
+        </tr>
+      <%end -%>
+    </tbody>
+  </table>
+  <div class="text-center">Query Time: <%=@result['query_time']%></div>
+<%end%>

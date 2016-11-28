@@ -1,0 +1,18 @@
+<div class="form-group depth col-md-6">
+  <%= f.text_field :depth, placeholder: "Depth", class: "form-control", data: {errorkey: "depth"} %>
+</div>
+<%= f.fields_for :hosts, setup_objects(ingress_trunk, :hosts) do |hs| %>
+ <div class="form-group host_ip">
+   <%= hs.text_field :host_ip, placeholder: "Host", class: "form-control", data: {errorkey: "hosts.host_ip"} %>
+ </div>
+ <div class="form-group subnet">
+   <%= hs.text_field :subnet, placeholder: "Subnet", class: "form-control", data: {errorkey: "hosts.subnet"} %>
+ </div>
+ <div class="form-group port">
+   <%= hs.text_field :port, placeholder: "Port", class: "form-control", data: {errorkey: "hosts.port"} %>
+ </div>
+ <div class="form-group type">
+   <%= hs.link_to_remove "Remove" %>
+ </div>
+<% end %>
+<p><%= f.link_to_add "Add", :hosts %></p>

@@ -1,0 +1,14 @@
+<%if @did_group.id.present?%>
+	jQuery("#did_groups_container").append("<%=j(render(partial: 'did_group', locals: {group: @did_group, dids: nil}))%>");
+	App.CarrierManageDids.initGroupDatatable("#group_<%=@did_group.id%>_table");
+	App.CarrierManageDids.initEditDidGrpDescription(".did-group-desc");
+	App.CarrierManageDids.addNewGroupOption('<%=@did_group.id%>', '<%=@did_group.name%>');
+	gritter_opts.text = "Did group \"<%=@did_group.name%>\" has been added.";
+	gritter_opts.class_name = 'growl-success';
+<%else%>
+	gritter_opts.text = "Sorry! Could not create DID group.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);
+jQuery('a.close_modal').click();

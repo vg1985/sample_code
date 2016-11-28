@@ -1,0 +1,2 @@
+o: ActiveSupport::Cache::Entry:@value{I"carriers:ETIC:!ActionController::Parameters{
+I"create;TI"on;TI"update;TI"on;TI"delete;TI"on;TI"disable;TI"on;TI"enable;TI"on;T:@permittedFI"ingress_trunks;TIC;{I"	list;TI"on;TI"create;TI"on;TI"update;TI"on;TI"delete;TI"on;TI"deactivate;TI"on;TI"activate;TI"on;T;	F:@created_atf1456855069.8070495:@expires_in0

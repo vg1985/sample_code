@@ -1,0 +1,10 @@
+$('#carrierError').hide();
+<% if @carrier.errors.blank? %>
+  window.location.href = "<%= carriers_path %>";
+<% else %>
+  App.ErrorHandler.add_errors("#carrier_form", "<%= j(raw(@carrier.errors.to_json)) %>");
+  $('#carrierError').show();
+  $('#progressWizard li:first a').trigger('click');
+  $('ul.pager').show();
+  $('ul.finish').hide();
+<% end %>

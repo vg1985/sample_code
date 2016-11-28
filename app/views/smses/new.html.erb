@@ -1,0 +1,103 @@
+<% provide(:title, 'SMS - Send Message') %>
+
+<%=content_for :breadcrumb do%>
+    <li>SMS</li>
+    <li class="active">Send Message</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'sms' %>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.SendSMSHandler.setUrls(['/smses/carrier_sms_dids']);
+    App.SendSMSHandler.init(<%=@settings%>, <%=policy(:sms_log).select_carrier?%>);
+<%end%>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Send Message</h4>
+    </div>
+    <%=form_for :message, url: smses_path, remote: false, html: {class: 'form-bordered', id: 'new_message_form'} do |f| -%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:sms_log).select_carrier?-%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Account ID:</label>
+            <div class="col-sm-3">
+                <%=f.select :carrier_id, options_for_select(Carrier.for_select(false)), {include_blank: true}, {class: '', data: {placeholder: 'Choose Carrier...'}} %>
+            </div>
+        </div>
+        <%end -%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">From:</label>
+            <%unless policy(:sms_log).select_carrier? -%>
+                <div class="col-sm-3">
+                    <%=f.select :from, Did.sms_numbers_for_select(current_user.carrier.id), { include_blank: true }, {class: 'select2', data: { placeholder: 'Choose Number...' }} %>
+                </div>
+                <div class="col-sm-2 mt10"><%=link_to 'Purchase DID', purchase_inbound_dids_path %></div>
+            <%else -%>
+                <div class="col-sm-3" id="from_select_cont">
+                    <%=f.select :from, {}, { include_blank: true }, {class: 'select2', data: { placeholder: 'Choose Number...' }} %>
+                </div>
+            <%end -%>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">
+                To: <h6 class="help-block">Max. <%=@settings[0]%> recipients </h6>
+            </label>
+            <div class="col-sm-4 mt10">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group mb15">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                   <span id="country_code"> +1</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="javascript:void(0);" class="country-code-val">+1</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="country-code-val">+91</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="country-code-val">+145</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <%=text_field_tag :number, nil, class: 'form-control' %>
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button" id="add_recipient">Add</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="control-label">
+                            <%=f.text_field :recipients, class: 'form-control'%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Message:</label>
+            <div class="col-sm-4">
+             <%= f.text_area :text, rows:6, class: "form-control"%>
+                <span class="help-block">Message: <span id="msg_count" class="text-info">1</span>, Characters left: <span id="chars_left" class="text-info"><%=@settings[2]%></span></span>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Description:</label>
+            <div class="col-sm-3">
+            <%= f.text_area :description , class: "form-control"%>
+            </div>
+        </div> -->
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary add-charge-btn">
+            Send Message
+        </button>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>

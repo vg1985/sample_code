@@ -1,0 +1,38 @@
+<% provide(:title, 'Users') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Users</li>
+	<li class="active">Edit User</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'users'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.UserFormHandler.setUrls(['<%=check_username_users_path%>', '<%=check_email_users_path%>']);
+  App.UserFormHandler.init();
+<%end%>
+
+<div class="panel panel-default">
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-body panel-body-nopadding">
+      <div id="editUserWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified nav-disabled-click">
+          <li>
+            <a href="#ptab1" data-toggle="tab"><span>Step 1:</span> User Credentials</a>
+          </li>
+          <li>
+            <a href="#ptab2" data-toggle="tab"><span>Step 2:</span> Other Info</a>
+          </li>
+        </ul>
+        <%= form_for(@user, url: update_internal_user_path(@user), html: {id: 'editUserForm'}) do |f| -%>
+          <%=f.hidden_field :id %>
+          <%= render partial: 'users/internal_user_form', locals: {f: f, user: @user} %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,2 @@
+module IngressTrunksHelper
+end

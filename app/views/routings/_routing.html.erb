@@ -1,0 +1,14 @@
+<tr id="routing<%= routing.id %>">
+  <td><%= link_to routing.name, routing %></td>
+  <td>
+    <ul>
+      <% routing.trunks.each do |trunk| %>
+        <li><%= link_to trunk.name, trunk %></li>
+      <% end %>
+    </ul>
+  </td>
+  <td>
+    <%= link_to "Modify", edit_routing_path(routing), class: "btn btn-xs btn-success" %>
+    <%= link_to "Delete", routing, class: "btn btn-xs btn-danger", method: :delete, data: {confirm: "Are You Sure?"}, remote: true %>
+  </td>
+</tr>

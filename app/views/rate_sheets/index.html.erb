@@ -1,0 +1,76 @@
+<% provide(:title, 'Manage Ratesheets') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Ratesheets</li>
+  <li class="active">Manage Ratesheet</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'ratesheets', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.AdminRateSheetListHandler.setUrls(['<%=dt_ratesheets_interplay_rate_sheets_path%>']);
+  App.AdminRateSheetListHandler.init();
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <span>Filter by LRN: </span> &nbsp;
+              <%= select_tag :lrn, options_for_select([['Enabled', '1'], ['Disabled', '0']]), {include_blank: 'Show All', id: 'lrn_select' } %>
+            </div>
+            <div class="col-sm-3">
+              <span>Filter by Jurisdiction: </span> &nbsp;
+              <%= select_tag :jurisdiction, options_for_select(RateSheet::JURISDICTION_TYPES.invert) , {include_blank: 'Show All', id: 'jurisdiction_select'} %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default ratesheets-container">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="rate_sheets_table" class="table table-striped dataTable table-hover table-bordered">
+              <thead>
+                <tr>
+                    <th width="15%">Name</th>
+                    <th width="10%" class="no-sort">Count</th>
+                    <th width="12%">LRN Enabled?</th>
+                    <th width="15%">Jurisdiction</th>
+                    <th width="15%">Last Updated</th>
+                    <th width="20%" class="no-sort">Notes</th>
+                    <th class='no-sort'>Actions</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>    
+</div>
+
+<div class="modal fade delete-ratesheet-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete this ratesheet? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_ratesheet_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

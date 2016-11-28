@@ -1,0 +1,217 @@
+<% provide(:title, 'Settings - OTP') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">OTP</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings' %>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.OTPSettingsHandler.init([
+		<%=@otp_setting.otp_sms_enabled == '1' ? 'true' : 'false'%>,
+		<%=@otp_setting.otp_email_enabled == '1' ? 'true' : 'false'%>,
+	]);
+<%end%>
+
+<div class="row">
+	<div class="col-md-12 mb30">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#general" data-toggle="tab"><strong>General</strong></a>
+			</li>
+			<li>
+				<a href="#plivo" data-toggle="tab"><strong>Plivo</strong></a>
+			</li>
+			<li>
+				<a href="#twilio" data-toggle="tab"><strong>Twilio</strong></a>
+			</li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content mb30">
+			<div class="tab-pane active" id="general">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @otp_setting, url: settings_update_otp_settings_path, remote: true, method: :patch, html: {class: 'otp_settings_form form-bordered'} do |f|%>
+							<%=f.hidden_field :uid%>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">General</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group" style="margin-top: 0px;">
+										<label class="col-sm-2 control-label">SMS Service Provider:</label>
+										<div class="col-sm-3 control-label">
+											<div class="rdio rdio-primary" style="float:left;">
+												<%=f.radio_button :otp_provider, '1', {style: 'margin: -3px 0 0;', id: 'radio_plivo'}%>
+												<label for="radio_plivo">Plivo</label>
+											</div>
+											<div class="rdio rdio-primary" style="margin-left: 30px; float:left;">
+												<%=f.radio_button :otp_provider, '2', {style: 'margin: -3px 0 0;', id: 'radio_twilio'}%>
+												<label for="radio_twilio">Twilio</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group" style="margin-top: 0px;">
+										<label class="col-sm-2 control-label">Send SMS:</label>
+										<div class="col-sm-3 control-label">
+											<div class="toggle-primary" id="send_sms_tgl"></div>
+											<%=f.check_box :otp_sms_enabled, {style: 'opacity:0; position:absolute; top:0px;', id: 'send_sms_tgl_chkbox'}%>
+										</div>
+									</div>
+									<div class="form-group" style="margin-top: 0px;">
+										<label class="col-sm-2 control-label">Send Email:</label>
+										<div class="col-sm-3 control-label">
+											<div class="toggle-primary" id="sms_email_tgl"></div>
+											<%=f.check_box :otp_email_enabled, {style: 'opacity:0; position:absolute; top:0px;', id: 'send_email_tgl_chkbox'}%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10">Message:</label>
+										<div class="col-sm-3">
+											<%=f.text_area :otp_message, size: '5x10', class: 'form-control'%>
+										</div>
+									</div>
+								</div><!-- panel-body -->
+								<div class="panel-footer">
+									<label class="col-sm-2"></label>
+									<button class="btn btn-primary">
+										Update
+									</button>
+									<span class="text-muted otp_settings_form_msg" style="margin-left:10px;"></span>
+								</div><!-- panel-footer -->
+							</div><!-- panel-default -->
+						<%end%>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="plivo">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @otp_setting, url: settings_update_otp_settings_path, remote: true, method: :patch, html: {class: 'otp_settings_form form-bordered'} do |f|%>
+							<%=f.hidden_field :uid%>
+						<div class="panel-heading">
+							<h4 class="panel-title">Plivo</h4>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">Plivo Auth. ID:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_plivo_auth_id, class: 'form-control'%>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">Plivo Auth. Token:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_plivo_auth_token, class: 'form-control'%>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">
+									From:
+									<span class="help-block">Number with country code e.g. +14084300680</span>
+								</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_plivo_from, class: 'form-control'%>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10" >Postback URL:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_plivo_postback_url, class: 'form-control'%>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10" >Postback Method:</label>
+								<div class="col-sm-3">
+									<%=f.select :otp_plivo_postback_method, ['POST', 'GET'], class: 'form-control'%>
+								</div>
+							</div>
+						</div><!-- panel-body -->
+						<div class="panel-footer">
+							<label class="col-sm-2"></label>
+							<button class="btn btn-primary">
+								Update
+							</button>
+							<span class="text-muted otp_settings_form_msg" style="margin-left:10px;"></span>
+						</div><!-- panel-footer -->
+						<%end%>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="twilio">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @otp_setting, url: settings_update_otp_settings_path, remote: true, method: :patch, html: {class: 'otp_settings_form form-bordered'} do |f|%>
+							<%=f.hidden_field :uid%>
+						<div class="panel-heading">
+							<h4 class="panel-title">Twilio</h4>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">Twilio Account SID:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_twilio_auth_id, class: 'form-control'%>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">Twilio Auth. Token:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_twilio_auth_token, class: 'form-control'%>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10">
+									From:
+									<span class="help-block">Number with country code e.g. +14084300680</span>
+								</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_twilio_from, class: 'form-control'%>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label mt10" >Postback URL:</label>
+								<div class="col-sm-3">
+									<%=f.text_field :otp_twilio_postback_url, class: 'form-control'%>
+								</div>
+							</div>
+						</div><!-- panel-body -->
+						<div class="panel-footer">
+							<label class="col-sm-2"></label>
+							<button class="btn btn-primary">
+								Update
+							</button>
+							<span class="text-muted otp_settings_form_msg" style="margin-left:10px;"></span>
+						</div><!-- panel-footer -->
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var var_tooltip_html = '<div class="row">\
+								<div class="col-sm-12">\
+									<i>{{sms_from}}</i> &nbsp;-> Number from which the SMS is sent. For e.g. +19582891722 <br />\
+									<i>{{sms_to}}</i> &nbsp;-> The DID to which SMS is sent. For e.g. 5102980799 <br />\
+									<i>{{sms_body}}</i> &nbsp;-> The text message in SMS.<br />\
+									<i>{{sms_time}}</i> &nbsp;-> The time at which the SMS has arrived. For e.g. 10:45 AM <br />\
+									<i>{{sms_date}}</i> &nbsp;-> The date &amp; time at which SMS has arrived. For e.g. 2016-01-21 10:45 AM\
+									<i>{{sms_url}}</i> &nbsp; -> The SMS Log URL. This will directly take the user to SMS Log Details.\
+								</div>\
+							</div>'
+</script>

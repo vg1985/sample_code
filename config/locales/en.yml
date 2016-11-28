@@ -1,0 +1,65 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  hello: "Hello world"
+  activation_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  monthly_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  outbound_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  inbound_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  pmin_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  bstart_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  binc_helptext: 'This is going to be some helptext which tells the meaning of this input'
+  try_timeout_valid_values: 'Required. Should be between 3 and 60 inclusive'
+  pdd_timeout_valid_values: 'Required. Should be between 3 and 60 inclusive'
+  call_fwd_valid_values: 'Required. Should be between 3 and 200 inclusive'
+  ip_valid_values: 'Required. Can only contain alpha-numeric, dots and dashes'
+  sms_fwd_valid_values: 'Required. Should be a valid number'
+  sms_email_valid_values: 'Required. Should be a valid email address'
+  sms_api_valid_values: 'Required. Should be a valid URL and must start with http:// or https://'
+  code_validvalues: 'Required. Unique within this ratesheet. Can have upto 25 numeric characters'
+  codename_validvalues: 'Optional. Can have upto 25 alphanumeric characters'
+  codecountry_validvalues: 'Optional. Can have upto 10 alphanumeric characters'
+  rate_validvalues: 'Required. Should be a positive number between 0.000001 to 99.999999'
+  billstart_validvalues: 'Required. Should be a positive integer between 1 to 60'
+  billinc_validvalues: 'Required. Should be a positive integer between 1 to 60'
+  setupfees_validvalues: 'Required. Should be a positive number between 0.0001 to 99.9999'
+  decimal_rounding_validvalues: 'Should be a positive integer between 1 to 6'
+  effectivetime_validvalues: 'Required. Datetime format should be YYYY-MM-DD HH:MM'
+  effectivetime_validinput: 'Datetime format should be YYYY-MM-DD HH:MM'
+  multiply_validvalues: 'Required. Should be a positive integer between 1 to 100'
+
+  views:
+    pagination:
+      first: "<<"
+      last: ">>"
+      previous: "<"
+      next: ">"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Showing <b>1</b> %{entry_name}"
+          other: "Showing <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Showing %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> entries"

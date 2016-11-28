@@ -1,0 +1,185 @@
+<div class='row'>
+	<div class="col-md-6">
+		<h4>Local Inbound DID Rates</h4>
+		<div class="well form-horizontal form-bordered">
+    		<%=f.fields_for :local_did_rate do |ldr|%>
+				<div class="form-group local_activation_spinner_group">
+					<label class="col-sm-3 control-label">Activation</label>
+					<div class="col-sm-4">
+						<%=ldr.text_field :activation, id: 'local_activation_spinner', title: t(:activation_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="local_activation_tgl" data-spinner="local_activation_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="local_activation_tgl_val" id="local_activation_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="local_activation_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group local_monthly_spinner_group">
+					<label class="col-sm-3 control-label">Monthly</label>
+					<div class="col-sm-4">
+						<%=ldr.text_field :monthly, id: 'local_monthly_spinner', title: t(:monthly_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips' , style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="local_monthly_tgl" data-spinner="local_monthly_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="local_monthly_tgl_val" id="local_monthly_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="local_monthly_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group local_permin_spinner_group">
+					<label class="col-sm-3 control-label">Per Minute</label>
+					<div class="col-sm-4">
+						<%=ldr.text_field :per_minute, id: 'local_permin_spinner', title: t(:pmin_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="local_pmin_tgl" data-spinner="local_permin_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="local_pmin_tgl_val" id="local_pmin_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="local_permin_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group local_billstart_spinner_group">
+					<label class="col-sm-3 control-label">Bill Start</label>
+					<div class="col-sm-4">
+						<%=ldr.text_field :bill_start, id: 'local_billstart_spinner', title: t(:bstart_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="local_billstart_tgl" data-spinner="local_billstart_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="local_billstart_tgl_val" id="local_billstart_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="local_billstart_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group local_billinc_spinner_group">
+					<label class="col-sm-3 control-label">Bill Increment</label>
+					<div class="col-sm-4">
+						<%=ldr.text_field :bill_increment, id: 'local_billinc_spinner', title: t(:binc_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="local_billinc_tgl" data-spinner="local_billinc_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="local_billinc_tgl_val" id="local_billinc_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="local_billinc_spinner_error"></span>
+					</div>
+				</div>
+			<%end%>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h4>Tollfree Inbound DID Rates</h4>
+		<div class="well form-horizontal form-bordered">
+	    	<%=f.fields_for :tollfree_did_rate do |tfr|%>
+				<div class="form-group tf_activation_spinner_group">
+					<label class="col-sm-3 control-label">Activation</label>
+					<div class="col-sm-4">
+						<%=tfr.text_field :activation, id: 'tf_activation_spinner', title: t(:activation_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="tf_activation_tgl" data-spinner="tf_activation_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="tf_activation_tgl_val" id="tf_activation_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="tf_activation_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group tf_monthly_spinner_group">
+					<label class="col-sm-3 control-label">Monthly</label>
+					<div class="col-sm-4">
+						<%=tfr.text_field :monthly, id: 'tf_monthly_spinner', title: t(:monthly_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="tf_monthly_tgl" data-spinner="tf_monthly_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="tf_monthly_tgl_val" id="tf_monthly_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="tf_monthly_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group tf_permin_spinner_group">
+					<label class="col-sm-3 control-label">Per Minute</label>
+					<div class="col-sm-4">
+						<%=tfr.text_field :per_minute, id: 'tf_permin_spinner', title: t(:pmin_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="tf_pmin_tgl" data-spinner="tf_permin_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="tf_pmin_tgl_val" id="tf_pmin_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="tf_permin_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group tf_billstart_spinner_group">
+					<label class="col-sm-3 control-label">Bill Start</label>
+					<div class="col-sm-4">
+						<%=tfr.text_field :bill_start, id: 'tf_billstart_spinner', title: t(:bstart_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="tf_billstart_tgl" data-spinner="tf_billstart_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="tf_billstart_tgl_val" id="tf_billstart_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="tf_billstart_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group tf_billinc_spinner_group">
+					<label class="col-sm-3 control-label">Bill Increment</label>
+					<div class="col-sm-4">
+						<%=tfr.text_field :bill_increment, id: 'tf_billinc_spinner', title: t(:binc_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="tf_billinc_tgl" data-spinner="tf_billinc_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="tf_billinc_tgl_val" id="tf_billinc_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="tf_billinc_spinner_error"></span>
+					</div>
+				</div>
+			<%end%>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var local_did_defaults = [<%=@ldr_defaults.to_arr.join(',').html_safe%>];
+	var tf_did_defaults = [<%=@tfdr_defaults.to_arr.join(',').html_safe%>];
+	var local_did = [<%=spinner_init_values(@carrier_ldr).join(',').html_safe%>];
+	var tf_did = [<%=spinner_init_values(@carrier_tfdr).join(',').html_safe%>];
+	var local_switch_statuses = [<%=toggleswitch_init_format(@carrier_ldr).join(',').html_safe%>];
+	var tf_switch_statuses = [<%=toggleswitch_init_format(@carrier_tfdr).join(',').html_safe%>];
+</script>

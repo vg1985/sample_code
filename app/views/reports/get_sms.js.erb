@@ -1,0 +1,9 @@
+App.overlayModal.hide();
+<%if @sms_logs.present?%>
+	jQuery('#report_data_container').html('<%=escape_javascript(render partial: 'sms_reports_table')%>');
+<%else%>
+	jQuery('#report_data_container').html('<p class="text-info text-center">No data found for this search criteria.</p>');
+<%end%>
+App.SMSReportHandler.initDatatable('#reports_table');
+App.SMSReportHandler.minimizeFilter();
+jQuery('.reports-container .panel-body').show();

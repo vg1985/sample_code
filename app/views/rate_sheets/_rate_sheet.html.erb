@@ -1,0 +1,10 @@
+<tr id="rate_sheet<%= rate_sheet.id %>">
+  <td><%= link_to rate_sheet.name, rate_sheet %></td>
+  <td><%= rate_sheet.lrn_value %></td>
+  <td><%= rate_sheet.rate_sheet_type %></td>
+  <td><%= rate_sheet.notes %></td>
+  <td>
+    <%= link_to "Modify", edit_rate_sheet_path(rate_sheet), class: "btn btn-xs btn-success" %>
+    <%= link_to "Delete", rate_sheet, class: "btn btn-xs btn-danger", method: :delete, data: {confirm: "Are You Sure?"}, remote: true %>
+  </td>
+</tr>

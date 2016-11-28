@@ -1,0 +1,60 @@
+<% provide(:title, 'Modify Carrier') %>
+
+<%=content_for :breadcrumb do%>
+<li>
+	Carriers
+</li>
+<li>
+	<%= link_to 'Manage Carriers', carriers_path%>
+</li>
+<li class="active">
+	Modify Carrier
+</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+<%= javascript_include_tag 'carriers'%>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.RateSpinners.init();
+	App.AdminCarrierFormsHandler.init([local_did_defaults, tf_did_defaults, sms_did_defaults], [local_did, tf_did, sms_did], [local_switch_statuses, tf_switch_statuses, sms_switch_statuses], po_switch_statuses);
+<%end%>
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">Edit Carrier Information</h4>
+			<span id="carrierError" class="errors" style="display:none;">Please fix the errors below.</span>
+		</div>
+		<div class="panel-body panel-body-nopadding">
+			<div id="editCarrierWizard" class="basic-wizard">
+				<ul class="nav nav-pills nav-justified">
+					<li>
+						<a href="#ptab1" data-toggle="tab"> Login Credentials</a>
+					</li>
+					<li>
+						<a href="#ptab2" data-toggle="tab"> Billing Information</a>
+					</li>
+					<li>
+						<a href="#ptab3" data-toggle="tab"> Carrier Contacts</a>
+					</li>
+					<li>
+						<a href="#ptab4" data-toggle="tab"> Payment Options</a>
+					</li>
+					<li>
+						<a href="#ptab5" data-toggle="tab"> Billing Settings</a>
+					</li>
+					<li>
+						<a href="#ptab6" data-toggle="tab"> DID Billing</a>
+					</li>
+					<li>
+						<a href="#ptab7" data-toggle="tab"> SMS Billing</a>
+					</li>
+				</ul>
+
+				<%=render partial: 'form'%>
+			</div>
+		</div>
+	</div>
+</div>

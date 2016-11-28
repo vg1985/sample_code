@@ -1,0 +1,191 @@
+<%= nested_form_for @egress_trunk, html: {id: @egress_trunk.new_record? ? 'newEgressTrunkForm' : 'editEgressTrunkForm', class: "form-horizontal"} do |f| %>
+  <%unless @egress_trunk.new_record?%>
+    <%=f.hidden_field :id%>
+    <%=hidden_field_tag :trunk_type, 'egress'%>
+  <%end%>
+  <div class="tab-content">
+    <div class="tab-pane panel-body" id="ptab1">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name, raw("Name <span class='asterisk'>*</span>"), class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.text_field :name, class: "form-control", style: 'width: 75%'%></div>
+        </div>
+        <div class="form-group">
+          <%= f.label :carrier_id, raw("Carrier <span class='asterisk'>*</span>"), class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.collection_select :carrier_id, Carrier.all, :id, :company_name, {include_blank: true}, title: nil, data: {placeholder: 'Choose Carrier'}, class: "select2"%></div>
+        </div>
+        <div class="form-group">
+          <%= f.label :rate_sheet_id, raw("Rate Sheet <span class='asterisk'>*</span>"), class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.collection_select :rate_sheet_id, RateSheet.all, :id, :name, {include_blank: true}, data: {placeholder: 'Choose Rate'}, class: "select2" %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :routing_strategy, "Routing Strategy", class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.select :routing_strategy,  EgressTrunk::ROUTING_STRATEGIES.invert, {}, {class: ""} %></div>
+        </div>
+        <div class="form-group top_down_depth_spinner_group" id="top_down_depth_cont" style="<%=(@egress_trunk.new_record? || @egress_trunk.routing_strategy == 0) ? 'display:none;' : ''%>">
+          <%= f.label :depth, "Depth", class: "col-sm-3 control-label" %>
+          <div class="col-sm-3">
+            <%= f.text_field :depth, class: "form-control", id: 'top_down_depth_spinner' %>
+            <span class="error" id="top_down_depth_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :tech_prefix, "Tech Prefix", class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.text_field :tech_prefix, class: "form-control", style: 'width: 75%' %></div>
+        </div>
+        <div id="egress_ip_fields">
+          <span id="ip_auth_fields">
+            <%= render partial: 'ingress_trunks/ip_authentication', locals: {f: f, trunk: @egress_trunk} %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane panel-body" id="ptab2">
+      <div class='col-md-4'>
+        <div class="form-group call_limit_spinner_group">
+          <%= f.label :call_limit, "Call Limit", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+            <%= f.text_field :call_limit, class: "form-control", id: 'call_limit_spinner' %>
+            <span class="error" id="call_limit_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group cps_limit_spinner_group">
+          <%= f.label :cps_limit, "CPS Limit", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+            <%= f.text_field :cps_limit, class: "form-control", id: 'cps_limit_spinner' %>
+            <span class="error" id="cps_limit_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group max_cost_spinner_group">
+          <%= f.label :max_cost, "Max Cost", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+            <%= f.text_field :max_cost, class: "form-control", id: 'max_cost_spinner'%>
+            <span class="error" id="max_cost_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :profit_margin_type, class: "col-sm-4 control-label" %>
+          <div class="col-sm-7"><%= f.select :profit_margin_type, {'Value': 0, 'Percent': 1}, {include_blank: true}, { data: {placeholder: 'Please select'}} %></div>
+        </div>
+        <div class="form-group profit_margin_pc_spinner_group profit_margin_value_spinner_group">
+          <%= f.label :profit_margin, class: "col-sm-4 control-label" %>
+            
+          <div class="col-sm-5" id="profit_margin_pc_cont" style="<%=@egress_trunk.profit_margin_type == 1 ? '' : 'display:none;'%>">
+            <%= f.text_field :pc_profit_margin, class: "form-control", id: "profit_margin_pc_spinner"%>
+            <span class="error" id="profit_margin_pc_spinner_error"></span>
+          </div>
+          <div class="col-sm-5" id="profit_margin_value_cont" style="<%=@egress_trunk.profit_margin_type == 0 ? '' : 'display:none;'%>">
+            <%= f.text_field :profit_margin, class: "form-control", id: "profit_margin_value_spinner"%>
+             <span class="error" id="profit_margin_value_spinner_error"></span>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-4'>
+        <div class="form-group try_timeout_spinner_group">
+          <%= f.label :try_timeout, "Try Timeout (in Sec.)", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+              <%= f.text_field :try_timeout, class: "form-control", id: 'try_timeout_spinner'%>
+              <span class="error" id="try_timeout_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group pdd_timeout_spinner_group">
+          <%= f.label :pdd_timeout, "PDD Timeout (in Sec.)", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+            <%= f.text_field :pdd_timeout, class: "form-control", id: 'pdd_timeout_spinner'%>
+            <span class="error" id="pdd_timeout_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group ring_timeout_spinner_group">
+          <%= f.label :ring_timeout, "Ring Timeout (in Sec.)", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5">
+            <%= f.text_field :ring_timeout, class: "form-control", id: 'ring_timeout_spinner'%>
+            <span class="error" id="ring_timeout_spinner_error"></span>
+          </div>
+        </div>
+         <div class="form-group decimal_points_spinner_group">
+          <%= f.label :decimal_points, "Precision", class: "col-sm-4 control-label"%>
+          <div class="col-sm-5">
+            <%= f.text_field :decimal_points, class: "form-control", id: 'decimal_points_spinner' %>
+            <span class="error" id="decimal_points_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group max_duration_spinner_group">
+          <%= f.label :max_duration, "Max Duration (in Sec.)", class: "col-sm-4 control-label" %>
+          <div class="col-sm-5 control-label">
+            <%= f.text_field :max_duration, class: "form-control", id: 'max_duration_spinner'%>
+            <span class="error" id="max_duration_spinner_error"></span>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-4'>
+        <div class="form-group">
+          <%= f.label :sip_trace, "SIP Trace", class: "col-sm-4 control-label" %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="siptrace_activation_tgl"></div>
+            <%=f.check_box :sip_trace, {style: "opacity:0; position:absolute; top:0px;", id: "sip_trace_tgl_chkbox"}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :media_bypass, "Media Bypass", class: "col-sm-4 control-label" %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="media_bypass_activation_tgl"></div>
+            <%=f.check_box :media_bypass, {style: "opacity:0; position:absolute; top:0px;", id: "media_bypass_tgl_chkbox"}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :lrn_block, "LRN Block", class: "col-sm-4 control-label" %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="lrn_block_activation_tgl"></div>
+            <%=f.check_box :lrn_block, {style: "opacity:0; position:absolute; top:0px;", id: "lrn_block_tgl_chkbox"}%>
+          </div>
+        </div>
+        <div class="form-group block_wireless">
+          <%= f.label :block_wireless, "Block Wireless", class: "col-sm-4 control-label" %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="block_wireless_activation_tgl"></div>
+              <%=f.check_box :block_wireless, {style: "opacity:0; position:absolute; top:0px;", id: "block_wireless_tgl_chkbox"}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :lrn_source, "LRN Source", class: "col-sm-4 control-label" %>
+          <div class="col-sm-7">
+            <%= f.select :lrn_source, IngressTrunk::LRN_SOURCES.invert, {include_blank: true}, { class: 'select2', data: {placeholder: 'Please select'}} %>
+        </div>
+      </div>
+       <div class="form-group">
+        <%= f.label :force_cid, "Force CID", class: "col-sm-4 control-label" %>
+        <div class="col-sm-7"><%= f.text_field :force_cid, class: "form-control input-sm" %></div>
+      </div>
+    </div>
+  </div>
+  <%if @egress_trunk.new_record?%>
+    <ul class="pager wizard">
+      <li class="previous">
+        <a href="javascript:void(0)">&lt;&lt; Previous</a>
+      </li>
+      <li>
+        <%= f.submit "Finish", class: 'btn btn-darkblue disabled', id: 'newFormFinishBtn' %>
+        <button class="btn btn-default cancel-form">Cancel</button>
+      </li>
+      <li class="next">
+        <a href="javascript:void(0)">Next &gt;&gt;</a>
+      </li>
+    </ul>
+  <%else%>
+    <ul class="pager wizard">
+      <li class="previous">
+        <a href="javascript:void(0)">&lt;&lt; Previous</a>
+      </li>
+      <li>
+        <%=f.submit "Update", class:"btn btn-primary"%>
+        <button class="btn btn-default cancel-form">Cancel</button>
+      </li>
+      <li class="next">
+        <a href="javascript:void(0)">Next &gt;&gt;</a>
+      </li>
+    </ul>
+  <%end%>
+<% end %>
+

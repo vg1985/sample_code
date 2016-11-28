@@ -1,0 +1,29 @@
+App.RateSpinners.enableSmsSpinners();
+App.InboundRateSmsFormHandler.enableActions();
+
+if(!gritter_opts) {
+	var gritter_opts = {
+		title: 'SMS Settings',
+		sticky: false,
+		time: '5000'
+	};
+}
+
+gritter_opts.title = 'SMS rates';
+
+<%if @did_sms_rate.present? %>
+	<%if @did_sms_rate.errors.any? %>
+		gritter_opts.text = "The data seems to be invalid. Failed to update the SMS rates.";
+		gritter_opts.class_name = 'growl-danger';
+	<%else%>
+		App.RateSpinners.reset('sms', [<%=@did_sms_rate.to_arr.join(',')%>])
+		gritter_opts.text = "SMS rates updated successfully.";
+		gritter_opts.class_name = 'growl-success';
+	<%end%>
+<%else%>
+	gritter_opts.text = "Sorry! You are not authorized to perform this action.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);
+

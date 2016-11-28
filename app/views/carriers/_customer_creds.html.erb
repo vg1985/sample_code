@@ -1,0 +1,51 @@
+<div class="panel-body">
+  <div class="col-md-12">
+    <%if user_signed_in?%>
+    <div class="form-group">
+      <%= f.label :account_code, raw('Account Code <span class="asterisk">*</span>'), class: 'col-sm-2 control-label' %>
+      <%if current_user.is_carrier?%>
+        <div class="col-sm-2 mt10"><%=carrier.account_code%></div>
+      <%else%>
+        <div class="col-sm-2"><%=f.text_field :account_code, class: 'form-control input-sm'%></div>
+      <%end%>
+    </div>
+    <%end%>
+  	<%= f.fields_for :user, setup_new_obj(carrier, :user) do |user| %>
+    <div class="form-group">
+      <%= user.label :username, raw('Username <span class="asterisk">*</span>'), class: 'col-sm-2 control-label' %>
+      <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%> 
+        <div class="col-sm-2"><%= user.text_field :username, class: 'form-control input-sm'%></div>
+      <%else%>
+        <div class="col-sm-7 mt10"><%=user.object.username%></div>
+      <%end%>
+      </div>
+    <div class="form-group">
+      <%= user.label :email, raw('Email <span class="asterisk">*</span>'), class: 'col-sm-2 control-label'%>
+      <div class="col-sm-2"><%= user.text_field :email, class: 'form-control input-sm'%></div>
+      <div class="col-sm-2 mt10" id="email_verify_links">
+        <span class="fa fa-times-circle validity-fail" id="unverified_email_msg" style="display:none; font-size: 15px; margin-top:5px;"> Unverfied Email.</span>
+        <span class="fa fa-check-circle validity-success" id="verified_email_msg" style="display:none; font-size: 15px; margin-top:5px;"> Verified</span>
+        <span id="verify_email_now_link" style="display:none;"><a href="#">Verify Now</a></span>
+      </div>
+    </div>
+    <%if !user_signed_in? || ( user_signed_in? && current_user.is_admin? )%>
+      <div class="form-group" id="pwd-container">
+        <%= user.label :password, raw('Password <span class="asterisk">*</span>'), class: 'col-sm-2 control-label' %>
+        <div class="col-sm-2"><%= user.password_field :password, class: 'form-control input-sm'%></div>
+        <div class="col-sm-1" style="width: 2%"><span id="passwd_valid"></span></div>
+        <div class="col-sm-3" id="pwstrength_viewport_progress" style="display:none;"></div>
+      </div>
+      <div class="form-group">
+        <%= user.label :password_confirmation, raw('Confirm Password <span class="asterisk">*</span>'), class: 'col-sm-2 control-label' %>
+        <div class="col-sm-2"><%= user.password_field :password_confirmation, class: 'form-control input-sm'%></div>
+        <div class="col-sm-2"><span id="confirm_passwd_valid" style="width: 2%"></span></div>
+      </div>
+    <% else %>
+    	<div class="form-group">
+    		<label class="col-sm-2 control-label">Reset Password</label>
+    		<div class="col-sm-7 mt10">An email confirmation will be sent to your email address. To start <%= link_to 'Click Here', edit_password_carrier_path(@carrier)%>.</div>
+      	</div>
+    <%end%>
+    <%end%>
+  </div>
+</div>

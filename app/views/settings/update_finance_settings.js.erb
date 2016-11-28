@@ -1,0 +1,23 @@
+var gritter_opts = {
+	title: 'Finance Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @finance_setting.present? %>
+	<%unless @finance_setting.errors.any?%>
+		/*jQuery("span.bw_settings_form_msg").removeClass('text-muted text-danger').addClass('text-success').html('Bandwidth API settings updated successfully.');*/
+		gritter_opts.text = "Finance settings have been updated.";
+		gritter_opts.class_name = 'growl-success';
+		
+	<%else%>
+		gritter_opts.text = "The data seems to be invalid. Failed to update the Finance settings.";
+		gritter_opts.class_name = 'growl-danger';
+	<%end%>
+<%else%>
+		gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+		gritter_opts.class_name = 'growl-danger';
+<%end%>	
+
+jQuery("span.finance_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

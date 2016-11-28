@@ -1,0 +1,145 @@
+<%if @did.present? || @bulk_settings%>
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-cog"></span> SMS settings for <%=@did.present? ? @did.did : 'bulk DIDs'%>
+    </h4>
+</div>
+<div class="modal-body smssettings-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class='form-group'>
+                <label class="control-label col-sm-2">Enable SMS:</label> 
+                <div class="control-label col-sm-6 text-left">
+                    <div class="toggle-primary" id="sms_activation_tgl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="table-responsive">
+                <%
+                    if @bulk_settings
+                        form_url = update_bulk_sms_settings_inbound_dids_path
+                    else
+                        form_url = update_sms_settings_inbound_did_path(@did)
+                    end
+                %>
+                <%=form_for :settings, url: form_url, method: :patch, remote: false, html: {id: 'sms_settings_form'} do -%>
+                    <%=hidden_field_tag :dids, nil, id: 'bulk_setting_dids' %>
+                    <%=check_box_tag :enable, 1, @did.present? ? @did.enable_sms : false, {name: 'enable_sms', class: 'toggle-hidden-cb', id: 'sms_activation_tgl_chkbox'}%>
+
+    			<table class="table mb30" id="sms_destination_table">
+    				<thead>
+    					<tr>
+    						<th width="20%">Destination Type</th>
+    						<th width="30%">Destination Value</th>
+    						<th width="40%">Description</th>
+    						<th width="10%">&nbsp;</th>
+    					</tr>
+    				</thead>
+					<tbody>
+                        <tr>
+                            <td><%=select_tag 'did_setting[type]', options_for_select(DidSmsSetting.select_options, @did_setting.dest_type), class: 'select2'%></td>
+                            <td style="vertical-align: middle"><%=text_field_tag 'did_setting[value]', @did_setting.dest_value, data: {placement: 'top', toggle: 'tooltip'}, class: 'dest-val tooltips', size: 30, title: t(:sms_fwd_valid_values)%>
+                            </td>
+                            <td style="vertical-align: middle"><%=text_field_tag 'did_setting[desc]', @did_setting.description, size: 30%></td>
+                        </tr>
+					</tbody>
+    			</table>
+    			<%end%>
+    		</div>
+    	</div>
+    </div>
+    <div class="row" id="cb_agree_cont">
+        <div class='col-sm-6' style="margin-left:10px;">
+            <div class="ckbox ckbox-warning">
+            <%if @user_carrier.present?%>
+                <input id="cb_agree" type="checkbox" value="1">
+            <%else%>
+                <%if @did.present? && @did.enable_sms %>
+                    <input id="cb_agree" type="checkbox" value="1" checked="checked">
+                <%else%>
+                    <input id="cb_agree" type="checkbox" value="1">
+                <%end%>
+            <%end%>
+            <label for="cb_agree">I agree with the <a id="sms_charges" data-toggle="popover">SMS charges</a> that will apply.</label>
+            </div>                         
+        </div>
+    </div>
+    <div class="row" id="submit-opts">
+        <div class='col-sm-12'>
+            <%if @user_carrier.present? || !@bulk_settings%>
+                <%if @has_credit%>
+                    <p class="settings-err-msg text-danger text-center" style="display:none;"></p>
+                <%else%>
+                    <p class="settings-err-msg text-danger text-center">NOTICE: You do not have enough credit to Enable SMS.</p>
+                <%end%>
+            <%else%>
+                <p class="settings-err-msg text-danger text-center">WARNING: You cannot select multiple carriers for SMS settings.</p>
+            <%end%>
+        </div>
+		<div class="col-md-12 text-center">
+            <%if @has_credit%>
+			    <a href="javascript:void(0);" id="sms_settings_submit_btn" class="btn btn-primary" onclick="App.DidSettings.submitSmsSettings(<%=@bulk_settings%>);">OK</a>
+            <%else%>
+                <a href="javascript:void(0);" class="btn btn-primary" disabled="disabled">OK</a>
+            <%end%>
+			<a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+		</div>
+        <%if @bulk_settings%>
+        <div class="col-md-12">
+            <span class='help-text text-info small'>*Note: This setting will override existing SMS settings on selected DIDs</span>
+        </div>
+        <%end%>
+	</div>
+</div>
+<script type="text/javascript">
+    App.DidSettings.initSMSDestinations();
+    jQuery('.tooltips').tooltip({ container: 'body'});
+    <%if @sms_rates.present? -%>
+    jQuery('a#sms_charges').popover({
+        placement: 'right', 
+        container: false,
+        // title: 'SMS Charges',
+        trigger: 'hover',
+        html: true,
+        content: function() {                                                       
+            return '<div class="row">                                               \
+                    <div class="col-sm-12">                                         \
+                        <table class="table text-left small" style="margin:0px; padding:2px;">  \
+                            <tr>                                                    \
+                                <td width="50%"><strong>Activation: </strong></td>    \
+                                <td width="50%">$<%=@sms_rates.activation%></td>                \
+                            </tr>                                                   \
+                            <tr>                                                    \
+                                <td><strong>Monthly: </strong></td>                 \
+                                <td>$<%=@sms_rates.monthly%></td>                   \
+                            </tr>                                                   \
+                            <tr>                                                    \
+                                <td><strong>Outbound: </strong></td>                \
+                                <td>$<%=@sms_rates.outbound%></td>                  \
+                            </tr>                                                   \
+                            <tr>                                                    \
+                                <td><strong>Inbound: </strong></td>                 \
+                                <td>$<%=@sms_rates.inbound%></td>                   \
+                            </tr>                                                   \
+                            <tr>                                                    \
+                                <td><strong>Forward: </strong></td>                 \
+                                <td>$<%=@sms_rates.outbound + @sms_rates.inbound%></td> \
+                            </tr>                                                   \
+                        </table>                                                    \
+                    </div>                                                          \
+                </div>';
+        }
+    });
+    <%end -%>
+</script>
+<%else%>
+<div class="modal-header">
+    <h4 class="modal-title">Invalid Request</h4>
+</div>
+<div class="modal-body">
+    Sorry! This is an invalid request. Please try again.
+</div>
+<%end%>

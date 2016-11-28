@@ -1,0 +1,112 @@
+<div class="panel-body">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :credit_limit, 'Credit Limit', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :credit_limit, class: 'input-sm form-control' %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :type_paid, 'Billing Method', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.select :type_paid, %w(Prepay Postpay), {}, {class: 'select2 mb15'} %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :ingress_credit, 'Credit', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :ingress_credit, class: 'input-sm form-control' %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :invoice_period, class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%=f.select :invoice_period, invoice_billing_options, {include_blank: 'Default'}, class: 'select2 mb15'%>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group max_cost">
+				<%= f.label :egress_credit, 'Egress Credit', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :egress_credit, class: 'form-control input-sm'%>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :billing_cycle, 'Invoice Due', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.select :billing_cycle, invoice_due_options, {}, {class: 'select2 mb15'} %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 mb15">
+			<div class="form-group">
+				<div class="form-group max_cost">
+				<%= f.label :max_cost, 'Max Cost Per Minute', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :max_cost, class: 'form-control input-sm' %>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<%= f.label :reseller_id, 'Reseller', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.select :reseller_id, ['Choose Seller'], {}, {class: 'select2 mb15'} %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 mb15">
+			<div class="form-group">
+				<%= f.label :cps_limit, 'CPS Limit', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :cps_limit, class: 'form-control input-sm' %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group wireless_block_cost">
+				<%= f.label :wireless_block_cost, 'Wireless Surcharge', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :wireless_block_cost, class: 'form-control input-sm'%>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 mb15">
+			<div class="form-group">
+				<%= f.label :call_limit, 'Call Limit', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :call_limit, class: 'form-control input-sm'%>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group reseller_commission_rate">
+				<%= f.label :reseller_commission_rate, 'Reseller Commission Rate', class: 'col-sm-4 control-label' %>
+				<div class="col-sm-4">
+					<%= f.text_field :reseller_commission_rate, class: 'form-control input-sm' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

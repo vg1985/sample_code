@@ -1,0 +1,70 @@
+<% provide :title, "Credit Cards" %>
+
+<%=content_for :breadcrumb do-%>
+    <li>Finance</li>
+    <li class="active">Credit Cards</li>
+<%end%>
+
+<%=content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'dropzone', media: 'all', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'dropzone.min', 'finance', 'data-turbolinks-track' => true %>
+<%end%>
+
+
+<%=content_for :js_init do -%>
+    <%if policy(:credit_card).select_carrier? -%>
+        App.AdminCreditCardsHandler.setUrls(['<%=dt_cc_interplay_credit_cards_path%>']);
+        App.AdminCreditCardsHandler.init();
+    <%else%>
+        App.CreditCardsHandler.init();
+    <%end%>
+    
+<%end%>
+
+<div class="row">
+     <%if policy(:credit_card).select_carrier? -%>
+    <div class="col-md-12">
+        <%= form_tag '#', class: 'form-inline' do %>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a class="minimize" href="">−</a>
+                    </div>
+                    <h4 class="panel-title">Filters</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" style="margin-right:15px;">
+                        <label class="sr-only" for="carrier_select">Carrier</label>
+                        <%= select_tag :carrier_id, options_from_collection_for_select(@carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: "select2", id: "carrier_select"} %>
+                    </div>
+                    <div class="form-group" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="cc_status">Status</label>
+                        <%= select_tag :status, options_for_select([['Verified', 1], ['Pending Verification', 0]], ''), {prompt: "All Statuses", class: "select2", id: 'cc_status' } %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <%end%>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <%if policy(:credit_card).new? -%>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <%= link_to "Add Credit Card", new_credit_card_path, class: "btn btn-primary" %>
+                        </div>
+                    </div>
+                </h4>
+            </div>
+            <%end%>
+            <div class="panel-body">
+                <%=render partial: 'credit_card_list' %>
+            </div>
+        </div>
+    </div>
+</div>

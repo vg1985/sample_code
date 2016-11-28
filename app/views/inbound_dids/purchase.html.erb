@@ -1,0 +1,149 @@
+<% provide(:title, 'Purchase Inbound DIDs') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Inbound DID</li>
+	<li class="active">Purchase</li>
+<%end%>
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'inbound_dids' %>
+<%end%>
+<%=content_for :js_init do %>
+	App.LocalSearchFormHandler.init(<%=policy(:inbound_dids).select_carrier?%>);
+	App.LocalSearchFormHandler.setUrls(['<%=cities_inbound_dids_path%>']);
+	App.tfSearchFormHandler.init(<%=policy(:inbound_dids).select_carrier?%>);
+<%end%>
+
+<div class="row">
+	<div class="col-md-12 mb30">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#local" data-toggle="tab"><strong>Local</strong></a>
+			</li>
+			<li>
+				<a href="#toll-free" data-toggle="tab"><strong>Toll Free</strong></a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content mb30">
+			<div class="tab-pane active" id="local">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_tag url_for(controller: 'inbound_dids', action: 'search_local_numbers'), remote: true, method: :get, id: 'search_local_nos_form', class: 'form-horizontal' do  -%>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">Search Local Numbers</h4>
+								</div>
+								<div class="panel-body">
+									<% if policy(:purchase).select_customer? %>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Select Carrier</label>
+											<div class="col-sm-2">
+												<%= select :search, :carrier, options_for_select(Carrier.for_select), {}, {id: 'select_local_carrier', class: 'select2 career_select', required: true, data: {placeholder: 'Choose Carrier...'}} %>
+											</div>
+										</div>
+									<%end%>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Search Type</label>
+										<div class="col-sm-2">
+											<%=select :search, :type, options_for_select([["Area Code", "1"], ["State, City", "2"]]), {}, id: 'local_search_type', class: "form-control mb-15"%>
+										</div>
+									</div>
+									<div class="form-group" id="area_code_container">
+										<label class="col-sm-2 control-label">Area Code</label>
+										<div class="col-sm-3">
+											<%=text_field_tag "search[area_code]", nil, placeholder: "Area Code", class: 'form-control', style: "max-width: 110px;", maxlength: '3' %>
+										</div>
+									</div>
+									<div class="form-group" id="state_container" style="display:none;">
+										<label class="col-sm-2 control-label">State</label>
+										<div class="col-sm-2">
+											<%us_states = [['', '']]%>
+											<%us_states = us_states + CS.states(:us).dup.invert.to_a%>
+											<%= select :search, :state, options_for_select(us_states), {}, {id: 'search_state', class: "select2", data:{placeholder: "Choose State..."}} %>
+										</div>
+									</div>
+									<div class="form-group" id="city_container" style='display:none;'>
+										<label class="col-sm-2 control-label">City</label>
+										<div class="col-sm-2">
+											<%#text_field_tag "search[city]", nil, placeholder: "City", class: 'form-control', maxlength: '150'%>
+											<%= select :search, :city, [''], {}, {id: 'search_city', class: "select2", data:{placeholder: "Choose City..."}} %>
+										</div>
+									</div>
+								</div><!-- panel-body -->
+								<div class="panel-footer">
+									<div class="col-sm-12">
+										<button class="btn btn-primary" id="submit_local_search_form" type="submit">Search</button>
+										<button type="reset" id="reset_local_search_form" class="btn btn-default">Reset</button>
+										<a href="javascript:void(0);" data-target="#billing_rate_dlg" class="btn btn-white" data-toggle="modal">Billing Rates</a>
+									</div>
+								</div>
+							</div><!-- panel-default -->
+						<%end -%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="margin-left:10px;" id="local_search_result">
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="toll-free">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_tag url_for(controller: 'inbound_dids', action: 'search_tf_numbers'), remote: true, method: :get, id: 'search_tf_nos_form', class: 'form-horizontal' do  -%>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">Search Toll Free Numbers</h4>
+								</div>
+								<div class="panel-body">
+									<% if policy(:purchase).select_customer? %>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Select Carrier</label>
+											<div class="col-sm-2">
+												<%= select :search, :carrier, options_for_select(Carrier.for_select), {}, {id: 'select_tf_carrier', class: 'select2 career_select', required: true, data: { placeholder: 'Choose Carrier...'} } %>
+											</div>
+										</div>
+									<%end%>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Search Pattern</label>
+										<div class="col-sm-2">
+											<%=select :search, :wild_card, options_for_select(%w(8** 88* 87* 86* 85* 80*)), {include_blank: true}, id: 'tf_wild_card', class: 'select2', data: { placeholder: 'Choose Pattern...' }%>
+										</div>
+									</div>
+								</div><!-- panel-body -->
+								<div class="panel-footer">
+									<div class="col-sm-12">
+										<button class="btn btn-primary" id="submit_tf_search_form" type="submit">Search</button>
+										<button type="reset" id="reset_tf_search_form" class="btn btn-default">Reset</button>
+										<a href="javascript:void(0);" data-target="#billing_rate_dlg" class="btn btn-white" data-toggle="modal">Billing Rates</a>
+									</div>
+								</div>
+							</div><!-- panel-default -->
+						<%end -%>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="margin-left:10px;" id="tf_search_result">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="billing_rate_dlg" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<%unless policy(:inbound_dids).select_carrier?%>
+    		<%=render partial: 'inbound_dids/billing_rates_modal'%>
+    	<%end%>
+    </div>
+  </div>
+</div>
+

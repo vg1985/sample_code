@@ -1,0 +1,2 @@
+module InboundSmsesHelper
+end

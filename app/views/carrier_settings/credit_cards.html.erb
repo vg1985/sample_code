@@ -1,0 +1,140 @@
+<% provide(:title, 'Settings - Credit Cards') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Credit Cards</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'carrier_settings', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.CreditCardsHandler.init([<%=@auto_recharge_setting.auto_recharge_enable == '1' ? "true" : "false"%>, <%=@low_credit_notification_setting.lc_notification_enable == '1' ? "true" : "false"%>]);
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#automatic_recharge" data-toggle="tab"><strong>Automatic Recharge</strong></a>
+			</li>
+			<li>
+				<a href="#low_credit_notification" data-toggle="tab"><strong>Low Credit Notification</strong></a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="automatic_recharge">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<%=form_for @auto_recharge_setting, url: carrier_settings_update_credit_card_settings_path, remote: true, method: :patch, html: {class: 'auto_recharge_settings_form form-bordered'} do |f|%>
+								<%=f.hidden_field :uid%>
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@auto_recharge_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group" style="margin-top: 0px;">
+									<label class="col-sm-2 control-label">Enable Automatic Recharge:</label>
+									<div class="col-sm-3 control-label">
+										<div class="toggle-primary" id="auto_recharge_activation_tgl"></div>
+										<%=f.check_box :auto_recharge_enable, {style: "opacity:0; position:absolute; top:0px;", id: "auto_recharge_activation_tgl_chkbox"}%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Credit Card:</label>
+									<div class="col-sm-3">
+										 <%=select :carrier_setting, :auto_recharge_storage_id, options_for_select(CreditCard.for_select(current_user.carrier, false)), {include_blank: true}, {class: "select2", data: {placeholder: "Choose Credit Card..."}} %>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Balance Threshold:</label>
+									<div class="col-sm-2">
+										<div class="input-group input-group-sm">
+					                        <span class="input-group-addon">USD</span>
+					                        <%= f.number_field :auto_recharge_balance_threshold, class: "form-control", step: '0.01', style: 'width:65%' %>
+					                    </div>
+									</div>
+									<div class="col-sm-3" id="balance_threshold_error">
+					                </div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Recharge Amount:</label>
+									<div class="col-sm-2">
+										<div class="input-group input-group-sm">
+					                        <span class="input-group-addon">USD</span>
+					                        <%= f.number_field :auto_recharge_recharge_amount, class: "form-control", step: '0.01', style: 'width:65%' %>
+					                    </div>
+									</div>
+									<div class="col-sm-3" id="recharge_amount_error">
+									</div>
+								</div><!--panel-body -->
+								<div class="panel-footer">
+									<label class="col-sm-2"></label>
+									<button class="btn btn-primary">
+										Update
+									</button>
+									<span class="text-muted automatic_recharge_settings_form_msg" style="margin-left:10px;"></span>
+								</div><!-- panel-footer -->
+								<%end%>
+							</div><!-- panel-default -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="low_credit_notification">
+				<div class="row">
+					<%=form_for @low_credit_notification_setting, url: carrier_settings_update_credit_card_settings_path, remote: true, method: :patch, html: {class: 'low_credit_notification_settings_form form-bordered'} do |f|%>
+						<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@low_credit_notification_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Enable:</label>
+									<div class="col-sm-3 control-label">
+										<div class="toggle-primary" id="lc_notification_activation_tgl"></div>
+										<%=f.check_box :lc_notification_enable, {style: "opacity:0; position:absolute; top:0px;", id: "lc_notification_activation_tgl_chkbox"}%>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Balance Threshold:</label>
+									<div class="col-sm-2">
+										<div class="input-group input-group-sm">
+					                        <span class="input-group-addon">USD</span>
+					                        <%= f.number_field :lc_notification_balance_threshold, class: "form-control", step: '0.01', style: 'width:65%' %>
+					                    </div>
+									</div>
+									<div class="col-sm-3" id="lc_balance_threshold_error">
+					                </div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted low_credit_notification_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+						
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

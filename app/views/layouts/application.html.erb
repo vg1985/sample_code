@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? "VOIP Essential | #{content_for(:title)}" : 'VOIP Essential' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= yield :stylesheets %>
+  <%= stylesheet_link_tag 'custom', media: 'all'%>
+  <%= javascript_include_tag 'application'%>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
+    var ajax_loader = '<%=image_tag('loader25.gif')%>';
+  </script>
+</head>
+<body>
+  <div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+  <section>
+    <div class="mainpanel" style="margin-left:0px;">
+      <div class="pageheader">
+        <h2><i class="fa fa-laptop"></i> <%= yield :title %> 
+          <%if content_for?(:subtitle) -%>
+            <span><%=yield :subtitle%></span>
+          <%end -%>
+        </h2>
+        <div class="breadcrumb-wrapper">
+          <ol class="breadcrumb">
+        <!--<li><a href="index.html">Bracket</a></li> <li><a href="buttons.html">UI Elements</a></li><li class="active">Buttons</li>-->
+        <%=yield :breadcrumb%>
+          </ol>
+        </div>
+      </div>
+      <div class="contentpanel">
+        <div id="alerts">
+          <% [:notice, :error].each do |msg| %>
+            <% if flash[msg].present? %>
+              <div class='<%= msg.to_s %>'>
+                <div class="alert alert-<%= msg.to_s == 'notice' ? 'success' : 'danger' %>">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <%= sanitize(flash[msg]) %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <%= yield %>
+      </div>
+    </div>
+    
+  </section>
+    <%if content_for?(:javascripts)%>
+      <%= yield :javascripts %>
+    <%else%>
+      <%= javascript_include_tag 'theme'%>
+    <%end%>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      <%=yield(:js_init)%>
+    });
+  </script>
+</body>
+</html>

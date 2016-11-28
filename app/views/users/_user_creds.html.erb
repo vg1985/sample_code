@@ -1,0 +1,65 @@
+<%is_admin = current_user.is_admin? %>
+<div class="panel-body">
+	<div class="col-md-6">
+		<div class="form-group">
+     		<%= f.label :name, raw('Name <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7">
+            <%if is_admin %>
+              <%=f.text_field :name, class: 'form-control input-sm'%>
+            <%else%>
+              <label class="mt2"><%=user.name%></label>
+            <%end%>
+          </div>
+    	</div>
+    	<div class="form-group">
+     		<%= f.label :username, raw('Username <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7">
+            <%if is_admin%>
+              <%=f.text_field :username, class: 'form-control input-sm'%>
+            <%else%>
+              <label class="mt2"><%=user.username%></label>
+            <%end%>
+          </div>
+    	</div>	
+		  <div class="form-group">
+     		<%= f.label :email, raw('Email <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7">
+            <%if is_admin%>
+              <%=f.text_field :email, class: 'form-control input-sm'%>
+            <%else%>
+              <label class="mt2"><%=user.email%></label>
+            <%end%>
+          </div>
+    	</div>	
+		  <div class="form-group">
+     		<%= f.label :password , raw('Password <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7">
+      			<%=f.password_field :password, class: 'form-control input-sm', autocomplete: "off" %>
+      		</div>
+    	</div>	
+		  <div class="form-group">
+     		<%= f.label :password_confirmation , raw('Password confirmation <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7"><%=f.password_field :password_confirmation, class: 'form-control input-sm', autocomplete: "off" %></div>
+    	</div>
+    	<div class="form-group">
+      		<%= f.label :roles, raw('Roles <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+          <div class="col-sm-7">
+            <%if is_admin%>
+              <%= f.select :role_ids, options_for_select(get_roles, f.object.role_ids), {include_blank: true}, {class: 'select2', data:{placeholder: 'Choose Roles'}, multiple: false, name: 'user[role_ids][]'} %>
+            <%else%>
+              <label class="mt2"><%=user.roles.collect(&:name).to_sentence%></label>
+            <%end%>
+          </div>
+    	</div>
+    	<div class="form-group">
+      		<%= f.label :department, class: 'col-sm-3 control-label' %>
+      		<div class="col-sm-7">
+            <%if is_admin%>
+              <%= f.select :department, options_for_select(['Accounts', 'Marketing','Operations', 'Sales'], f.object.department), { include_blank: true }, { class: 'select2', data: { placeholder: 'Choose Department' } } %>
+            <%else%>
+              <label class="mt2"><%=user.department%></label>
+            <%end%>
+          </div>
+    	</div>
+    </div>
+</div>    

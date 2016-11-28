@@ -1,0 +1,186 @@
+<%if current_user.is_admin? || current_user.is_super_admin?%>
+    <% provide(:title, 'Finance - Add Payment') %>
+
+    <%=content_for :breadcrumb do%>
+        <li>Finance</li>
+        <li class="active">Add Payment</li>
+    <%end%>
+    <%page_title = 'Add Payment'%>
+<%else%>
+    <% provide(:title, 'Finance - Make Payment') %>
+
+    <%=content_for :breadcrumb do%>
+        <li>Finance</li>
+        <li class="active">Make Payment</li>
+    <%end%>
+    <%page_title = 'Make Payment'%>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'finance'%>
+<%end%>
+
+<%=content_for :js_init do %> 
+    App.AddPaymentHandler.setUrls(['/payments/carrier_payment_options']);
+    App.AddPaymentHandler.init(<%=policy(:payment).never_hide_transaction_details? ? true : false%>);
+<%end%>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><%=page_title%></h4>
+    </div>
+    <%=form_for @payment, remote: false, html: {class: 'form-bordered', id: 'new_payment_form'} do |f| -%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:payment).select_carrier? -%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Date:</label>
+                <div class="col-sm-2">
+                    <%=f.text_field :for_date, id: 'for_date', class: 'form-control', readonly: false, value: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M")%>
+                </div>
+            </div>
+        <%end -%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Amount:</label>
+                <% if policy(:payment).set_custom_amount? %>
+                <div class="col-sm-2 mt10">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">USD</span>
+                        <%= f.number_field :amount, class: "form-control payment-details", step: '0.1', style: 'width:65%' %>
+                    </div>
+                </div>
+                <%else%>   
+                <div class="col-sm-3">             
+                    <%=f.select :amount, options_for_select(Setting.allowed_amounts_options), {include_blank: true}, {class: 'select2', data: {placeholder: 'Choose Amount...'}} %>
+                </div>
+                <%end%>
+                <div class="col-sm-3" id="amount_error">
+                   
+                </div>
+        </div>
+        <% if policy(:payment).select_carrier? %>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Account ID:</label>
+            <div class="col-sm-3">
+                <%=f.select :carrier_id, options_for_select(Carrier.for_select), {include_blank: true}, {class: "", data: {placeholder: "Choose Carrier..."}} %>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group" style="<%=policy(:payment).select_carrier? ? 'display:none;' : '' %>" id="payment_type_field">
+            <label class="col-sm-2 control-label mt10">Payment Type:</label>
+            <% if policy(:payment).select_carrier? %>
+            <div class='col-sm-3' id="carrier_payment_types">
+            </div>
+            <div class='col-sm-4' id="carrier_payment_types_notice">
+                <span class="text-danger"></span>
+            </div>
+            <%else%>
+            <div class="col-sm-3">
+                <%=render partial: 'payment_type_select'%>
+            </div>
+            <div class="col-sm-4">
+                 <%=render 'payment_type_notice'%>
+            </div>
+            <%end%>
+        </div>
+        <div class="form-group" id="cc_list">
+            <%if current_user.is_carrier?%>
+                <%=render partial: 'carrier_creditcard_list', locals: {carrier: current_user.carrier, include_other: false} %>
+            <%end%>
+        </div>
+        <div class="form-group" id="custom_type">
+            <label class="col-sm-2 control-label mt10">Custom Payment Type:</label>
+            <div class="col-sm-3">
+                <%= f.text_field :custom_type, class: "form-control payment-details", maxlength: 250%>
+            </div>
+        </div>
+        <!--<div class="form-group" id='deduct_balance'>
+            <label class="col-sm-2 control-label mt10">Deduct Balance:</label>
+            <div class="col-sm-3 mt10 text-left">
+                <%# f.check_box :deduct_balance %>
+            </div>
+        </div>
+        <div class="form-group" id="charge_type">
+            <label class="col-sm-2 control-label mt10">Charge Type:</label>
+            <div class="col-sm-3">
+            <%#f.text_field :charge_type, class: "form-control" %>
+            </div>
+        </div>-->
+        <%if policy(:payment).select_carrier?%>
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">Type:</label>
+            <div class="col-sm-3 mt10">
+                <div id="cctypedimmer">  
+                    Credit card icons.  
+                    <%=hidden_field_tag "credit_card[brand]" %>
+                </div>
+                <%# text_field_tag "credit_card[brand]", params[:credit_card][:brand], class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">Credit Card Number:</label>
+            <div class="col-sm-3">
+            <%= text_field_tag "credit_card[number]", params[:credit_card][:number], { class: "form-control" } %>
+            </div>
+        </div>
+
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">CVV / CVV2:</label>
+            <div class="col-sm-3">
+             <%= text_field_tag "credit_card[verification_value]", params[:credit_card][:verification_value], { class: "form-control", maxlength: 5 } %>
+            </div>
+        </div>
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">Expiry Date:</label>
+            <div class="col-sm-1">
+                <%= select_month(Date.today, {use_short_month: true}, {name: "credit_card[month]", class: "form-control"}) %>
+            </div>
+            <div class="col-sm-2 text-left">
+               <%= select_year(Date.today, {start_year: Date.today.year + 6, end_year: Date.today.year, field_name: 'year'}, {name: "credit_card[year]", class: "form-control", style: "width:50%"}) %>
+            </div>
+        </div>
+
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">First Name:</label>
+            <div class="col-sm-3">
+                <%= text_field_tag "credit_card[first_name]", params[:credit_card][:first_name], class: "form-control", maxlength: 100 %>
+            </div>
+        </div>
+
+        <div class="form-group credit-card-field">
+            <label class="col-sm-2 control-label mt10">Last Name:</label>
+            <div class="col-sm-3">
+             <%= text_field_tag "credit_card[last_name]", params[:credit_card][:last_name], class: "form-control", maxlength: 100 %>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Description:</label>
+            <div class="col-sm-3">
+             <%= f.text_area :description, class: "form-control", maxlength: 250%>
+            </div>
+        </div>
+        <div class="form-group" id="transaction_details" style="display:none;">
+            <label class="col-sm-2 control-label mt10">Transaction Details:</label>
+            <div class="col-sm-3">
+            <%= f.text_field :transaction_details, class: "form-control", maxlength: 250%>
+            </div>
+        </div>
+        <%if policy(:payment).add_note? -%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Notes:</label>
+            <div class="col-sm-3">
+            <%= f.text_area :notes , class: "form-control"%>
+            </div>
+        </div>
+        <%end%>
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary make-payment-btn">
+            Make Payment
+        </button>
+        <%=f.submit 'ExpressCheckout', type: :image, src: 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif', id: 'express-checkout-save' %>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>

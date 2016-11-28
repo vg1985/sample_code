@@ -1,0 +1,11 @@
+<tr id="admin<%= admin.id %>">
+  <td><%= admin.name %></td>
+  <td><%= admin.username %></td>
+  <td><%= admin.email %></td>
+  <td><%= admin.carriers.count %></td>
+  <td><%= admin.created_at %></td>
+  <td>
+    <%= link_to "Modify", edit_admin_path(admin), class: "btn btn-xs btn-success" %>
+    <%= link_to "Delete", admin_path(admin), class: "btn btn-xs btn-danger", method: :delete, data: {confirm: "Are You Sure?"}, remote: true %>
+  </td>
+</tr>

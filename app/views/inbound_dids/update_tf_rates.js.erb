@@ -1,0 +1,21 @@
+App.RateSpinners.enableTollfreeSpinners();
+App.InboundRateTollfreeFormHandler.enableActions();
+
+gritter_opts.title = 'Toll-free Inbound DID rates';
+
+<%if @tf_did_rate.present? %>
+	<%if @tf_did_rate.errors.any? %>
+		gritter_opts.text = "The data seems to be invalid. Failed to update the toll-free inbound DID rates.";
+		gritter_opts.class_name = 'growl-danger';
+	<%else%>
+		App.RateSpinners.reset('tf', [<%=@tf_did_rate.to_arr.join(',')%>])
+		gritter_opts.text = "Inbound DID rates updated successfully.";
+		gritter_opts.class_name = 'growl-success';
+	<%end%>
+<%else%>
+	gritter_opts.text = "Sorry! You are not authorized to perform this action.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);
+

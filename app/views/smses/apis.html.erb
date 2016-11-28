@@ -1,0 +1,27 @@
+<% provide(:title, 'SMS - API') %>
+
+<%=content_for :breadcrumb do%>
+    <li>SMS</li>
+    <li class="active">API</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'sms' %>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.SMSAPIHandler.setUrls(['<%=refresh_token_carrier_path(@carrier)%>']);
+    App.SMSAPIHandler.init();
+<%end%>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">API</h4>
+    </div>
+    <div class="panel-body panel-body-nopadding">
+        <table class="table table-bordered">
+            <tr><td width="15%">API Token: </td><td width="85%"><span class="api-token"><%=@api_token.token%></span> &nbsp;&nbsp;<a href="#" id="refresh_token" title="Refresh"><span class="glyphicon glyphicon-repeat"></span></a></td></tr>
+            <tr><td>Send SMS: </td><td><%=APP_CONFIG['host']%>/sendsms?token=<span class="api-token"><%=@api_token.token%></span>&to=XXXXXXXXXX&from=&lt;valid DID&gt;&text=How%20are%20you.</td></tr>
+        </table>
+    </div><!-- panel-body -->
+</div>

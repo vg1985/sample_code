@@ -1,0 +1,3 @@
+o: ActiveSupport::Cache::Entry:@value{	I"ingress_trunks:ETIC:!ActionController::Parameters{
+I"module;TI"1;TI"	list;TI"1;TI"update;TI"1;TI"deactivate;TI"1;TI"activate;TI"1;T:@permittedFI"egress_trunks;TIC;{I"module;TI"1;TI"	list;TI"1;TI"create;TI"0;TI"update;TI"1;TI"delete;TI"0;TI"deactivate;TI"1;TI"activate;TI"1;T;	FI"support;TIC;{I"module;TI"1;TI"create_ticket;TI"1;TI"update_ticket;TI"1;TI"delete_tickets;TI"0;TI"close_tickets;TI"1;TI"add_tags;TI"0;T;	FI"reports;TIC;{
+I"module;TI"1;TI"summary_report;TI"1;TI"did_report;TI"1;TI"cdr_search;TI"1;TI"cdr_logs;TI"1;T;	F:@created_atf1468339359.762572:@expires_in0

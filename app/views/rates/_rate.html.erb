@@ -1,0 +1,18 @@
+<tr>
+  <td class='wd10'><%= check_box_tag "rates_ids[]", rate.id %></td>
+  <td class="code"><%= link_to rate.code, "javascript:void(0);", class: "editable", id: "code", data: { type: "text", pk: rate.id, url: "/rates/#{rate.id}", title: "Code" } %></td>
+  <td class="code_name"><%= link_to rate.code_name, "javascript:void(0);", class: "editable", id: "code_name", data: { type: "text", pk: rate.id, url: "/rates/#{rate.id}", title: "Code Name" } %></td>
+  <td class="code_country"><%= link_to rate.code_country, "javascript:void(0);", class: "editable", id: "code_country", data: { type: "text", pk: rate.id, url: "/rates/#{rate.id}", title: "Code Country" } %></td>
+  <td class="inter_rate"><%= link_to rate.inter_rate, "javascript:void(0);", class: "editable", id: "inter_rate", data: { type: "number", step: "0.00001", pk: rate.id, url: "/rates/#{rate.id}", title: "Inter Rate" } %></td>
+  <td class="intra_rate"><%= link_to rate.intra_rate, "javascript:void(0);", class: "editable", id: "intra_rate", data: { type: "number", step: "0.00001", pk: rate.id, url: "/rates/#{rate.id}", title: "Intra Rate" } %></td>
+  <td class="rate"><%= link_to rate.rate, "javascript:void(0);", class: "editable", id: "rate", data: { type: "number", step: "0.00001", pk: rate.id, url: "/rates/#{rate.id}", title: "Enter Rate" } %></td>
+  <td class="bill_start"><%= link_to rate.bill_start, "javascript:void(0);", class: "editable", id: "bill_start", data: { type: "number", pk: rate.id, url: "/rates/#{rate.id}", title: "Bill Start" } %></td>
+  <td class="bill_increment"><%= link_to rate.bill_increment, "javascript:void(0);", class: "editable", id: "bill_increment", data: { type: "number", pk: rate.id, url: "/rates/#{rate.id}", title: "Bill Increment" } %></td>
+  <td class="effective_time"><%= link_to rate.effective_time.strftime("%b %d, %Y, %H:%M"), "javascript:void(0);", class: "editable", id: "effective_time", data: { type: "combodate", pk: rate.id, template: "D MMM YYYY  HH:mm", format: "YYYY-MM-DD HH:mm", viewformat: "MMM D, YYYY, HH:mm", url: "/rates/#{rate.id}", title: "Effective Time" } %></td>
+  <td class="setup_fee"><%= link_to rate.setup_fee, "javascript:void(0);", class: "editable", id: "setup_fee", data: { type: "number", step: "0.00001", pk: rate.id, url: "/rates/#{rate.id}", title: "Setup Fee" } %></td>
+</tr>
+<script>
+  $(document).ready(function() {
+    $('.editable').editable();
+  });
+</script>

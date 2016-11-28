@@ -1,0 +1,93 @@
+<% provide(:title, 'Order Confirmation') %>
+
+<%=content_for :breadcrumb do -%>
+	<li>Inbound DID</li>
+	<li><%=link_to 'Purchase', '#' %></li>
+	<li class="active">Order Confirmation</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+	<%= javascript_include_tag 'orders'%>
+<%end%>
+
+<%=content_for :js_init do -%>
+    App.purchaseConfirmation.init(['<%=cancel_purchase_orders_path%>'], <%= @time_left_for_confirmation %>);
+<%end%>
+
+<div class="panel panel-default">
+	<div class="panel-body">
+        <%if current_user.is_admin?%>
+        <h3>Order confirmation for: <%=@carrier.company_name%></h3>
+        <%end%>
+        <div class="table-responsive">
+            <table class="table table-primary mb30 table-order-confirm">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Activation Fee</th>
+                        <th>Monthly Fee</th>
+                        <th>Usage Rate</th>
+                        <th>Due Now</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <%unit_price = @carrier.unit_price(params[:order_type]) %>
+                    <%params[:ordersfor].each do |number| -%>
+                    <tr>
+                        <td>
+                            <div class='text-primary'>
+                                <strong><%=number%></strong>
+                            </div>
+                        </td>
+                        <td>$<%=@did_rate.activation%></td>
+                        <td>$<%=@did_rate.monthly%></td>
+                        <td>$<%=@did_rate.per_minute%>/min.</td>
+                        <td>$<%=unit_price%></td>
+                    </tr>
+                    <%end%>
+                    <tr>
+                        <%
+                            total_price = @carrier.did_purchase_total(params[:order_type], params[:ordersfor].size)
+                            purchase_eligibility = @carrier.purchase_eligibility?(total_price)
+                        %>
+                        <td colspan="3"><small class="text-danger">*Subject to availability while ordering.</small></td>
+                        <td class='text-right'><h4>Total:</h4></td>
+                        <td><h4>$<%=total_price.ceil_to(2).to_s%></h4></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->     
+        
+        <div class="form-group text-info">
+			<label class="col-sm-2 control-label text-info">Time Left:</label>
+			<div class="col-sm-10 control-label" id="purchase_time_left"></div>
+		</div>
+		 
+        <div>
+            <%=form_tag order_now_orders_path, method: :post, id: 'order_now', class: 'form-horizontal' do %>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Send email confirmation to:</label>
+                    <span class="col-sm-2">
+                        <%=text_field_tag :order_email, current_user.is_admin? ? @carrier.user.email : current_user.email, class: 'form-control'%>
+                        <label class="error" id="order_email_error"></label>
+                    </span>
+                </div>
+            <%end%>
+        </div>
+        
+        <div class="text-center btn-invoice">
+            <%=link_to cancel_purchase_orders_path, class: "btn btn-white" do%>
+            	<i class="fa fa-mail-reply"></i> Cancel Purchase
+            <%end%>
+             <button class="btn btn-primary mr5 <%=purchase_eligibility  ? '' : 'disabled'%>" id="submit_order">
+                <i class="fa fa-dollar mr5"></i> Order 
+            </button>
+           
+            <%unless purchase_eligibility%>
+            	<div class='text-danger mt10'>You do not have sufficient funds to complete this order. Please <%=link_to "Add Funds", new_payment_path %> and place the order again.</div>
+            <%end%>
+        
+        <div class="mb40"></div>
+	</div>
+</div>
+

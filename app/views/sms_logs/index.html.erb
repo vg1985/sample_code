@@ -1,0 +1,118 @@
+<% provide(:title, 'Message Logs') %>
+
+<%=content_for :breadcrumb do%>
+    <li>SMS</li>
+    <li class="active">Message Logs</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'sms' %>
+<%end%>
+
+<%=content_for :js_init do %> 
+<%if policy(:sms_log).select_carrier? -%>
+    App.SMSLogsAdminHandler.setUrls(['<%=dt_message_logs_interplay_sms_logs_path%>']);
+    App.SMSLogsAdminHandler.setSmsId('<%= params['id']%>')
+    App.SMSLogsAdminHandler.init();
+<%else -%>
+    App.SMSLogsCarrierHandler.setUrls(['<%=dt_message_logs_interplay_sms_logs_path%>']);
+    App.SMSLogsCarrierHandler.setSmsId('<%= params['id']%>')
+    App.SMSLogsCarrierHandler.init();
+<%end -%>
+    
+<%end%>
+<div class="row">
+  <div class="col-md-12">
+      <%= form_tag payments_path, class: 'form-inline' do %>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <div class="panel-btns">
+                      <a class="minimize maximize" href="">+</a>
+                  </div>
+                  <div class="row">
+                    <%if policy(:sms_log).select_carrier? -%>
+                      <div class='col-sm-2'>
+                        <%= select_tag :carrier_id, options_from_collection_for_select(@carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: 'select2', id: 'carrier_select'} %>
+                      </div>
+                    <%end%>
+                    
+                    <div class='col-sm-2'>
+                      <%= select_tag :status, options_for_select({'Success': 'success', 'Partially Successful': 'partial success', 'Failed': 'failed'}), {prompt: 'All Statuses', class: 'select2', id: 'message_status' } %>
+                    </div>
+                    
+                    <div class='col-sm-2'>
+                      <%= select_tag :direction, options_for_select({'Incoming': 'incoming', 'Outgoing': 'outgoing', 'Forwarded': 'forward'}), {prompt: 'All Directions', class: 'select2', id: 'message_direction' } %>
+                    </div>
+                    <div class="col-sm-1">
+                      <%=link_to 'Reset', sms_logs_path, class: 'btn btn-white', onclick: 'App.overlayModal.show();' %>
+                    </div>
+                  </div>
+              </div>
+              <div class="panel-body" style="display:none;">
+                  <div class="row"> 
+                    <div class='col-sm-1 mt15' style="width:4%">
+                      From:
+                    </div> 
+                    <div class='col-sm-3 mt10'>
+                      <%=text_field_tag :from_date, Time.now.in_time_zone.strftime("%Y-%m-%d 00:00:00"), id: 'from_date', class: 'form-control', readonly: false%>
+                    </div>
+                    <div class='col-sm-1 mt15' style="width:4%">
+                      To:
+                    </div> 
+                    <div class='col-sm-2 mt10'>
+                      <%=text_field_tag :to_date, Time.now.in_time_zone.strftime("%Y-%m-%d 23:59:59"), id: 'to_date', class: 'form-control', readonly: false%>
+                    </div>  
+                    
+                                       
+                  </div>
+              </div>
+          </div>
+      <% end %>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Message Logs</h4>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive sip-style">
+          <table id="message_logs" class="table table-striped dataTable table-hover table-bordered">
+            <thead>
+              <tr>
+                <%if policy(:sms_log).select_carrier? -%>
+                  <th width="14%">Carrier</th>
+                  <th width="14%">Message ID</th>
+                  <th width="12%">Date</th>
+                  <th width="5%">Direction</th>
+                  <th width="9%">Status</th>
+                  <th width="12%">Sender</th>
+                  <th width="12%" class="no-sort">Recipient(s)</th>
+                  <th width="10%" class="no-sort">Forwarded To</th>
+                  <th width="12%" class="no-sort">Message</th>
+                  <th class='no-sort'>Actions</th>
+                <%else%>
+                  <th width="10%">Message ID</th>
+                  <th width="18%">Date</th>
+                  <th width="4%">Direction</th>
+                  <th width="10%">Status</th>
+                  <th width="14%">Sender</th>
+                  <th width="12%" class="no-sort">Recipient(s)</th>
+                  <th width="14%" class="no-sort">Forwarded To</th>
+                  <th width="19%" class="no-sort">Message</th>
+                  <th class='no-sort'>Actions</th>
+                <%end%>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade view-smslog-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

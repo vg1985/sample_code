@@ -1,0 +1,80 @@
+<% provide(:title, 'Finance - Add Charge') %>
+
+<%=content_for :breadcrumb do%>
+    <li>Finance</li>
+    <li class="active">Add Charge</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'finance'%>
+<%end%>
+
+<%=content_for :js_init do %> 
+    //App.AddPaymentHandler.setUrls(['/payments/carrier_payment_options']);
+    App.AddChargeHandler.init();
+<%end%>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Add Charge</h4>
+    </div>
+    <%=form_for @payment, remote: false, html: {class: 'form-bordered', id: 'new_charge_form'} do |f| -%>
+    <%=f.hidden_field :payment_type%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:payment).select_carrier? -%>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Date:</label>
+                <div class="col-sm-2">
+                    <%=f.text_field :for_date, id: 'for_date', class: 'form-control', readonly: false, value: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M")%>
+                </div>
+            </div>
+        <%end -%>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Amount:</label>
+            <div class="col-sm-2">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">USD</span>
+                    <%= f.number_field :amount, class: 'form-control payment-details', step: '0.1', style: 'width:65%' %>
+                </div>
+            </div>
+            <div class="col-sm-3" id="amount_error">
+               
+            </div>
+        </div>
+        <% if policy(:payment).select_carrier? %>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Account ID:</label>
+            <div class="col-sm-3">
+                <%=f.select :carrier_id, options_for_select(Carrier.for_select, @payment.carrier_id), { include_blank: true }, {class: 'select2', data: { placeholder: 'Choose Carrier...'}} %>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Charge Type:</label>
+            <div class="col-sm-3">
+            <%=f.text_field :charge_type, class: 'form-control' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Description:</label>
+            <div class="col-sm-3">
+             <%= f.text_area :description, class: 'form-control'%>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Notes:</label>
+            <div class="col-sm-3">
+            <%= f.text_area :notes , class: 'form-control'%>
+            </div>
+        </div>
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary add-charge-btn">
+            Add Charge
+        </button>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>

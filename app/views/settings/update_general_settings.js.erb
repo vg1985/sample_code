@@ -1,0 +1,23 @@
+var gritter_opts = {
+	title: 'General Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @general_setting.present? %>
+	<%unless @general_setting.errors.any?%>
+		/*jQuery("span.bw_settings_form_msg").removeClass('text-muted text-danger').addClass('text-success').html('Bandwidth API settings updated successfully.');*/
+		gritter_opts.text = "General settings have been updated.";
+		gritter_opts.class_name = 'growl-success';
+		
+	<%else%>
+		gritter_opts.text = "The data seems to be invalid. Failed to update the General settings.";
+		gritter_opts.class_name = 'growl-danger';
+	<%end%>
+<%else%>
+		gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+		gritter_opts.class_name = 'growl-danger';
+<%end%>	
+
+jQuery("span.general_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

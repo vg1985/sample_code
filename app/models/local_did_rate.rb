@@ -1,0 +1,3 @@
+class LocalDidRate < DidRate
+  
+end

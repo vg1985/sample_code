@@ -1,0 +1,95 @@
+<%if @ingress_trunk.new_record?%>
+  <% provide(:title, 'New Ingress Trunk') %>
+
+  <%=content_for :breadcrumb do%>
+  <li>
+    Trunk Groups
+  </li>
+  <li>
+    <%= link_to 'Ingress Trunks', ingress_trunks_path%>
+  </li>
+  <li class="active">
+    New Ingress Trunk
+  </li>
+  <%end%>
+<%else%>
+  <% provide(:title, 'Modify Ingress Trunk') %>
+
+  <%=content_for :breadcrumb do%>
+  <li>
+    Trunk Groups
+  </li>
+  <li>
+    <%= link_to 'Ingress Trunks', ingress_trunks_path%>
+  </li>
+  <li class="active">
+    Modify Ingress Trunk
+  </li>
+  <%end%>
+<%end%>
+
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'trunk_groups'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  <%if policy(:ingress_trunk).select_carrier?%>
+    App.AdminIngressTrunkFormHandler.setUrls([
+                                        '<%=ingress_trunks_path%>', 
+                                        '<%=check_name_ingress_trunks_path%>', 
+                                        '<%=validate_hosts_ingress_trunks_path%>',
+                                        '<%=check_username_ingress_trunks_path%>',
+                                        '<%=default_username_ingress_trunks_path%>'
+                                      ]);
+    <%if @ingress_trunk.new_record?%>
+      App.AdminIngressTrunkFormHandler.init([false, <%=@ingress_trunk.media_bypass%>, false, false]);
+    <%else%>
+      App.AdminIngressTrunkFormHandler.init([<%=@ingress_trunk.sip_trace%>, <%=@ingress_trunk.media_bypass%>, <%=@ingress_trunk.lrn_block%>, <%=@ingress_trunk.block_wireless%>]);
+      App.AdminIngressTrunkFormHandler.resetSpinnersTo([<%=@ingress_trunk.call_limit%>, <%=@ingress_trunk.cps_limit%>, <%=@ingress_trunk.profit_margin%>, <%=@ingress_trunk.pc_profit_margin%>, <%=@ingress_trunk.try_timeout%>, <%=@ingress_trunk.pdd_timeout%>, <%=@ingress_trunk.ring_timeout%>, <%=@ingress_trunk.decimal_points%>, <%=@ingress_trunk.max_duration%>, <%=@ingress_trunk.max_cost%> ]);                                               
+    <%end%>                                                
+  <%else%>
+    App.CarrierIngressTrunkFormHandler.setUrls([
+                                        '<%=ingress_trunks_path%>', 
+                                        '<%=check_name_ingress_trunks_path%>',
+                                        '<%=validate_hosts_ingress_trunks_path%>',
+                                        '<%=check_username_ingress_trunks_path%>'
+                                      ]);
+    
+      App.CarrierIngressTrunkFormHandler.init([<%=@ingress_trunk.sip_trace%>, <%=@ingress_trunk.media_bypass%>, <%=@ingress_trunk.lrn_block%>, <%=@ingress_trunk.block_wireless%>]);
+      App.CarrierIngressTrunkFormHandler.resetSpinnersTo([<%=@ingress_trunk.call_limit%>, <%=@ingress_trunk.cps_limit%>]);
+
+      App.CarrierIngressTrunkFormHandler.setDirtyValues(['<%=@ingress_trunk.ingress_type%>', '<%=@ingress_trunk.reg_user%>', '<%=@ingress_trunk.reg_password%>', null]);
+  <%end%>                                                  
+<%end%>
+
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading panel-body-nopadding"></div>
+    <div class="panel-body panel-body-nopadding">
+      <%if @ingress_trunk.new_record?%>
+      <div id="newIngressTrunkWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified nav-disabled-click">
+      <%else%>
+       <div id="editIngressTrunkWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified">
+      <%end%>
+          <li>
+            <a href="#ptab1" data-toggle="tab">Basic</a>
+          </li>
+          <li>
+            <a href="#ptab2" data-toggle="tab">Advanced</a>
+          </li>
+        </ul>
+        <%if policy(:ingress_trunk).select_carrier?%>
+          <%= render partial: 'form'%>
+        <%else%>
+          <%= render partial: 'carrier_form'%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+<%unless policy(:ingress_trunk).select_carrier?%>
+  <%=render partial: 'shared/otp_auth', locals: {type: 'rmobem'}%>
+<%end%>

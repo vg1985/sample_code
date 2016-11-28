@@ -1,0 +1,41 @@
+<div class="panel-body">
+  <div class="table-responsive">
+    <div class='pull-left'>
+      Entries per page
+      <%= select_tag "per", options_for_select(["10", "15", "20", "30", "40", "50"], selected: params[:per] || 20), id: "per_page" %>
+    </div>
+    <div class='pull-right'>
+      <div class='pull-right'><%= page_entries_info @rates %></div>
+      <br/>
+      <%= paginate @rates %>
+    </div>
+    <table id="rates" class="table table-striped dataTable table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Code</th>
+          <th>Code Name</th>
+          <th>Code Country</th>
+  				<th>Inter Rate</th>
+  				<th>Intra Rate</th>
+          <th>Rate</th>
+          <th>Bill Start</th>
+          <th>Bill Increment</th>
+          <th>Effective Time</th>
+          <th>Setup Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rates.each do |rate| %>
+          <%= render rate %>
+  			<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  $("#per_page").change(function(){
+    $("form#paginate #per").val($(this).val());
+    $("form#paginate").submit();
+  });
+</script>

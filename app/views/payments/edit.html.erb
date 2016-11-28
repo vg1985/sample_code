@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Edit <%=@payment.payment_type == 'charge' ? "Charges" : "Payment"%></h4>
+    </div>
+    <%=form_for @payment, remote: false, html: {class: 'form-bordered', id: 'edit_payment_form'} do |f| -%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:payment).select_carrier? %>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Account ID:</label>
+            <label class="col-sm-6 control-label">
+                <%=@payment.carrier.company_name%>
+            </label>
+        </div>
+        <%end%>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Payment Type:</label>
+            <label class="col-sm-6 control-label">
+                <%=@payment.payment_type.humanize%>
+            </label>
+        </div>
+        <%if policy(:payment).custom_payment? && @payment.payment_type == 'custom'%>
+        <div class="form-group" id="custom_type">
+            <label class="col-sm-4 control-label mt10">Custom Payment Type:</label>
+            <div class="col-sm-6">
+                <%= f.text_field :custom_type, class: "form-control payment-details"%>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Date:</label>
+            <label class="col-sm-6 control-label">
+                <%if current_user.internal? -%>
+                    <%=@payment.for_date.in_time_zone(current_user.timezone).to_s(:carrier)%>
+                <%else -%>
+                    <%=@payment.for_date.in_time_zone(carrier.timezone).to_s(:carrier)%>
+                <%end -%>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Amount:</label>
+            <%if @payment.manual_payment? && @payment.status == 'pending'%>
+                <% if policy(:payment).set_custom_amount? %>
+                <div class="col-sm-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">USD</span>
+                        <%= f.number_field :amount, class: "form-control payment-details", step: '0.1', style: 'width:65%' %>
+                    </div>
+                </div>
+                <%else%>   
+                <div class="col-sm-6">
+                    <%=f.select :amount, options_for_select(Setting.allowed_amounts_options, @payment.amount.to_i), {include_blank: true}, {class: "select2", data: {placeholder: 'Choose Amount...'}} %>
+                </div>
+                <%end%>
+                <div class="col-sm-4" id="amount_error">
+                   
+                </div>
+            <%else%>
+                <label class="col-sm-4 control-label">
+                    $<%=@payment.amount%>
+                </label>
+            <%end%>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label mt10">Description:</label>
+            <div class="col-sm-6">
+             <%= f.text_area :description, class: "form-control", maxlength: 250%>
+            </div>
+        </div>
+        <%if policy(:payment).never_hide_transaction_details? || (@payment.manual_payment? && @payment.status == 'pending')%>
+        <div class="form-group" id="transaction_details">
+            <label class="col-sm-4 control-label mt10">Transaction Details:</label>
+            <div class="col-sm-6">
+            <%= f.text_field :transaction_details, class: "form-control", maxlength: 250%>
+            </div>
+        </div>
+        <%end%>
+        <%if policy(:payment).add_note? -%>
+        <div class="form-group">
+            <label class="col-sm-4 control-label mt10">Admin Notes:</label>
+            <div class="col-sm-6">
+            <%= f.text_area :notes , class: "form-control"%>
+            </div>
+        </div>
+        <%end%>
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-4"></label>
+        <button class="btn btn-primary update-payment-btn">
+            Update <%=@payment.payment_type == 'charge' ? "Charges" : "Payment"%>
+        </button>
+        <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>
+
+<script type="text/javascript">
+    App.CommonHandler.validatePayment("#edit_payment_form");
+    $("#edit_payment_form .select2").select2({
+        width: '60%'
+    });
+</script>

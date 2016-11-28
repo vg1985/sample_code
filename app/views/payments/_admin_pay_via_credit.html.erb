@@ -1,0 +1,46 @@
+<div class="form-group">
+  <label class="col-sm-2 control-label">Type</label>
+  <div class="col-sm-4">
+    <%= text_field_tag "credit_card[brand]", (params[:credit_card][:brand] rescue ""), class: "form-control input-sm credit_card_field" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Credit Card Number</label>
+  <div class="col-sm-4">
+    <%= text_field_tag "credit_card[number]", (params[:credit_card][:number] rescue ""), { class: "form-control input-sm credit_card_field", pattern: "[0-9]+" } %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">CVV / CVV2</label>
+  <div class="col-sm-4">
+    <%= text_field_tag "credit_card[verification_value]", (params[:credit_card][:verification_value] rescue ""), { class: "form-control input-sm credit_card_field", pattern: "[0-9]{3,4}" } %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Month</label>
+  <div class="col-sm-4">
+    <%= select_month(Date.today, {}, {name: "credit_card[month]", class: "form-control input-sm credit_card_field"}) %>
+    <!-- # = text_field_tag "credit_card[month]", params[:credit_card][:month], class: "form-control input-sm"
+    -->
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Year</label>
+  <div class="col-sm-4">
+    <!-- # = text_field_tag "credit_card[year]", params[:credit_card][:year], class: "form-control input-sm"
+    -->
+    <%= select_year(Date.today, {start_year: Date.today.year + 6, end_year: Date.today.year, field_name: 'year'}, {name: "credit_card[year]", class: "form-control input-sm credit_card_field"}) %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">First Name</label>
+  <div class="col-sm-4">
+    <%= text_field_tag "credit_card[first_name]", (params[:credit_card][:first_name] rescue ""), class: "form-control input-sm credit_card_field" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-2 control-label">Last Name</label>
+  <div class="col-sm-4">
+    <%= text_field_tag "credit_card[last_name]", (params[:credit_card][:last_name] rescue ""), class: "form-control input-sm credit_card_field" %>
+  </div>
+</div>

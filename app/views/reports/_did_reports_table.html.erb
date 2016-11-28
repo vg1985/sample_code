@@ -1,0 +1,78 @@
+<%if @result['error'].present?%>
+  <p class="text-center text-danger"><%=@result['message']%></p>
+<%else%>
+  <p class="text-right">
+    Export:&nbsp;
+    <%=link_to 'javascript:void(0);', title: 'PDF', data: {format: 'pdf'}, class: 'export-link' do -%>
+      <span class="fa fa-file-pdf-o" style="font-size:20px;"></span>
+    <%end%>&nbsp;
+    <%=link_to 'javascript:void(0);', title: 'Excel', data: {format: 'xls'}, class: 'export-link' do -%>
+      <span class="fa fa-file-excel-o" style="font-size:20px;"></span>
+    <%end%>&nbsp;
+    <%=link_to 'javascript:void(0);', title: 'CSV', data: {format: 'csv'}, class: 'export-link' do -%>
+      <span class="fa fa-file-text-o" style="font-size:20px;"></span>
+    <%end%>
+  </p>
+
+  <table id="reports_table" cellspacing="0" class="text-center table table-striped dataTable table-hover table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center <%=(@data['id_group'].blank? && @data['date_group'].blank?) ? 'no-sort' : ''%>" style="width:16%;">
+          <%=group_by_title(@data['id_group'] || @data['date_group'])%>
+        </th>
+        <th class="text-center">Total Calls</th>
+        <th class="text-center">Non-zero</th>
+        <%if policy(:report).select_carrier? && 'did' == @data['id_group']-%>
+          <th class="text-center">Carrier</th>
+          <th class="text-center">Vendor</th>
+        <%end -%>
+        <th class="text-center">Raw Duration</th>
+        <th class="text-center">Billable Duration</th>
+        <th class="text-center">Cost</th>
+        <th class="text-center">Avg. Channels</th>
+        <th class="text-center">Avg. CPS</th>
+        <th class="text-center">Max. CPS</th>
+      </tr>
+    </thead>
+    <tfoot>
+        <tr>
+          <th class="text-center">Total:</th>
+          <th class="text-center"><%=@result['total_calls']%></th>
+          <th class="text-center"><%=@result['total_nonzero']%></th>
+          <%if policy(:report).select_carrier? && 'did' == @data['id_group'] -%>
+            <th class="text-center">&nbsp;</th>
+            <th class="text-center">&nbsp;</th>
+          <%end -%>
+          <th class="text-center"><%=@result['total_duration']%></th>
+          <th class="text-center"><%=@result['total_billtime']%></th>
+          <th class="text-center"><%=@result['total_cost']%></th>
+          <th class="text-center"><%=@result['avg_channels']%></th>
+          <th class="text-center"><%=@result['avg_cps']%></th>
+          <th class="text-center">&nbsp;</th>
+        </tr>
+    </tfoot>
+    <tbody>
+      <%@result['group'].each do |group| -%>
+        <tr class="text-center">
+          <td>
+            <%=group_by_col_val(@data['id_group'] || @data['date_group'], group['id'])%>
+          </td>
+          <td class="text-center"><%=group['calls']%></td>
+          <td class="text-center"><%=group['nonzero']%></td>
+          <%if policy(:report).select_carrier? && 'did' == @data['id_group'] -%>
+            <td class="text-center"><%=group['id']['did_carrier_name']%></td>
+            <td class="text-center"><%=group['id']['did_vendor_name']%></td>
+          <%end%>
+          <td class="text-center"><%=group['duration']%></td>
+          <td class="text-center"><%=group['billtime']%></td>
+          <td class="text-center"><%=group['cost']%></td>
+          <td class="text-center"><%=group['avg_channels']%></td>
+          <td class="text-center"><%=group['avg_cps']%></td>
+          <td class="text-center"><%=group['max_channels']%></td>
+        </tr> 
+      <%end -%>
+    </tbody>
+  </table>
+  <div class="text-center">Query Time: <%=@result['query_time']%></div>
+  <div class="text-center"><%="curl -d \"#{CGI.unescape(@data.to_query)}\" http://68.64.174.22:8000/v1/reports/did/customerA/#{@from_date}/#{@to_date}"%></div>
+<%end%>

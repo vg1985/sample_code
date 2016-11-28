@@ -1,0 +1,40 @@
+<% provide(:title, 'View Rate Sheet Details') %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-btns">
+      <a href="#" class="panel-close">&times;</a>
+      <a href="#" class="minimize">&minus;</a>
+    </div>
+  	<h4 class="profile-name"><%= @rate_sheet.name %></h4>
+  	<h5 class="clearfix mb5">
+  		LRN: <%= @rate_sheet.lrn_value %>
+      Type: <%= @rate_sheet.rate_sheet_type %>
+  		<div class="pull-right">
+  			<%= link_to "Back to Ratesheet", rate_sheet_path(@rate_sheet), class: "btn btn-xs btn-success" %>
+      </div>
+    </h5>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table id="rate_sheet_notifications" class="table table-striped dataTable table-hover">
+        <thead>
+          <tr>
+            <th>Log file</th>
+            <th>Status</th>
+            <th>Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @logs.each do |rate_sheet_notification| %>
+            <%= render rate_sheet_notification %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<script>
+  App.nav.collapseLeftNav();
+</script>

@@ -1,0 +1,113 @@
+<%= nested_form_for @ingress_trunk, html: {id: 'editIngressTrunkForm', class: 'form-horizontal'} do |f| %>
+  <%=f.hidden_field :id%>
+  <%=hidden_field_tag :otpid%>
+  <%=hidden_field_tag :otpcode%>
+  <%=hidden_field_tag :trunk_type, 'ingress'%>
+  <div class="tab-content">
+    <div class="tab-pane panel-body" id="ptab1">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name, raw('Name <span class="asterisk">*</span>'), class: "col-sm-3 control-label" %>
+          <div class="col-sm-7"><%= f.text_field :name, class: 'form-control', style: 'width: 75%', disabled: true%></div>
+        </div>
+        <div class="form-group">
+          <%= f.label :routing_id, raw('Routing <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+          <div class="col-sm-7"><%= text_field_tag :routing, @ingress_trunk.routing.name, class: 'form-control', style: 'width: 75%', disabled: true%></div>
+        </div>
+        <div class="form-group">
+          <%= f.label :rate_sheet_id, raw('Rate Sheet <span class="asterisk">*</span>'), class: 'col-sm-3 control-label' %>
+          <div class="col-sm-7"><%= text_field_tag :rate_sheet, @ingress_trunk.rate_sheet.name, class: 'form-control', style: 'width: 75%', disabled: true%></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :tech_prefix, 'Tech Prefix', class: 'col-sm-3 control-label' %>
+          <div class="col-sm-7"><%= f.text_field :tech_prefix, class: 'form-control', style: 'width: 75%', disabled: true %></div>
+        </div>
+        <div class="form-group">
+          <%= f.label :ingress_type, 'Auth Type', class: 'col-sm-3 control-label' %>
+          <div class="col-sm-7"><%= f.select :ingress_type, IngressTrunk::INGRESS_TYPES.invert, {include_blank: true}, {class: 'select2', data: {placeholder: 'Please select'}} %></div>
+        </div>
+        <div id="ingress_type_fields">
+          <span id="registration_fields" style="<%=@ingress_trunk.ingress_type == 0 ? '' : 'display:none;'%>">
+            <%= render partial: 'registration', locals: {f: f} %>
+          </span>
+          <span id="ip_auth_fields" style="<%=@ingress_trunk.ingress_type == 1 ? '' : 'display:none;'%>">
+            <%= render partial: 'ip_authentication', locals: {f: f, trunk: @ingress_trunk} %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane panel-body" id="ptab2">
+      <div class='col-md-4'>
+        <div class="form-group call_limit_spinner_group">
+          <%= f.label :call_limit, 'Call Limit', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+            <%= f.text_field :call_limit, class: 'form-control', id: 'call_limit_spinner'%>
+            <span class="error" id="call_limit_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group cps_limit_spinner_group">
+          <%= f.label :cps_limit, 'CPS Limit', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-5">
+            <%= f.text_field :cps_limit, class: 'form-control', id: 'cps_limit_spinner' %>
+            <span class="error" id="cps_limit_spinner_error"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :lrn_block, 'LRN Block', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="lrn_block_activation_tgl"></div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-offset-2 col-md-4'>
+        <div class="form-group block_wireless">
+          <%= f.label :block_wireless, 'Block Wireless', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="block_wireless_activation_tgl"></div>
+            <%=f.check_box :block_wireless, {style: 'opacity:0; position:absolute; top:0px;', id: 'block_wireless_tgl_chkbox'}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :media_bypass, 'Media Bypass', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-7 control-label">
+            <div class="toggle-primary" id="media_bypass_activation_tgl"></div>
+            <%=f.check_box :media_bypass, {style: 'opacity:0; position:absolute; top:0px;', id: 'media_bypass_tgl_chkbox'}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :force_cid, 'Force CID', class: 'col-sm-5 control-label' %>
+          <div class="col-sm-7"><%= f.text_field :force_cid, class: 'form-control input-sm' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%if @ingress_trunk.new_record?%>
+    <ul class="pager wizard">
+      <li class="previous">
+        <a href="javascript:void(0)">&lt;&lt; Previous</a>
+      </li>
+      <li>
+        <%= f.submit 'Finish', class: 'btn btn-darkblue disabled', id: 'newFormFinishBtn' %>
+        <button class="btn btn-default cancel-form">Cancel</button>
+      </li>
+      <li class="next">
+        <a href="javascript:void(0)">Next &gt;&gt;</a>
+      </li>
+    </ul>
+  <%else%>
+    <ul class="pager wizard">
+      <li class="previous">
+        <a href="javascript:void(0)">&lt;&lt; Previous</a>
+      </li>
+      <li>
+        <%=f.submit 'Update', class: 'btn btn-primary'%>
+        <button class="btn btn-default cancel-form">Cancel</button>
+      </li>
+      <li class="next">
+        <a href="javascript:void(0)">Next &gt;&gt;</a>
+      </li>
+    </ul>
+  <%end%>
+<% end %>

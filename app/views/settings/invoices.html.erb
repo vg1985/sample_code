@@ -1,0 +1,128 @@
+<% provide(:title, 'Settings - Invoices') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Invoices</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.InvoiceSettingsHandler.init();
+<%end%>
+
+<div class="row">
+	<div class="col-md-12 mb30">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#general" data-toggle="tab"><strong>General</strong></a>
+			</li>
+			<li>
+				<a href="#billing" data-toggle="tab"><strong>Billing</strong></a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content mb30">
+			<div class="tab-pane active" id="general">
+				<div class="row">
+					<%=form_for @invoice_settings, url:  settings_update_invoice_settings_path, remote: true, method: :patch, html: {class: 'inv_settings_form form-bordered'} do |f|%>
+					<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@invoice_settings.label%></h4>
+							</div>
+							<div class="panel-body panel-body-nopadding">
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Company Name:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :invoice_company_name, class: 'form-control'%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Company Address:</label>
+									<div class="col-sm-3">
+										<%=f.text_area :invoice_company_address, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Payment Instructions:</label>
+									<div class="col-sm-3">
+										<%=f.select :invoice_payment_instructions, {'Wire/ACH': 'wire', 'Paypal': 'paypal'}, {include_blank: true}, class: 'pi-select2'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Email:</label>
+									<div class="col-sm-3">
+										<%=f.email_field :invoice_email, class: 'form-control'%>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Phone:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :invoice_phone, class: 'form-control'%>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Special Announcement:</label>
+									<div class="col-sm-3">
+										<%=f.text_area :invoice_announcement, class: 'form-control'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update Credentials
+								</button>
+								<span class="text-muted invoice_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+					</div>
+					<%end%>
+				</div>
+			</div>
+			<div class="tab-pane" id="billing">
+				<div class="row">
+					<%=form_for @invoice_settings, url:  settings_update_invoice_settings_path, remote: true, method: :patch, html: {class: 'inv_settings_form form-bordered'} do |f|%>
+						<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@invoice_settings.label%></h4>
+							</div>
+							<div class="panel-body panel-body-nopadding">
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Default Billing Cycle:</label>
+									<div class="col-sm-3">
+										<%=f.select :invoice_default_billing_cycle, invoice_billing_options, {include_blank: false}, class: 'bc-select2'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update Credentials
+								</button>
+								<span class="text-muted invoice_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

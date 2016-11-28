@@ -1,0 +1,86 @@
+<% provide(:title, 'Finance - Credit Card Confirmation') %>
+
+<%
+  form_url = "https://sandbox.usaepay.com/gate"
+
+  unless PaymentGateway.usaepay.test?
+    form_url = "https://usaepay.com/gate"
+  end
+  
+%>
+<%= form_tag form_url, method: :post, class: "form-horizontal" do %>
+   <%= hidden_field_tag "UMcommand", "cc:save" %>
+      <%= hidden_field_tag "UMredir", "#{finalize_credit_card_url(@credit_card)}?ref=#{@credit_card.redir_ref}" %>
+      <%= hidden_field_tag "UMkey", "#{PaymentGateway.gateway_settings[1].cc_epay_source_key }" %>
+      <%= hidden_field_tag "UMamount", "0.00" %>
+      <%= hidden_field_tag "UMinvoice", "1" %>
+      <%= hidden_field_tag "UMcard", @for_cloud[:number] %>
+      <%= hidden_field_tag "UMexpir", @credit_card.expired_on.strftime("%m%y") %>
+      <%= hidden_field_tag "UMcvv2", @for_cloud[:verification_value] %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= "Verify Card Submission" %>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Card Number:</label>
+        <div class="col-sm-4 mt10">
+          <%= @for_cloud[:number] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Card Expiration Date:</label>
+        <div class="col-sm-4 mt10">
+          <%= @credit_card.expired_on.strftime("%m-%y") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">CVV2:</label>
+        <div class="col-sm-4 mt10">
+          <%= @for_cloud[:verification_value] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-4 mt10">
+          <%= @for_cloud[:first_name] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-4 mt10">
+          <%= @for_cloud[:last_name] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-4 mt10">
+          <%= @credit_card.address %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">State</label>
+        <div class="col-sm-4 mt10">
+          <%= @credit_card.city_state %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Zip Code</label>
+        <div class="col-sm-4 mt10">
+          <%= @credit_card.zip_code %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+          <div class="pull-right">
+            <%= submit_tag "Confirm Submission", name: "submitbutton", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

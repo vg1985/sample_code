@@ -1,0 +1,2 @@
+jQuery('#from_select_cont').html("<%=escape_javascript(select(:message, :from, options_for_select(@sms_dids), {include_blank: true}, class: '', data: {placeholder: 'Choose Number...'}, id: 'message_from'))%>");
+App.SendSMSHandler.initDidsSelect();

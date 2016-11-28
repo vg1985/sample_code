@@ -1,0 +1,7 @@
+<% if @disabled_payment_options.present?
+    disabled_payment_count = @disabled_payment_options.count 
+%>
+    <span class="text-warning">
+        <%= "*Note: #{@disabled_payment_options.to_sentence.titlecase} #{"payment type".pluralize(disabled_payment_count)} #{disabled_payment_count == 1 ? "is" : "are"} disabled. Contact your administrator to get it enabled." %>
+    </span>
+<% end %>

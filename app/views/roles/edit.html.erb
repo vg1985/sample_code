@@ -1,0 +1,21 @@
+<% provide(:title, 'Users - Update Role') %>
+
+<%=content_for :breadcrumb do%>
+    <li>Users</li>
+    <li class='active'>Update Role</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'roles'%>
+<%end%>
+
+<%=content_for :js_init do %> 
+    App.RoleFormHandler.setUrls(['/roles/check_name']);
+    App.RoleFormHandler.init();
+<%end%>
+
+<div class="panel panel-default">
+    <%=render 'form'%>
+</div>
+
+

@@ -1,0 +1,78 @@
+<%if @response[:count] > 0%>
+	
+	<h4 class="inblock header-left">Search Result (<%= @response[:count]%>)</h4>
+	<div class="header-left mt10" style="margin-left:24%;"><label class="control-label text-info">Time left to place your order: <span id="purchase_time_left"></span></label></div>
+	
+	<%=render partial: 'shared/checkbox_toggler', locals: {klass: 'ta-right header-right mr60'}%>
+
+	<%=form_tag purchase_confirmation_orders_path, method: :post do %>
+		<table class="table mb30" style="clear:both;">
+			<%if @response[:count] > 24%>
+				<thead>
+					<tr>
+						<td colspan="7" align="center">
+							<%if @tollfree_page%>
+								<a class="btn btn-success tf_purchase_nos disabled pur_button" >Purchase Selected Toll Free DIDs</a>
+							<%else%>
+								<a class="btn btn-success local_purchase_nos disabled pur_button" >Purchase Selected Local DIDs</a>
+							<%end%>
+							<%=hidden_field_tag "time_left_for_order_conf", '' %>
+						</td>
+						
+							
+					</tr>						
+				</thead>
+			<%end%>
+			<tbody>
+				<%@response[:numbers].in_groups_of(7, nil) do |group|%>
+					<tr>
+					<%group.each do |value|%>
+					<td>
+						<div class="input-group mb12" style="padding-left:4%">
+							<%if value.present?%>
+								<%=hidden_field_tag "ordersfor[]", '', { id: "did_#{value}", disabled: true }%>
+								<a class="number btn btn-white unselect"><%= value %></a>
+								<%#=text_field_tag "", value, class: 'form-control', readonly: true%>
+							<%end%>
+						</div>
+					</td>
+					<%end%>
+					</tr>
+				<%end%>
+				<%=hidden_field_tag 'order_type', @tollfree_page ? 'toll_free' : 'local'%>
+				<% if policy(:purchase).select_customer? %>
+					<%=hidden_field_tag 'carrier', params[:search][:carrier]%>
+				<%end%>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6" align="center">
+					<%if @tollfree_page%>
+						<a class="btn btn-success tf_purchase_nos disabled pur_button" >Purchase Selected Toll Free DIDs</a>
+					<%else%>
+						<a class="btn btn-success local_purchase_nos disabled pur_button" >Purchase Selected Local DIDs</a>
+					<%end%>
+					</td>
+				</tr>						
+			</tfoot>
+		</table>
+	<%end%>
+<%end%>
+
+<%if @response[:count] == 0%>
+	<div class="alert alert-warning" style="text-align: center;">
+		<%if @tolfree_page%>
+			<strong>No results(s) found. </strong><br />Use different pattern and try again.
+		<%else%>
+			<strong>No results(s) found. </strong><br />Use different area codes/state/city and try again.
+		<%end%>
+		
+	</div>
+<%end%>
+
+<%if @response[:count] < 0%>
+	<div class="alert alert-danger" style="text-align: center;">
+		<strong>Oh snap!</strong> Result could not be found because of this error "<%=@response[:errObject]["Description"]%>". <br />Please fix this error and try again.
+	</div>
+<%end%>
+

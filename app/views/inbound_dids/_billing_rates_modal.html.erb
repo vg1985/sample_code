@@ -1,0 +1,93 @@
+<ul class="nav nav-tabs nav-justified">
+	<li class="active">
+		<a href="#localx" data-toggle="tab">Local</a>
+	</li>
+	<li>
+		<a href="#tf" data-toggle="tab">Toll Free</a>
+	</li>
+	<li>
+		<a href="#sms" data-toggle="tab">SMS</a>
+	</li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active" id="localx">
+        <div class="row">
+            <div class="col-sm-12">
+            	<table class="table table-striped text-center">
+               		<tr>
+               			<td width="50%"><strong>Activation</strong></td>
+               			<td>$<%=@local_rates.activation%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Monthly</strong></td>
+               			<td>$<%=@local_rates.monthly%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Per Minute</strong></td>
+               			<td>$<%=@local_rates.per_minute%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Bill Start</strong></td>
+               			<td><%=@local_rates.bill_start%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Bill Increment</strong></td>
+               			<td><%=@local_rates.bill_increment%></td>
+               		</tr>
+               	</table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="tf">
+        <div class="row">
+            <div class="col-sm-12">
+            	<table class="table table-striped text-center">
+               		<tr>
+               			<td width="50%"><strong>Activation</strong></td>
+               			<td>$<%=@tf_rates.activation%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Monthly</strong></td>
+               			<td>$<%=@tf_rates.monthly%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Per Minute</strong></td>
+               			<td>$<%=@tf_rates.per_minute%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Bill Start</strong></td>
+               			<td><%=@tf_rates.bill_start%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Bill Increment</strong></td>
+               			<td><%=@tf_rates.bill_increment%></td>
+               		</tr>
+               	</table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="sms">
+        <div class="row">
+           <div class="col-sm-12">
+            	<table class="table table-striped text-center">
+               		<tr>
+               			<td width="50%"><strong>Activation</strong></td>
+               			<td>$<%=@sms_rates.activation%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Monthly</strong></td>
+               			<td>$<%=@sms_rates.monthly%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Outbound</strong></td>
+               			<td>$<%=@sms_rates.outbound%></td>
+               		</tr>
+               		<tr>
+               			<td><strong>Inbound</strong></td>
+               			<td>$<%=@sms_rates.inbound%></td>
+               		</tr>
+               	</table>
+            </div>
+        </div>
+    </div>
+</div>

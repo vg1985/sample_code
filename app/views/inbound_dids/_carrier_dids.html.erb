@@ -1,0 +1,63 @@
+<div class="panel panel-default sip-style group-container" id="group_0_container">
+	<div class="panel-body">
+		<div class="table-responsive">
+			<%if dids.present?%>
+	  		<table id="no_group_table" class="table table-bordered table-striped dataTable table-hover did_group">
+	    		<thead>
+	      			<tr>
+	        	        <th class='no-sort' width="5%"><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+	        	        <th width="10%">DID</th>
+	        	        <th width="13%">Carrier</th>
+	        	        <th width="10%">Vendor</th>
+	        	        <th width="7%">SMS</th>
+	        	        <th width="8%">Monthly</th>
+	        	        <th width="9%">Activation</th>
+	        	        <th width="12%">Next Bill Date</th>
+	        	        <th class='no-sort' width="16%">Description</th>
+	        	        <th class='no-sort' width="10%">Actions</th>
+	      			</tr>
+	    		</thead>
+        	    <tbody>
+        	      <% dids.each do |did| -%>
+					<tr>
+						<td><%= check_box_tag "dids[]", did.id, false, {class: 'did-cb'} %></td>
+						<td><%=did.did%></td>
+						<td><%=did.carrier.company_name%></td>
+						<td><%=did.vendor.titlecase%></td>
+						<%if did.enable_sms? %>
+							<td><span class="label label-success">Enabled</span></td>
+						<%else%>
+							<td><span class="label label-warning">Disabled</span></td>
+						<%end%>
+						<td><%=did.activation%></td>
+						<td><%=did.monthly%></td>
+						<td><%=did.bill_start.day()%>-<%=Date.today().next_month.strftime('%b-%Y')%></td>
+						<td>
+							<%=link_to truncate(did.description, :length => 32), '#', name: 'did[description]', class: 'did-desc editable-click', data: {type: 'textarea', pk: did.id, value: did.description}%>
+						</td>
+						<td>
+							<%= link_to '#', title: 'Voice Settings', style: 'font-size:18px;', data: {toggle: 'modal', target: '.did-voice-settings-dlg', 'settings-url': voice_settings_inbound_did_path(did.id)} do %>
+								<!-- <span class="glyphicon glyphicon-wrench"></span> -->
+								<span class='fa fa-phone'></span>
+							<%end%>
+							<%= link_to '#', title: 'SMS Settings', style: 'font-size: 18px; margin-left:10px;', data: {toggle: 'modal', target: '.did-sms-settings-dlg', 'settings-url': sms_settings_inbound_did_path(did.id)} do %>
+								<!-- <span class="glyphicon glyphicon-wrench"></span> -->
+								<span class='fa fa-mobile'></span>
+							<%end%>
+							<%= link_to '#', title: 'Release', style: 'margin-left:10px;', data: {toggle: 'modal', target: '.release-did-confirm-dlg', pk: did.id}, class: 'release-link' do %>
+								<span class="fa fa-unlink"></span>
+							<%end%>
+							<%= link_to '#', title: 'Delete', style: 'margin-left:10px;', data: {toggle: 'modal', target: '.remove-did-confirm-dlg', pk: did.id}, class: 'release-link' do %>
+								<span class="glyphicon glyphicon-trash"></span>
+							<%end%>
+						</td>
+					</tr>
+        	      <% end %>
+        	    </tbody>
+	  		</table>
+	  		<%else%>
+	  			No DIDs found in this group.
+	  		<%end%>
+		</div>
+	</div>
+</div>

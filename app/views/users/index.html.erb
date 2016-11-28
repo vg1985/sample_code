@@ -1,0 +1,129 @@
+<% provide(:title, 'Users Listing') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Users</li>
+  <li class="active">Manage Users</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'users'%>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.UserListHandler.setUrls(['<%=dt_users_interplay_users_path%>']);
+    App.UserListHandler.init();
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body carriers-actions">
+        <!--<div class="col-sm-1">
+          <%#render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%>
+        </div>-->
+        <div class="col-sm-4">
+          <button class="btn btn-primary disabled btn_change_all_status" data-url="<%=update_bulk_status_users_path(enable: 1)%>" data-toggle="modal" data-target=".enable-user-confirm-dlg" title="Enable All"><span class="glyphicon glyphicon-check"></span>
+          </button>
+          <button class="btn btn-warning disabled btn_change_all_status" data-url="<%=update_bulk_status_users_path%>" data-toggle="modal" data-target=".disable-user-confirm-dlg" title="Disable All"><span class="glyphicon glyphicon-lock"></span></button>
+          <%if policy(:user).new?%>
+             <%=link_to 'Add New User', new_user_path, class: 'btn btn-primary'%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_users_form' do -%>
+      <div class="panel panel-default users-container">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="users_table" class="table table-striped dataTable table-hover table-bordered" style="margin-top:-20px;">
+              <thead>
+                <tr>
+                  <tr>
+                    <th width="1%" class='no-sort'><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+                    <th width="18%">Name</th>
+                    <th width="18%">Username</th>
+                    <th width="18%">Email</th>
+                    <th width="18%">Address1</th>
+                    <th width="9%">Country</th>
+                    <th width="10%">Status</th>
+                   	<th width="10%"class='no-sort'>Actions</th>
+                  </tr>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade delete-user-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete these User? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_user_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade enable-user-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to enable these user(s)?</h4>
+                <a href="javascript:void(0);" id="enable_user_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade disable-user-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to disable these user(s)?</h4>
+                <a href="javascript:void(0);" id="disable_user_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? "VOIP Essential | #{content_for(:title)}" : 'VOIP Essential' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= yield :stylesheets %>
+  <%= stylesheet_link_tag 'custom', media: 'all'%>
+  <%= javascript_include_tag 'application', 'bootstrap.min'%>
+  <%= csrf_meta_tags %>
+</head>
+<body class="signin">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+
+  <section>
+    <div class="<%= params[:controller] == 'devise/sessions' ? 'signinpanel' : 'signuppanel'%>">
+        
+      <div class="row">
+            
+        <div class="col-md-6">
+                
+          <div class="signin-info">
+            <div class="logopanel">
+              <h1><span>[</span> VOIP essentials <span>]</span></h1>
+            </div><!-- logopanel -->
+                
+            <div class="mb20"></div>
+                
+            <h5><strong>Welcome to Bracket Bootstrap 3 Template!</strong></h5>
+            <ul>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> Fully Responsive Layout</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> HTML5/CSS3 Valid</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> Retina Ready</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> WYSIWYG CKEditor</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> and much more...</li>
+            </ul>
+            <div class="mb20"></div>
+          </div><!-- signin0-info -->
+            
+        </div><!-- col-sm-6 -->
+            
+        <div class="col-md-6">
+
+          <div id="alerts">
+            <% [:notice, :error, :alert].each do |msg| %>
+            <% if flash[msg].present? %>
+              <div class='<%= msg.to_s %>'>
+                <div class="alert alert-<%= msg.to_s == 'notice' ? 'success' : 'danger' %>">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <%= sanitize(flash[msg]) %>
+                </div>
+              </div>
+            <% end %>
+            <%end%>
+          </div>
+
+          <%= yield %>
+        </div><!-- col-sm-6 -->
+            
+      </div><!-- row -->
+        
+      <div class="signup-footer">
+        <div class="pull-left">
+          &copy; 2014. All Rights Reserved. Bracket Bootstrap 3 Admin Template
+        </div>
+        <div class="pull-right">
+          Created By: <a href="http://themepixels.com/" target="_blank">ThemePixels</a>
+        </div>
+      </div>
+        
+    </div><!-- signin -->
+  
+  </section>
+  <%if content_for?(:javascripts)%>
+    <%= yield :javascripts %>
+  <%end%>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      <%=yield(:js_init)%>
+    });
+  </script>
+</body>
+</html>

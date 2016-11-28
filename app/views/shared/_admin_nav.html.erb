@@ -1,0 +1,359 @@
+<li>
+  <%= link_to raw("<i class='fa fa-home'></i><span>Dashboard</span>"), root_path %>
+</li>
+
+<li>
+  <%= link_to edit_internal_user_path(current_user) do %>
+    <i class='fa fa-user'></i><span>My Profile</span>
+  <% end %>
+</li>
+
+<% if policy(:carrier).module_enabled? %>
+<li class='nav-parent <%= active_class(['carriers', 'carrier_users']) %>'>
+  <%= link_to raw("<i class='fa fa-laptop'></i><span>Carriers</span>") %>
+  <ul class="children <%= active_subnav_class(['carriers', 'carrier_users']) %>">
+    <li class="<%= active_class(['carriers'], ['index', 'edit', 'show']) %>">
+      <%= link_to carriers_path do %>
+        <i class='fa fa-caret-right'></i> Manage Carriers
+      <% end %>
+    </li>
+    <% if policy(:carrier).new? %>
+      <li class="<%= active_class(['carriers', 'carrier_users'], ['new']) %>">
+        <%= link_to new_carrier_path do %>
+          <i class='fa fa-caret-right'></i> New Carrier
+        <% end %>
+      </li>
+    <%end%>
+  </ul>
+</li>
+<%end%>
+
+<% if policy(:user_action).module_enabled? %>
+<%menu_routes = %w(roles registrations users)%>
+
+<li class='nav-parent <%= new_active_class(menu_routes) %>'>
+  <%= link_to raw("<i class='fa fa-users'></i><span>Administrators</span>") %>
+  <ul class="children <%= new_active_class(menu_routes) %>">
+    <% if policy(:role).module_enabled? %>
+      <li class="<%= new_active_class(['roles#index']) %>">
+        <%= link_to roles_path do %>
+          <i class='fa fa-caret-right'></i> Manage Roles
+        <% end %>
+      </li>
+      <li class="<%= new_active_class(['roles#new']) %>">
+        <%= link_to new_role_path do %>
+          <i class='fa fa-caret-right'></i> Create Role
+        <% end %>
+      </li>
+    <%end%>
+    <li class="<%= new_active_class(['users#index']) %>">
+      <%= link_to users_path do %>
+        <i class='fa fa-caret-right'></i> Manage Users
+      <% end %>
+    </li>
+    
+    <li class="<%= new_active_class(['registrations#new']) %>">
+      <%= link_to new_user_path do %>
+        <i class='fa fa-caret-right'></i> Create User
+      <% end %>
+    </li>
+  </ul>
+</li>
+<%end%>
+
+<% if policy(:egress_trunk).module_enabled? || policy(:ingress_trunk).module_enabled?%>
+<%menu_routes = %w(ingress_trunks egress_trunks)%>
+<li class='nav-parent <%= new_active_class(menu_routes) %>'>
+  <%= link_to raw("<i class='fa fa-users'></i><span>Trunk Groups</span>") %>
+  <ul class="children <%= new_active_class(menu_routes) %>">
+    <% if policy(:ingress_trunk).module_enabled? %>
+    <li class="<%= new_active_class(['ingress_trunks']) %>">
+      <%= link_to ingress_trunks_path do %>
+        <i class='fa fa-caret-right'></i> Ingress Trunks
+      <% end %>
+    </li>
+    <%end%>
+    <% if policy(:egress_trunk).module_enabled? %>
+    <li class="<%= new_active_class(['egress_trunks']) %>">
+      <%= link_to egress_trunks_path do %>
+        <i class='fa fa-caret-right'></i> Egress Trunks
+      <% end %>
+    </li>
+    <%end%>
+  </ul>
+</li>
+<%end%>
+<li class='nav-parent <%= active_class(['routings']) %>'>
+  <%= link_to raw("<i class='fa fa-sitemap'></i><span>Routing</span>") %>
+  <ul class="children <%= active_subnav_class(['routings']) %>">
+    <li class="<%= active_class(['routings'], ['index', 'edit', 'show']) %>">
+      <%= link_to routings_path do %>
+        <i class='fa fa-caret-right'></i> Manage Routing Plans
+      <% end %>
+    </li>
+    <li class="<%= active_class(['routings'], ['new']) %>">
+      <%= link_to new_routing_path do %>
+        <i class='fa fa-caret-right'></i> New Route Plan
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li class='nav-parent <%= active_class(['rate_sheets']) %>'>
+  <%= link_to raw("<i class='fa fa-table'></i><span>Ratesheets</span>") %>
+  <ul class="children <%= active_subnav_class(['rate_sheets'], ['index', 'new']) %>">
+    <li class="<%= active_class(['rate_sheets'], ['index', 'edit', 'show']) %>">
+      <%= link_to rate_sheets_path do %>
+        <i class='fa fa-caret-right'></i> Manage Ratesheets
+      <% end %>
+    </li>
+    <li class="<%= active_class(['rate_sheets'], ['new']) %>">
+      <%= link_to new_rate_sheet_path do %>
+        <i class='fa fa-caret-right'></i> New Ratesheet
+      <% end %>
+    </li>
+  </ul>
+</li>
+<%menu_routes = %w(inbound_dids#manage inbound_dids#purchase 
+                   inbound_dids#new orders#purchase_confirmation 
+                   orders#index)%>
+
+<li class='nav-parent <%= new_active_class(menu_routes) %>'>
+  <%= link_to raw("<i class='fa fa-th'></i><span>Inbound Numbers</span>") %>
+  <ul class="children <%= new_active_class(menu_routes) %>">
+    <li class="<%= new_active_class(['inbound_dids#manage']) %>">
+      <%= link_to manage_inbound_dids_path do %>
+        <i class='fa fa-caret-right'></i> My Numbers
+      <% end %>
+    </li>
+     <li class="<%= new_active_class(['inbound_dids#purchase', 'orders#purchase_confirmation']) %>">
+      <%= link_to purchase_inbound_dids_path do %>
+        <i class='fa fa-caret-right'></i> Purchase
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['orders#index']) %>">
+      <%= link_to  orders_path do %>
+        <i class='fa fa-caret-right'></i> Orders
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['inbound_dids#new']) %>">
+      <%= link_to '#' do %>
+        <i class='fa fa-caret-right'></i> Admin Tools
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li class='nav-parent <%= active_class(['payments', 'payment_gateways', 'credit_cards']) %>'>
+  <%= link_to raw("<i class='fa fa-phone'></i><span>Finance</span>") %>
+  <ul class="children <%= active_subnav_class(['payments', 'payment_gateways', 'credit_cards'], []) %>">
+    <li class="<%= active_class(['payments'], ['new']) %>">
+      <%= link_to new_payment_path do %>
+        <i class='fa fa-caret-right'></i> Add Payment
+      <% end %>
+    </li>
+    <li class="<%= active_class(['payments'], ['add_charge']) %>">
+      <%= link_to add_charge_payments_path do %>
+        <i class='fa fa-caret-right'></i> Add Charge
+      <% end %>
+    </li>
+    <li class="<%= active_class(['payments'], ['index']) %>">
+      <%= link_to payments_path do %>
+        <i class='fa fa-caret-right'></i> Payment History
+      <% end %>
+    </li>
+    <li class="<%= active_class(['payments'], ['charges']) %>">
+      <%= link_to charges_payments_path do %>
+        <i class='fa fa-caret-right'></i> Charge History
+      <% end %>
+    </li>
+    <li class="<%= active_class(['credit_cards'], ['index', 'new']) %>">
+      <%= link_to credit_cards_path do %>
+        <i class='fa fa-caret-right'></i> Credit Cards
+      <% end %>
+    </li>
+  </ul>
+</li>
+
+<li class='nav-parent <%= new_active_class(['invoices#index']) %>'>
+  <%= link_to raw("<i class='fa fa-phone'></i><span>Invoices</span>") %>
+  <ul class="children <%= new_active_class(['invoices#index']) %>">
+    <li class="<%= new_active_class(['invoices#index']) %>">
+      <%= link_to invoices_path do %>
+        <i class='fa fa-caret-right'></i> Manage Invoices
+      <% end %>
+    </li>
+  </ul>
+</li>
+
+<%menu_routes = %w(smses sms_logs#index)%>
+<li class='nav-parent <%= new_active_class(menu_routes) %>'>
+  <%= link_to raw("<i class='fa fa-laptop'></i><span>SMS</span>") %>
+  <ul class="children <%= new_active_class(menu_routes) %>">
+    <li class="<%= new_active_class(['smses#new']) %>">
+      <%= link_to new_sms_path do %>
+        <i class='fa fa-caret-right'></i> Send Message
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['sms_logs#index']) %>">
+      <%= link_to sms_logs_path do %>
+        <i class='fa fa-caret-right'></i> Message logs
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['smses#manage']) %>">
+      <%= link_to manage_smses_path do %>
+        <i class='fa fa-caret-right'></i> My Numbers
+      <% end %>
+    </li>
+  </ul>
+</li>
+
+<%if policy(:report).module_enabled? -%>
+<li class='nav-parent <%= active_class(['reports']) %>'>
+  <%= link_to raw("<i class='fa fa-bar-chart-o'></i><span>Reports</span>") %>
+  <ul class="children <%= active_subnav_class(['reports']) %>">
+    <%if policy(:report).get_profit? -%>
+    <li class="<%= active_class(['reports'], ['profit']) %>">
+      <%= link_to reports_profit_path do %>
+        <i class='fa fa-caret-right'></i> Profit Report
+      <% end %>
+    </li>
+    <%end -%>
+    <%if policy(:report).get_summary? -%>
+    <li class="<%= active_class(['reports'], ['summary']) %>">
+      <%= link_to reports_summary_path do %>
+        <i class='fa fa-caret-right'></i> Summary Report
+      <% end %>
+    </li>
+    <%end -%>
+    <%if policy(:report).get_did? -%>
+    <li class="<%= active_class(['reports'], ['did']) %>">
+      <%= link_to reports_did_path do %>
+        <i class='fa fa-caret-right'></i> DID Report
+      <% end %>
+    </li>
+    <%end%>
+    <%if policy(:report).get_sms? -%>
+    <li class="<%= active_class(['reports'], ['sms']) %>">
+      <%= link_to reports_sms_path do %>
+        <i class='fa fa-caret-right'></i> SMS Report
+      <% end %>
+    </li>
+    <%end -%>
+    <%if policy(:report).cdr_search? -%>
+    <li class="<%= active_class(['reports'], ['cdr_search']) %>">
+      <%= link_to reports_cdr_search_path do %>
+        <i class='fa fa-caret-right'></i> CDR Search
+      <% end %>
+    </li>
+    <li class="<%= active_class(['reports'], ['cdr_templates']) %>">
+      <%= link_to reports_cdr_templates_path do -%>
+        <i class='fa fa-caret-right'></i> Manage CDR Templates
+      <% end -%>
+    </li>
+    <%end -%>
+    <%if policy(:report).did_search? -%>
+    <li class="<%= active_class(['reports'], ['did_search']) %>">
+      <%= link_to reports_did_search_path do %>
+        <i class='fa fa-caret-right'></i> DID Search
+      <% end %>
+    </li>
+    <% end %>
+    <%if policy(:report).cdr_logs? -%>
+    <li class="<%= active_class(['reports'], ['cdr_logs']) %>">
+      <%= link_to reports_cdr_logs_path do -%>
+        <i class='fa fa-caret-right'></i> CDR Export Logs
+      <% end -%>
+    </li>
+    <%end -%>
+  </ul>
+</li>
+<%end -%>
+
+<%if Setting.zendesk_enabled? &&
+    policy(:support).module_enabled? &&
+    current_user.zendesk_id.present? -%>
+<li class='nav-parent <%= new_active_class(['support']) %>'>
+  <%= link_to raw("<i class='fa fa-support'></i><span>Support</span>") %>
+  <ul class="children <%= new_active_class(['support']) %>">
+    <% if policy(:support).create_ticket?%>
+    <li class="<%= new_active_class(['support#new']) %>">
+      <%= link_to controller: 'support', action: 'new' do %>
+        <i class='fa fa-caret-right'></i> Create Ticket
+      <% end %>
+    </li>
+    <%end%>
+    <li class="<%= new_active_class(['support#index']) %>">
+      <%= link_to support_index_path do %>
+        <i class='fa fa-caret-right'></i> View Tickets
+      <% end %>
+    </li>
+  </ul>
+</li>
+<%end%>
+
+<%menu_routes = %w(settings inbound_dids#rates)%>
+
+<li class='nav-parent <%= new_active_class(menu_routes) %>'>
+  <%= link_to raw("<i class='fa fa-gear'></i><span>Settings</span>") %>
+  <ul class="children <%= new_active_class(menu_routes) %>">
+    <li class="<%= new_active_class(['settings#general']) %>">
+      <%= link_to controller: 'settings', action: 'general' do %>
+        <i class='fa fa-caret-right'></i> General
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['inbound_dids#rates'])%>">
+      <%= link_to rates_inbound_dids_path do %>
+        <i class='fa fa-caret-right'></i> Default Rates
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#bandwidth']) %>">
+      <%= link_to controller: 'settings', action: 'bandwidth' do %>
+        <i class='fa fa-caret-right'></i> Origination API
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#zendesk']) %>">
+      <%= link_to controller: 'settings', action: 'zendesk' do %>
+        <i class='fa fa-caret-right'></i> Support
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#sms']) %>">
+      <%= link_to controller: 'settings', action: 'sms' do %>
+        <i class='fa fa-caret-right'></i> SMS/Text
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#payment_gateways']) %>">
+      <%= link_to controller: 'settings', action: 'payment_gateways' do %>
+        <i class='fa fa-caret-right'></i> Finance
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#invoices']) %>">
+      <%= link_to controller: 'settings', action: 'invoices' do %>
+        <i class='fa fa-caret-right'></i> Invoices
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#mailer']) %>">
+      <%= link_to controller: 'settings', action: 'mailer' do %>
+        <i class='fa fa-caret-right'></i> Mailer
+      <% end %>
+    </li>
+    <li class="<%= new_active_class(['settings#otp']) %>">
+      <%= link_to controller: 'settings', action: 'otp' do %>
+        <i class='fa fa-caret-right'></i> OTP Auth
+      <% end %>
+    </li>
+  </ul>
+</li>
+<%if policy(:user_action).masquerade? || policy(:carrier).masquerade_menu?%>
+<li class='nav-parent'>
+  <%= link_to raw("<i class='fa fa-users'></i><span>Masquerade</span>") %>
+  <ul class="children">
+    <%if user_masquerade? -%>
+      <li><%= link_to 'Reverse masquerade', back_masquerade_path(current_user)%></li>
+    <%else -%>
+    <li>
+      Login As:
+      <input type="text" id="masq_user_select" />
+    </li>
+    <%end%>
+  </ul>
+</li>
+<%end%>

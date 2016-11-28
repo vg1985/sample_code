@@ -1,0 +1,18 @@
+<div class="panel-body">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<textarea rows="20" cols="75">
+				<%=Setting.tnc%>
+			</textarea>
+		</div>
+		<div class="col-md-offset-5 col-md-3 mt10">
+			<div class="ckbox ckbox-primary">
+            <input type="checkbox" name="terms_conditions" id="tc_chkbox" value="1">
+            <label for="tc_chkbox">I agree with Terms &amp; Conditions</label>
+          </div>
+		</div>
+		<div class="col-md-offset-5 col-md-3 mt10">
+			<%= recaptcha_tags stoken: false %>
+		</div>
+	</div>
+</div>

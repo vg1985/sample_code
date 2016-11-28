@@ -1,0 +1,38 @@
+
+  <div class="tab-content">
+    <div class="tab-pane" id="ptab1">
+      <%= render partial: 'users/user_creds', locals: { f: f, user: user } %>
+    </div>
+    <div class="tab-pane" id="ptab2">
+      <%= render partial: 'users/other_info', locals: { f: f, user: user } %>
+    </div>
+  </div>
+
+<%if user.new_record?%>
+  <ul class="pager wizard">
+    <li class="previous">
+      <a href="javascript:void(0)">&lt;&lt; Previous</a>
+    </li>
+    <li>
+      <%= f.submit 'Finish', class: 'btn btn-darkblue disabled', id: 'newFormFinishBtn' %>
+      <button class="btn btn-default" id="cancelForm">Cancel</button>
+    </li>
+    <li class="next">
+      <a href="javascript:void(0)">Next &gt;&gt;</a>
+    </li>
+  </ul>
+<%else%>
+  <ul class="pager wizard">
+    <li class="previous">
+      <a href="javascript:void(0)">&lt;&lt; Previous</a>
+    </li>
+    <li>
+      <%=f.submit 'Update', class:'btn btn-primary'%>
+      <button class="btn btn-default" id="cancelForm">Cancel</button>
+    </li>
+    <li class="next">
+      <a href="javascript:void(0)">Next &gt;&gt;</a>
+    </li>
+  </ul>
+<%end%>
+

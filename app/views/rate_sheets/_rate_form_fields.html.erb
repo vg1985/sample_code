@@ -1,0 +1,16 @@
+<tr class="rate_fields" data-id="<%= rate.id %>">
+  <td></td>
+  <td><%= text_field_tag :code, rate.code, class: "form-control short input-sm", placeholder: "code", disabled: true %></td>
+  <td><%= text_field_tag :code_name, rate.code_name, class: "form-control short input-sm", placeholder: "code name", disabled: true %></td>
+  <td><%= text_field_tag :code_country,  rate.code_country, class: "form-control short input-sm", placeholder: "code country", disabled: true %></td>
+  <td class="for_us_only">
+    <%= text_field_tag :inter_rate,  rate.inter_rate, class: "form-control short input-sm spinner", placeholder: "inter rate", disabled: true, step: '0.00001', maxlength: "10" %></td>
+  <td class="for_us_only">
+    <%= text_field_tag :intra_rate,  rate.intra_rate, class: "form-control short input-sm spinner", placeholder: "intra rate", disabled: true, step:' 0.00001' %></td>
+  <td>
+    <%= text_field_tag :rate, rate.rate, class: "form-control short input-sm spinner", placeholder: "rate", disabled: true, step: '0.00001' %></td>
+  <td><%= text_field_tag :bill_start, rate.bill_start, class: "form-control short input-sm spinner", placeholder: "bill start", disabled: true, step: '1' %></td>
+  <td><%= text_field_tag :bill_increment, rate.bill_increment,class: "form-control short input-sm spinner", placeholder: "bill increment", disabled: true, step: '1' %></td>
+  <td style="width: 195px;"><%= text_field_tag :effective_time,  rate.effective_time, class: "form-control input-sm datepicker", placeholder: "effective time", style: "width: 185px;", disabled: true %></td>
+  <td><%= text_field_tag :setup_fee, rate.setup_fee, class: "form-control short input-sm spinner", placeholder: "setup fee", disabled: true, step:' 0.00001' %></td>
+</tr>

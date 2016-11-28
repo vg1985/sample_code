@@ -1,0 +1,15 @@
+App.overlayModal.hide();
+<%if @timeout %>
+	jQuery('#report_data_container').html('<p class="text-danger text-center">Request Timed Out.</p> \
+		<div class="text-center"><%="curl -d \"#{CGI.unescape(@data.to_query)}\" http://68.64.174.22:8000/v1/reports/did/customerA/#{@from_date}/#{@to_date}"%></div>');
+<%else%>
+	<%if @result['group'].size > 0%>
+		jQuery('#report_data_container').html('<%=escape_javascript(render partial: 'did_reports_table')%>');
+		App.DIDReportHandler.initDatatable('#reports_table');
+	<%else%>
+		jQuery('#report_data_container').html('<p class="text-info text-center">No data found for this search criteria.</p> \
+			<div class="text-center"><%="curl -d \"#{CGI.unescape(@data.to_query)}\" http://68.64.174.22:8000/v1/reports/did/customerA/#{@from_date}/#{@to_date}"%></div>');
+	<%end%>
+<%end%>
+App.DIDReportHandler.minimizeFilter();
+jQuery('.reports-container .panel-body').show();

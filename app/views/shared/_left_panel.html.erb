@@ -1,0 +1,49 @@
+<div class="leftpanel">
+    
+  <div class="logopanel">
+    <h1><span>[</span> bracket <span>]</span></h1>
+  </div><!-- logopanel -->
+    
+  <div class="leftpanelinner">
+        
+    <!-- This is only visible to small devices -->
+    <div class="visible-xs hidden-sm hidden-md hidden-lg">   
+      <div class="media userlogged">
+        <%= image_tag "photos/loggeduser.png", class: "media-object" %>
+        <div class="media-body">
+          <h4>John Doe</h4>
+          <span>"Life is so..."</span>
+        </div>
+      </div>
+        
+      <h5 class="sidebartitle actitle">Account</h5>
+      <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+        <% if current_user %>
+         <li>
+           <%= link_to destroy_user_session_path, method: :delete do %>
+             <i class="fa fa-sign-out"></i> <span>Sign Out</span>
+           <% end %>
+         </li>
+        <% end %>
+         </a>
+      </ul>
+    </div>
+      
+    <h5 class="sidebartitle">Navigation</h5>
+    <ul class="nav nav-pills nav-stacked nav-bracket">
+      <% if current_user.internal? %>
+        <%= render partial: "shared/admin_nav" %>
+      <% else %>
+        <%= render partial: "shared/carrier_nav" %>
+      <% end %>
+      <li class="">
+        <a class="menutoggle menu-collapsed" id="nav" style="float: none !important; width: inherit !important; font-size: inherit; height: inherit; border: none;">
+          <i class="fa fa-chevron-left" id="menu-left"></i>
+          <i class="fa fa-chevron-right" id="menu-right"></i>
+          <span>Toggle Navigation</span>
+      </a>
+      </li>
+    </ul>
+      
+  </div><!-- leftpanelinner -->
+</div><!-- leftpanel -->

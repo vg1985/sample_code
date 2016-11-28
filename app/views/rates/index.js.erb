@@ -1,0 +1,37 @@
+App.overlayModal.hide();
+
+var gritter_opts = {
+	title: 'Manage Ratesheet',
+	sticky: false,
+	time: '5000'
+};
+<%if @message.present? -%>
+	gritter_opts.text = '<%=@message%>';
+	gritter_opts.class_name = 'growl-success';
+	jQuery.gritter.add(gritter_opts);
+<%end%>
+
+<%if @error.present? -%>
+	gritter_opts.text = '<%=@error%>';
+	gritter_opts.class_name = 'growl-danger';
+	jQuery.gritter.add(gritter_opts);
+<%end%>
+
+<%if params[:action] == 'create'%>
+	$('.rate-new-fields').hide();
+	$('a.modify, #add_new_btn').removeClass('disabled');
+	App.AdminRateSheetDataHandler.resetNewValues();
+	App.AdminRateSheetDataHandler.setBlankRows(false);
+<%end%>
+
+<%if params[:action] == 'destroy'%>
+	App.AdminRateSheetDataHandler.setBlankRows(<%=@rate_sheet.rates.count == 0%>);
+<%end%>
+
+jQuery('table#ratesheet_data_table tbody').html("<%=escape_javascript(render partial: 'rates/rate_rows')%>");
+jQuery('#rate_page_links').html("<%=escape_javascript(paginate @rates, params: {controller: 'rate_sheets', action: 'show', id: @rate_sheet.id}, remote: true)%>");
+jQuery('div#rate_page_info').html("<%=escape_javascript(page_entries_info @rates)%>");
+jQuery('a.modify, #add_new_btn').removeClass('disabled');
+
+
+App.AdminRateSheetDataHandler.initControls();

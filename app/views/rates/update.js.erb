@@ -1,0 +1,22 @@
+App.overlayModal.hide();
+
+var gritter_opts = {
+	title: 'Update Rate',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @rate.errors.any? -%>
+	gritter_opts.text = 'Could not perform the update operation. There is some invalid data.';
+	gritter_opts.class_name = 'growl-danger';
+<%else -%>
+	App.AdminRateSheetDataHandler.setData($('tr#rate_static_<%=@rate.id%>'), <%=raw(@data)%>);
+	$('tr#rate_fields_<%=@rate.id%>').hide();
+	$('tr#rate_static_<%=@rate.id%>').show();
+	$('a.modify, #add_new_btn').removeClass('disabled');
+
+	gritter_opts.text = 'Rate has been updated successfully';
+	gritter_opts.class_name = 'growl-success';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);

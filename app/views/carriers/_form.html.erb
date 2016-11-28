@@ -1,0 +1,84 @@
+<%html_options = {html: {id: @carrier.new_record? ? 'newCarrierForm' : 'editCarrierForm', class: 'form-horizontal'}}%>
+<%
+unless local_assigns[:url].nil?
+	html_options[:url] = url
+end
+%>
+<%= nested_form_for @carrier, html_options  do |f| %>
+	<%if user_signed_in? && current_user.is_carrier?%>
+		<%=hidden_field_tag :otpid%>
+		<%=hidden_field_tag :otpcode%>
+	<%end%>
+	<div class="tab-content">
+		<%if @carrier.new_record?%>
+			<div class="progress progress-striped active">
+				<div class="progress-bar wizard-progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		<%end%>
+		<div class="tab-pane" id="ptab1">
+			<%= render partial: 'customer_creds', locals: { f: f, carrier: @carrier } %>
+		</div>
+		<div class="tab-pane" id="ptab2">
+			<%= render partial: 'billing_information', locals: { f: f, carrier: @carrier } %>
+		</div>
+		<div class="tab-pane contacts-tab" id="ptab3">
+			<%= render partial: 'contacts', locals: { f: f, carrier: @carrier } %>
+		</div>
+		<%if user_signed_in? && current_user.internal? %>
+			<div class="tab-pane" id="ptab4">
+				<%= render partial: 'payment_options', locals: { f: f, carrier: @carrier } %>
+			</div>
+			<div class="tab-pane" id="ptab5">
+				<%= render partial: 'billing_settings', locals: { f: f, carrier: @carrier } %>
+			</div>
+			<div class="tab-pane" id="ptab6">
+				<%= render partial: 'did_billing', locals: { f: f, carrier: @carrier } %>
+			</div>
+			<div class="tab-pane" id="ptab7">
+				<%= render partial: 'sms_billing', locals: { f: f, carrier: @carrier } %>
+			</div>
+		<%end%>
+		<%unless user_signed_in? %>
+			<div class="tab-pane" id="ptab4">
+				<%= render partial: 'terms_conditions', locals: { f: f, carrier: @carrier } %>
+			</div>
+		<%end%>
+	</div>
+	
+	<%if @carrier.new_record?%>
+		<ul class="pager wizard">
+			<li class="previous">
+				<a href="javascript:void(0)">&lt;&lt; Previous</a>
+			</li>
+			<li>
+				<%= f.submit 'Finish', class: 'btn btn-darkblue disabled', id: 'newFormFinishBtn' %>
+				<button class="btn btn-default" id="cancelForm">Cancel</button>
+			</li>
+			<li class="next" id="inbuilt_next">
+				<a href="javascript:void(0)">Next &gt;&gt;</a>
+			</li>
+			<li class="next" id="custom_next" style="display:none">
+				<a href="javascript:void(0)">Next &gt;&gt;</a>
+			</li>
+		</ul>
+	<%else%>
+		<ul class="pager wizard">
+			<li class="previous" id="inbuilt_prev">
+				<a href="javascript:void(0)">&lt;&lt; Previous</a>
+			</li>
+			<li class="previous" id="custom_prev" style="display:none">
+				<a href="javascript:void(0)">&lt;&lt; Previous</a>
+			</li>
+			<li>
+				<%=f.submit 'Update', class: 'btn btn-primary'%>
+				<button class="btn btn-default" id="cancelForm">Cancel</button>
+			</li>
+			<li class="next" id="inbuilt_next">
+				<a href="javascript:void(0)">Next &gt;&gt;</a>
+			</li>
+			<li class="next" id="custom_next" style="display:none">
+				<a href="javascript:void(0)">Next &gt;&gt;</a>
+			</li>
+		</ul>
+	<%end%>
+<% end %>

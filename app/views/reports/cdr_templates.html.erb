@@ -1,0 +1,79 @@
+<% provide(:title, 'CDR Templates') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Reports</li>
+  <li class="active">CDR Templates</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'reports', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.CdrTemplatesHandler.init();
+<%end%>
+    
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a href="/reports/cdr_search" class="btn btn-primary">Add New Template</a>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="cdr_templates" class="table table-striped dataTable table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th class='no-sort'>Description</th>
+                <th class='no-sort'>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%@templates.each_with_index do |t, i|%>
+                <tr>
+                  <td><%=i + 1%></td>
+                  <td><%=t.name%></td>
+                  <td><%=t.description%></td>
+                  <td>
+                    <%=link_to reports_cdr_search_path(filter: t.id), class: 'btn btn-success btn-xs apply-template', title: 'Apply &amp; Generate Report' do%>
+                      <span class="glyphicon glyphicon-play"></span>
+                    <%end%>
+                    <%=link_to '#', class: 'btn btn-danger btn-xs template-destroy', title: 'Delete', data: {toggle: 'modal', target: '.delete-template-confirm-dlg', template_id: t.id} do %>
+                      <span class="glyphicon glyphicon-trash"></span>
+                    <%end%>
+                    <%=link_to '', "/reports/remove_cdr_template/#{t.id}", method: :delete, id: "template_#{t.id}_destroy_link"%>
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade delete-template-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete this template? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_template_confirm_ok" class="btn btn-danger">OK</a>
+                <%=link_to 'Cancel', '#', class: 'btn btn-white', data: {dismiss: 'modal'}, 'aria-hidden': true%>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="table-responsive">
+  <table id="<%=policy(:credit_card).select_carrier? ? 'admin_credit_cards' : 'carrier_credit_cards'%>" class="credit_cards table table-striped dataTable table-hover table-bordered">
+      <thead>
+          <%if policy(:credit_card).select_carrier? -%>
+              <th width="18%">Carrier</th>
+              <th width="12%">Name</th>
+              <th width="15%">Credit Card Number</th>
+              <th width="6%">Type</th>
+              <th width="8%">Expiry Date</th>
+              <th width="10%">Date Added</th>
+              <th width="1%" class='no-sort text-center'>Verified?</th>
+              <th width="1%" class='no-sort text-center'>Enabled?</th>
+              <th class='no-sort' width="8%">Actions</th>
+          <%else%>
+            <th width="15%">Name</th>
+            <th width="20%">Credit Card Number</th>
+            <th width="12%">Type</th>
+            <th width="12%">Expiry Date</th>
+            <th width="15%">Date Added</th>
+            <th class='no-sort' width="10%">Status</th>
+            <th class='no-sort'>Actions</th>
+          <%end %>
+      </thead>
+    <%unless policy(:credit_card).select_carrier? -%>
+      <tbody>
+          <% @credit_cards.each do |cc| %>
+          <tr>
+              <%if policy(:credit_card).select_carrier? -%>
+                <td>
+                  <%= cc.carrier.company_name %>
+                </td>
+              <% end %>
+              <td>
+                  <%= cc.nickname %>
+              </td>
+              <td>
+                  <%= cc.card_number || '-NA-' %>
+              </td>
+              <td>
+                  <%= cc.card_type || '-NA-' %>
+              </td>
+              <td>
+                  <%= cc.expired_on.strftime('%m/%y') %>
+              </td>
+              <td>
+                  <%= cc.created_at.in_time_zone(carrier.timezone).to_s(:carrier) %>
+              </td>
+              <%if policy(:credit_card).select_carrier? -%>
+                <td class='text-center'>
+                    <% if cc.verified?  %>
+                        <span title="Verified" class="glyphicon glyphicon-ok text-success"></span>
+                    <% else %>
+                        <span title="Pending Verification" class="glyphicon glyphicon-pause"></span>
+                    <% end %>
+                </td>
+                <td class='text-center'>
+                    <% if cc.enabled?  %>
+                        <span title="Enabled" class="glyphicon glyphicon-ok text-success"></span>
+                    <% else %>
+                        <span title="Disabled" class="glyphicon glyphicon-remove text-warning"></span>
+                    <% end %>
+                </td>
+              <%else%>
+                 <td>
+                    <% if cc.verified? %>
+                      <%if cc.enabled?%>
+                        <span class="label label-success">Enabled</span>  
+                      <%else%>
+                        <span class="label label-warning">Disabled</span>
+                      <%end%>
+                    <%else%>
+                      <span class="label label-default">Verification Pending</span>
+                    <%end%>
+                 </td>
+              <%end%>
+              <td>
+                  <%if policy(cc).check_authorization? -%>
+                      <%= link_to '#', data: {url: check_authorization_credit_card_path(cc), toggle: "modal", target: ".download-supported-docs-dlg"}, class: "btn btn-default btn-xs", title: 'Supported Documents' do%>
+                        <%=cc.documents.count%>
+                      <%end%>
+                  <%end%>
+                  <%if cc.on_cloud? && policy(cc).activate? && !cc.active? -%>
+                      <%= link_to activate_credit_card_path(cc), method: :put, class: "btn btn-primary btn-xs", title: 'Verify' do%>
+                        <span class="glyphicon glyphicon-check"></span>
+                      <%end%>
+                  <%end%>
+                  <%if policy(cc).deactivate? && cc.active? -%>
+                      <%= link_to deactivate_credit_card_path(cc),  method: :put, class: "btn btn-warning btn-xs", title: 'Unverify' do%>
+                        <span class="glyphicon glyphicon-pause"></span>
+                      <%end%>
+                  <%end%>
+                  
+                  <%if policy(cc).enable? && !cc.enabled? -%>
+                      <%if cc.active?%>
+                        <%= link_to enable_credit_card_path(cc),  method: :put, class: "btn btn-primary btn-xs", title: 'Enable' do%>
+                          <span class="glyphicon glyphicon-check"></span>
+                        <%end%>
+                      <%else%>
+                        <%= link_to '#', class: "btn btn-primary btn-xs disabled" do%>
+                          <span class="glyphicon glyphicon-check"></span>
+                        <%end%>
+                      <%end%>
+                  <%end%>
+
+                  <%if policy(cc).disable? && cc.active? && cc.enabled? -%>
+                      <%= link_to disable_credit_card_path(cc),  method: :put, class: "btn btn-warning btn-xs", title: 'Disable' do%>
+                        <span class="glyphicon glyphicon-lock"></span>
+                      <%end%>
+                  <%end%>
+                  <%if policy(cc).destroy? -%>
+                  <%=link_to '#', data: {cc_id: cc.id}, class: 'btn btn-danger btn-xs cc_destroy', title: 'Delete' do%>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <%end%>
+                  <%=link_to '', cc, method: :delete, id: "cc_#{cc.id}_destroy_link"%>         
+                  <% end %>
+              </td>
+          </tr>
+          <% end %>
+      </tbody>
+    <%end%>
+  </table>
+</div>
+
+<div class="modal fade download-supported-docs-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>      
+    </div>
+</div>
+
+<div class="modal fade delete-cc-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete this Credit Card?</h4>
+                <a href="javascript:void(0);" id="del_cc_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

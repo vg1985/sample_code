@@ -1,0 +1,131 @@
+<%if 'smses' == controller.controller_name %>
+	<% provide(:title, 'SMS - My Numbers') %>
+
+	<%=content_for :breadcrumb do%>
+		<li>SMS</li>
+		<li class="active">My Numbers</li>
+	<%end%>
+<%else%>
+	<% provide(:title, 'Inbound Numbers - My Numbers') %>
+
+	<%=content_for :breadcrumb do%>
+		<li>Inbound Numbers</li>
+		<li class="active">My Numbers</li>
+	<%end%>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'inbound_dids'%>
+<%end%>
+
+<%=content_for :js_init do %>
+	var update_did_desc_inbound_dids_groups_path = '<%= update_did_desc_inbound_dids_groups_path%>';
+	var release_inbound_dids_groups_path = '<%=release_inbound_dids_groups_path%>';
+	var remove_dids_inbound_dids_groups_path = '<%=remove_dids_inbound_dids_groups_path%>';
+
+	App.AdminManageDidsHandler.setUrls([update_did_desc_inbound_dids_groups_path, release_inbound_dids_groups_path, remove_dids_inbound_dids_groups_path]);
+	App.DidSettings.setMessages(['<%=t(:try_timeout_valid_values)%>', '<%=t(:pdd_timeout_valid_values)%>', '<%=t(:call_fwd_valid_values)%>', '<%=t(:ip_valid_values)%>', '<%=t(:sms_fwd_valid_values)%>', '<%=t(:sms_email_valid_values)%>', '<%=t(:sms_api_valid_values)%>']);
+	App.AdminManageDidsHandler.init();
+	App.DidSettings.init([<%=policy(:inbound_dids).change_defaults?%>, <%=DidVoiceSetting::DEFAULT_PDD_TIMEOUT%>, <%=DidVoiceSetting::DEFAULT_TRY_TIMEOUT%>]);
+<%end%>
+
+<script type="text/javascript">
+	var gritter_opts = {
+		title: '',
+		sticky: false,
+		time: '5000'
+	};
+</script>
+<div class="row">
+	<div class="col-md-12 mb30" id="did_groups_container">
+		<div class="panel panel-default">
+			<div class="panel-body manage-dids-actions">
+				<div class='text-right'>
+					Bulk Actions:
+					<button class="btn btn-white disabled" id="btn_bulk_voice_settings" data-toggle="modal" data-target=".did-voice-settings-dlg" data-settings-url="<%=bulk_voice_settings_inbound_dids_path%>" title="Bulk Voice Settings"><span class="fa fa-phone"></span>
+					</button>
+					<button class="btn btn-white disabled" id="btn_bulk_sms_settings" data-toggle="modal" data-target=".did-sms-settings-dlg" data-settings-url="<%=bulk_sms_settings_inbound_dids_path%>" data-send-dids="1" title="Bulk SMS Settings"><span class="fa fa-mobile"></span>
+					</button>
+					<button class="btn btn-info disabled" id="btn_release_all" data-toggle="modal" data-target=".release-did-confirm-dlg" title="Release All"><span class="fa fa-unlink"></span></button>
+					<button class="btn btn-danger disabled" id="btn_remove_all" data-toggle="modal" data-target=".remove-did-confirm-dlg" title="Delete All"><span class="glyphicon glyphicon-trash"></span></button>
+				</div>
+        	</div>
+		</div>
+		<%=form_tag '#', method: :post, id: 'selected_dids_form' do -%>
+			<%=hidden_field_tag :did, '', id: 'single_did', name: 'dids[]' %>
+			<%=hidden_field_tag :reason, '', id: 'release_reason', name: 'release_reason' %>
+			<%=render partial: 'inbound_dids/carrier_dids', locals: {dids: @dids}%>
+		<%end%>
+	</div>		
+</div>
+
+<div class="modal fade remove-did-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+  	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+	        </div>
+	        <div class="modal-body">
+		        <div class="panel panel-default">
+		        	<div class="panel-body panel-body-nopadding">
+				        <div class="row">
+							<div style='text-align:center;'>
+								<h4>Are you sure you want to delete the DID(s)? This action is irreversible.</h4>
+								<a href="javascript:void(0);" id="remove_did_confirm_ok" class="btn btn-danger">OK</a>
+								<a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+							</div>
+						</div>
+					</div>
+		    	</div>
+			</div>
+	    </div>
+  	</div>
+</div>
+
+
+<div class="modal fade did-voice-settings-dlg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade did-sms-settings-dlg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade release-did-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+  	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+	        </div>
+	        <div class="modal-body">
+		        <div class="panel panel-default">
+		        	<div class="panel-body panel-body-nopadding">
+				        <div class="row">
+				        	<h4>Please mention the reason for release: </h4>
+				        	<form class="form-horizontal form-bordered">
+				        		<div class="form-group">
+				        			<%Did::REASON_OPTIONS.each do |k, v| -%>
+					        			<div class="radio">
+					        				<label><input type="radio" name="rel_reason" value="<%=k%>" class="rel-reason"> <%=v%></label>
+					        			</div>
+				        			<%end -%>
+				        			<input type="text" id="release_other_reason" name="other_reason" style="display:none;" placeholder="Specify other reason here" class: "form-control" %>
+				        		</div>
+				        	</form>
+							<div style='text-align:center;'>
+								<a href="javascript:void(0);" id="rel_did_confirm_ok" class="btn btn-primary disabled">OK</a>
+								<a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+							</div>
+						</div>
+					</div>
+		    	</div>
+			</div>
+	    </div>
+  	</div>
+</div>

@@ -1,0 +1,30 @@
+defaults: &defaults
+  app_timeout: 120
+  sample_auth_file_path: 'public/cc_auth_form'
+  max_csv_file_size: 20971520 #20MB
+  single_sms_length: 160
+  
+development:
+  <<: *defaults
+  #api_url: 'http://68.64.174.22:8000/v1'
+  host: 'http://vin33t.voipessential.com'
+  api_url: 'http://68.64.174.22:8000/v1'
+  api_key: '1ec9b82c'
+  api_customer: 'voipessential'
+
+staging:
+  <<: *defaults
+  host: 'http://vin33t.voipessential.com'
+  api_url: 'http://68.64.174.22:8000/v1'
+  api_key: '1ec9b82c'
+  api_customer: 'voipessential'
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  host: 'http://vin33t.voipessential.com'
+  api_url: 'http://68.64.174.22:8000/v1'
+  api_key: '1ec9b82c'
+  api_customer: 'voipessential'

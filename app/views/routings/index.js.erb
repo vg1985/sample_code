@@ -1,0 +1,23 @@
+var gritter_opts = {
+	title: 'Manage Routing Plans',
+	sticky: false,
+	time: '5000'
+};
+<%if @message.present? -%>
+	gritter_opts.text = '<%=@message%>';
+	gritter_opts.class_name = 'growl-success';
+	jQuery.gritter.add(gritter_opts);
+<%end%>
+<%if @error.present? -%>
+	gritter_opts.text = '<%=@error%>';
+	gritter_opts.class_name = 'growl-danger';
+	jQuery.gritter.add(gritter_opts);
+<%end%>
+
+jQuery('span#routings_container').html("<%=escape_javascript(render partial: 'routing_plans')%>");
+jQuery('.pagination-info-top').html("<%=escape_javascript(page_entries_info @routings)%>");
+<%if params[:q].present? -%>
+	$('a.show-hide-all span').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+<%else -%>
+	$('a.show-hide-all span').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+<%end -%>

@@ -1,0 +1,90 @@
+<% provide(:title, 'Egress Trunks') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Inbound DID</li>
+  <li class="active">Egress Trunks</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'trunk_groups', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+    App.EgressTrunkListHandler.setUrls(['<%=dt_trunks_interplay_egress_trunks_path%>']);
+    App.EgressTrunkListHandler.init([<%=params[:cid]%>]);
+    <%if params[:cid].present? && params[:cid].to_i > 0 -%>
+      $('#egress_trunks_table').DataTable().columns(2).search($('#carrier_select').select2('val')).draw();
+    <%else -%>
+      $('#egress_trunks_table').DataTable().draw();
+    <%end-%>
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body manage-dids-actions">
+        <div class="col-sm-1">
+          <%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%>
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-primary disabled btn_change_all_status" data-url="<%=update_bulk_status_egress_trunks_path(enable: 1)%>" data-toggle="modal" data-target=".enable-trunk-confirm-dlg" title="Activate All"><span class="glyphicon glyphicon-check"></span>
+          </button>
+          <button class="btn btn-warning disabled btn_change_all_status" data-url="<%=update_bulk_status_egress_trunks_path%>" data-toggle="modal" data-target=".disable-trunk-confirm-dlg" title="Deactivate All"><span class="glyphicon glyphicon-lock"></span></button>
+          <button class="btn btn-danger disabled btn_change_all_status" data-url="<%=bulk_destroy_egress_trunks_path%>" data-toggle="modal" data-target=".delete-trunk-confirm-dlg" title="Delete All"><span class="glyphicon glyphicon-trash"></span></button>
+          <%=link_to 'New Egress Trunk', new_egress_trunk_path, class: 'btn btn-primary'%>
+        </div>
+        <div class="col-sm-7">
+          <div style="margin-right:15px;">
+            <span>Filter By: </span> &nbsp;
+            <%= select_tag :carrier_id, options_from_collection_for_select(Carrier.all, :id, :carrier_balance), {prompt: 'All Carriers', class: "select2", id: "carrier_select"} %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_trunks_form' do -%>
+      <div class="panel panel-default egress-trunks-container">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="egress_trunks_table" class="table table-striped dataTable table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th class='no-sort' width="3%"> &nbsp;</th>
+                  <th width="10%">Name</th>
+                  <th width="13%">Carrier</th>
+                  <th width="10%">Ratesheet</th>
+                  <th class='no-sort' width="5%">PDD Timeout</th>
+                  <th class='no-sort' width="10%">Actions</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade delete-trunk-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete these trunk(s)? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_trunk_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<%=render partial: 'enable_disable_confirm_dlgs'%>

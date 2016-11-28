@@ -1,0 +1,9 @@
+<ul>
+	<% @egress_trunks.each do |egress_trunk| %>
+		<li class="egress_<%= egress_trunk.id %>">
+			<%= link_to add_trunk_routing_path(params[:routing_id], trunk_id: egress_trunk.id), remote: true do %>
+        <h4 class="sender"><%= egress_trunk.name %></h4>
+      <% end %>
+		</li>
+	<% end %>
+</ul>

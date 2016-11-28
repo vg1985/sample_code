@@ -1,0 +1,59 @@
+<table id="reports_table" cellspacing="0" border='1' cellpadding="2">
+  <thead>
+    <tr>
+      <th style="width:16%;">
+        <%=group_by_title(@data['id_group'] || @data['date_group'])%>
+      </th>
+      <th>Total Calls</th>
+      <th>Non-zero</th>
+      <%if policy(:report).select_carrier? && 'did' == @data['id_group']-%>
+        <th>Carrier</th>
+        <th>Vendor</th>
+      <%end -%>
+      <th>Raw Duration</th>
+      <th>Billable Duration</th>
+      <th>Cost</th>
+      <th>Avg. Channels</th>
+      <th>Avg. CPS</th>
+      <th>Max. CPS</th>
+    </tr>
+  </thead>
+  <tfoot>
+      <tr>
+        <th>Total:</th>
+        <th><%=@result['total_calls']%></th>
+        <th><%=@result['total_nonzero']%></th>
+        <%if policy(:report).select_carrier? && 'did' == @data['id_group'] -%>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        <%end -%>
+        <th><%=@result['total_duration']%></th>
+        <th><%=@result['total_billtime']%></th>
+        <th><%=@result['total_cost']%></th>
+        <th><%=@result['avg_channels']%></th>
+        <th><%=@result['avg_cps']%></th>
+        <th>&nbsp;</th>
+      </tr>
+  </tfoot>
+  <tbody>
+    <%@result['group'].each do |group| -%>
+        <tr class="text-center">
+          <td>
+            <%=group_by_col_val(@data['id_group'] || @data['date_group'], group['id'])%>
+          </td>
+          <td class="text-center"><%=group['calls']%></td>
+          <td class="text-center"><%=group['nonzero']%></td>
+          <%if policy(:report).select_carrier? && 'did' == @data['id_group'] -%>
+            <td class="text-center"><%=group['id']['did_carrier_name']%></td>
+            <td class="text-center"><%=group['id']['did_vendor_name']%></td>
+          <%end%>
+          <td class="text-center"><%=group['duration']%></td>
+          <td class="text-center"><%=group['billtime']%></td>
+          <td class="text-center"><%=group['cost']%></td>
+          <td class="text-center"><%=group['avg_channels']%></td>
+          <td class="text-center"><%=group['avg_cps']%></td>
+          <td class="text-center"><%=group['max_channels']%></td>
+        </tr> 
+      <%end -%>
+  </tbody>
+</table>

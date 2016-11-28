@@ -1,0 +1,28 @@
+<div class="panel-body">
+  <%= form_for @user, url: admin_form_url(@user), remote: true, html: {id: 'new_admin', class: "form-horizontal"} do |f| %>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name, raw("Name <span class='asterisk'>*</span>"), class: "col-sm-4 control-label" %>
+        <div class="col-sm-7"><%= f.text_field :name, class: "form-control input-sm", data: {errorkey: "name"} %></div>
+      </div>
+      <div class="form-group">
+        <%= f.label :username, class: "col-sm-4 control-label" %>
+        <div class="col-sm-7"><%= f.text_field :username, class: "form-control input-sm", data: {errorkey: "username"} %></div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, raw("Email <span class='asterisk'>*</span>"), class: "col-sm-4 control-label" %>
+        <div class="col-sm-7"><%= f.text_field :email, class: "form-control input-sm", data: {errorkey: "email"} %></div>
+      </div>
+      <div class="form-group">
+        <%= f.label :carriers, class: "col-sm-4 control-label" %><br/>
+        <div class="col-sm-7"><%= f.select :carrier_ids, select_options(Carrier, :company_name), {}, { multiple: "multiple", id: "carrier_select", class: 'form-control' } %></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="actions mt10">
+      <div class="pull-right">
+        <%= f.submit "Save", class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

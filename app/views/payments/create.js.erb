@@ -1,0 +1,5 @@
+<% if @payment.errors.blank? %>
+  window.location.href = "<%= @redir_path %>";
+<% else %>
+  App.ErrorHandler.add_errors("#new_payment", "<%= j(raw(@payment.errors.to_json)) %>");
+<% end %>

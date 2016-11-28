@@ -1,0 +1,9 @@
+App.overlayModal.hide();
+<%if @result['list'].size > 0%>
+	jQuery('#report_data_container').html('<%=escape_javascript(render partial: 'cdr_logs_table')%>');
+<%else%>
+	jQuery('#report_data_container').html('<p class="text-info text-center">No log(s) found for this search criteria.</p>');
+<%end%>
+App.CdrLogsHandler.initDatatable('#reports_table', <%=@result['total']%>);
+App.CdrLogsHandler.minimizeFilter();
+jQuery('.reports-container .panel-body').show();

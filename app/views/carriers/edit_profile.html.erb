@@ -1,0 +1,49 @@
+<% provide(:title, 'Edit Profile') %>
+
+<%=content_for :breadcrumb do%>
+<li>
+	My Account
+</li>
+<li class="active">
+	Edit Profile
+</li>
+<%end%>
+
+<%= content_for :javascripts do %>
+	<%= javascript_include_tag 'carriers'%>	
+<%end%>
+
+<%=content_for :js_init do %>
+	App.RegisterCarrierFormsHandler.init();
+
+	App.RegisterCarrierFormsHandler.setDirtyValues([
+		'<%=@carrier.user.email%>',
+		'<%=@carrier.phone1%>',
+		'<%=@carrier.mobile%>',
+		<%=contacts_dirty_values(@carrier).to_s.html_safe%>
+	]);
+<%end%>
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-body panel-body-nopadding">
+			<div id="editCarrierWizard" class="basic-wizard">
+				<ul class="nav nav-pills nav-justified">
+					<li>
+						<a href="#ptab1" data-toggle="tab">Customer Credentials</a>
+					</li>
+					<li>
+						<a href="#ptab2" data-toggle="tab">Billing Information</a>
+					</li>
+					<li>
+						<a href="#ptab3" data-toggle="tab">Carrier Contacts</a>
+					</li>
+				</ul>
+
+				<%= render partial: 'form', locals: { url: update_profile_carrier_path(@carrier) } %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%=render partial: 'shared/otp_auth', locals: {type: 'rmobemp'}%>

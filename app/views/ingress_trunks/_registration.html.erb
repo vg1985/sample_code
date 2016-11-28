@@ -1,0 +1,20 @@
+<div class="form-group reg_user">
+  <%= f.label :reg_user, raw("User <span class='asterisk'>*</span>"), class: "col-sm-3 control-label" %>
+  <div class="col-sm-5">
+    <div class="input-group input-group-sm">
+      <%= f.text_field :reg_user, class: "form-control"%>
+      <span class="input-group-addon btn generate_random">Generate</span>
+    </div>
+  </div>
+  <div id="rgn_username_error"></div>
+</div>
+<div class="form-group reg_password">
+  <%= f.label :reg_password, raw("Password <span class='asterisk'>*</span>"), class: "col-sm-3 control-label" %>
+  <div class="col-sm-5">
+    <div class="input-group input-group-sm">
+      <%= f.text_field :reg_password, class: "form-control"%>
+      <span class="input-group-addon btn generate_random">Generate</span>
+    </div>
+  </div>
+  <div id="rgn_password_error"></div>
+</div>

@@ -1,0 +1,74 @@
+<%if @egress_trunk.new_record?%>
+  <% provide(:title, 'New Egress Trunk') %>
+
+  <%=content_for :breadcrumb do%>
+  <li>
+    Trunk Groups
+  </li>
+  <li>
+    <%= link_to 'Egress Trunks', egress_trunks_path%>
+  </li>
+  <li class="active">
+    New Egress Trunk
+  </li>
+  <%end%>
+<%else%>
+  <% provide(:title, 'Modify Egress Trunk') %>
+
+  <%=content_for :breadcrumb do%>
+  <li>
+    Trunk Groups
+  </li>
+  <li>
+    <%= link_to 'Egress Trunks', egress_trunks_path%>
+  </li>
+  <li class="active">
+    Modify Egress Trunk
+  </li>
+  <%end%>
+<%end%>
+
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'trunk_groups', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.EgressTrunkFormHandler.setUrls([
+                                      '<%=egress_trunks_path%>', 
+                                      '<%=check_name_egress_trunks_path%>', 
+                                      '<%=validate_hosts_egress_trunks_path%>'
+                                    ]);
+  <%if @egress_trunk.new_record?%>
+    App.EgressTrunkFormHandler.init([false, <%=@egress_trunk.media_bypass%>, false, false]);
+  <%else%>
+    App.EgressTrunkFormHandler.init([<%=@egress_trunk.sip_trace%>, <%=@egress_trunk.media_bypass%>, <%=@egress_trunk.lrn_block%>, <%=@egress_trunk.block_wireless%>]);
+    App.EgressTrunkFormHandler.resetSpinnersTo([<%=@egress_trunk.call_limit%>, <%=@egress_trunk.cps_limit%>, <%=@egress_trunk.profit_margin%>,
+                                                 <%=@egress_trunk.pc_profit_margin%>, <%=@egress_trunk.try_timeout%>, <%=@egress_trunk.pdd_timeout%>,
+                                                 <%=@egress_trunk.ring_timeout%>, <%=@egress_trunk.decimal_points%>, <%=@egress_trunk.max_duration%>,
+                                                 <%=@egress_trunk.max_cost%>, <%=@egress_trunk.depth%> ]);
+  <%end%>
+<%end%>
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+  <div class="panel-heading"></div>
+    <div class="panel-body panel-body-nopadding" style="padding-top:0px;">
+      <%if @egress_trunk.new_record?%>
+      <div id="newEgressTrunkWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified nav-disabled-click">
+      <%else%>
+       <div id="editEgressTrunkWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified">
+      <%end%>
+          <li>
+            <a href="#ptab1" data-toggle="tab">Basic</a>
+          </li>
+          <li>
+            <a href="#ptab2" data-toggle="tab">Advanced</a>
+          </li>
+        </ul>
+        <%= render partial: "form"%>
+      </div>
+    </div>
+  </div>
+</div>

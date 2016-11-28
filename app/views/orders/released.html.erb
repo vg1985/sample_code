@@ -1,0 +1,82 @@
+<% provide(:title, "Order##{@order.sipsurge_order_id}") %>
+
+<%=content_for :breadcrumb do%>
+	<li>Inbound DID</li>
+	<li><%=link_to 'Orders', orders_path %></li>
+	<li class="active">Order#<%=@order.sipsurge_order_id%></li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'orders', 'data-turbolinks-track' => true %>
+<%end%>
+
+<div class="panel panel-default">
+    
+    <div class="panel-heading">
+        <%
+        status_klass = 
+            case @order.status
+            when 1
+                'text-success'
+            when 2
+                ''
+            when 3
+                'text-warning'
+            else
+                'text-danger'
+            end
+        %>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class='text-default'>Order Type: Release</strong></h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <h4 class='<%=status_klass%>'>Order Status: <strong><%=Order::STATUS_NAMES[@order.status]%></strong></h4>
+            </div>
+        </div>
+    </div>
+	<div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-primary mb30 table-order-confirm">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="50%">Number</th>
+                        <th class="text-center">Status</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    
+                    <%if Order::STATUS_ERROR == @order.status
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                    %>
+                        <%=render partial: 'released_order_detail_row', collection: dids, as: :number, locals: {status: '<span>-NA-</span>'}%>
+                    <%elsif Order::STATUS_FAILED == @order.status
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                    %>
+                        <%=render partial: 'released_order_detail_row', collection: dids, as: :number, locals: {status: '<span>Failed</span>'}%>
+                    <%elsif Order::STATUS_PENDING == @order.status
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                    %>                        
+                        <%=render partial: 'released_order_detail_row', collection: dids, as: :number, locals: {status: '<span>Pending</span>'}%>
+                    <%else
+                        dids = @order.dids.is_a?(Array) ? @order.dids : [@order.dids]
+                        completed_numbers = @order.additional_info["DisconnectedTelephoneNumberList"]["TelephoneNumber"]
+                        completed_numbers = completed_numbers.is_a?(Array) ? completed_numbers : [completed_numbers]
+                        failed_numbers = dids - completed_numbers
+                    %>
+                        <%=render partial: 'released_order_detail_row', collection: completed_numbers, as: :number, locals: {status: '<span class="text-success">Released</span>'}%>
+                        <%=render partial: 'released_order_detail_row', collection: failed_numbers, as: :number, locals: {status: '<span class="text-danger">Failed</span>'}%>
+                    <%
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->      
+        <div class="text-center btn-invoice">
+            <%=link_to orders_path, class: "btn btn-white" do%>
+            	<i class="fa fa-mail-reply"></i> Back to orders
+            <%end%>
+        <div class="mb40"></div>
+	</div>
+</div>
+

@@ -1,0 +1,153 @@
+<% provide(:title, 'Carriers Listing') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Carriers</li>
+  <li class="active">Manage Carriers</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'carriers'%>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.AdminCarrierListHandler.setUrls(['<%=dt_carriers_interplay_carriers_path%>']);
+    App.AdminCarrierListHandler.init();
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body carriers-actions">
+        <!--<div class="col-sm-1">
+          <%#render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%>
+        </div>-->
+        <div class="col-sm-4">
+          <button class="btn btn-primary disabled btn_change_all_status" data-url="<%=update_bulk_status_carriers_path(enable: 1)%>" data-toggle="modal" data-target=".enable-carrier-confirm-dlg" title="Enable All"><span class="glyphicon glyphicon-check"></span>
+          </button>
+          <button class="btn btn-warning disabled btn_change_all_status" data-url="<%=update_bulk_status_carriers_path%>" data-toggle="modal" data-target=".disable-carrier-confirm-dlg" title="Disable All"><span class="glyphicon glyphicon-lock"></span></button>
+          <%if policy(:carrier).new?%>
+             <%=link_to 'Add New Carrier', new_carrier_path, class: 'btn btn-primary'%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_carriers_form' do -%>
+      <div class="panel panel-default carriers-container">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="carriers_table" class="table table-striped dataTable table-hover table-bordered" style="margin-top:-20px;">
+              <thead>
+                <tr>
+                  <tr>
+                    <th width="1%" class='no-sort'><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+                    <th width="10%">Username</th>
+                    <th width="10%">Account#</th>
+                    <th width="15%">Company Name</th>
+                    <th width="15%">Email</th>
+                    <!--<th width="6%" class='no-sort'>Ingress</th>
+                    <th width="6%" class='no-sort'>Egress</th>
+                    <th width="12%">Ingress Credit</th>
+                    <th width="12%">Egress Credit</th>-->
+                    <th width="10%">Status</th>
+                    <th width="15%"class='no-sort'>Actions</th>
+                  </tr>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade delete-carrier-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete these Carrier? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_carrier_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade delete-carrier-unempty-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-warning-sign"></span> Warning</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div class='text-warning' style='text-align:center;'>
+                <h4>This carrier is associated with Ingress and/or Egress trunk(s) and hence cannot be removed.</h4>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">OK</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade enable-carrier-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to enable these carrier(s)?</h4>
+                <a href="javascript:void(0);" id="enable_carrier_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade disable-carrier-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to disable these trunk(s)?</h4>
+                <a href="javascript:void(0);" id="disable_carrier_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<%if @did.present? || @bulk_settings%>
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-cog"></span> Voice settings for <%=@did.present? ? @did.did : 'bulk DIDs'%>
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+    	<div class="col-sm-2">
+            <% disable_menu = @did_settings.present? && (DidVoiceSetting::CALL_FWDING_DEST_TYPE == @did_settings.last.dest_type || @did_settings.size >= 3)%>
+			<button type="button" class="btn btn-xs btn-success dropdown-toggle add-dest-btn <%=disable_menu ? 'disabled' : ''%>" data-toggle="dropdown">
+				Add Destination <span class="caret"></span>
+    	    </button>
+    	    <ul class="dropdown-menu" role="menu">
+    	        <li><a href="#" class="dest-opn" data-option="<%=DidVoiceSetting::CALL_FWDING_DEST_TYPE%>">Call Forwarding</a></li>
+    	        <li><a href="#" class="dest-opn" data-option="<%=DidVoiceSetting::TRUNK_DEST_TYPE%>">Trunk</a></li>
+    	        <li><a href="#" class="dest-opn" data-option="<%=DidVoiceSetting::IP_DOMAIN_DEST_TYPE%>">IP/Domain</a></li>
+    	    </ul>
+    	</div>
+    	<div class="col-sm-8"> <p class="settings-err-msg text-danger" style="display:none;">Please fix the error(s) for field(s) marked in red. Hover over fields to check valid values. </p></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <span class='small text-warning' id="callfwd_type_msg" style="<%=(@did_settings.present? && DidVoiceSetting::CALL_FWDING_DEST_TYPE == @did_settings.last.dest_type) ? '' : 'display:none;' %>">*Call Forwarding should be the last destination. <br />To select another one, please delete Call Forwarding and then continue.</span>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="table-responsive">
+    			<h4 class="text-center nodest-msg" style="<%=@did_settings.present? ? 'display:none' : ''%>">Select and configure destinations<br /><br /></h4>
+                <%
+                    if @bulk_settings
+                        form_url = update_bulk_voice_settings_inbound_dids_path
+                    else
+                        form_url = update_voice_settings_inbound_did_path(@did)
+                    end
+                %>
+                <%=form_for :settings, url: form_url, method: :patch, remote: true, html: {id: 'voice_settings_form'} do -%>
+                <%=hidden_field_tag :dids, nil, id: 'bulk_setting_dids' %>
+    			<table class="table mb30" id="voice_destination_table" style="<%=@did_settings.blank? ? 'display:none' : ''%>">
+    				<thead>
+    					<tr>
+    						<th width="15%">Dest. Type</th>
+    						<th width="25%">Dest. Value</th>
+    						<th width="25%">Description</th>
+    						<th width="12%">Try Timeout</th>
+    						<th width="12%">PDD Timeout</th>
+    						<th width="11%">&nbsp;</th>
+    					</tr>
+    				</thead>
+					<tbody>
+                        <%
+                            if @did_settings.present?
+                                @did_settings.each do |setting|
+                                    desc = "<td><textarea rows='1' cols='20' name='did_settings[desc][]'>#{setting.description}</textarea></td>";
+
+                                    if policy(:inbound_dids).change_defaults?
+                                        try_timeout = "<td><input type='number' value='#{setting.try_timeout}' class='input-sm tooltips dest-try-timeout' data-placement='top' data-toggle='tooltip' style='width:75%' name='did_settings[try_timeout][]' title='#{t(:try_timeout_valid_values)}'/></td>";
+                                        pdd_timeout = "<td><input type='number' value='#{setting.pdd_timeout}' class='input-sm dest-pdd-timeout tooltips' data-placement='top' data-toggle='tooltip'  style='width:75%' name='did_settings[pdd_timeout][]' title='#{t(:pdd_timeout_valid_values)}'/></td>";
+                                    else
+                                        try_timeout = "<td class='text-center'><span>#{DidVoiceSetting::DEFAULT_TRY_TIMEOUT}</span></td>"
+                                        pdd_timeout = "<td class='text-center'><span>#{DidVoiceSetting::DEFAULT_PDD_TIMEOUT}</span></td>"
+                                    end
+
+                                    delete_action = "<td class='table-action'>
+                                                            <a class='delete-row' href='#' title='Remove'>
+                                                                <i class='glyphicon glyphicon-trash'></i>
+                                                            </a></td>";
+
+                                    case setting.dest_type
+                                    when DidVoiceSetting::CALL_FWDING_DEST_TYPE
+                                        dest_type = "<td>Call Forwarding <input type='hidden' name='did_settings[type][]' value='#{setting.dest_type}' /></td>";
+                                        dest_val = "<td><input type='text' value='#{setting.dest_value}' name='did_settings[value][]' data-placement='top' data-toggle='tooltip' class='dest-val tooltips' size='20' title='#{t(:call_fwd_valid_values)}'/></td>";
+                                    when DidVoiceSetting::TRUNK_DEST_TYPE
+                                        dest_type = "<td>Trunk  <input type='hidden' name='did_settings[type][]' value='#{setting.dest_type}' /></td>";
+                                        if current_user.is_admin?
+                                             ingressTrunksList = options_for_select(IngressTrunk.select_options(@did.carrier.id), setting.dest_value)
+                                        else
+                                            ingressTrunksList = options_for_select(IngressTrunk.select_options(current_user.carrier.id), setting.dest_value)
+                                        end
+                                        dest_val = "<td><select name='did_settings[value][]' class='dest-val'>#{ingressTrunksList}</select></td>";
+                                    when DidVoiceSetting::IP_DOMAIN_DEST_TYPE
+                                        dest_type = "<td>IP/Domain  <input type='hidden' name='did_settings[type][]' value='#{setting.dest_type}' /></td>";
+                                        dest_val = "<td><input type='text' value='#{setting.dest_value}' name='did_settings[value][]' data-placement='top' data-toggle='tooltip' class='tooltips dest-val' title='#{t(:ip_valid_values)}'/></td>";
+                                    end                                                        
+                        %>
+                                <tr data-option="<%=setting.dest_type%>"><%=dest_type.html_safe + dest_val.html_safe + desc.html_safe + try_timeout.html_safe + pdd_timeout.html_safe + delete_action.html_safe%></tr>
+                        <%
+                                end
+                            end
+                        %>
+					</tbody>
+    			</table>
+    			<%end%>
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 text-center">
+			<a href="javascript:void(0);" id="voice_settings_submit_btn" class="btn btn-primary <%=@did_settings.blank? ? 'disabled' : ''%>" onclick="App.DidSettings.submitVoiceSettings(<%=@bulk_settings%>);">OK</a>
+			<a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+		</div>
+        <%if @bulk_settings%>
+        <div class="col-md-12 text-center">
+            <span class='help-text text-info'>*Note: This setting will override existing settings on selected DIDs</span>
+        </div>
+        <%end%>
+	</div>
+    <div class="row">
+        <div class='col'
+        
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery("select.dest-val").select2({width: '100%'});
+    jQuery('.tooltips').tooltip({ container: 'body'});
+    <%
+        if policy(:inbound_dids).select_carrier?
+            if @did.present? 
+    %>
+                App.DidSettings.setIngressTrunksList('<%=escape_javascript(options_for_select(IngressTrunk.select_options(@did.carrier.id)))%>');
+            <% else %>
+                App.DidSettings.setIngressTrunksList('<%=escape_javascript(options_for_select(IngressTrunk.select_options))%>');
+    <% 
+            end
+        end 
+    %>
+</script>
+<%else%>
+<div class="modal-header">
+    <h4 class="modal-title">Invalid Request</h4>
+</div>
+<div class="modal-body">
+    Sorry! This is an invalid request. Please try again.
+</div>
+<%end%>

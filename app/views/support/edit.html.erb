@@ -1,0 +1,80 @@
+<% provide(:title, "Support-Update Ticket##{@ticket.id}") %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Support</li>
+  <li class="active">Update Ticket</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'support' %>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.SupportTicketUpdateHandler.setUrls([]);
+    App.SupportTicketUpdateHandler.init(<%=policy(:support).select_carrier?%>);
+    
+	App.SupportTicketUpdateHandler.initCCTo([
+		<%@cc_to.each do |contact| -%>
+			{text: '<%=contact[0].html_safe%>', id: '<%=contact[1]%>'},
+		<%end -%>
+	]);
+<%end%>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title"><%=@ticket.subject%></div>
+    </div><!-- panel-heading-->
+    <%=form_for :ticket, url: support_path, method: :put, remote: false, html: {class: 'form-bordered', id: 'edit_ticket_form'} do |f| -%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:support).select_carrier?-%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Carrier <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :carrier_id, options_for_select(@carriers, @ticket.organization_id), {include_blank: true}, {class: '', data: {placeholder: 'Choose Carrier...'}} %>
+            </div>
+        </div>
+        <%end -%>
+        <div class="form-group">    
+            <label class="col-sm-2 control-label mt10">Email <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+            	<span id="carrier_contacts_list">
+                    <%=select :ticket, :requester_id, @email_options, {include_blank: true}, {class: '', data: {placeholder: 'Select Email...'}} %>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">CC to:</label>
+            <div class="col-sm-3" id="contacts_cc_list">
+                <%=f.hidden_field :cc_to, placeholder: 'Select Contacts...', value: @collaborators.keys.join(',')%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Type <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :type, options_for_select(Zendesk::TICKET_TYPES.dup.invert, @ticket.type), {include_blank: true}, {class: '', data: {placeholder: 'Choose Type...'}} %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Priority <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :priority, options_for_select(Zendesk::TICKET_PRIORITY.dup.invert, @ticket.priority), {include_blank: true}, {class: '', data: {placeholder: 'Choose Priority...'}} %>
+            </div>
+        </div>
+        <% if policy(:support).add_tags?-%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Tags:</label>
+            <div class="col-sm-3">
+                <%=f.hidden_field :tags, value: @ticket.tags.collect(&:id).join(', ') %>
+            </div>
+        </div>
+        <%end%>
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary add-charge-btn">
+            Update Ticket
+        </button>
+        <%=link_to 'Cancel', support_path, class: 'btn btn-white'%>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div><!-- panel -->

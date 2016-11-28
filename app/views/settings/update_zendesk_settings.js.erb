@@ -1,0 +1,35 @@
+var gritter_opts = {
+	title: 'Zendesk Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @zendesk_setting.present? %>
+	<%if params[:form][:action] == 'test'%>
+		<%if @api_error %>
+			gritter_opts.text = "Zendesk API connection cannot be establsihed.";
+			gritter_opts.class_name = 'growl-danger';
+		<%else%>
+			gritter_opts.text = "Zendesk API connection successful.";
+			gritter_opts.class_name = 'growl-success';
+		<%end%>
+	<%else%>
+		<%unless @zendesk_setting.errors.any?%>
+			gritter_opts.text = "Zendesk settings have been updated.";
+			gritter_opts.class_name = 'growl-success';
+			
+		<%else%>
+			gritter_opts.text = "The data seems to be invalid. Failed to update the Zendesk settings.";
+			gritter_opts.class_name = 'growl-danger';
+		<%end%>
+	<%end%>
+<%else%>
+	gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>	
+jQuery('span#zendesk_assignees_list').html("<%=escape_javascript(select :setting, :zendesk_default_assignee, \
+	options_for_select(Setting.zendesk_grp_options, Setting.zendesk_default_assignee), \
+	{include_blank: true}, {class: '', data: {placeholder: 'Choose Assignee...'}})%>");
+App.ZendeskSettingsHandler.initAssignees();
+jQuery("span.zendesk_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

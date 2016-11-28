@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <h4><%=@payment.payment_type == 'charge' ? "Charge" : "Payment"%> Details</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12" >
+            <table class="table table-bordered">
+              <tbody>
+                <%if policy(:payment).select_carrier? -%>
+                    <tr>
+                        <td width="40%">Carrier</td> 
+                        <td title="<%=@payment.carrier.company_name%>"><%=@payment.carrier.company_name.truncate(30)%></td>
+                    </tr>
+                <%end%>
+                <tr>
+                    <td width="30%">Payment Type</td> 
+                    <td><%=@payment.payment_type.humanize%></td>
+                </tr>
+                <%if @payment.payment_type == 'charge'%>
+                <tr>
+                    <td width="30%">Charge Type</td> 
+                    <td><%=@payment.charge_type.humanize%></td>
+                </tr>
+                <%end%>
+                <tr>
+                    <td>Date</td> 
+                    <td>
+                        <%if current_user.internal? -%>
+                            <%=@payment.for_date.in_time_zone(current_user.timezone).to_s(:carrier)%>
+                        <%else -%>
+                            <%=@payment.for_date.in_time_zone(carrier.timezone).to_s(:carrier)%>
+                        <%end -%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Amount</td> 
+                    <td>$ <%=@payment.amount%></td>
+                </tr>
+                <tr>
+                    <td>Old Balance</td> 
+                    <td>$ <%=@payment.balance_old%></td>
+                </tr>
+                <tr>
+                    <td>New Balance</td> 
+                    <td>$ <%=@payment.balance_new%></td>
+                </tr>
+                <tr>
+                    <td>Status</td> 
+                    <%if @payment.status == 'deleted'%>
+                        <td>Deleted by admin</td>
+                    <%else%>
+                        <td><%=@payment.status.humanize%></td>
+                    <%end%>
+                </tr>
+                <% if @payment.manual_payment? || policy(:payment).never_hide_transaction_details? %>
+                <tr>
+                    <td>Transaction Details</td> 
+                    <td><%=@payment.transaction_details%></td>
+                </tr>
+                <%end%>
+                <%if @payment.status == 'declined'%>
+                <tr>
+                    <td>Decline Reason</td> 
+                    <td><%=@payment.decline_reason%></td>
+                </tr>
+                <%end%>
+                <tr>
+                    <td>Description</td> 
+                    <td><%=@payment.description%></td>
+                </tr>
+                <%if policy(:payment).add_note? -%>
+                <tr>
+                    <td>Admin Notes</td> 
+                    <td><%=@payment.notes%></td>
+                </tr>
+                <%end%>
+              </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 text-center mt10" >
+            <a class="btn btn-default close_modal">Close</a>
+        </div>
+    </div>
+</div>

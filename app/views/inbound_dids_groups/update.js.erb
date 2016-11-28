@@ -1,0 +1,14 @@
+gritter_opts.title = 'Update Group';
+
+<%if @done%>
+	App.CarrierManageDids.updateGroup('<%=@did_group.id%>', '<%=@did_group.name%>', '<%=@did_group.description%>');
+	App.CarrierManageDids.updateGroupOption('<%=@did_group.id%>', '<%=@did_group.name%>');
+	gritter_opts.text = "Did group \"<%=@did_group.name%>\" has been updated.";
+	gritter_opts.class_name = 'growl-success';
+<%else%>
+	gritter_opts.text = "Sorry! Could not update DID group.";
+	gritter_opts.class_name = 'growl-danger';
+<%end%>
+
+jQuery.gritter.add(gritter_opts);
+jQuery('a.close_modal').click();

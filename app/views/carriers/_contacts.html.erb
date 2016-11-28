@@ -1,0 +1,78 @@
+<h4>Primary Contact</h4>
+<div class="panel-body form-inline">
+	<div class="row">
+		<div class="col-sm-2">
+			<div class="form-group">
+				<div>Name</div>
+				<%= text_field_tag :primary_name, carrier.user.name, class: 'form-control input-sm', disabled: true, style: 'width:100%' %>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="form-group">
+				<div>Email</div>
+				<%= email_field_tag :primary_email, carrier.user.email, class: 'form-control input-sm', disabled: true, style: 'width:100%'%>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="form-group">
+				<div>Phone</div>
+				<%= text_field_tag :primary_phone, carrier.phone1, class: 'form-control input-sm', disabled: true, style: 'width:100%' %>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="form-group">
+				<div>Mobile</div>
+				<%= text_field_tag :primary_mobile, carrier.mobile, class: 'form-control input-sm', disabled: true, style: 'width:100%' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h4>Secondary Contact(s)</h4>
+<span class="error" id="sec_contact_errmsg" style="display:none;"></span>
+<%= f.fields_for :contacts, setup_objects(carrier, :contacts) do |con| -%>
+<div class="panel-body form-inline">
+	<div class="row">
+		<div class="col-sm-2" style="width: 12%">
+			<div class="form-group">
+				<%= con.text_field :name, placeholder: 'Name', class: 'form-control input-sm sec_names', style: 'width:100%'%>
+			</div>
+		</div>
+		<div class="col-sm-2" style="width: 20%">
+			<div class="form-group">
+				<%= con.text_field :email, placeholder: 'Email', class: 'form-control input-sm sec_emails', style: 'width:100%'%>
+			</div>
+		</div>
+		<div class="col-sm-2" style="width: 17%">
+			<div class="form-group" style="margin-top: 3px;">
+				<%= con.text_field :phone, placeholder: 'phone', class: 'form-control input-sm sec_phones', style: 'width:100%'%>
+				<%= con.hidden_field :phone_code%>
+			</div>
+		</div>
+		<div class="col-sm-2" style="width: 18%">
+			<div class="form-group" style="margin-top: 3px;">
+				<%= con.text_field :mobile, placeholder: 'Mobile', class: 'form-control input-sm sec_mobiles', style: 'width:100%'%>
+				<%= con.hidden_field :mobile_code%>
+			</div>
+		</div>
+		<div class="col-sm-2" style="margin-top: 3px; width: 15%">
+			<div class="form-group">
+				<%= con.select :contact_type, options_for_select(Contact::TYPES.invert, con.object.contact_type), {}, {class: 'cont-type', data:{placeholder: 'Choose Type...'}} %>
+			</div>
+		</div>
+		<div class="col-sm-1" style="width: 9%">
+			<div class="form-group">
+				<%= con.text_field :description, placeholder: 'Description', class: 'form-control input-sm', style: 'width:175%'%>
+			</div>
+		</div>
+		<div class="col-sm-1 text-right mt10">
+			<div class="form-group type">
+				<%= con.link_to_remove raw('<i class="fa fa-times-circle"></i>') %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end -%>
+<div>
+	<%= f.link_to_add raw('Add Secondary Contact...'), :contacts%>
+</div>

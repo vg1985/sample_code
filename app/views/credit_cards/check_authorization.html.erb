@@ -1,0 +1,108 @@
+<div class="modal-header">
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">Supported Documents</h4>
+</div>
+<div class="modal-body">
+    <%if @documents.present?%>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <tkh>Size</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@documents.each_with_index do |doc, i|%>
+            <tr id="document_<%=doc.id%>_row">
+                <td title="<%=doc.content_file_name%>"><%=doc.content_file_name.truncate(30)%></td>
+                <td><%=number_to_human_size(doc.content_file_size)%></td>
+                <td>
+                  <%=link_to_if policy(:credit_card).download_authorization?, '<span class="glyphicon glyphicon-download"></span>'.html_safe, document_download_authorization_path(@credit_card, doc), title: 'Download'%>
+                    
+                  
+                </td>
+            </tr>
+        <%end%>  
+      </tbody>
+    </table>
+    <%else%>
+    <div class="row">
+        <div class='col-sm-12 text-center'><h4>No supported documents attached.</h4></div>
+    </div>
+    <%end%>
+    <%if @documents.size < 3%>
+        <%max_files = 3 - @documents.size%>
+        <%=form_for @credit_card, url: attach_authorization_credit_card_path, method: :post, html: {multipart: true, id: 'upload_auth_files'} do |f|%>
+            <div class="row">
+                <div class="col-sm-12 dropzone" id="auth_files" style="min-height:130px;">
+                    <div class='dz-message'><h4>Drop Files here</h4> or click here to upload.</h4></div>
+                    <div class="fallback">
+                        Your system does not support File Drag 'n' Drop. Please select files to upload.
+                        <%=f.fields_for :documents, Array.new(max_files, Document.new) do |d| %>
+                            <%=d.file_field :content %><br />
+                        <%end%>
+                    </div>
+                </div>
+                <span class='helptext text-warning'>Note*: Only <%=max_files%> file(s) of size 5 MB can be uploaded. You can upload images and pdf files.</span>
+                <div class="col-sm-12 text-center mt10" >
+                    <button class="btn btn-primary done-btn disabled">Done</button>
+                </div>
+            </div>
+            <%=hidden_field_tag :uploaded_docs %>  
+        <%end%>
+
+      <script type="text/javascript">
+          var authFilesDropZone = new Dropzone("div#auth_files",{
+              //Dropzone.options.auth_files({
+              url: '<%=upload_authorization_credit_cards_path%>',
+              headers: {"X-CSRF-Token" : $('meta[name="csrf-token"]').attr('content')},
+              maxFilesize: 5,
+              filesizeBase: 1024,
+              addRemoveLinks: true,
+              uploadMultiple: false,
+              maxFiles: <%=max_files%>,
+              acceptedFiles: 'image/*,application/pdf',
+              dictDefaultMessage: "<h4>Drop Files here</h4> or click here to upload.",
+              dictMaxFilesExceeded: "Maximum <%=max_files%> file(s) can be uploaded.",
+              init: function() {
+                this.on("success", function(file, response) { 
+                  if (response.status == 'success') {
+                    file.id = response.id;  
+                    if(this.getAcceptedFiles().length > 0) {
+                        $('.done-btn').removeClass('disabled');    
+                    }
+                  }
+                });
+
+                this.on('removedfile', function(file) {
+                    if(this.getAcceptedFiles().length < 1) {
+                        $('.done-btn').addClass('disabled');    
+                    }
+
+                    if(file.id != undefined) {
+                        $.get('<%=remove_authorization_credit_cards_path%>', {id: file.id});  
+                    }
+                });
+              },
+              fallback: function() {
+                $('.done-btn').removeClass('disabled');
+              },
+              forceFallback:  false
+          });
+        
+        $(".done-btn").on('click', function() {
+            if($('.fallback').length < 1) {
+                var files = new Array();
+                $.each(authFilesDropZone.getAcceptedFiles(), function() {
+                    files.push(this.id);
+                });
+
+                $("#uploaded_docs").val(files.join(','));
+            }
+            
+            $('#upload_auth_files').submit();
+        })
+      </script>
+    <%end%>
+</div>

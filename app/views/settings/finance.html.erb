@@ -1,0 +1,54 @@
+<% provide(:title, 'Settings - Finance') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Finance</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.FinanceSettingsHandler.init();
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<%=form_for @finance_setting, url: settings_update_finance_settings_path, method: :patch, html: {multipart:true, class: 'finance_settings_form form-bordered'} do |f|%>
+				<%=f.hidden_field :uid%>
+			<div class="panel-heading">
+				<h4 class="panel-title"><%=@finance_setting.label%></h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group" style="margin-top: 0px;">
+					<label class="col-sm-3 control-label">Allowed Amounts:
+					<h6 class="help-block">Enter comma-sepearted amounts e.g. 500, 1000, 1500 </h6></label>
+
+					<div class="col-sm-3 control-label">
+						<%=f.text_field :finance_allowed_amounts, class: 'form-control'%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label mt10">Credit card authorization form template:</label>
+					<div class="col-sm-4">
+						<%if @finance_setting.finance_auth_file_name.present? %>
+							<%=link_to "Download Template", '/settings/download_auth_sample' %> (<%=@finance_setting.finance_auth_file_name%>). <br />To update new template click 'Browse'
+						<%end%>
+						<%=file_field(:setting, :sample_auth_form, style: "margin-top:10px;")%>
+					</div>
+				</div>
+			</div><!-- panel-body -->
+			<div class="panel-footer">
+				<label class="col-sm-2"></label>
+				<button class="btn btn-primary">
+					Update
+				</button>
+				<span class="text-muted finance_settings_form_msg" style="margin-left:10px;"></span>
+			</div><!-- panel-footer -->
+			<%end%>
+		</div><!-- panel-default -->
+	</div>
+</div>

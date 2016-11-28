@@ -1,0 +1,18 @@
+<% provide(:title, 'Invoices - Manage Invoices') %>
+
+<%=content_for :breadcrumb do-%>
+	<li>Invoices</li>
+	<li class="active">Manage Invoices</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%# javascript_include_tag 'invoices', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+<%end%>
+<div class="row">
+  <div class="col-md-12">
+  	<h3>List of Invoices</h3>
+  </div>
+</div>

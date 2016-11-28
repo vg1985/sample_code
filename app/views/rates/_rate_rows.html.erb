@@ -1,0 +1,63 @@
+<%if @rates.present?%>
+  <%@rates.each_with_index do |rate, i|%>
+    <%klass = cycle('odd', 'even')%>
+    <tr class="rate-static <%=klass%> " id="rate_static_<%=rate.id%>">
+      <td class='no-dblclick ronly'><input type="checkbox" name="rate_ids[]" class="rate-cb" value="<%=rate.id%>"></td>
+      <td class='ronly'><%=@rates.offset_value + i + 1%></td>
+      <td><%=rate.code%></td>
+      <td><%=rate.code_name%></td>
+      <td><%=rate.code_country%></td>
+      <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION-%>
+      <td><%=rate.inter_rate%></td>
+      <td><%=rate.intra_rate%></td>
+      <%end-%>
+      <td><%=rate.rate%></td>
+      <td><%=rate.bill_start%></td>
+      <td><%=rate.bill_increment%></td>
+      <td><%=rate.setup_fee%></td>
+      <td><%=rate.effective_time%></td>
+      <td class='no-dblclick ronly'>
+        <a href="javascript:void(0);" data-id="<%=rate.id%>" title="Modify" class="btn btn-default btn-xs modify"><span class="glyphicon glyphicon-edit"></span></a>
+        <%=link_to '#', class: 'btn btn-danger btn-xs rate-delete', data: {pk: rate.id}, title: 'Delete' do%>
+          <span class="glyphicon glyphicon-trash"></span>
+        <%end%>
+        <%=link_to '', rate, remote: true, method: :delete, id: "rate_#{rate.id}_destroy_link"%>
+      </td>
+    </tr>
+    <tr class="rate-fields <%=klass%>" id="rate_fields_<%=rate.id%>" style="display:none;">
+        <td >&nbsp;</td>
+        <td><%=@rates.offset_value + i + 1%></td>
+        <td><%= text_field_tag :code, rate.code, data: {toggle: "tooltip", placement: 'top'}, class: 'form-control text-box input-sm', maxlength: 25, placeholder: 'Code', title: t(:code_validvalues)%></td>
+        <td><%= text_field_tag :code_name, rate.code_name, maxlength: 25, data: {toggle: "tooltip", placement: 'top'}, class: 'form-control text-box input-sm', placeholder: 'Code Name', title: t(:codename_validvalues)%></td>
+        <td><%= text_field_tag :code_country, rate.code_country, maxlength: 10, data: {toggle: "tooltip", placement: 'top'}, class: 'form-control text-box input-sm', placeholder: 'Code Country', title:  t(:codecountry_validvalues) %></td>
+        <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION -%>
+        <td><%= text_field_tag :inter_rate, rate.inter_rate, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: "form-control input-sm spinner", placeholder: 'Inter Rate', step: '0.000001', maxlength: 10, title: t(:rate_validvalues) %></td>
+        <td><%= text_field_tag :intra_rate, rate.intra_rate, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Intra Rate', step: '0.000001', maxlength: 10, title: t(:rate_validvalues)%></td>
+        <%end -%>
+        <td><%= text_field_tag :rate, rate.rate, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Rate', step: '0.000001',  maxlength: 10, title: t(:rate_validvalues) %></td>
+        <td><%= text_field_tag :bill_start, rate.bill_start, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Bill Start', step: '1', maxlength: 2, title: t(:billstart_validvalues) %></td>
+        <td><%= text_field_tag :bill_increment, rate.bill_increment, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Bill Increment', step: '1', maxlength: 4, title: t(:billinc_validvalues) %></td>
+        <td><%= text_field_tag :setup_fee, rate.setup_fee, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control input-sm spinner', placeholder: 'Setup Fee', step:' 0.0001', maxlength: 10, title: t(:setupfees_validvalues) %></td>
+        <td>
+          <div class="input-group">
+            <%= text_field_tag :effective_time, rate.effective_time, data: {toggle: "tooltip", placement: 'top', container: 'body'}, class: 'form-control datetimepicker fg-adj-row', placeholder: 'yyyy-mm-dd hh:ss', title: t(:effectivetime_validvalues) %>
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+          </div>
+        </td>
+        <td class='no-dblclick'>
+           <a href="javascript:void(0);" title="Update Rate" role="button" class="btn btn-success btn-xs update_row" data-html="true" data-toggle="popover" data-id="<%=rate.id%>" data-placement="top"><span class="glyphicon glyphicon-ok"></span></a>
+          <a class="btn btn-warning btn-xs cancel-modify" data-id="<%=rate.id%>" title="Cancel" rel="nofollow" href="javascript:void(0);">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        </td>
+    </tr>
+  <%end%>
+<%else%>
+   <%if @rate_sheet.rate_sheet_type == RateSheet::US_JURISDICTION%>
+    <tr><td colspan="13"><p class='text-center'>No rate(s) found.</p></td></tr>
+  <%else%>
+    <tr><td colspan="11"><p class='text-center'>No rate(s) found.</p></td></tr>
+  <%end%>
+<%end%>

@@ -1,0 +1,56 @@
+<% provide(:title, 'New Carrier') %>
+
+<%=content_for :breadcrumb do%>
+<li>
+	Carriers
+</li>
+<li>
+	<%= link_to 'Manage Carriers', carriers_path%>
+</li>
+<li class="active">
+	New Carrier
+</li>
+<%end%>
+
+<%= content_for :javascripts do %>
+	<%= javascript_include_tag 'carriers'%>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.RateSpinners.init();
+	App.AdminCarrierFormsHandler.init([local_did_defaults, tf_did_defaults, sms_did_defaults], [local_did, tf_did, sms_did], [local_switch_statuses, tf_switch_statuses, sms_switch_statuses], po_switch_statuses);
+<%end%>
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-body panel-body-nopadding">
+			<div id="newCarrierWizard" class="basic-wizard">
+				<ul class="nav nav-pills nav-justified nav-disabled-click">
+					<li>
+						<a href="#ptab1" data-toggle="tab"><span>Step 1:</span> Customer Credentials</a>
+					</li>
+					<li>
+						<a href="#ptab2" data-toggle="tab"><span>Step 2:</span> Billing Information</a>
+					</li>
+					<li>
+						<a href="#ptab3" data-toggle="tab"><span>Step 3:</span> Carrier Contacts</a>
+					</li>
+					<li>
+						<a href="#ptab4" data-toggle="tab"><span>Step 4:</span> Payment Options</a>
+					</li>
+					<li>
+						<a href="#ptab5" data-toggle="tab"><span>Step 5:</span> Billing Settings</a>
+					</li>
+					<li>
+						<a href="#ptab6" data-toggle="tab"><span>Step 6:</span> DID Billing</a>
+					</li>
+					<li>
+						<a href="#ptab7" data-toggle="tab"><span>Step 7:</span> SMS Billing</a>
+					</li>
+				</ul>
+
+				<%= render partial: 'form', locals: { form_options: {} }%>
+			</div>
+		</div>
+	</div>
+</div>

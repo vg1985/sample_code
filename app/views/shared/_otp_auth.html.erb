@@ -1,0 +1,19 @@
+<%= content_for :javascripts do -%>
+  <%= javascript_include_tag 'otp_auth'%>
+<%end -%>
+
+<%=content_for :js_init do -%>
+	App.OTPAuth.init('<%=type%>');
+<%end -%>
+
+<%if 'umobem' == type -%>
+<%=hidden_field_tag :oauth_element %>
+<%=hidden_field_tag :oauth_element_val %>
+<%end -%>
+
+<div class="modal fade otp-auth-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

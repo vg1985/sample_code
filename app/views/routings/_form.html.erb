@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+          <%if @routing.new_record?%>
+            Create Routing Plan
+          <%else%>
+            Modify Routing Plan
+          <%end%>
+        </h4>
+    </div>
+    <%= form_for @routing, remote: false, html: {class: 'form-bordered', id: (@routing.new_record? ? 'newRoutingPlanForm' : 'editRoutingPlanForm')} do |f| %>
+    <%unless @routing.new_record?%>
+      <%=f.hidden_field :id%>
+    <%end%>
+    <div class="panel-body panel-body-nopadding">
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Name:</label>
+            <div class="col-sm-3">
+            <%=f.text_field :name, class: 'form-control', style: 'width:90%' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Egress Trunks:</label>
+            <div class="col-sm-4">
+                <%=f.grouped_collection_select :egress_trunk_ids, Carrier.all, :egress_trunks, :company_name, :id, :name, {}, {class: 'egress-trunks-select', data: {placeholder: 'Choose Egress Trunks...'}, multiple: true, required: true} %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Routing Type:</label>
+            <div class="col-sm-2">
+                <%=f.select :routing_type, ['Dynamic', 'Static'], {}, {class: 'select2', data: {placeholder: 'Choose Type...'}, required: true} %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Description:</label>
+            <div class="col-sm-3">
+             <%=f.text_area :description, class: 'form-control'%>
+            </div>
+        </div>
+        <!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <%if @routing.new_record?%>
+          <%= f.submit 'Create', class: 'btn btn-primary' %>
+        <%else%>
+          <%= f.submit 'Update', class: 'btn btn-primary' %>
+        <%end%>
+        <%=link_to 'Cancel', routings_path, class: 'btn btn-white'%>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>

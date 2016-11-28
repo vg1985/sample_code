@@ -1,0 +1,5 @@
+jQuery('span#zendesk_assignees_list').html("<%=escape_javascript(select :setting, :zendesk_default_assignee,\
+	options_for_select(Setting.zendesk_grp_options, Setting.zendesk_default_assignee),\
+	{include_blank: true}, {class: '', data: {placeholder: 'Choose Assignee...'}})%>");
+App.ZendeskSettingsHandler.initAssignees();
+jQuery("span.zendesk_settings_form_msg").html('');

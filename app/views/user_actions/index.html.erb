@@ -1,0 +1,74 @@
+<% provide(:title, 'User Actions') %>
+
+
+  <%=content_for :javascripts do -%>
+      <%= javascript_include_tag 'user_actions', 'data-turbolinks-track' => true %>
+  <%end%>
+
+  <%=content_for :js_init do %> 
+      App.UserActionsHandler.setUrls(['<%=polymorphic_path(['dt_user_actions_interplay', @trackable, UserAction])%>']);
+      App.UserActionsHandler.init();
+  <%end%>
+  <div class="row">
+    <!--<div class="col-md-12">
+        <%#form_tag payments_path, class: 'form-inline' do %>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a class="minimize" href="">−</a>
+                    </div>
+                    <h4 class="panel-title">Filters</h4>
+                </div>
+                <div class="panel-body">
+                    <%#if policy(:order).select_carrier? -%>
+                    <div class="form-group" style="margin-right:15px;">
+                        <label class="sr-only" for="carrier_select">Carrier</label>
+                        <%# select_tag :carrier_id, options_from_collection_for_select(@carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: "select2", id: "carrier_select"} %>
+                    </div>
+                    <%#end -%>
+                    <div class="form-group" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="payment_status">Status</label>
+                        <%# select_tag :status, options_for_select(Order::STATUS_NAMES.dup.invert), {prompt: 'All Statuses', class: "select2", id: 'order_status' } %>
+                    </div>
+                    <div class="form-group mr10" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="payment_type">Payment Type</label>
+                        <%# select_tag :payment_type, options_for_select(['Purchase', 'Release']), {prompt: "All Order Types", class: "select2", id: 'order_type'} %>
+                    </div>
+                    <div class="form-group mr10" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="">DID</label>
+                        <%# text_field_tag :dids, nil, id: 'search_did', placeholder: 'Search DID', class: 'form-control'%>
+                    </div>
+                </div>
+            </div>
+        <%# end %>
+    </div>-->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">User Actions for <%=@trackable.class%> "<%=@trackable.name%>"</h4>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="user_actions" class="table table-striped dataTable table-hover table-bordered">
+              <thead>
+                <tr>
+                    <th width="18%">Started At</th>
+                    <th width="18%">Finished At</th>
+                    <th width="15%">User</th>
+                    <th width="18%">Action Performed</th>
+                    <th width="10%">Status</th>
+                    <th class='no-sort' width="20%">Info</th>
+                    <th class='no-sort'>Details</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class='text-center'>
+            <%=link_to polymorphic_path([@trackable]), class: "btn btn-white" do%>
+              <i class="fa fa-mail-reply"></i> Go Back
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

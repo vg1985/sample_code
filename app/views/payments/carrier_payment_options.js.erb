@@ -1,0 +1,5 @@
+jQuery('#carrier_payment_types').html('<%=escape_javascript(render partial: 'payment_type_select')%>');
+jQuery('#carrier_payment_types_notice').html('<%=escape_javascript(render partial: 'payment_type_notice')%>');
+jQuery("#cc_list").html('<%=escape_javascript(render partial: 'carrier_creditcard_list', locals: {carrier: @carrier, include_other: true})%>');
+jQuery('#payment_type_field').show();
+App.AddPaymentHandler.initPaymentType();

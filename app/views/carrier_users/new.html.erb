@@ -1,0 +1,85 @@
+<% provide(:title, 'New Carrier') %>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-btns">
+        <a href="#" class="panel-close">&times;</a>
+        <a href="#" class="minimize">&minus;</a>
+      </div>
+      <h4 class="panel-title">Add Carrier Information</h4>
+    </div>
+    <div class="panel-body panel-body-nopadding">
+      
+      <div id="progressWizard" class="basic-wizard">
+        <ul class="nav nav-pills nav-justified">
+          <li><a href="#ptab1" data-toggle="tab"> Customer Information</a></li>
+          <li><a href="#ptab2" data-toggle="tab"> Carrier Contacts</a></li>
+          <li><a href="#ptab3" data-toggle="tab"> Payment Options</a></li>
+          <li><a href="#ptab4" data-toggle="tab"> Billing Information</a></li>
+          <li><a href="#ptab5" data-toggle="tab"> DID Billing</a></li>
+          <li><a href="#ptab6" data-toggle="tab"> SMS Billing</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <div class="tab-pane" id="ptab1">
+            <%= render partial: "form", locals: { user: @user } %>
+          </div>
+          <div class="tab-pane" id="ptab2">
+            <%= render partial: 'carriers/form', locals: {carrier: @carrier } %>
+          </div>
+          <div class="tab-pane" id="ptab3">
+            <%= render partial: 'carriers/payment_options', locals: {carrier: @carrier } %>
+          </div>
+          <div class="tab-pane" id="ptab4">
+            <%= render partial: 'carriers/billing_information', locals: {carrier: @carrier } %>
+          </div>
+          <div class="tab-pane" id="ptab5">
+            <%= render partial: 'carriers/did_billing', locals: {carrier: @carrier } %>
+          </div>
+          <div class="tab-pane" id="ptab6">
+            <%= render partial: 'carriers/sms_billing', locals: {carrier: @carrier } %>
+          </div>
+        </div><!-- tab-content -->
+        
+        <ul class="pager wizard">
+          <li class="previous"><a href="javascript:void(0)">Previous</a></li>
+          <li class="next" id="submitCurrent"><a href="javascript:void(0)">Next</a></li>
+        </ul>
+        
+      </div><!-- #basicWizard -->
+      
+    </div><!-- panel-body -->
+  </div><!-- panel -->
+</div><!-- col-md-6 -->
+
+<script>
+  $('#progressWizard').bootstrapWizard({
+    'nextSelector': '.next',
+    'previousSelector': '.previous',
+    onNext: function(tab, navigation, index) {
+      var $total = navigation.find('li').length;
+      var $current = index+1;
+      var $percent = ($current/$total) * 100;
+      $('#progressWizard').find('.progress-bar').css('width', $percent+'%');
+      $('.tab-pane.active form').submit();
+      $('#submitCurrent').removeClass('disabled');
+    },
+    onPrevious: function(tab, navigation, index) {
+      var $total = navigation.find('li').length;
+      var $current = index+1;
+      var $percent = ($current/$total) * 100;
+      $('#progressWizard').find('.progress-bar').css('width', $percent+'%');
+    },
+    onTabShow: function(tab, navigation, index) {
+      var $total = navigation.find('li').length;
+      var $current = index+1;
+      var $percent = ($current/$total) * 100;
+      $('#progressWizard').find('.progress-bar').css('width', $percent+'%');
+      $('#submitCurrent').removeClass('disabled');
+    }
+  });
+</script>

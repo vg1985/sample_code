@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+          <%if @rate_sheet.new_record?%>
+            Create Ratesheet
+          <%else%>
+            Modify Ratesheet
+          <%end%>
+        </h4>
+    </div>
+    <%= form_for @rate_sheet, remote: false, html: {class: 'form-bordered', id: (@rate_sheet.new_record? ? 'newRatesheetForm' : 'editRatesheetForm')} do |f| %>
+    <%unless @rate_sheet.new_record?%>
+      <%=f.hidden_field :id%>
+    <%end%>
+    <div class="panel-body panel-body-nopadding">
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Name:</label>
+            <div class="col-sm-3">
+            <%=f.text_field :name, class: 'form-control', style: 'width:90%' %>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 0px;">
+          <label class="col-sm-2 control-label">LRN Enabled?</label>
+          <div class="col-sm-3 control-label">
+            <div class="toggle-primary" id="lrn_activation_tgl"></div>
+            <%=f.check_box :lrn, {style: "opacity:0; position:absolute; top:0px;", id: "lrn_activation_tgl_chkbox"}%>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Jurisdiction:</label>
+            <div class="col-sm-3">
+                <%=f.select :rate_sheet_type, RateSheet::JURISDICTION_TYPES.invert, {}, {class: 'select2', data: {placeholder: 'Choose Jurisdiction...'}, required: true} %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Notes:</label>
+            <div class="col-sm-3">
+             <%=f.text_area :notes, class: 'form-control'%>
+            </div>
+        </div>
+        <!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <%if @rate_sheet.new_record?%>
+          <%= f.submit 'Create', class: 'btn btn-primary' %>
+        <%else%>
+          <%= f.submit 'Update', class: 'btn btn-primary' %>
+        <%end%>
+        <%=link_to 'Cancel', rate_sheets_path, class: 'btn btn-white'%>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div>
+

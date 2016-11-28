@@ -1,0 +1,23 @@
+var gritter_opts = {
+	title: 'Create Role',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @role.present? %>
+	<%unless @role.errors.any?%>
+		/*jQuery("span.bw_settings_form_msg").removeClass('text-muted text-danger').addClass('text-success').html('Bandwidth API settings updated successfully.');*/
+		gritter_opts.text = "Role has been created.";
+		gritter_opts.class_name = 'growl-success';
+		
+	<%else%>
+		gritter_opts.text = "The data seems to be invalid. Failed to create the Role.";
+		gritter_opts.class_name = 'growl-danger';
+	<%end%>
+<%else%>
+		gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+		gritter_opts.class_name = 'growl-danger';
+<%end%>	
+
+jQuery('.submit-btn').attr("disabled", false);
+jQuery.gritter.add(gritter_opts);

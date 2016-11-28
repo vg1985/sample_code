@@ -1,0 +1,165 @@
+<% provide(:title, 'Settings - Origination API') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Origination API</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.BWSettingsHandler.init();
+<%end%>
+
+<div class="row">
+	<div class="col-md-12 mb30">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#local" data-toggle="tab"><strong>Local</strong></a>
+			</li>
+			<li>
+				<a href="#toll-free" data-toggle="tab"><strong>Toll Free</strong></a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content mb30">
+			<div class="tab-pane active" id="local">
+				<div class="row">
+					<%=form_for @bandwidth_local_setting, url:  settings_update_bandwidth_settings_path, remote: true, method: :patch, html: {class: 'bw_settings_form form-bordered'} do |f|%>
+					<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@bandwidth_local_setting.label%></h4>
+							</div>
+							<div class="panel-body panel-body-nopadding">
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Prod API URL:</label>
+									<div class="col-sm-3">
+										<%=f.url_field :bandwidth_url, class: 'form-control'%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">API Username:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :bandwidth_username, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">API Password:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :bandwidth_password, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Account ID:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_account, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Location ID:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_location, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Max. Numbers To Search:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_search_max_numbers, class: 'form-control'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update Credentials
+								</button>
+								<span class="text-muted bw_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+					</div>
+					<%end%>
+				</div>
+			</div>
+			<div class="tab-pane" id="toll-free">
+				<div class="row">
+					<%=form_for @bandwidth_tf_setting, url:  settings_update_bandwidth_settings_path, remote: true, method: :patch, html: {class: 'bw_settings_form form-bordered'} do |f|%>
+						<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@bandwidth_tf_setting.label%></h4>
+							</div>
+							<div class="panel-body panel-body-nopadding">
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Prod API URL:</label>
+									<div class="col-sm-3">
+										<%=f.url_field :bandwidth_url, class: 'form-control'%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">API Username:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :bandwidth_username, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">API Password:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :bandwidth_password, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Account ID:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_account, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group"> 
+									<label class="col-sm-2 control-label mt10">Location ID:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_location, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Max. Numbers To Search:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :bandwidth_search_max_numbers, class: 'form-control'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update Credentials
+								</button>
+								<span class="text-muted bw_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

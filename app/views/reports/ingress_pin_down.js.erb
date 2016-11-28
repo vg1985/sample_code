@@ -1,0 +1,17 @@
+<%unless @ingress_trunks.nil?%>
+	$("#ingress_trunk_select").html("<option value=''>All Ingress Trunks</option><%=escape_javascript(options_for_select(@ingress_trunks))%>").select2('val', '');
+<%end%>
+
+<%unless @rate_sheets.nil?%>
+	$("#ingress_rate_select").html("<option value=''>All Ratesheets</option><%=escape_javascript(options_for_select(@rate_sheets))%>").select2('val', '');
+<%end%>
+
+<%unless @ingress_tech_prefixes.nil?%>
+	$("#ingress_techprefix_select").html("<option value=''>All Tech Prefixes </option><%=escape_javascript(options_for_select(@ingress_tech_prefixes))%>").select2('val', '');
+<%end%>
+
+<%unless @routings.nil?%>
+	$("#ingress_routing_select").html("<option value=''>All Routings</option><%=escape_javascript(options_for_select(@routings))%>").select2('val', '');
+<%end%>
+
+

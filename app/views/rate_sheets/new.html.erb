@@ -1,0 +1,17 @@
+<% provide(:title, 'Ratesheets - New Ratesheet') %>
+
+<%=content_for :breadcrumb do%>
+    <li>Ratesheets</li>
+    <li class="active">New Ratesheet</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'ratesheets', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+    App.RatesheetFormHandler.setUrls(['<%=check_name_rate_sheets_path%>']);
+    App.RatesheetFormHandler.init([<%=@rate_sheet.lrn?%>]);
+<%end%>
+
+<%=render partial: 'form'%>

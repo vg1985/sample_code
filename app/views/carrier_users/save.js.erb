@@ -1,0 +1,6 @@
+<% if @user.errors.blank? %>
+  $("#carrier-panel .panel-collapse.collapse.in").collapse("hide");
+  $('#carrier-panel2').html("<%= escape_javascript(raw( render partial: 'carriers/form', locals: {carrier: @user.carrier }))%>").collapse("show");
+<% else %>
+  App.ErrorHandler.add_errors("#new_carrier", "<%= j(raw(@user.errors.to_json)) %>");
+<% end %>

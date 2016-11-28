@@ -1,0 +1,744 @@
+# Logfile created on 2016-01-17 09:10:23 +0530 by logger.rb/44203
+I, [2016-01-19T22:29:43.993217 #5797]  INFO -- : 2016-01-19T22:29:43+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Starting job worker
+I, [2016-01-19T22:29:44.136901 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=29) RUNNING
+I, [2016-01-19T22:29:44.231698 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=29) COMPLETED after 0.0946
+I, [2016-01-19T22:29:44.285198 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=30) RUNNING
+I, [2016-01-19T22:29:44.375416 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=30) COMPLETED after 0.0900
+I, [2016-01-19T22:29:44.428964 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=31) RUNNING
+I, [2016-01-19T22:29:44.519667 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=31) COMPLETED after 0.0905
+I, [2016-01-19T22:29:44.586527 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=32) RUNNING
+I, [2016-01-19T22:29:44.697023 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=32) COMPLETED after 0.1103
+I, [2016-01-19T22:29:44.778738 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=33) RUNNING
+I, [2016-01-19T22:29:44.884938 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=33) COMPLETED after 0.1060
+I, [2016-01-19T22:29:44.948397 #5797]  INFO -- : 2016-01-19T22:29:44+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=34) RUNNING
+I, [2016-01-19T22:29:45.039898 #5797]  INFO -- : 2016-01-19T22:29:45+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job User#update_zendesk_without_delay (id=34) COMPLETED after 0.0913
+I, [2016-01-19T22:29:45.100559 #5797]  INFO -- : 2016-01-19T22:29:45+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=35) RUNNING
+I, [2016-01-19T22:29:50.587691 #5797]  INFO -- : 2016-01-19T22:29:50+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=35) COMPLETED after 5.4869
+I, [2016-01-19T22:29:50.634162 #5797]  INFO -- : 2016-01-19T22:29:50+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=36) RUNNING
+I, [2016-01-19T22:29:55.885706 #5797]  INFO -- : 2016-01-19T22:29:55+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=36) COMPLETED after 5.2514
+I, [2016-01-19T22:29:55.932109 #5797]  INFO -- : 2016-01-19T22:29:55+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=37) RUNNING
+I, [2016-01-19T22:30:00.783680 #5797]  INFO -- : 2016-01-19T22:30:00+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=37) COMPLETED after 4.8514
+I, [2016-01-19T22:30:00.830107 #5797]  INFO -- : 2016-01-19T22:30:00+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=38) RUNNING
+I, [2016-01-19T22:30:02.193198 #5797]  INFO -- : 2016-01-19T22:30:02+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=38) COMPLETED after 1.3629
+I, [2016-01-19T22:30:02.239561 #5797]  INFO -- : 2016-01-19T22:30:02+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=39) RUNNING
+I, [2016-01-19T22:30:03.503464 #5797]  INFO -- : 2016-01-19T22:30:03+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=39) COMPLETED after 1.2637
+I, [2016-01-19T22:30:03.549768 #5797]  INFO -- : 2016-01-19T22:30:03+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=40) RUNNING
+I, [2016-01-19T22:30:04.956783 #5797]  INFO -- : 2016-01-19T22:30:04+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=40) COMPLETED after 1.4068
+I, [2016-01-19T22:30:05.014055 #5797]  INFO -- : 2016-01-19T22:30:05+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=41) RUNNING
+I, [2016-01-19T22:30:06.346540 #5797]  INFO -- : 2016-01-19T22:30:06+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=41) COMPLETED after 1.3323
+I, [2016-01-19T22:30:06.392793 #5797]  INFO -- : 2016-01-19T22:30:06+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=42) RUNNING
+I, [2016-01-19T22:30:07.788805 #5797]  INFO -- : 2016-01-19T22:30:07+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=42) COMPLETED after 1.3958
+I, [2016-01-19T22:30:07.835039 #5797]  INFO -- : 2016-01-19T22:30:07+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=43) RUNNING
+I, [2016-01-19T22:30:09.013557 #5797]  INFO -- : 2016-01-19T22:30:09+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Job Zendesk.update_user (id=43) COMPLETED after 1.1781
+I, [2016-01-19T22:30:09.015938 #5797]  INFO -- : 2016-01-19T22:30:09+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] 15 jobs processed at 0.5995 j/s, 0 failed
+I, [2016-01-19T23:05:46.398765 #5797]  INFO -- : 2016-01-19T23:05:46+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Exiting...
+I, [2016-01-19T23:05:47.961691 #5797]  INFO -- : 2016-01-19T23:05:47+0530: [Worker(host:vineet-Aspire-5750Z pid:5797)] Exiting...
+I, [2016-01-19T23:06:05.788275 #9987]  INFO -- : 2016-01-19T23:06:05+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] Starting job worker
+I, [2016-01-19T23:07:14.070714 #9987]  INFO -- : 2016-01-19T23:07:14+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=44) RUNNING
+I, [2016-01-19T23:07:23.531740 #9987]  INFO -- : 2016-01-19T23:07:23+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=44) COMPLETED after 9.4608
+I, [2016-01-19T23:07:23.533560 #9987]  INFO -- : 2016-01-19T23:07:23+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] 1 jobs processed at 0.1040 j/s, 0 failed
+I, [2016-01-19T23:13:41.763855 #9987]  INFO -- : 2016-01-19T23:13:41+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] Exiting...
+I, [2016-01-19T23:13:43.191131 #9987]  INFO -- : 2016-01-19T23:13:43+0530: [Worker(host:vineet-Aspire-5750Z pid:9987)] Exiting...
+I, [2016-01-19T23:13:55.646249 #10296]  INFO -- : 2016-01-19T23:13:55+0530: [Worker(host:vineet-Aspire-5750Z pid:10296)] Starting job worker
+I, [2016-01-19T23:14:22.026585 #10296]  INFO -- : 2016-01-19T23:14:22+0530: [Worker(host:vineet-Aspire-5750Z pid:10296)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=45) RUNNING
+I, [2016-01-19T23:14:29.128329 #10296]  INFO -- : 2016-01-19T23:14:29+0530: [Worker(host:vineet-Aspire-5750Z pid:10296)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=45) COMPLETED after 7.1015
+I, [2016-01-19T23:14:29.130171 #10296]  INFO -- : 2016-01-19T23:14:29+0530: [Worker(host:vineet-Aspire-5750Z pid:10296)] 1 jobs processed at 0.1382 j/s, 0 failed
+I, [2016-01-19T23:18:40.741993 #10296]  INFO -- : 2016-01-19T23:18:40+0530: [Worker(host:vineet-Aspire-5750Z pid:10296)] Exiting...
+I, [2016-01-19T23:19:11.926436 #10587]  INFO -- : 2016-01-19T23:19:11+0530: [Worker(host:vineet-Aspire-5750Z pid:10587)] Starting job worker
+I, [2016-01-19T23:23:07.821474 #10587]  INFO -- : 2016-01-19T23:23:07+0530: [Worker(host:vineet-Aspire-5750Z pid:10587)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=46) RUNNING
+I, [2016-01-19T23:23:16.150543 #10587]  INFO -- : 2016-01-19T23:23:16+0530: [Worker(host:vineet-Aspire-5750Z pid:10587)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=46) COMPLETED after 8.3289
+I, [2016-01-19T23:23:16.152543 #10587]  INFO -- : 2016-01-19T23:23:16+0530: [Worker(host:vineet-Aspire-5750Z pid:10587)] 1 jobs processed at 0.1189 j/s, 0 failed
+I, [2016-01-20T08:43:08.550758 #5027]  INFO -- : 2016-01-20T08:43:08+0530: [Worker(host:vineet-Aspire-5750Z pid:5027)] Starting job worker
+I, [2016-01-20T08:43:14.029035 #5027]  INFO -- : 2016-01-20T08:43:14+0530: [Worker(host:vineet-Aspire-5750Z pid:5027)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=29) RUNNING
+I, [2016-01-20T08:43:19.176442 #5027]  INFO -- : 2016-01-20T08:43:19+0530: [Worker(host:vineet-Aspire-5750Z pid:5027)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=29) COMPLETED after 5.1472
+I, [2016-01-20T08:43:19.178792 #5027]  INFO -- : 2016-01-20T08:43:19+0530: [Worker(host:vineet-Aspire-5750Z pid:5027)] 1 jobs processed at 0.1905 j/s, 0 failed
+I, [2016-01-20T09:10:51.339613 #5027]  INFO -- : 2016-01-20T09:10:51+0530: [Worker(host:vineet-Aspire-5750Z pid:5027)] Exiting...
+I, [2016-02-28T15:32:38.493981 #17134]  INFO -- : 2016-02-28T15:32:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Starting job worker
+I, [2016-02-28T15:32:38.695545 #17134]  INFO -- : 2016-02-28T15:32:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=29) RUNNING
+I, [2016-02-28T15:32:39.046578 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=29) COMPLETED after 0.3508
+I, [2016-02-28T15:32:39.100129 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=30) RUNNING
+I, [2016-02-28T15:32:39.190751 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=30) COMPLETED after 0.0904
+I, [2016-02-28T15:32:39.246812 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=31) RUNNING
+I, [2016-02-28T15:32:39.334941 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=31) COMPLETED after 0.0879
+I, [2016-02-28T15:32:39.388311 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=32) RUNNING
+I, [2016-02-28T15:32:39.479434 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=32) COMPLETED after 0.0908
+I, [2016-02-28T15:32:39.544518 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=33) RUNNING
+I, [2016-02-28T15:32:39.635815 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=33) COMPLETED after 0.0910
+I, [2016-02-28T15:32:39.691217 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=34) RUNNING
+I, [2016-02-28T15:32:39.779594 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=34) COMPLETED after 0.0881
+I, [2016-02-28T15:32:39.832692 #17134]  INFO -- : 2016-02-28T15:32:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) RUNNING
+E, [2016-02-28T15:32:41.108387 #17134] ERROR -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:32:41.244793 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=36) RUNNING
+I, [2016-02-28T15:32:41.333050 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=36) COMPLETED after 0.0880
+I, [2016-02-28T15:32:41.386312 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=37) RUNNING
+I, [2016-02-28T15:32:41.476836 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=37) COMPLETED after 0.0902
+I, [2016-02-28T15:32:41.529895 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=38) RUNNING
+I, [2016-02-28T15:32:41.620800 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=38) COMPLETED after 0.0906
+I, [2016-02-28T15:32:41.687928 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=39) RUNNING
+I, [2016-02-28T15:32:41.808835 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=39) COMPLETED after 0.1206
+I, [2016-02-28T15:32:41.873867 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=40) RUNNING
+I, [2016-02-28T15:32:41.985929 #17134]  INFO -- : 2016-02-28T15:32:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=40) COMPLETED after 0.1117
+I, [2016-02-28T15:32:42.040178 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=41) RUNNING
+I, [2016-02-28T15:32:42.151407 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=41) COMPLETED after 0.1110
+I, [2016-02-28T15:32:42.204717 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=42) RUNNING
+I, [2016-02-28T15:32:42.295467 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=42) COMPLETED after 0.0905
+I, [2016-02-28T15:32:42.348411 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=43) RUNNING
+I, [2016-02-28T15:32:42.439379 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=43) COMPLETED after 0.0907
+I, [2016-02-28T15:32:42.497715 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=44) RUNNING
+I, [2016-02-28T15:32:42.594226 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=44) COMPLETED after 0.0963
+I, [2016-02-28T15:32:42.648833 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=45) RUNNING
+I, [2016-02-28T15:32:42.738110 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=45) COMPLETED after 0.0890
+I, [2016-02-28T15:32:42.804672 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=46) RUNNING
+I, [2016-02-28T15:32:42.894494 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=46) COMPLETED after 0.0896
+I, [2016-02-28T15:32:42.948556 #17134]  INFO -- : 2016-02-28T15:32:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=47) RUNNING
+I, [2016-02-28T15:32:43.038437 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=47) COMPLETED after 0.0896
+I, [2016-02-28T15:32:43.090960 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=48) RUNNING
+I, [2016-02-28T15:32:43.182221 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=48) COMPLETED after 0.0910
+I, [2016-02-28T15:32:43.235790 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=49) RUNNING
+I, [2016-02-28T15:32:43.326255 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=49) COMPLETED after 0.0902
+I, [2016-02-28T15:32:43.379559 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=50) RUNNING
+I, [2016-02-28T15:32:43.470194 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=50) COMPLETED after 0.0904
+I, [2016-02-28T15:32:43.523846 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=51) RUNNING
+I, [2016-02-28T15:32:43.614015 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=51) COMPLETED after 0.0899
+I, [2016-02-28T15:32:43.679241 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=52) RUNNING
+I, [2016-02-28T15:32:43.791083 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=52) COMPLETED after 0.1116
+I, [2016-02-28T15:32:43.859233 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=53) RUNNING
+I, [2016-02-28T15:32:43.978753 #17134]  INFO -- : 2016-02-28T15:32:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=53) COMPLETED after 0.1193
+I, [2016-02-28T15:32:44.041869 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=54) RUNNING
+I, [2016-02-28T15:32:44.133804 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=54) COMPLETED after 0.0917
+I, [2016-02-28T15:32:44.194279 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=55) RUNNING
+I, [2016-02-28T15:32:44.289116 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=55) COMPLETED after 0.0944
+I, [2016-02-28T15:32:44.341863 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=56) RUNNING
+I, [2016-02-28T15:32:44.432742 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=56) COMPLETED after 0.0907
+I, [2016-02-28T15:32:44.486060 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=57) RUNNING
+I, [2016-02-28T15:32:44.576849 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=57) COMPLETED after 0.0905
+I, [2016-02-28T15:32:44.630459 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=58) RUNNING
+I, [2016-02-28T15:32:44.733050 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=58) COMPLETED after 0.1023
+I, [2016-02-28T15:32:44.786227 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=59) RUNNING
+I, [2016-02-28T15:32:44.877140 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=59) COMPLETED after 0.0906
+I, [2016-02-28T15:32:44.930552 #17134]  INFO -- : 2016-02-28T15:32:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=60) RUNNING
+I, [2016-02-28T15:32:45.020935 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=60) COMPLETED after 0.0901
+I, [2016-02-28T15:32:45.075138 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=61) RUNNING
+I, [2016-02-28T15:32:45.164918 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=61) COMPLETED after 0.0895
+I, [2016-02-28T15:32:45.217977 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=62) RUNNING
+I, [2016-02-28T15:32:45.308789 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=62) COMPLETED after 0.0905
+I, [2016-02-28T15:32:45.369881 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=63) RUNNING
+I, [2016-02-28T15:32:45.463561 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=63) COMPLETED after 0.0934
+I, [2016-02-28T15:32:45.517106 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=64) RUNNING
+I, [2016-02-28T15:32:45.618659 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=64) COMPLETED after 0.1012
+I, [2016-02-28T15:32:45.686177 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=65) RUNNING
+I, [2016-02-28T15:32:45.806842 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=65) COMPLETED after 0.1203
+I, [2016-02-28T15:32:45.870724 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=66) RUNNING
+I, [2016-02-28T15:32:45.983486 #17134]  INFO -- : 2016-02-28T15:32:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=66) COMPLETED after 0.1125
+I, [2016-02-28T15:32:46.050366 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=67) RUNNING
+I, [2016-02-28T15:32:46.138216 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=67) COMPLETED after 0.0876
+I, [2016-02-28T15:32:46.194722 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=68) RUNNING
+I, [2016-02-28T15:32:46.282473 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=68) COMPLETED after 0.0874
+I, [2016-02-28T15:32:46.336810 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=69) RUNNING
+I, [2016-02-28T15:32:46.426176 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=69) COMPLETED after 0.0892
+I, [2016-02-28T15:32:46.480958 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=70) RUNNING
+I, [2016-02-28T15:32:46.570213 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=70) COMPLETED after 0.0889
+I, [2016-02-28T15:32:46.630440 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=71) RUNNING
+I, [2016-02-28T15:32:46.793156 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=71) COMPLETED after 0.1624
+I, [2016-02-28T15:32:46.846113 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=72) RUNNING
+I, [2016-02-28T15:32:46.936377 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=72) COMPLETED after 0.0901
+I, [2016-02-28T15:32:46.989963 #17134]  INFO -- : 2016-02-28T15:32:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=73) RUNNING
+I, [2016-02-28T15:32:47.080689 #17134]  INFO -- : 2016-02-28T15:32:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=73) COMPLETED after 0.0905
+I, [2016-02-28T15:32:47.135636 #17134]  INFO -- : 2016-02-28T15:32:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=74) RUNNING
+I, [2016-02-28T15:32:47.224546 #17134]  INFO -- : 2016-02-28T15:32:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=74) COMPLETED after 0.0887
+I, [2016-02-28T15:32:47.304893 #17134]  INFO -- : 2016-02-28T15:32:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=75) RUNNING
+I, [2016-02-28T15:32:53.269599 #17134]  INFO -- : 2016-02-28T15:32:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=75) COMPLETED after 5.9644
+I, [2016-02-28T15:32:53.327310 #17134]  INFO -- : 2016-02-28T15:32:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=76) RUNNING
+I, [2016-02-28T15:32:58.344854 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper (id=76) COMPLETED after 5.0172
+I, [2016-02-28T15:32:58.419904 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=77) RUNNING
+I, [2016-02-28T15:32:58.510397 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=77) COMPLETED after 0.0902
+I, [2016-02-28T15:32:58.564176 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=78) RUNNING
+I, [2016-02-28T15:32:58.654446 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=78) COMPLETED after 0.0900
+I, [2016-02-28T15:32:58.708550 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=79) RUNNING
+I, [2016-02-28T15:32:58.798405 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=79) COMPLETED after 0.0895
+I, [2016-02-28T15:32:58.852541 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=80) RUNNING
+I, [2016-02-28T15:32:58.976971 #17134]  INFO -- : 2016-02-28T15:32:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=80) COMPLETED after 0.1242
+I, [2016-02-28T15:32:59.079334 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=81) RUNNING
+I, [2016-02-28T15:32:59.220487 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=81) COMPLETED after 0.1409
+I, [2016-02-28T15:32:59.272981 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=82) RUNNING
+I, [2016-02-28T15:32:59.364400 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=82) COMPLETED after 0.0913
+I, [2016-02-28T15:32:59.416817 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=83) RUNNING
+I, [2016-02-28T15:32:59.508567 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=83) COMPLETED after 0.0916
+I, [2016-02-28T15:32:59.562247 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=84) RUNNING
+I, [2016-02-28T15:32:59.674711 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=84) COMPLETED after 0.1123
+I, [2016-02-28T15:32:59.741437 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=85) RUNNING
+I, [2016-02-28T15:32:59.851830 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=85) COMPLETED after 0.1101
+I, [2016-02-28T15:32:59.917914 #17134]  INFO -- : 2016-02-28T15:32:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=86) RUNNING
+I, [2016-02-28T15:33:00.006768 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=86) COMPLETED after 0.0886
+I, [2016-02-28T15:33:00.060676 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=87) RUNNING
+I, [2016-02-28T15:33:00.150560 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=87) COMPLETED after 0.0897
+I, [2016-02-28T15:33:00.203773 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=88) RUNNING
+I, [2016-02-28T15:33:00.294547 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=88) COMPLETED after 0.0906
+I, [2016-02-28T15:33:00.348219 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=89) RUNNING
+I, [2016-02-28T15:33:00.438524 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=89) COMPLETED after 0.0901
+I, [2016-02-28T15:33:00.492842 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=90) RUNNING
+I, [2016-02-28T15:33:00.582417 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=90) COMPLETED after 0.0893
+I, [2016-02-28T15:33:00.637722 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=91) RUNNING
+I, [2016-02-28T15:33:00.738774 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=91) COMPLETED after 0.1008
+I, [2016-02-28T15:33:00.794002 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=92) RUNNING
+I, [2016-02-28T15:33:00.882767 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=92) COMPLETED after 0.0885
+I, [2016-02-28T15:33:00.941032 #17134]  INFO -- : 2016-02-28T15:33:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=93) RUNNING
+I, [2016-02-28T15:33:01.037652 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=93) COMPLETED after 0.0964
+I, [2016-02-28T15:33:01.091937 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=94) RUNNING
+I, [2016-02-28T15:33:01.181618 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=94) COMPLETED after 0.0894
+I, [2016-02-28T15:33:01.236096 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=95) RUNNING
+I, [2016-02-28T15:33:01.303160 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 66 jobs processed at 2.8952 j/s, 1 failed
+I, [2016-02-28T15:33:01.357619 #17134]  INFO -- : 2016-02-28T15:33:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=96) RUNNING
+I, [2016-02-28T15:33:06.806929 #17134]  INFO -- : 2016-02-28T15:33:06+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=97) RUNNING
+I, [2016-02-28T15:33:12.272919 #17134]  INFO -- : 2016-02-28T15:33:12+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=98) RUNNING
+I, [2016-02-28T15:33:17.714775 #17134]  INFO -- : 2016-02-28T15:33:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=99) RUNNING
+I, [2016-02-28T15:33:17.828601 #17134]  INFO -- : 2016-02-28T15:33:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=99) COMPLETED after 0.1136
+I, [2016-02-28T15:33:17.883912 #17134]  INFO -- : 2016-02-28T15:33:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=100) RUNNING
+I, [2016-02-28T15:33:17.961215 #17134]  INFO -- : 2016-02-28T15:33:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 2.7963 j/s, 0 failed
+I, [2016-02-28T15:33:18.032127 #17134]  INFO -- : 2016-02-28T15:33:18+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Delayed::PerformableMethod (id=101) RUNNING
+I, [2016-02-28T15:33:23.484078 #17134]  INFO -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=102) RUNNING
+I, [2016-02-28T15:33:23.577152 #17134]  INFO -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=102) COMPLETED after 0.0927
+I, [2016-02-28T15:33:23.635096 #17134]  INFO -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) RUNNING
+E, [2016-02-28T15:33:23.672990 #17134] ERROR -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:23.815838 #17134]  INFO -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) RUNNING
+E, [2016-02-28T15:33:23.819384 #17134] ERROR -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:23.933076 #17134]  INFO -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) RUNNING
+E, [2016-02-28T15:33:23.937068 #17134] ERROR -- : 2016-02-28T15:33:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:24.055121 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) RUNNING
+E, [2016-02-28T15:33:24.058675 #17134] ERROR -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:24.199448 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) RUNNING
+E, [2016-02-28T15:33:24.204829 #17134] ERROR -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:24.322716 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) RUNNING
+E, [2016-02-28T15:33:24.325976 #17134] ERROR -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:24.445534 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=109) RUNNING
+I, [2016-02-28T15:33:24.538927 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=109) COMPLETED after 0.0932
+I, [2016-02-28T15:33:24.600913 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=110) RUNNING
+I, [2016-02-28T15:33:24.715828 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=110) COMPLETED after 0.1147
+I, [2016-02-28T15:33:24.774283 #17134]  INFO -- : 2016-02-28T15:33:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=111) RUNNING
+I, [2016-02-28T15:33:26.191424 #17134]  INFO -- : 2016-02-28T15:33:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=111) COMPLETED after 1.4169
+I, [2016-02-28T15:33:26.250100 #17134]  INFO -- : 2016-02-28T15:33:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=112) RUNNING
+I, [2016-02-28T15:33:27.766667 #17134]  INFO -- : 2016-02-28T15:33:27+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=112) COMPLETED after 1.5164
+I, [2016-02-28T15:33:27.813759 #17134]  INFO -- : 2016-02-28T15:33:27+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=113) RUNNING
+I, [2016-02-28T15:33:29.154002 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.destroy_user (id=113) COMPLETED after 1.3400
+I, [2016-02-28T15:33:29.214525 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=114) RUNNING
+I, [2016-02-28T15:33:29.321629 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=114) COMPLETED after 0.1068
+I, [2016-02-28T15:33:29.379084 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=115) RUNNING
+I, [2016-02-28T15:33:29.476677 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=115) COMPLETED after 0.0973
+I, [2016-02-28T15:33:29.532460 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=116) RUNNING
+I, [2016-02-28T15:33:29.620561 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=116) COMPLETED after 0.0878
+I, [2016-02-28T15:33:29.686627 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=117) RUNNING
+I, [2016-02-28T15:33:29.775354 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=117) COMPLETED after 0.0885
+I, [2016-02-28T15:33:29.831395 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=118) RUNNING
+I, [2016-02-28T15:33:29.919044 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=118) COMPLETED after 0.0874
+I, [2016-02-28T15:33:29.974488 #17134]  INFO -- : 2016-02-28T15:33:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=119) RUNNING
+I, [2016-02-28T15:33:30.063165 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=119) COMPLETED after 0.0884
+I, [2016-02-28T15:33:30.128171 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=120) RUNNING
+I, [2016-02-28T15:33:30.218016 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=120) COMPLETED after 0.0897
+I, [2016-02-28T15:33:30.285090 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=121) RUNNING
+I, [2016-02-28T15:33:30.395198 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=121) COMPLETED after 0.1098
+I, [2016-02-28T15:33:30.462431 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=122) RUNNING
+I, [2016-02-28T15:33:30.560965 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=122) COMPLETED after 0.0983
+I, [2016-02-28T15:33:30.632521 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=123) RUNNING
+I, [2016-02-28T15:33:30.726923 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=123) COMPLETED after 0.0942
+I, [2016-02-28T15:33:30.782617 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=124) RUNNING
+I, [2016-02-28T15:33:30.870808 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=124) COMPLETED after 0.0880
+I, [2016-02-28T15:33:30.929797 #17134]  INFO -- : 2016-02-28T15:33:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=125) RUNNING
+I, [2016-02-28T15:33:31.025793 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=125) COMPLETED after 0.0957
+I, [2016-02-28T15:33:31.091894 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) RUNNING
+E, [2016-02-28T15:33:31.095865 #17134] ERROR -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:31.204790 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) RUNNING
+E, [2016-02-28T15:33:31.208489 #17134] ERROR -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:31.328480 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) RUNNING
+E, [2016-02-28T15:33:31.331812 #17134] ERROR -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:31.450299 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) RUNNING
+E, [2016-02-28T15:33:31.453510 #17134] ERROR -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) FAILED (0 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:33:31.574306 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=130) RUNNING
+I, [2016-02-28T15:33:31.669090 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=130) COMPLETED after 0.0946
+I, [2016-02-28T15:33:31.737038 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=131) RUNNING
+I, [2016-02-28T15:33:31.824311 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=131) COMPLETED after 0.0869
+I, [2016-02-28T15:33:31.881601 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=132) RUNNING
+I, [2016-02-28T15:33:31.978945 #17134]  INFO -- : 2016-02-28T15:33:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=132) COMPLETED after 0.0971
+I, [2016-02-28T15:33:32.041731 #17134]  INFO -- : 2016-02-28T15:33:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=133) RUNNING
+I, [2016-02-28T15:33:32.133972 #17134]  INFO -- : 2016-02-28T15:33:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=133) COMPLETED after 0.0920
+I, [2016-02-28T15:33:32.201419 #17134]  INFO -- : 2016-02-28T15:33:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=134) RUNNING
+I, [2016-02-28T15:33:32.310958 #17134]  INFO -- : 2016-02-28T15:33:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=134) COMPLETED after 0.1093
+I, [2016-02-28T15:33:32.383831 #17134]  INFO -- : 2016-02-28T15:33:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) RUNNING
+E, [2016-02-28T15:33:33.633547 #17134] ERROR -- : 2016-02-28T15:33:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) FAILED (0 prior attempts) with RangeError: 2533648019 is out of range for ActiveRecord::Type::Integer with limit 4
+I, [2016-02-28T15:33:33.768886 #17134]  INFO -- : 2016-02-28T15:33:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=136) RUNNING
+I, [2016-02-28T15:33:33.908282 #17134]  INFO -- : 2016-02-28T15:33:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=136) COMPLETED after 0.1391
+I, [2016-02-28T15:33:33.966244 #17134]  INFO -- : 2016-02-28T15:33:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) RUNNING
+E, [2016-02-28T15:33:35.072267 #17134] ERROR -- : 2016-02-28T15:33:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:33:35.188512 #17134]  INFO -- : 2016-02-28T15:33:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) RUNNING
+E, [2016-02-28T15:33:36.488503 #17134] ERROR -- : 2016-02-28T15:33:36+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:33:36.616770 #17134]  INFO -- : 2016-02-28T15:33:36+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) RUNNING
+E, [2016-02-28T15:33:37.712137 #17134] ERROR -- : 2016-02-28T15:33:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:33:37.839620 #17134]  INFO -- : 2016-02-28T15:33:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) RUNNING
+E, [2016-02-28T15:33:38.963616 #17134] ERROR -- : 2016-02-28T15:33:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:33:39.080683 #17134]  INFO -- : 2016-02-28T15:33:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=141) RUNNING
+I, [2016-02-28T15:33:40.594997 #17134]  INFO -- : 2016-02-28T15:33:40+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=141) COMPLETED after 1.5141
+I, [2016-02-28T15:33:40.642407 #17134]  INFO -- : 2016-02-28T15:33:40+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=142) RUNNING
+I, [2016-02-28T15:33:41.861359 #17134]  INFO -- : 2016-02-28T15:33:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=142) COMPLETED after 1.2187
+I, [2016-02-28T15:33:41.908362 #17134]  INFO -- : 2016-02-28T15:33:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=143) RUNNING
+I, [2016-02-28T15:33:43.347742 #17134]  INFO -- : 2016-02-28T15:33:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=143) COMPLETED after 1.4390
+I, [2016-02-28T15:33:43.394759 #17134]  INFO -- : 2016-02-28T15:33:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=144) RUNNING
+I, [2016-02-28T15:33:44.647321 #17134]  INFO -- : 2016-02-28T15:33:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=144) COMPLETED after 1.2522
+I, [2016-02-28T15:33:44.694587 #17134]  INFO -- : 2016-02-28T15:33:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=145) RUNNING
+I, [2016-02-28T15:33:45.935197 #17134]  INFO -- : 2016-02-28T15:33:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=145) COMPLETED after 1.2403
+I, [2016-02-28T15:33:45.994376 #17134]  INFO -- : 2016-02-28T15:33:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=146) RUNNING
+I, [2016-02-28T15:33:47.190806 #17134]  INFO -- : 2016-02-28T15:33:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=146) COMPLETED after 1.1962
+I, [2016-02-28T15:33:47.250153 #17134]  INFO -- : 2016-02-28T15:33:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=147) RUNNING
+I, [2016-02-28T15:33:48.533877 #17134]  INFO -- : 2016-02-28T15:33:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=147) COMPLETED after 1.2835
+I, [2016-02-28T15:33:48.592965 #17134]  INFO -- : 2016-02-28T15:33:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=148) RUNNING
+I, [2016-02-28T15:33:50.087835 #17134]  INFO -- : 2016-02-28T15:33:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=148) COMPLETED after 1.4946
+I, [2016-02-28T15:33:50.135461 #17134]  INFO -- : 2016-02-28T15:33:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=149) RUNNING
+I, [2016-02-28T15:33:51.464349 #17134]  INFO -- : 2016-02-28T15:33:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=149) COMPLETED after 1.3286
+I, [2016-02-28T15:33:51.512291 #17134]  INFO -- : 2016-02-28T15:33:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=150) RUNNING
+I, [2016-02-28T15:33:52.719578 #17134]  INFO -- : 2016-02-28T15:33:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=150) COMPLETED after 1.2071
+I, [2016-02-28T15:33:52.767285 #17134]  INFO -- : 2016-02-28T15:33:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=151) RUNNING
+I, [2016-02-28T15:33:54.216992 #17134]  INFO -- : 2016-02-28T15:33:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=151) COMPLETED after 1.4495
+I, [2016-02-28T15:33:54.276608 #17134]  INFO -- : 2016-02-28T15:33:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=152) RUNNING
+I, [2016-02-28T15:33:55.573906 #17134]  INFO -- : 2016-02-28T15:33:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=152) COMPLETED after 1.2970
+I, [2016-02-28T15:33:55.620851 #17134]  INFO -- : 2016-02-28T15:33:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=153) RUNNING
+I, [2016-02-28T15:33:57.181109 #17134]  INFO -- : 2016-02-28T15:33:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=153) COMPLETED after 1.5599
+I, [2016-02-28T15:33:57.228162 #17134]  INFO -- : 2016-02-28T15:33:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=154) RUNNING
+I, [2016-02-28T15:33:58.513132 #17134]  INFO -- : 2016-02-28T15:33:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=154) COMPLETED after 1.2847
+I, [2016-02-28T15:33:58.560412 #17134]  INFO -- : 2016-02-28T15:33:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=155) RUNNING
+I, [2016-02-28T15:33:59.862845 #17134]  INFO -- : 2016-02-28T15:33:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=155) COMPLETED after 1.3021
+I, [2016-02-28T15:33:59.951305 #17134]  INFO -- : 2016-02-28T15:33:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=156) RUNNING
+I, [2016-02-28T15:34:01.443005 #17134]  INFO -- : 2016-02-28T15:34:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=156) COMPLETED after 1.4914
+I, [2016-02-28T15:34:01.501841 #17134]  INFO -- : 2016-02-28T15:34:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=157) RUNNING
+I, [2016-02-28T15:34:02.941900 #17134]  INFO -- : 2016-02-28T15:34:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=157) COMPLETED after 1.4397
+I, [2016-02-28T15:34:02.990653 #17134]  INFO -- : 2016-02-28T15:34:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=158) RUNNING
+I, [2016-02-28T15:34:04.241280 #17134]  INFO -- : 2016-02-28T15:34:04+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=158) COMPLETED after 1.2503
+I, [2016-02-28T15:34:04.288855 #17134]  INFO -- : 2016-02-28T15:34:04+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=159) RUNNING
+I, [2016-02-28T15:34:05.617492 #17134]  INFO -- : 2016-02-28T15:34:05+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=159) COMPLETED after 1.3284
+I, [2016-02-28T15:34:05.664551 #17134]  INFO -- : 2016-02-28T15:34:05+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=160) RUNNING
+I, [2016-02-28T15:34:07.191386 #17134]  INFO -- : 2016-02-28T15:34:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=160) COMPLETED after 1.5265
+I, [2016-02-28T15:34:07.237923 #17134]  INFO -- : 2016-02-28T15:34:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=161) RUNNING
+I, [2016-02-28T15:34:08.436690 #17134]  INFO -- : 2016-02-28T15:34:08+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=161) COMPLETED after 1.1985
+I, [2016-02-28T15:34:08.496791 #17134]  INFO -- : 2016-02-28T15:34:08+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=162) RUNNING
+I, [2016-02-28T15:34:14.833523 #17134]  INFO -- : 2016-02-28T15:34:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=162) COMPLETED after 6.3365
+I, [2016-02-28T15:34:14.880946 #17134]  INFO -- : 2016-02-28T15:34:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=163) RUNNING
+I, [2016-02-28T15:34:16.210703 #17134]  INFO -- : 2016-02-28T15:34:16+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=163) COMPLETED after 1.3296
+I, [2016-02-28T15:34:16.269665 #17134]  INFO -- : 2016-02-28T15:34:16+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=164) RUNNING
+I, [2016-02-28T15:34:17.851323 #17134]  INFO -- : 2016-02-28T15:34:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=164) COMPLETED after 1.5814
+I, [2016-02-28T15:34:17.910360 #17134]  INFO -- : 2016-02-28T15:34:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=165) RUNNING
+I, [2016-02-28T15:34:19.217024 #17134]  INFO -- : 2016-02-28T15:34:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=165) COMPLETED after 1.3064
+I, [2016-02-28T15:34:19.266304 #17134]  INFO -- : 2016-02-28T15:34:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=166) RUNNING
+I, [2016-02-28T15:34:20.769481 #17134]  INFO -- : 2016-02-28T15:34:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=166) COMPLETED after 1.5027
+I, [2016-02-28T15:34:20.817512 #17134]  INFO -- : 2016-02-28T15:34:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=167) RUNNING
+I, [2016-02-28T15:34:22.475889 #17134]  INFO -- : 2016-02-28T15:34:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=167) COMPLETED after 1.6582
+I, [2016-02-28T15:34:22.523872 #17134]  INFO -- : 2016-02-28T15:34:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=168) RUNNING
+I, [2016-02-28T15:34:24.005494 #17134]  INFO -- : 2016-02-28T15:34:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=168) COMPLETED after 1.4813
+I, [2016-02-28T15:34:24.098913 #17134]  INFO -- : 2016-02-28T15:34:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=169) RUNNING
+I, [2016-02-28T15:34:25.373409 #17134]  INFO -- : 2016-02-28T15:34:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=169) COMPLETED after 1.2740
+I, [2016-02-28T15:34:25.420836 #17134]  INFO -- : 2016-02-28T15:34:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=170) RUNNING
+I, [2016-02-28T15:34:26.738422 #17134]  INFO -- : 2016-02-28T15:34:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=170) COMPLETED after 1.3174
+I, [2016-02-28T15:34:26.786061 #17134]  INFO -- : 2016-02-28T15:34:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=171) RUNNING
+I, [2016-02-28T15:34:28.246799 #17134]  INFO -- : 2016-02-28T15:34:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=171) COMPLETED after 1.4604
+I, [2016-02-28T15:34:28.293891 #17134]  INFO -- : 2016-02-28T15:34:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=172) RUNNING
+I, [2016-02-28T15:34:29.876912 #17134]  INFO -- : 2016-02-28T15:34:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=172) COMPLETED after 1.5828
+I, [2016-02-28T15:34:29.923686 #17134]  INFO -- : 2016-02-28T15:34:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=173) RUNNING
+I, [2016-02-28T15:34:31.187491 #17134]  INFO -- : 2016-02-28T15:34:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=173) COMPLETED after 1.2636
+I, [2016-02-28T15:34:31.235197 #17134]  INFO -- : 2016-02-28T15:34:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=174) RUNNING
+I, [2016-02-28T15:34:32.761832 #17134]  INFO -- : 2016-02-28T15:34:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=174) COMPLETED after 1.5264
+I, [2016-02-28T15:34:32.820531 #17134]  INFO -- : 2016-02-28T15:34:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=175) RUNNING
+I, [2016-02-28T15:34:34.083245 #17134]  INFO -- : 2016-02-28T15:34:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=175) COMPLETED after 1.2624
+I, [2016-02-28T15:34:34.143066 #17134]  INFO -- : 2016-02-28T15:34:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=176) RUNNING
+I, [2016-02-28T15:34:35.714035 #17134]  INFO -- : 2016-02-28T15:34:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=176) COMPLETED after 1.5706
+I, [2016-02-28T15:34:35.824091 #17134]  INFO -- : 2016-02-28T15:34:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=177) RUNNING
+I, [2016-02-28T15:34:37.046580 #17134]  INFO -- : 2016-02-28T15:34:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=177) COMPLETED after 1.2222
+I, [2016-02-28T15:34:37.094522 #17134]  INFO -- : 2016-02-28T15:34:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=178) RUNNING
+I, [2016-02-28T15:34:38.346259 #17134]  INFO -- : 2016-02-28T15:34:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=178) COMPLETED after 1.2513
+I, [2016-02-28T15:34:38.393505 #17134]  INFO -- : 2016-02-28T15:34:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=179) RUNNING
+I, [2016-02-28T15:34:39.931723 #17134]  INFO -- : 2016-02-28T15:34:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=179) COMPLETED after 1.5380
+I, [2016-02-28T15:34:39.980757 #17134]  INFO -- : 2016-02-28T15:34:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=180) RUNNING
+I, [2016-02-28T15:34:41.220215 #17134]  INFO -- : 2016-02-28T15:34:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=180) COMPLETED after 1.2392
+I, [2016-02-28T15:34:41.267773 #17134]  INFO -- : 2016-02-28T15:34:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=181) RUNNING
+I, [2016-02-28T15:34:43.751773 #17134]  INFO -- : 2016-02-28T15:34:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=181) COMPLETED after 2.4838
+I, [2016-02-28T15:34:43.798620 #17134]  INFO -- : 2016-02-28T15:34:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=182) RUNNING
+I, [2016-02-28T15:34:45.161008 #17134]  INFO -- : 2016-02-28T15:34:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=182) COMPLETED after 1.3621
+I, [2016-02-28T15:34:45.207911 #17134]  INFO -- : 2016-02-28T15:34:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=183) RUNNING
+I, [2016-02-28T15:34:46.485361 #17134]  INFO -- : 2016-02-28T15:34:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=183) COMPLETED after 1.2772
+I, [2016-02-28T15:34:46.544814 #17134]  INFO -- : 2016-02-28T15:34:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=184) RUNNING
+I, [2016-02-28T15:34:47.795688 #17134]  INFO -- : 2016-02-28T15:34:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=184) COMPLETED after 1.2505
+I, [2016-02-28T15:34:47.859986 #17134]  INFO -- : 2016-02-28T15:34:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) RUNNING
+E, [2016-02-28T15:34:48.945354 #17134] ERROR -- : 2016-02-28T15:34:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:34:49.066997 #17134]  INFO -- : 2016-02-28T15:34:49+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=185) RUNNING
+I, [2016-02-28T15:34:50.350373 #17134]  INFO -- : 2016-02-28T15:34:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=185) COMPLETED after 1.2831
+I, [2016-02-28T15:34:50.398625 #17134]  INFO -- : 2016-02-28T15:34:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=186) RUNNING
+I, [2016-02-28T15:34:51.858617 #17134]  INFO -- : 2016-02-28T15:34:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=186) COMPLETED after 1.4598
+I, [2016-02-28T15:34:51.905147 #17134]  INFO -- : 2016-02-28T15:34:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=187) RUNNING
+I, [2016-02-28T15:34:53.488240 #17134]  INFO -- : 2016-02-28T15:34:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=187) COMPLETED after 1.5828
+I, [2016-02-28T15:34:53.535670 #17134]  INFO -- : 2016-02-28T15:34:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=188) RUNNING
+I, [2016-02-28T15:34:55.372262 #17134]  INFO -- : 2016-02-28T15:34:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=188) COMPLETED after 1.8363
+I, [2016-02-28T15:34:55.419234 #17134]  INFO -- : 2016-02-28T15:34:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=189) RUNNING
+I, [2016-02-28T15:34:57.003061 #17134]  INFO -- : 2016-02-28T15:34:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=189) COMPLETED after 1.5835
+I, [2016-02-28T15:34:57.049989 #17134]  INFO -- : 2016-02-28T15:34:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=190) RUNNING
+I, [2016-02-28T15:34:58.577555 #17134]  INFO -- : 2016-02-28T15:34:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=190) COMPLETED after 1.5272
+I, [2016-02-28T15:34:58.624849 #17134]  INFO -- : 2016-02-28T15:34:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=191) RUNNING
+I, [2016-02-28T15:35:00.427380 #17134]  INFO -- : 2016-02-28T15:35:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=191) COMPLETED after 1.8022
+I, [2016-02-28T15:35:00.475272 #17134]  INFO -- : 2016-02-28T15:35:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=192) RUNNING
+I, [2016-02-28T15:35:02.125161 #17134]  INFO -- : 2016-02-28T15:35:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=192) COMPLETED after 1.6496
+I, [2016-02-28T15:35:02.172163 #17134]  INFO -- : 2016-02-28T15:35:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=193) RUNNING
+I, [2016-02-28T15:35:03.787609 #17134]  INFO -- : 2016-02-28T15:35:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=193) COMPLETED after 1.6152
+I, [2016-02-28T15:35:03.836077 #17134]  INFO -- : 2016-02-28T15:35:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=194) RUNNING
+I, [2016-02-28T15:35:05.350905 #17134]  INFO -- : 2016-02-28T15:35:05+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=194) COMPLETED after 1.5145
+I, [2016-02-28T15:35:05.398239 #17134]  INFO -- : 2016-02-28T15:35:05+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=195) RUNNING
+I, [2016-02-28T15:35:07.256889 #17134]  INFO -- : 2016-02-28T15:35:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=195) COMPLETED after 1.8584
+I, [2016-02-28T15:35:07.344360 #17134]  INFO -- : 2016-02-28T15:35:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=196) RUNNING
+I, [2016-02-28T15:35:09.062054 #17134]  INFO -- : 2016-02-28T15:35:09+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=196) COMPLETED after 1.7174
+I, [2016-02-28T15:35:09.109320 #17134]  INFO -- : 2016-02-28T15:35:09+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=197) RUNNING
+I, [2016-02-28T15:35:10.900538 #17134]  INFO -- : 2016-02-28T15:35:10+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=197) COMPLETED after 1.7910
+I, [2016-02-28T15:35:10.958853 #17134]  INFO -- : 2016-02-28T15:35:10+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=198) RUNNING
+I, [2016-02-28T15:35:12.331700 #17134]  INFO -- : 2016-02-28T15:35:12+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=198) COMPLETED after 1.3727
+I, [2016-02-28T15:35:12.380172 #17134]  INFO -- : 2016-02-28T15:35:12+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=199) RUNNING
+I, [2016-02-28T15:35:13.675265 #17134]  INFO -- : 2016-02-28T15:35:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=199) COMPLETED after 1.2948
+I, [2016-02-28T15:35:13.722859 #17134]  INFO -- : 2016-02-28T15:35:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=200) RUNNING
+I, [2016-02-28T15:35:14.963183 #17134]  INFO -- : 2016-02-28T15:35:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=200) COMPLETED after 1.2401
+I, [2016-02-28T15:35:14.963329 #17134]  INFO -- : 2016-02-28T15:35:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 100 jobs processed at 0.8962 j/s, 16 failed
+I, [2016-02-28T15:35:15.013204 #17134]  INFO -- : 2016-02-28T15:35:15+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=201) RUNNING
+I, [2016-02-28T15:35:16.219288 #17134]  INFO -- : 2016-02-28T15:35:16+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=201) COMPLETED after 1.2059
+I, [2016-02-28T15:35:16.268358 #17134]  INFO -- : 2016-02-28T15:35:16+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=202) RUNNING
+I, [2016-02-28T15:35:17.640337 #17134]  INFO -- : 2016-02-28T15:35:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=202) COMPLETED after 1.3716
+I, [2016-02-28T15:35:17.821215 #17134]  INFO -- : 2016-02-28T15:35:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=203) RUNNING
+I, [2016-02-28T15:35:19.098314 #17134]  INFO -- : 2016-02-28T15:35:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=203) COMPLETED after 1.2767
+I, [2016-02-28T15:35:19.143361 #17134]  INFO -- : 2016-02-28T15:35:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=204) RUNNING
+I, [2016-02-28T15:35:20.560181 #17134]  INFO -- : 2016-02-28T15:35:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=204) COMPLETED after 1.4166
+I, [2016-02-28T15:35:20.607772 #17134]  INFO -- : 2016-02-28T15:35:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=205) RUNNING
+I, [2016-02-28T15:35:21.859593 #17134]  INFO -- : 2016-02-28T15:35:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=205) COMPLETED after 1.2516
+I, [2016-02-28T15:35:21.906870 #17134]  INFO -- : 2016-02-28T15:35:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=206) RUNNING
+I, [2016-02-28T15:35:23.334923 #17134]  INFO -- : 2016-02-28T15:35:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=206) COMPLETED after 1.4278
+I, [2016-02-28T15:35:23.382485 #17134]  INFO -- : 2016-02-28T15:35:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=207) RUNNING
+I, [2016-02-28T15:35:24.788423 #17134]  INFO -- : 2016-02-28T15:35:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=207) COMPLETED after 1.4056
+I, [2016-02-28T15:35:24.844252 #17134]  INFO -- : 2016-02-28T15:35:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) RUNNING
+E, [2016-02-28T15:35:24.847494 #17134] ERROR -- : 2016-02-28T15:35:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:24.953971 #17134]  INFO -- : 2016-02-28T15:35:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) RUNNING
+E, [2016-02-28T15:35:24.957274 #17134] ERROR -- : 2016-02-28T15:35:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:25.068932 #17134]  INFO -- : 2016-02-28T15:35:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) RUNNING
+E, [2016-02-28T15:35:25.072341 #17134] ERROR -- : 2016-02-28T15:35:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:25.179780 #17134]  INFO -- : 2016-02-28T15:35:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=208) RUNNING
+I, [2016-02-28T15:35:26.441365 #17134]  INFO -- : 2016-02-28T15:35:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=208) COMPLETED after 1.2613
+I, [2016-02-28T15:35:26.489890 #17134]  INFO -- : 2016-02-28T15:35:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=209) RUNNING
+I, [2016-02-28T15:35:27.971581 #17134]  INFO -- : 2016-02-28T15:35:27+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=209) COMPLETED after 1.4815
+I, [2016-02-28T15:35:28.019409 #17134]  INFO -- : 2016-02-28T15:35:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=210) RUNNING
+I, [2016-02-28T15:35:29.625369 #17134]  INFO -- : 2016-02-28T15:35:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=210) COMPLETED after 1.6057
+I, [2016-02-28T15:35:29.734818 #17134]  INFO -- : 2016-02-28T15:35:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=211) RUNNING
+I, [2016-02-28T15:35:31.023441 #17134]  INFO -- : 2016-02-28T15:35:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=211) COMPLETED after 1.2883
+I, [2016-02-28T15:35:31.081631 #17134]  INFO -- : 2016-02-28T15:35:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=212) RUNNING
+I, [2016-02-28T15:35:32.542747 #17134]  INFO -- : 2016-02-28T15:35:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=212) COMPLETED after 1.4609
+I, [2016-02-28T15:35:32.601020 #17134]  INFO -- : 2016-02-28T15:35:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=213) RUNNING
+I, [2016-02-28T15:35:34.107582 #17134]  INFO -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=213) COMPLETED after 1.5063
+I, [2016-02-28T15:35:34.166883 #17134]  INFO -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) RUNNING
+E, [2016-02-28T15:35:34.171772 #17134] ERROR -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:34.287045 #17134]  INFO -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) RUNNING
+E, [2016-02-28T15:35:34.290405 #17134] ERROR -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:34.401891 #17134]  INFO -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) RUNNING
+E, [2016-02-28T15:35:34.405000 #17134] ERROR -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:34.508701 #17134]  INFO -- : 2016-02-28T15:35:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=214) RUNNING
+I, [2016-02-28T15:35:35.695064 #17134]  INFO -- : 2016-02-28T15:35:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=214) COMPLETED after 1.1861
+I, [2016-02-28T15:35:35.742924 #17134]  INFO -- : 2016-02-28T15:35:35+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=215) RUNNING
+I, [2016-02-28T15:35:37.324551 #17134]  INFO -- : 2016-02-28T15:35:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=215) COMPLETED after 1.5814
+I, [2016-02-28T15:35:37.372140 #17134]  INFO -- : 2016-02-28T15:35:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=216) RUNNING
+I, [2016-02-28T15:35:38.590711 #17134]  INFO -- : 2016-02-28T15:35:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=216) COMPLETED after 1.2183
+I, [2016-02-28T15:35:38.637991 #17134]  INFO -- : 2016-02-28T15:35:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=217) RUNNING
+I, [2016-02-28T15:35:40.077890 #17134]  INFO -- : 2016-02-28T15:35:40+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=217) COMPLETED after 1.4396
+I, [2016-02-28T15:35:40.270129 #17134]  INFO -- : 2016-02-28T15:35:40+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=218) RUNNING
+I, [2016-02-28T15:35:41.730440 #17134]  INFO -- : 2016-02-28T15:35:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=218) COMPLETED after 1.4601
+I, [2016-02-28T15:35:41.777092 #17134]  INFO -- : 2016-02-28T15:35:41+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=219) RUNNING
+I, [2016-02-28T15:35:43.173809 #17134]  INFO -- : 2016-02-28T15:35:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=219) COMPLETED after 1.3965
+I, [2016-02-28T15:35:43.232580 #17134]  INFO -- : 2016-02-28T15:35:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=220) RUNNING
+I, [2016-02-28T15:35:44.506641 #17134]  INFO -- : 2016-02-28T15:35:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=220) COMPLETED after 1.2737
+I, [2016-02-28T15:35:44.565445 #17134]  INFO -- : 2016-02-28T15:35:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=221) RUNNING
+I, [2016-02-28T15:35:45.906165 #17134]  INFO -- : 2016-02-28T15:35:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=221) COMPLETED after 1.3405
+I, [2016-02-28T15:35:45.953266 #17134]  INFO -- : 2016-02-28T15:35:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=222) RUNNING
+I, [2016-02-28T15:35:47.194657 #17134]  INFO -- : 2016-02-28T15:35:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=222) COMPLETED after 1.2410
+I, [2016-02-28T15:35:47.241960 #17134]  INFO -- : 2016-02-28T15:35:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=223) RUNNING
+I, [2016-02-28T15:35:48.779686 #17134]  INFO -- : 2016-02-28T15:35:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=223) COMPLETED after 1.5375
+I, [2016-02-28T15:35:48.852552 #17134]  INFO -- : 2016-02-28T15:35:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=224) RUNNING
+I, [2016-02-28T15:35:50.134078 #17134]  INFO -- : 2016-02-28T15:35:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=224) COMPLETED after 1.2811
+I, [2016-02-28T15:35:50.181085 #17134]  INFO -- : 2016-02-28T15:35:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=225) RUNNING
+I, [2016-02-28T15:35:51.488646 #17134]  INFO -- : 2016-02-28T15:35:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job Zendesk.update_user (id=225) COMPLETED after 1.3070
+I, [2016-02-28T15:35:51.550991 #17134]  INFO -- : 2016-02-28T15:35:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) RUNNING
+E, [2016-02-28T15:35:51.555122 #17134] ERROR -- : 2016-02-28T15:35:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:51.688466 #17134]  INFO -- : 2016-02-28T15:35:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) RUNNING
+E, [2016-02-28T15:35:51.691819 #17134] ERROR -- : 2016-02-28T15:35:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:52.161081 #17134]  INFO -- : 2016-02-28T15:35:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) RUNNING
+E, [2016-02-28T15:35:52.166125 #17134] ERROR -- : 2016-02-28T15:35:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:52.399747 #17134]  INFO -- : 2016-02-28T15:35:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) RUNNING
+E, [2016-02-28T15:35:52.403440 #17134] ERROR -- : 2016-02-28T15:35:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) FAILED (1 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+I, [2016-02-28T15:35:52.529304 #17134]  INFO -- : 2016-02-28T15:35:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) RUNNING
+E, [2016-02-28T15:35:53.721516 #17134] ERROR -- : 2016-02-28T15:35:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:35:53.850220 #17134]  INFO -- : 2016-02-28T15:35:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) RUNNING
+E, [2016-02-28T15:35:55.021191 #17134] ERROR -- : 2016-02-28T15:35:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:35:55.163460 #17134]  INFO -- : 2016-02-28T15:35:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) RUNNING
+E, [2016-02-28T15:35:56.349947 #17134] ERROR -- : 2016-02-28T15:35:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:35:56.489527 #17134]  INFO -- : 2016-02-28T15:35:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) RUNNING
+E, [2016-02-28T15:35:57.619157 #17134] ERROR -- : 2016-02-28T15:35:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:35:57.762082 #17134]  INFO -- : 2016-02-28T15:35:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) RUNNING
+E, [2016-02-28T15:35:58.916009 #17134] ERROR -- : 2016-02-28T15:35:58+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:35:59.056939 #17134]  INFO -- : 2016-02-28T15:35:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) RUNNING
+E, [2016-02-28T15:36:00.382456 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:00.385304 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=35) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:00.529761 #17134]  INFO -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) RUNNING
+E, [2016-02-28T15:36:00.535540 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:00.536655 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=103) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:00.659739 #17134]  INFO -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) RUNNING
+E, [2016-02-28T15:36:00.663100 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:00.664194 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=104) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:00.784040 #17134]  INFO -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) RUNNING
+E, [2016-02-28T15:36:00.789298 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:00.790434 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=105) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:00.905794 #17134]  INFO -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) RUNNING
+E, [2016-02-28T15:36:00.909788 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:00.910876 #17134] ERROR -- : 2016-02-28T15:36:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=106) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:01.031455 #17134]  INFO -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) RUNNING
+E, [2016-02-28T15:36:01.035045 #17134] ERROR -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:01.036163 #17134] ERROR -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=107) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:01.158446 #17134]  INFO -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) RUNNING
+E, [2016-02-28T15:36:01.162437 #17134] ERROR -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:01.163509 #17134] ERROR -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=108) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:01.221515 #17134]  INFO -- : 2016-02-28T15:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 47 jobs processed at 1.0160 j/s, 22 failed
+I, [2016-02-28T15:36:17.354976 #17134]  INFO -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) RUNNING
+E, [2016-02-28T15:36:17.399586 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:17.401010 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=126) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:17.521030 #17134]  INFO -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) RUNNING
+E, [2016-02-28T15:36:17.527981 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:17.529083 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=127) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:17.636774 #17134]  INFO -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) RUNNING
+E, [2016-02-28T15:36:17.640359 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:17.641435 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=128) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:17.749641 #17134]  INFO -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) RUNNING
+E, [2016-02-28T15:36:17.755638 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) FAILED (2 prior attempts) with NoMethodError: undefined method `zendesk_id' for nil:NilClass
+E, [2016-02-28T15:36:17.758385 #17134] ERROR -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=129) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:17.900841 #17134]  INFO -- : 2016-02-28T15:36:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) RUNNING
+E, [2016-02-28T15:36:19.056532 #17134] ERROR -- : 2016-02-28T15:36:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:19.059320 #17134] ERROR -- : 2016-02-28T15:36:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=135) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:19.217025 #17134]  INFO -- : 2016-02-28T15:36:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) RUNNING
+E, [2016-02-28T15:36:20.385632 #17134] ERROR -- : 2016-02-28T15:36:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:20.386711 #17134] ERROR -- : 2016-02-28T15:36:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=137) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:20.523357 #17134]  INFO -- : 2016-02-28T15:36:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) RUNNING
+E, [2016-02-28T15:36:21.811843 #17134] ERROR -- : 2016-02-28T15:36:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:21.813101 #17134] ERROR -- : 2016-02-28T15:36:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=138) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:21.947998 #17134]  INFO -- : 2016-02-28T15:36:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) RUNNING
+E, [2016-02-28T15:36:23.296619 #17134] ERROR -- : 2016-02-28T15:36:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:23.299405 #17134] ERROR -- : 2016-02-28T15:36:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=139) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:23.471640 #17134]  INFO -- : 2016-02-28T15:36:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) RUNNING
+E, [2016-02-28T15:36:24.753327 #17134] ERROR -- : 2016-02-28T15:36:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:36:24.756136 #17134] ERROR -- : 2016-02-28T15:36:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=140) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:36:24.818742 #17134]  INFO -- : 2016-02-28T15:36:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 9 jobs processed at 1.1892 j/s, 9 failed
+I, [2016-02-28T15:44:38.110327 #17134]  INFO -- : 2016-02-28T15:44:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) RUNNING
+E, [2016-02-28T15:44:39.379556 #17134] ERROR -- : 2016-02-28T15:44:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:44:39.468781 #17134]  INFO -- : 2016-02-28T15:44:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6871 j/s, 1 failed
+I, [2016-02-28T15:44:50.133827 #17134]  INFO -- : 2016-02-28T15:44:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) RUNNING
+E, [2016-02-28T15:44:51.309484 #17134] ERROR -- : 2016-02-28T15:44:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:44:51.377373 #17134]  INFO -- : 2016-02-28T15:44:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7346 j/s, 1 failed
+I, [2016-02-28T15:45:12.624136 #17134]  INFO -- : 2016-02-28T15:45:12+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) RUNNING
+E, [2016-02-28T15:45:13.868905 #17134] ERROR -- : 2016-02-28T15:45:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:45:13.870012 #17134] ERROR -- : 2016-02-28T15:45:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=226) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:45:13.933163 #17134]  INFO -- : 2016-02-28T15:45:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6974 j/s, 1 failed
+I, [2016-02-28T15:49:17.727217 #17134]  INFO -- : 2016-02-28T15:49:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) RUNNING
+E, [2016-02-28T15:49:18.964115 #17134] ERROR -- : 2016-02-28T15:49:18+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:49:19.040968 #17134]  INFO -- : 2016-02-28T15:49:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7083 j/s, 1 failed
+I, [2016-02-28T15:49:24.468955 #17134]  INFO -- : 2016-02-28T15:49:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) RUNNING
+E, [2016-02-28T15:49:25.674910 #17134] ERROR -- : 2016-02-28T15:49:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:49:25.745786 #17134]  INFO -- : 2016-02-28T15:49:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7210 j/s, 1 failed
+I, [2016-02-28T15:49:47.023407 #17134]  INFO -- : 2016-02-28T15:49:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) RUNNING
+E, [2016-02-28T15:49:48.390550 #17134] ERROR -- : 2016-02-28T15:49:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:49:48.393713 #17134] ERROR -- : 2016-02-28T15:49:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=227) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:49:48.461856 #17134]  INFO -- : 2016-02-28T15:49:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6512 j/s, 1 failed
+I, [2016-02-28T15:56:43.040069 #17134]  INFO -- : 2016-02-28T15:56:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) RUNNING
+E, [2016-02-28T15:56:44.922861 #17134] ERROR -- : 2016-02-28T15:56:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:56:44.985110 #17134]  INFO -- : 2016-02-28T15:56:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.3397 j/s, 1 failed
+I, [2016-02-28T15:56:50.397744 #17134]  INFO -- : 2016-02-28T15:56:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) RUNNING
+E, [2016-02-28T15:56:51.880469 #17134] ERROR -- : 2016-02-28T15:56:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T15:56:51.965915 #17134]  INFO -- : 2016-02-28T15:56:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.5902 j/s, 1 failed
+I, [2016-02-28T15:57:13.322120 #17134]  INFO -- : 2016-02-28T15:57:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) RUNNING
+E, [2016-02-28T15:57:14.534649 #17134] ERROR -- : 2016-02-28T15:57:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T15:57:14.537618 #17134] ERROR -- : 2016-02-28T15:57:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=228) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T15:57:14.602337 #17134]  INFO -- : 2016-02-28T15:57:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7115 j/s, 1 failed
+I, [2016-02-28T16:56:02.515614 #17134]  INFO -- : 2016-02-28T16:56:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) RUNNING
+E, [2016-02-28T16:56:03.763694 #17134] ERROR -- : 2016-02-28T16:56:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T16:56:03.836143 #17134]  INFO -- : 2016-02-28T16:56:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.5115 j/s, 1 failed
+I, [2016-02-28T16:56:09.264564 #17134]  INFO -- : 2016-02-28T16:56:09+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) RUNNING
+E, [2016-02-28T16:56:10.492800 #17134] ERROR -- : 2016-02-28T16:56:10+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T16:56:10.554231 #17134]  INFO -- : 2016-02-28T16:56:10+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7159 j/s, 1 failed
+I, [2016-02-28T16:56:32.101676 #17134]  INFO -- : 2016-02-28T16:56:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) RUNNING
+E, [2016-02-28T16:56:33.956391 #17134] ERROR -- : 2016-02-28T16:56:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T16:56:33.959346 #17134] ERROR -- : 2016-02-28T16:56:33+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=229) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T16:56:34.018071 #17134]  INFO -- : 2016-02-28T16:56:34+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.4934 j/s, 1 failed
+I, [2016-02-28T17:02:16.314075 #17134]  INFO -- : 2016-02-28T17:02:16+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) RUNNING
+E, [2016-02-28T17:02:17.674041 #17134] ERROR -- : 2016-02-28T17:02:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:02:17.869817 #17134]  INFO -- : 2016-02-28T17:02:17+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.3665 j/s, 1 failed
+I, [2016-02-28T17:02:23.271013 #17134]  INFO -- : 2016-02-28T17:02:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) RUNNING
+E, [2016-02-28T17:02:24.473450 #17134] ERROR -- : 2016-02-28T17:02:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:02:24.533981 #17134]  INFO -- : 2016-02-28T17:02:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7336 j/s, 1 failed
+I, [2016-02-28T17:02:46.042762 #17134]  INFO -- : 2016-02-28T17:02:46+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) RUNNING
+E, [2016-02-28T17:02:47.320413 #17134] ERROR -- : 2016-02-28T17:02:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:02:47.323289 #17134] ERROR -- : 2016-02-28T17:02:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=230) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:02:47.451344 #17134]  INFO -- : 2016-02-28T17:02:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6576 j/s, 1 failed
+I, [2016-02-28T17:12:50.099545 #17134]  INFO -- : 2016-02-28T17:12:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) RUNNING
+E, [2016-02-28T17:12:51.460891 #17134] ERROR -- : 2016-02-28T17:12:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:12:51.533923 #17134]  INFO -- : 2016-02-28T17:12:51+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.3924 j/s, 1 failed
+I, [2016-02-28T17:13:02.241845 #17134]  INFO -- : 2016-02-28T17:13:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) RUNNING
+E, [2016-02-28T17:13:03.671647 #17134] ERROR -- : 2016-02-28T17:13:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:13:03.735542 #17134]  INFO -- : 2016-02-28T17:13:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6239 j/s, 1 failed
+I, [2016-02-28T17:13:25.281191 #17134]  INFO -- : 2016-02-28T17:13:25+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) RUNNING
+E, [2016-02-28T17:13:26.542719 #17134] ERROR -- : 2016-02-28T17:13:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:13:26.545614 #17134] ERROR -- : 2016-02-28T17:13:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=231) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:13:26.621752 #17134]  INFO -- : 2016-02-28T17:13:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6871 j/s, 1 failed
+I, [2016-02-28T17:15:19.559605 #17134]  INFO -- : 2016-02-28T17:15:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) RUNNING
+E, [2016-02-28T17:15:20.850918 #17134] ERROR -- : 2016-02-28T17:15:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:15:20.918780 #17134]  INFO -- : 2016-02-28T17:15:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.4114 j/s, 1 failed
+I, [2016-02-28T17:15:26.557495 #17134]  INFO -- : 2016-02-28T17:15:26+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) RUNNING
+E, [2016-02-28T17:15:28.007375 #17134] ERROR -- : 2016-02-28T17:15:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:15:28.142821 #17134]  INFO -- : 2016-02-28T17:15:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.5193 j/s, 1 failed
+I, [2016-02-28T17:15:49.440776 #17134]  INFO -- : 2016-02-28T17:15:49+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) RUNNING
+E, [2016-02-28T17:15:50.665614 #17134] ERROR -- : 2016-02-28T17:15:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:15:50.668591 #17134] ERROR -- : 2016-02-28T17:15:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=232) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:15:50.743649 #17134]  INFO -- : 2016-02-28T17:15:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7149 j/s, 1 failed
+I, [2016-02-28T17:18:53.134111 #17134]  INFO -- : 2016-02-28T17:18:53+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) RUNNING
+E, [2016-02-28T17:18:54.350470 #17134] ERROR -- : 2016-02-28T17:18:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:18:54.419306 #17134]  INFO -- : 2016-02-28T17:18:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6863 j/s, 1 failed
+I, [2016-02-28T17:19:00.169171 #17134]  INFO -- : 2016-02-28T17:19:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) RUNNING
+E, [2016-02-28T17:19:01.386772 #17134] ERROR -- : 2016-02-28T17:19:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:19:01.461306 #17134]  INFO -- : 2016-02-28T17:19:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7177 j/s, 1 failed
+I, [2016-02-28T17:19:22.800038 #17134]  INFO -- : 2016-02-28T17:19:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) RUNNING
+E, [2016-02-28T17:19:24.026481 #17134] ERROR -- : 2016-02-28T17:19:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:19:24.029551 #17134] ERROR -- : 2016-02-28T17:19:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=233) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:19:24.090969 #17134]  INFO -- : 2016-02-28T17:19:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7072 j/s, 1 failed
+I, [2016-02-28T17:19:56.347991 #17134]  INFO -- : 2016-02-28T17:19:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) RUNNING
+E, [2016-02-28T17:19:57.535307 #17134] ERROR -- : 2016-02-28T17:19:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:19:57.592381 #17134]  INFO -- : 2016-02-28T17:19:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7184 j/s, 1 failed
+I, [2016-02-28T17:20:08.297341 #17134]  INFO -- : 2016-02-28T17:20:08+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) RUNNING
+E, [2016-02-28T17:20:09.654974 #17134] ERROR -- : 2016-02-28T17:20:09+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:20:09.727436 #17134]  INFO -- : 2016-02-28T17:20:09+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6506 j/s, 1 failed
+I, [2016-02-28T17:20:31.309031 #17134]  INFO -- : 2016-02-28T17:20:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) RUNNING
+E, [2016-02-28T17:20:32.495747 #17134] ERROR -- : 2016-02-28T17:20:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:20:32.496943 #17134] ERROR -- : 2016-02-28T17:20:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=234) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:20:32.567281 #17134]  INFO -- : 2016-02-28T17:20:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7259 j/s, 1 failed
+I, [2016-02-28T17:21:48.094203 #17134]  INFO -- : 2016-02-28T17:21:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) RUNNING
+E, [2016-02-28T17:21:49.638725 #17134] ERROR -- : 2016-02-28T17:21:49+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:21:49.697313 #17134]  INFO -- : 2016-02-28T17:21:49+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.3955 j/s, 1 failed
+I, [2016-02-28T17:22:00.456082 #17134]  INFO -- : 2016-02-28T17:22:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) RUNNING
+E, [2016-02-28T17:22:01.842988 #17134] ERROR -- : 2016-02-28T17:22:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:22:01.911245 #17134]  INFO -- : 2016-02-28T17:22:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6359 j/s, 1 failed
+I, [2016-02-28T17:22:23.272481 #17134]  INFO -- : 2016-02-28T17:22:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) RUNNING
+E, [2016-02-28T17:22:24.461337 #17134] ERROR -- : 2016-02-28T17:22:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:22:24.464263 #17134] ERROR -- : 2016-02-28T17:22:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=235) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:22:24.527168 #17134]  INFO -- : 2016-02-28T17:22:24+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7398 j/s, 1 failed
+I, [2016-02-28T17:22:30.278277 #17134]  INFO -- : 2016-02-28T17:22:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) RUNNING
+E, [2016-02-28T17:22:31.697886 #17134] ERROR -- : 2016-02-28T17:22:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:22:31.757805 #17134]  INFO -- : 2016-02-28T17:22:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6204 j/s, 1 failed
+I, [2016-02-28T17:22:37.199588 #17134]  INFO -- : 2016-02-28T17:22:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) RUNNING
+E, [2016-02-28T17:22:38.400654 #17134] ERROR -- : 2016-02-28T17:22:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:22:38.476299 #17134]  INFO -- : 2016-02-28T17:22:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7193 j/s, 1 failed
+I, [2016-02-28T17:22:49.320673 #17134]  INFO -- : 2016-02-28T17:22:49+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) RUNNING
+E, [2016-02-28T17:22:50.629631 #17134] ERROR -- : 2016-02-28T17:22:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:22:50.702324 #17134]  INFO -- : 2016-02-28T17:22:50+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6654 j/s, 1 failed
+I, [2016-02-28T17:22:56.386070 #17134]  INFO -- : 2016-02-28T17:22:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) RUNNING
+E, [2016-02-28T17:22:57.670058 #17134] ERROR -- : 2016-02-28T17:22:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:22:57.904151 #17134]  INFO -- : 2016-02-28T17:22:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6014 j/s, 1 failed
+I, [2016-02-28T17:23:03.609036 #17134]  INFO -- : 2016-02-28T17:23:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) RUNNING
+E, [2016-02-28T17:23:04.896886 #17134] ERROR -- : 2016-02-28T17:23:04+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:23:04.898366 #17134] ERROR -- : 2016-02-28T17:23:04+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=236) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:23:04.960209 #17134]  INFO -- : 2016-02-28T17:23:04+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6746 j/s, 1 failed
+I, [2016-02-28T17:23:21.435544 #17134]  INFO -- : 2016-02-28T17:23:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) RUNNING
+E, [2016-02-28T17:23:22.695897 #17134] ERROR -- : 2016-02-28T17:23:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:23:22.697166 #17134] ERROR -- : 2016-02-28T17:23:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=237) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:23:22.767843 #17134]  INFO -- : 2016-02-28T17:23:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6935 j/s, 1 failed
+I, [2016-02-28T17:25:47.030951 #17134]  INFO -- : 2016-02-28T17:25:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) RUNNING
+E, [2016-02-28T17:25:48.325486 #17134] ERROR -- : 2016-02-28T17:25:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) FAILED (0 prior attempts) with RangeError: 2533982139 is out of range for ActiveRecord::Type::Integer with limit 4
+I, [2016-02-28T17:25:48.388740 #17134]  INFO -- : 2016-02-28T17:25:48+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6885 j/s, 1 failed
+I, [2016-02-28T17:25:59.424650 #17134]  INFO -- : 2016-02-28T17:25:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) RUNNING
+E, [2016-02-28T17:26:00.646887 #17134] ERROR -- : 2016-02-28T17:26:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:26:00.812910 #17134]  INFO -- : 2016-02-28T17:26:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) RUNNING
+E, [2016-02-28T17:26:01.954984 #17134] ERROR -- : 2016-02-28T17:26:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:26:02.026986 #17134]  INFO -- : 2016-02-28T17:26:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 2 jobs processed at 0.7419 j/s, 2 failed
+I, [2016-02-28T17:26:07.469151 #17134]  INFO -- : 2016-02-28T17:26:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) RUNNING
+E, [2016-02-28T17:26:08.659833 #17134] ERROR -- : 2016-02-28T17:26:08+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:26:08.736102 #17134]  INFO -- : 2016-02-28T17:26:08+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7222 j/s, 1 failed
+I, [2016-02-28T17:26:19.879231 #17134]  INFO -- : 2016-02-28T17:26:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) RUNNING
+E, [2016-02-28T17:26:21.108040 #17134] ERROR -- : 2016-02-28T17:26:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:26:21.242106 #17134]  INFO -- : 2016-02-28T17:26:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) RUNNING
+E, [2016-02-28T17:26:22.420381 #17134] ERROR -- : 2016-02-28T17:26:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:26:22.423125 #17134] ERROR -- : 2016-02-28T17:26:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=238) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:26:22.486296 #17134]  INFO -- : 2016-02-28T17:26:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 2 jobs processed at 0.7279 j/s, 2 failed
+I, [2016-02-28T17:26:28.125671 #17134]  INFO -- : 2016-02-28T17:26:28+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) RUNNING
+E, [2016-02-28T17:26:29.418001 #17134] ERROR -- : 2016-02-28T17:26:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:26:29.570921 #17134]  INFO -- : 2016-02-28T17:26:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) RUNNING
+E, [2016-02-28T17:26:30.672136 #17134] ERROR -- : 2016-02-28T17:26:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:26:30.674903 #17134] ERROR -- : 2016-02-28T17:26:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=239) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:26:30.742776 #17134]  INFO -- : 2016-02-28T17:26:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 2 jobs processed at 0.7255 j/s, 2 failed
+I, [2016-02-28T17:26:52.746720 #17134]  INFO -- : 2016-02-28T17:26:52+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) RUNNING
+E, [2016-02-28T17:26:54.170015 #17134] ERROR -- : 2016-02-28T17:26:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:26:54.173021 #17134] ERROR -- : 2016-02-28T17:26:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=240) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:26:54.237988 #17134]  INFO -- : 2016-02-28T17:26:54+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6246 j/s, 1 failed
+I, [2016-02-28T17:31:10.014896 #17134]  INFO -- : 2016-02-28T17:31:10+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) RUNNING
+E, [2016-02-28T17:31:11.356846 #17134] ERROR -- : 2016-02-28T17:31:11+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:31:11.415931 #17134]  INFO -- : 2016-02-28T17:31:11+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6613 j/s, 1 failed
+I, [2016-02-28T17:31:22.313106 #17134]  INFO -- : 2016-02-28T17:31:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) RUNNING
+E, [2016-02-28T17:31:23.521401 #17134] ERROR -- : 2016-02-28T17:31:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:31:23.587470 #17134]  INFO -- : 2016-02-28T17:31:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7291 j/s, 1 failed
+I, [2016-02-28T17:31:45.458883 #17134]  INFO -- : 2016-02-28T17:31:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) RUNNING
+E, [2016-02-28T17:31:47.068576 #17134] ERROR -- : 2016-02-28T17:31:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:31:47.072172 #17134] ERROR -- : 2016-02-28T17:31:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=241) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:31:47.151412 #17134]  INFO -- : 2016-02-28T17:31:47+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.5449 j/s, 1 failed
+I, [2016-02-28T17:34:59.453704 #17134]  INFO -- : 2016-02-28T17:34:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) RUNNING
+E, [2016-02-28T17:35:00.840030 #17134] ERROR -- : 2016-02-28T17:35:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:35:00.910526 #17134]  INFO -- : 2016-02-28T17:35:00+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6457 j/s, 1 failed
+I, [2016-02-28T17:35:06.303956 #17134]  INFO -- : 2016-02-28T17:35:06+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) RUNNING
+E, [2016-02-28T17:35:07.754525 #17134] ERROR -- : 2016-02-28T17:35:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:35:07.813948 #17134]  INFO -- : 2016-02-28T17:35:07+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6222 j/s, 1 failed
+I, [2016-02-28T17:35:29.122601 #17134]  INFO -- : 2016-02-28T17:35:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) RUNNING
+E, [2016-02-28T17:35:30.393022 #17134] ERROR -- : 2016-02-28T17:35:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) FAILED (0 prior attempts) with RangeError: 2549894495 is out of range for ActiveRecord::Type::Integer with limit 4
+I, [2016-02-28T17:35:30.517107 #17134]  INFO -- : 2016-02-28T17:35:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) RUNNING
+E, [2016-02-28T17:35:31.862844 #17134] ERROR -- : 2016-02-28T17:35:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:35:31.865685 #17134] ERROR -- : 2016-02-28T17:35:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=242) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:35:31.928543 #17134]  INFO -- : 2016-02-28T17:35:31+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 2 jobs processed at 0.6824 j/s, 2 failed
+I, [2016-02-28T17:35:37.328085 #17134]  INFO -- : 2016-02-28T17:35:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) RUNNING
+E, [2016-02-28T17:35:38.498428 #17134] ERROR -- : 2016-02-28T17:35:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:35:38.569869 #17134]  INFO -- : 2016-02-28T17:35:38+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7500 j/s, 1 failed
+I, [2016-02-28T17:35:59.951293 #17134]  INFO -- : 2016-02-28T17:35:59+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) RUNNING
+E, [2016-02-28T17:36:01.353972 #17134] ERROR -- : 2016-02-28T17:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:36:01.357157 #17134] ERROR -- : 2016-02-28T17:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=243) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:36:01.417171 #17134]  INFO -- : 2016-02-28T17:36:01+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6306 j/s, 1 failed
+I, [2016-02-28T17:36:12.166855 #17134]  INFO -- : 2016-02-28T17:36:12+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) RUNNING
+E, [2016-02-28T17:36:13.372179 #17134] ERROR -- : 2016-02-28T17:36:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:36:13.433722 #17134]  INFO -- : 2016-02-28T17:36:13+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6954 j/s, 1 failed
+I, [2016-02-28T17:36:19.152344 #17134]  INFO -- : 2016-02-28T17:36:19+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) RUNNING
+E, [2016-02-28T17:36:20.610591 #17134] ERROR -- : 2016-02-28T17:36:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:36:20.693531 #17134]  INFO -- : 2016-02-28T17:36:20+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6026 j/s, 1 failed
+I, [2016-02-28T17:36:42.049429 #17134]  INFO -- : 2016-02-28T17:36:42+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) RUNNING
+E, [2016-02-28T17:36:44.833136 #17134] ERROR -- : 2016-02-28T17:36:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:36:44.836151 #17134] ERROR -- : 2016-02-28T17:36:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=244) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:36:44.899770 #17134]  INFO -- : 2016-02-28T17:36:44+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.3352 j/s, 1 failed
+I, [2016-02-28T17:37:22.296786 #17134]  INFO -- : 2016-02-28T17:37:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) RUNNING
+E, [2016-02-28T17:37:23.771907 #17134] ERROR -- : 2016-02-28T17:37:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:37:23.847776 #17134]  INFO -- : 2016-02-28T17:37:23+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.5564 j/s, 1 failed
+I, [2016-02-28T17:37:29.272850 #17134]  INFO -- : 2016-02-28T17:37:29+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) RUNNING
+E, [2016-02-28T17:37:30.836582 #17134] ERROR -- : 2016-02-28T17:37:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) FAILED (0 prior attempts) with RangeError: 2534021779 is out of range for ActiveRecord::Type::Integer with limit 4
+I, [2016-02-28T17:37:30.973932 #17134]  INFO -- : 2016-02-28T17:37:30+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) RUNNING
+E, [2016-02-28T17:37:32.315490 #17134] ERROR -- : 2016-02-28T17:37:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:37:32.389684 #17134]  INFO -- : 2016-02-28T17:37:32+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 2 jobs processed at 0.6219 j/s, 2 failed
+I, [2016-02-28T17:37:37.813845 #17134]  INFO -- : 2016-02-28T17:37:37+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) RUNNING
+E, [2016-02-28T17:37:39.235284 #17134] ERROR -- : 2016-02-28T17:37:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:37:39.324767 #17134]  INFO -- : 2016-02-28T17:37:39+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6160 j/s, 1 failed
+I, [2016-02-28T17:37:55.631100 #17134]  INFO -- : 2016-02-28T17:37:55+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) RUNNING
+E, [2016-02-28T17:37:56.955865 #17134] ERROR -- : 2016-02-28T17:37:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:37:56.957154 #17134] ERROR -- : 2016-02-28T17:37:56+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=245) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:37:57.020426 #17134]  INFO -- : 2016-02-28T17:37:57+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6736 j/s, 1 failed
+I, [2016-02-28T17:38:02.448649 #17134]  INFO -- : 2016-02-28T17:38:02+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) RUNNING
+E, [2016-02-28T17:38:03.647837 #17134] ERROR -- : 2016-02-28T17:38:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:38:03.651113 #17134] ERROR -- : 2016-02-28T17:38:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=246) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:38:03.729088 #17134]  INFO -- : 2016-02-28T17:38:03+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7187 j/s, 1 failed
+I, [2016-02-28T17:38:14.464530 #17134]  INFO -- : 2016-02-28T17:38:14+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) RUNNING
+E, [2016-02-28T17:38:15.698603 #17134] ERROR -- : 2016-02-28T17:38:15+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) FAILED (0 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:38:15.777000 #17134]  INFO -- : 2016-02-28T17:38:15+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7042 j/s, 1 failed
+I, [2016-02-28T17:38:21.191491 #17134]  INFO -- : 2016-02-28T17:38:21+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) RUNNING
+E, [2016-02-28T17:38:22.545263 #17134] ERROR -- : 2016-02-28T17:38:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) FAILED (1 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+I, [2016-02-28T17:38:22.605667 #17134]  INFO -- : 2016-02-28T17:38:22+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.6524 j/s, 1 failed
+I, [2016-02-28T17:38:43.896416 #17134]  INFO -- : 2016-02-28T17:38:43+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) RUNNING
+E, [2016-02-28T17:38:45.090140 #17134] ERROR -- : 2016-02-28T17:38:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) FAILED (2 prior attempts) with NoMethodError: undefined method `id' for nil:NilClass
+E, [2016-02-28T17:38:45.093196 #17134] ERROR -- : 2016-02-28T17:38:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] Job User#update_zendesk_without_delay (id=247) REMOVED permanently because of 3 consecutive failures
+I, [2016-02-28T17:38:45.151143 #17134]  INFO -- : 2016-02-28T17:38:45+0530: [Worker(host:vineet-Aspire-5750Z pid:17134)] 1 jobs processed at 0.7326 j/s, 1 failed

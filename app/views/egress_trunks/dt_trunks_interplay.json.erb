@@ -1,0 +1,6 @@
+{
+  "draw": <%=params[:draw]%>,
+  "recordsTotal": <%=@egress_trunks.total_count%>,
+  "recordsFiltered": <%=@egress_trunks.total_count%>,
+  "data": <%=@data.to_json.html_safe%>
+}

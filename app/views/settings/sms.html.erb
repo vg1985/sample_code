@@ -1,0 +1,278 @@
+<% provide(:title, 'Settings - SMS/Text') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">SMS/Text</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+	<%= javascript_include_tag 'settings'%>
+<%end -%>
+
+<%=content_for :js_init do -%>	
+	App.SmsSettingsHandler.init();
+	App.OutboundSmsSettingsHandler.init();
+	App.RateSpinners.init();
+	App.InboundRateSmsFormHandler.init(<%=@did_sms.charge_failed?%>);
+<%end -%>
+
+<div class="row">
+	<div class="col-md-12 mb30">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#api" data-toggle="tab"><strong>API Cred.</strong></a>
+			</li>
+			<li>
+				<a href="#rates" data-toggle="tab"><strong>Default Rates</strong></a>
+			</li>
+			<li>
+				<a href="#email" data-toggle="tab"><strong>Email Preferences</strong></a>
+			</li>
+			<li>
+				<a href="#other" data-toggle="tab"><strong>Other</strong></a>
+			</li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content mb30">
+			<div class="tab-pane active" id="api">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @sms_setting, url:  settings_update_sms_settings_path, remote: true, method: :patch,
+										html: {class: 'sms_settings_form form-bordered'} do |f|%>
+								<%=f.hidden_field :uid%>
+								<%=hidden_field_tag :action, '', name: 'form[action]' %>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title"><%=@sms_setting.label%></h4>
+									</div>
+									<div class="panel-body panel-body-nopadding">
+										<div class="form-group">
+											<label class="col-sm-2 control-label mt10">User ID:</label>
+											<div class="col-sm-3">
+												<%=f.text_field :sms_user_id, class: 'form-control'%>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label mt10">API Token:</label>
+											<div class="col-sm-3">
+												<%=f.text_field :sms_api_token, class: 'form-control'%>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label mt10">API Secret:</label>
+											<div class="col-sm-3">
+												<%=f.text_field :sms_api_secret, class: 'form-control'%>
+											</div>
+										</div>
+									</div><!-- panel-body -->
+									<div class="panel-footer">
+										<label class="col-sm-2"></label>
+										<button type="submit" class="btn btn-primary" id="updateBtn">
+											Update
+										</button>
+										<button type="submit" class="btn btn-white" id="testBtn">
+											Test
+										</button>
+										<span class="text-muted sms_settings_form_msg" style="margin-left:10px;"></span>
+									</div><!-- panel-footer -->
+								</div><!-- panel-default -->
+						<%end%>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="rates">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @did_sms, url: update_did_sms_rates_inbound_did_path(@did_sms), remote: true, html: {id: 'edit_did_sms_form', class: 'form-horizontal form-bordered'} do |f| -%>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">SMS rates</h4>
+									<!--<p>
+										Basic form with a class name of <code>
+											.form-bordered</code>.
+									</p>-->
+								</div>
+								<div class="panel-body panel-body-nopadding">
+									<div class="form-group sms_activation_spinner_group">
+										<label class="col-sm-2 control-label">Activation</label>
+										<div class="col-sm-2">
+											<%=f.text_field :activation, id: 'sms_activation_spinner', title: t(:activation_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:100%'%>
+										</div>
+										<div class='col-sm-8'>
+											<label style="margin-left:5px;" class="error" id="sms_activation_spinner_error" for="sms_activation_spinner"></label>
+										</div>
+									</div>
+									<div class="form-group sms_monthly_spinner_group">
+										<label class="col-sm-2 control-label">Monthly</label>
+										<div class="col-sm-2">
+											<%=f.text_field :monthly, id: 'sms_monthly_spinner', title: t(:monthly_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:100%'%>
+										</div>
+										<div class='col-sm-8'>
+											<label style="margin-left:5px;" class="error" id="sms_monthly_spinner_error" for="sms_monthly_spinner"></label>
+										</div>
+									</div>
+									<div class="form-group sms_outbound_spinner_group">
+										<label class="col-sm-2 control-label">Outbound</label>
+										<div class="col-sm-2">
+											<%=f.text_field :outbound, id: 'sms_outbound_spinner', title: t(:outbound_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:100%'%>
+										</div>
+										<div class='col-sm-8'>
+											<label style="margin-left:5px;" class="error" id="sms_outbound_spinner_error" for="sms_outbound_spinner"></label>
+										</div>
+									</div>
+									<div class="form-group sms_inbound_spinner_group">
+										<label class="col-sm-2 control-label">Inbound</label>
+										<div class="col-sm-2">
+											<%=f.text_field :inbound, id: 'sms_inbound_spinner', title: t(:inbound_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:100%'%>
+										</div>
+										<div class='col-sm-8'>
+											<label style="margin-left:5px;" class="error" id="sms_inbound_spinner_error" for="sms_inbound_spinner"></label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Charge Failed SMS</label>
+						                <div class="col-sm-2 control-label">
+						                	<div class="toggle-default" id="sms_charge_failed_tgl"></div>
+						                	<%=f.check_box :charge_failed, id: 'sms_charge_failed_tgl_chkbox', style: 'opacity:0; position:absolute;'%>
+						                </div>
+									</div>
+								</div><!-- panel-body -->
+								<div class="panel-footer">
+									<button class="btn btn-primary" id="submit_sms_form" type="submit">Submit</button>
+									<button type="reset" id="reset_sms_form" class="btn btn-default">Reset</button>
+									<span class="text-muted" id="edit_did_sms_form_msg" style="margin-left:10px;"></span>
+								</div><!-- panel-footer -->
+							</div><!-- panel-default -->
+						<%end -%>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="email">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @outbound_sms_setting, url: settings_update_outbound_sms_settings_path, remote: true, method: :patch, html: {class: 'outbound_sms_settings_form form-bordered'} do |f|%>
+									<%=f.hidden_field :uid%>
+								<div class="panel-heading">
+									<h4 class="panel-title"><%=@outbound_sms_setting.label%></h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10">Mail Server Address:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_server_address, class: 'form-control'%>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10">Port:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_port, class: 'form-control'%>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >Domain:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_domain, class: 'form-control'%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >Sender's Email:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_email, class: 'form-control'%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >Username:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_username, class: 'form-control'%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >Password:</label>
+										<div class="col-sm-3">
+											<%=f.text_field :outbound_sms_password, class: 'form-control'%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >Subject:</label>
+										<div class="col-sm-8">
+											<%=f.text_field :outbound_sms_subject, class: 'form-control'%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label mt10" >
+											Body: <br />
+											<a class="var-tooltip" type="button" data-toggle="popover" data-placement="right">Variables?</a>
+										</label>
+										<div class="col-sm-8">
+											<%=f.text_area :outbound_sms_body, class: 'form-control', rows: 8%>
+										</div>
+									</div>
+								</div><!-- panel-body -->
+								<div class="panel-footer">
+									<label class="col-sm-2"></label>
+									<button class="btn btn-primary">
+										Update
+									</button>
+									<span class="text-muted sms_settings_form_msg" style="margin-left:10px;"></span>
+								</div><!-- panel-footer -->
+							<%end%>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="other">
+				<div class="row">
+					<div class="col-md-12">
+						<%=form_for @sms_other_setting, url: settings_update_sms_other_settings_path, remote: true, method: :patch, html: {class: 'outbound_sms_settings_form form-bordered'} do |f|%>
+							<%=f.hidden_field :uid%>
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@sms_other_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Max. Message Size:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :sms_other_max_message_size, class: 'form-control'%>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Max. Recipients Allowed:</label>
+									<div class="col-sm-3">
+										<%=f.number_field :sms_other_max_recipients, class: 'form-control'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted sms_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var var_tooltip_html = '<div class="row">\
+								<div class="col-sm-12">\
+									<i>{{sms_from}}</i> &nbsp;-> Number from which the SMS is sent. For e.g. +19582891722 <br />\
+									<i>{{sms_to}}</i> &nbsp;-> The DID to which SMS is sent. For e.g. 5102980799 <br />\
+									<i>{{sms_body}}</i> &nbsp;-> The text message in SMS.<br />\
+									<i>{{sms_time}}</i> &nbsp;-> The time at which the SMS has arrived. For e.g. 10:45 AM <br />\
+									<i>{{sms_date}}</i> &nbsp;-> The date &amp; time at which SMS has arrived. For e.g. 2016-01-21 10:45 AM\
+									<i>{{sms_url}}</i> &nbsp; -> The SMS Log URL. This will directly take the user to SMS Log Details.\
+								</div>\
+							</div>'
+</script>

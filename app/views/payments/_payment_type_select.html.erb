@@ -1,0 +1,8 @@
+<%
+    payment_options = PaymentGateway.for_select
+
+    if policy(:payment).custom_payment?
+        payment_options = PaymentGateway.for_select(true)
+    end
+%>
+<%= select :payment, :payment_type, options_for_select(payment_options, disabled: @disabled_payment_options), {include_blank: true}, class: "", data: {placeholder: "Choose Payment Type..."}, id: "payment_type"%>

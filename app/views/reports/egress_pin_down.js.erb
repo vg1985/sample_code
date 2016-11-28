@@ -1,0 +1,11 @@
+<%unless @egress_trunks.nil?%>
+	$("#egress_trunk_select").html("<option value=''>All Egress Trunks</option><%=escape_javascript(options_for_select(@egress_trunks))%>").select2('val', '');
+<%end%>
+
+<%unless @rate_sheets.nil?%>
+	$("#egress_rate_select").html("<option value=''>All Ratesheets</option><%=escape_javascript(options_for_select(@rate_sheets))%>").select2('val', '');
+<%end%>
+
+<%unless @egress_tech_prefixes.nil?%>
+	$("#egress_techprefix_select").html("<option value=''>All Tech Prefixes </option><%=escape_javascript(options_for_select(@egress_tech_prefixes))%>").select2('val', '');
+<%end%>

@@ -1,0 +1,167 @@
+<% provide(:title, 'Ingress Trunks') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Inbound DID</li>
+  <li class="active">Ingress Trunks</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'trunk_groups'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  <%if policy(:ingress_trunk).select_carrier?%>
+    App.AdminIngressTrunkListHandler.setUrls(['<%=dt_trunks_interplay_ingress_trunks_path%>']);
+    App.AdminIngressTrunkListHandler.init([<%=params[:cid]%>]);
+    <%if params[:cid].present? && params[:cid].to_i > 0 -%>
+      $('#ingress_trunks_table').DataTable().columns(2).search($('#carrier_select').select2('val')).draw();
+    <%else -%>
+      $('#ingress_trunks_table').DataTable().draw();
+    <%end-%>
+  <%else%>
+    App.CarrierIngressTrunkListHandler.setUrls(['<%=dt_trunks_interplay_ingress_trunks_path%>']);
+    App.CarrierIngressTrunkListHandler.init();
+  <%end%>
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body manage-dids-actions">
+        <div class="col-sm-1">
+          <%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%>
+        </div>
+        <div class="col-sm-4">
+          <%if policy(:ingress_trunk).list_activate?%>
+          <button class="btn btn-primary disabled btn_change_all_status" data-url="<%=update_bulk_status_ingress_trunks_path(enable: 1)%>" data-toggle="modal" data-target=".enable-trunk-confirm-dlg" title="Activate All"><span class="glyphicon glyphicon-check"></span>
+          </button>
+          <%end%>
+          <%if policy(:ingress_trunk).list_deactivate? %>
+          <button class="btn btn-warning disabled btn_change_all_status" data-url="<%=update_bulk_status_ingress_trunks_path%>" data-toggle="modal" data-target=".disable-trunk-confirm-dlg" title="Deactivate All"><span class="glyphicon glyphicon-lock"></span></button>
+          <%end%>
+          <%if policy(:ingress_trunk).list_delete? %>
+          <button class="btn btn-danger disabled btn_change_all_status" data-url="<%=bulk_destroy_ingress_trunks_path%>" data-toggle="modal" data-target=".delete-trunk-confirm-dlg" title="Delete All"><span class="glyphicon glyphicon-trash"></span></button>
+          <%end%>
+          <%if policy(:ingress_trunk).new?%>
+            <%=link_to 'New Ingress Trunk', new_ingress_trunk_path, class: 'btn btn-primary'%>
+          <%end%>
+        </div>
+        <%if policy(:ingress_trunk).select_carrier?%>
+        <div class="col-sm-7">
+          <div style="margin-right:15px;">
+            <span>Filter By: </span> &nbsp;
+            <%= select_tag :carrier_id, options_for_select(current_user.carrier_options()), {prompt: 'All Carriers', class: 'select2', id: 'carrier_select'} %>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_trunks_form' do -%>
+      <%if current_user.is_carrier?%>
+        <%=hidden_field_tag :otpid%>
+        <%=hidden_field_tag :otpcode%>
+      <%end%>
+      <div class="panel panel-default ingress-trunks-container">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="ingress_trunks_table" class="table table-striped dataTable table-hover table-bordered">
+              <thead>
+                <tr>
+                  <%if policy(:ingress_trunk).select_carrier?%>
+                    <th class='no-sort' width="3%"> &nbsp;</th>
+                    <th width="10%">Name</th>
+                    <th width="13%">Carrier</th>
+                    <th width="10%">Route Plan</th>
+                    <th width="10%">Ratesheet</th>
+                    <th width="10%">Status</th>
+                    <th class='no-sort' width="10%">Actions</th>
+                  <%else%>
+                    <th class='no-sort' width="3%"> &nbsp;</th>
+                    <th width="10%">Name</th>
+                    <th width="10%">Route Plan</th>
+                    <th width="10%">Ratesheet</th>
+                    <th width="10%">Status</th>
+                    <th class='no-sort' width="10%">Actions</th>
+                  <%end%>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade delete-trunk-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete these trunk(s)? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_trunk_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade enable-trunk-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to activate these trunk(s)?</h4>
+                <a href="javascript:void(0);" id="enable_trunk_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade disable-trunk-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to deactivate these trunk(s)?</h4>
+                <a href="javascript:void(0);" id="disable_trunk_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<%if current_user.is_carrier?%>
+  <%=render partial: 'shared/otp_auth', locals: {type: 'rmobem'}%>
+<%end%>

@@ -1,0 +1,40 @@
+<% provide(:title, 'Reset Password') %>
+
+<%=content_for :javascripts do %>
+  <%= javascript_include_tag 'carriers'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.CarrierChangePassHandler.init();
+<%end%>
+<style>
+  label.error {
+    display:block;
+  }
+</style>
+<div>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, id: 'changePassCarrierForm' }) do |f| %>
+        <%
+            messages = resource.errors.full_messages.to_sentence
+        %>
+        <%if messages.present?%>
+            <div class="error">Error: <%=messages%></div>
+        <%end%>
+        <%= f.hidden_field :reset_password_token %>
+
+      <h4 class="nomargin">Change Password</h4>
+      <p class="mt5 mb20"></p>
+
+      <div class="form-group">
+      	<%= f.label :password, 'New password' %><br />
+        <%= f.password_field :password, class: 'form-control',autofocus: true, autocomplete: 'off' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'Confirm new password' %><br />
+        <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: 'off' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Reset my password', class: 'btn btn-success' %>
+      </div>
+    <% end %>
+</div>

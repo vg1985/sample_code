@@ -1,0 +1,120 @@
+<% provide(:title, "Support-Create Ticket") %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Support</li>
+  <li class="active">Create Ticket</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'support' %>
+<%end%>
+
+<%unless policy(:support).select_carrier?%>
+	<%email_options = current_user.carrier.emails_for_support%>
+	<%phone_options = carrier.phones_for_support%>
+<%end%>
+
+<%=content_for :js_init do %>
+    App.SupportTicketCreateHandler.setUrls([]);
+    App.SupportTicketCreateHandler.init(<%=policy(:support).select_carrier?%>);
+    
+    <%unless policy(:support).select_carrier?%>
+    	<%email_options = current_user.carrier.emails_for_support%>
+    	<%phone_options = carrier.phones_for_support%>
+
+    	App.SupportTicketCreateHandler.initCCTo([
+    		<%email_options.each do |contact| -%>
+    			{text: '<%=contact[0].html_safe%>', id: '<%=contact[1]%>'},
+    		<%end -%>
+    	]);
+
+    	App.SupportTicketCreateHandler.initPhones(<%=phone_options.collect{ |contact| contact[0] }.to_s.html_safe%>);
+    <%end%>
+<%end%>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title">Create Ticket</div>
+    </div><!-- panel-heading-->
+    <%=form_for :ticket, url: support_index_path, method: :post, remote: false, html: {class: 'ticket_form', id: 'new_ticket_form'} do |f| -%>
+    <div class="panel-body panel-body-nopadding">
+        <% if policy(:support).select_carrier?-%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Carrier <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :carrier_id, @carriers, {include_blank: true}, {class: '', data: {placeholder: 'Choose Carrier...'}} %>
+            </div>
+        </div>
+        <%end -%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Email <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+            	<span id="carrier_contacts_list">
+                <% if policy(:support).select_carrier?-%>
+                	<%=select(:ticket, :requester_id, [], {include_blank: true}, {class: '', data: {placeholder: 'Select Email'}})%>
+                <%else%>
+                	<%=select :ticket, :requester_id, email_options, {include_blank: true}, {class: '', data: {placeholder: 'Select Email...'}} %>
+                <%end%>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Name <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.text_field :requester_name, class: 'form-control', placeholder: 'Name' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">CC to:</label>
+            <div class="col-sm-3" id="contacts_cc_list">
+                <%=f.hidden_field :cc_to, placeholder: 'Select Contacts...' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Phone:</label>
+            <div class="col-sm-3" id="contacts_phone_list">
+                <%=f.hidden_field :phone, placeholder: 'Select Contacts...' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Subject <span class="asterisk">*</span></label>
+            <div class="col-sm-4">
+                <%=f.text_field :subject, class: 'form-control', placeholder: 'Subject' %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Type <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :type, Zendesk::TICKET_TYPES.dup.invert, {include_blank: true}, {class: '', data: {placeholder: 'Choose Type...'}} %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Priority <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :priority, Zendesk::TICKET_PRIORITY.dup.invert, {include_blank: true}, {class: '', data: {placeholder: 'Choose Priority...'}} %>
+            </div>
+        </div>
+        <% if policy(:support).add_tags? -%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Tags:</label>
+            <div class="col-sm-3">
+                <%=f.hidden_field :tags %>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Description <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+                <%=f.text_area :comment, cols: '50', rows: '10' %>
+            </div>
+        </div>
+    </div><!-- panel-body -->
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary add-charge-btn">
+            Create Ticket
+        </button>
+        <%=link_to 'Reset', new_support_path, class: 'btn btn-white', onclick: 'App.overlayModal.show();' %>
+    </div><!-- panel-footer -->
+    <%end -%>
+</div><!-- panel -->

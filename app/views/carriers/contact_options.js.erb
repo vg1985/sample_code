@@ -1,0 +1,12 @@
+$('#carrier_contacts_list').html('<%=escape_javascript(select(:ticket, :requester_id, @emails, {include_blank: true}, {class: '', data: {placeholder: 'Select Email'}}))%>');
+$('#contacts_cc_list').html('<%=escape_javascript(hidden_field(:ticket, :cc_to))%>');
+$('#contacts_phone_list').html('<%=escape_javascript(hidden_field(:ticket, :phone))%>');
+
+App.SupportTicketCreateHandler.initRequester();
+App.SupportTicketCreateHandler.initCCTo([
+	<%@emails.each do |contact| -%>
+		{text: '<%=contact[0].html_safe%>', id: '<%=contact[1]%>'},
+	<%end -%>
+]);
+
+App.SupportTicketCreateHandler.initPhones(<%=@phones.collect{ |contact| contact[0] }.to_s.html_safe%>);

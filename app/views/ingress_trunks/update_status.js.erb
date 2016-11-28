@@ -1,0 +1,18 @@
+$('#ingress_trunks_table').DataTable().draw();
+
+var gritter_opts = {
+	title: 'Ingress Trunks',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @success_msg.present? -%>
+	gritter_opts.text = '<%=@success_msg%>';
+	gritter_opts.class_name = 'growl-success';
+<%end%>
+<%if @error_msg.present? -%>
+	gritter_opts.text = '<%=@error_msg%>';
+	gritter_opts.class_name = 'growl-danger';	
+<%end%>
+   
+jQuery.gritter.add(gritter_opts);

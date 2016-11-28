@@ -1,0 +1,45 @@
+<% provide(:title, 'Administrator Listing') %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-btns">
+      <a href="#" class="panel-close">&times;</a>
+      <a href="#" class="minimize">&minus;</a>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <%= link_to new_admin_path, class: "btn btn-xs btn-primary" do %>
+          <span class="fa fa-plus mr10"></span>New Admin
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table id="admins" class="table table-striped dataTable table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Allowed Carriers</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminsList">
+          <% @admins.each do |admin| %>
+            <%= render partial: "admin", locals: {admin: admin} %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#admins').dataTable();
+	});
+</script>
+

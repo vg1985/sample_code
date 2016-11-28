@@ -1,0 +1,46 @@
+<p class="text-right">
+  Export:&nbsp;
+  <%=link_to 'javascript:void(0);', title: 'Excel', data: {format: 'xls'}, class: 'export-link' do -%>
+    <span class="fa fa-file-excel-o" style="font-size:20px;"></span>
+  <%end%>&nbsp;
+  <%=link_to 'javascript:void(0);', title: 'CSV', data: {format: 'csv'}, class: 'export-link' do -%>
+    <span class="fa fa-file-text-o" style="font-size:20px;"></span>
+  <%end%>
+</p>
+<% 
+  col_order = @data['columns'].split(',') 
+  if policy(:report).select_carrier?
+    allowed_sortby_cols = cdr_sortby_cols.keys
+  else
+    allowed_sortby_cols = cdr_carrier_sortby_cols.keys
+  end
+%>
+<table id="reports_table" cellpadding="2" class="text-center dataTable table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <%
+      if policy(:report).select_carrier?
+        columns_select = cdr_columns_select(true, false)
+      else
+        columns_select = cdr_columns_select(false, false)
+      end 
+      -%>
+      
+      <%col_order.each do |key|%>
+        <th class="text-center <%=allowed_sortby_cols.include?(key)? '' : 'no-sort'%>"><%=columns_select[key]%></th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <%@result['cdrs'].each do |rec| -%>
+      <tr class="text-center">
+        <%col_order.each do |key|%>
+        <td class="text-center">
+          <%=cdr_search_format_value(key, rec[key])%>
+        </td>
+        <%end%>
+      </tr>
+    <%end -%>
+  </tbody>
+</table>
+<div class="text-center">Query Time: <%=@result['query_time']%></div>

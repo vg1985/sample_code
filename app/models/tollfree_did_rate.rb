@@ -1,0 +1,3 @@
+class TollfreeDidRate < DidRate
+  
+end

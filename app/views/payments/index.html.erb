@@ -1,0 +1,137 @@
+<% provide(:title, 'Finance - Payments History') %>
+
+<%=content_for :breadcrumb do%>
+  <li>Finance</li>
+  <li class="active">Payments History</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'finance' %>
+<%end%>
+
+<%=content_for :js_init do %> 
+<%if policy(:payment).select_carrier? -%>
+    App.AdminPaymentHistoryHandler.setUrls(['<%=dt_payments_interplay_payments_path%>']);
+    App.AdminPaymentHistoryHandler.init();
+<%else -%>
+    App.CarrierPaymentHistoryHandler.setUrls(['<%=dt_payments_interplay_payments_path%>']);
+    App.CarrierPaymentHistoryHandler.init();
+<%end -%>
+    
+<%end%>
+
+<div class="row">
+    <div class="col-md-12">
+        <%= form_tag payments_path, class: 'form-inline' do %>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a class="minimize" href="">−</a>
+                    </div>
+                    <h4 class="panel-title">Filters</h4>
+                </div>
+                <div class="panel-body">
+                    <%if policy(:payment).select_carrier? -%>
+                    <div class="form-group" style="margin-right:15px;">
+                        <label class="sr-only" for="carrier_select">Carrier</label>
+                        <%= select_tag :carrier_id, options_from_collection_for_select(@carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: "select2", id: "carrier_select"} %>
+                    </div>
+                    <% end -%>
+                    <div class="form-group" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="payment_status">Status</label>
+                        <%
+                            if policy(:payment).select_carrier?
+                                default_status = 'pending'
+                            else
+                                default_status = "All Statuses"
+                            end
+                        %>
+                        <%= select_tag :status, options_for_select(["All Statuses"] + payment_status_select, default_status), {include_blank: false, class: "select2", id: 'payment_status' } %>
+                    </div>
+                    <div class="form-group mr10" style="margin-right:15px; min-width:120px;">
+                        <label class="sr-only" for="payment_type">Payment Type</label>
+                        <%= select_tag :payment_type, options_for_select(payment_type_select), {prompt: "All Payment Types", class: "select2", id: 'payment_type'} %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Payments</h4>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="<%=policy(:payment).select_carrier? ? 'admin_payments' : 'carrier_payments'%>" class="table table-striped table-bordered dataTable table-hover">
+                        <thead>
+                          <tr>
+                            <%if policy(:payment).select_carrier? -%>
+                                <th width="20%">Carrier</th>
+                                <th width="15%">Payment Type</th>
+                                <th width="20%">Date</th>
+                                <th width="12%">Amount(in $)</th>
+                                <th width="15%">Status</th>
+                                <th class='no-sort'>Actions</th>
+                            <%else%>
+                                <th width="15%">Payment Type</th>
+                                <th width="20%">Date</th>
+                                <th width="12%">Amount(in $)</th>
+                                <th width="15%">Status</th>
+                                <th width="20%" class='no-sort'>Description</th>
+                                <th class='no-sort'>Actions</th>
+                            <%end -%>
+                          </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade cancel-payment-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body panel-body-nopadding">
+                        <div class="row">
+                            <h4>Are you sure you want to proceed? This operation is irreversible.</h4>
+                            <%=form_tag "#", method: :put, class: 'form-horizontal form-bordered' do%>
+                                <div class="form-group">
+                                    <div>
+                                        <label>
+                                            <input type="checkbox" value="true" name="deduct" checked="checked">
+                                            Deduct Amount from Carrier's Account Balance
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style='text-align:center;'>
+                                    <button class="btn btn-danger">Yes</button>
+                                    <a href="javascript:void(0);" class="btn btn-default close_modal">No</a>
+                                </div>
+                            <%end%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade view-payment-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
+<div class="modal fade edit-payment-dlg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<% provide(:title, 'Settings - General') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">General</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.GeneralSettingsHandler.init();
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<%=form_for @general_setting, url: settings_update_general_settings_path, remote: true, method: :patch, html: {class: 'general_settings_form form-bordered'} do |f|%>
+				<%=f.hidden_field :uid%>
+			<div class="panel-heading">
+				<h4 class="panel-title"><%=@general_setting.label%></h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Terms &amp; Conditions</label>
+					<div class="col-sm-8">
+						<%=f.text_area :general_tnc, size: '10x20', class: 'form-control'%>
+					</div>
+				</div>
+			</div><!-- panel-body -->
+			<div class="panel-footer">
+				<label class="col-sm-2"></label>
+				<button class="btn btn-primary">
+					Update
+				</button>
+				<span class="text-muted general_settings_form_msg" style="margin-left:10px;"></span>
+			</div><!-- panel-footer -->
+			<%end%>
+		</div><!-- panel-default -->
+	</div>
+</div>

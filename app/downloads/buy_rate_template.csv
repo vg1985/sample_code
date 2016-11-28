@@ -1,0 +1,2 @@
+vendor,country_code,country_name,prefix,price_monthly,price_activation,price_msg_out,price_msg_in
+Test,USA,USA,86,0.027,0.534,0.027,0.015

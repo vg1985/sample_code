@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <%# wicked_pdf_stylesheet_link_tag "pdf" -%>
+  </head>
+  <body>
+    <div id="header">
+      <%=@report_name%>
+    </div>
+    <div id="content" style='font-size:9px; margin-top:10px;'>
+      <%= yield %>
+    </div>
+  </body>
+</html>

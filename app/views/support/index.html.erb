@@ -1,0 +1,152 @@
+<% provide(:title, 'Support-View Tickets') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Support</li>
+  <li class="active">View Tickets</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'support'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  <%if policy(:support).select_carrier?%>
+    App.AdminViewTicketsHandler.setUrls(['<%=dt_tickets_interplay_support_index_path%>']);
+    App.AdminViewTicketsHandler.init();
+  <%else%>
+    App.CarrierViewTicketsHandler.setUrls(['<%=dt_tickets_interplay_support_index_path%>']);
+    App.CarrierViewTicketsHandler.init();
+  <%end%>
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+    <div class="panel panel-default">
+      <div class="panel-body support-tickets-actions">
+        <div class="col-sm-5">
+          <div>
+            <span>Filter By: </span> &nbsp;
+            <%if policy(:support).select_carrier?%>
+              <%
+                allowed_carriers = current_user.allowed_carriers
+              
+                if allowed_carriers.include?('-10')
+                  carriers = Carrier.all
+                else
+                  carriers = Carrier.where(['id IN (?)', allowed_carriers]).all
+                end
+              %>
+            <%= select_tag :carrier_id, options_from_collection_for_select(carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: 'select2', id: 'carrier_select'} %>
+            <%end%>
+            <%= select_tag :status, options_for_select(status_options), {prompt: 'All Open', class: 'select2', id: 'status_select', style: 'margin-left:10px;'} %>
+            <%= select_tag :priority, options_for_select(priority_options), {prompt: 'Any Priority', class: 'select2', id: 'priority_select', style: 'margin-left:10px;'} %>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <button class="btn btn-default mr5 disabled" id="merge_all">Merge</button>
+        </div>
+      </div>
+    </div>
+    <%=form_tag '#', method: :post, remote: true, id: 'selected_trunks_form' do -%>
+      <div class="panel panel-default support-tickets-container sip-style-selectable">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="support_tickets_table" class="table table-striped dataTable table-hover table-bordered">
+              <thead>
+                <tr>
+                  <%if policy(:support).select_carrier?%>
+                    <th width="1%" class='no-sort'><%=render partial: 'shared/checkbox_toggler', locals: {klass: 'checkbox_toggler_container'}%></th>
+                    <!--<th class='no-sort' width="3%"> &nbsp;</th>-->
+                    <th class='no-sort' width="5%">ID</th>
+                    <th class='no-sort' width="12%">Carrier</th>
+                    <th width="10%">Type</th>
+                    <th width="17%" class='no-sort'>Title</th>
+                    <th width="10%">Priority</th>
+                    <th width="5%">Status</th>
+                    <th width="10%">Created on</th>
+                    <th width="10%">Updated on</th>
+                    <th width="20%" class='no-sort'>Actions</th>
+                  <%else%>
+                    <th width="5%" class='no-sort'>ID</th>
+                    <th width="10%">Type</th>
+                    <th width="25%" class='no-sort'>Title</th>
+                    <th width="10%">Priority</th>
+                    <th width="10%">Status</th>
+                    <th width="10%">Created on</th>
+                    <th width="10%">Updated on</th>
+                    <th width="20%" class='no-sort'>Actions</th>
+                  <%end%>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>    
+</div>
+
+<div class="modal fade delete-ticket-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete this ticket? This action is irreversible.</h4>
+                <a href="javascript:void(0);" id="del_ticket_confirm_ok" class="btn btn-danger">OK</a>
+                <a href="/support/'+ cellData[0] +'" rel="nofollow" data-method="delete" id="ticket_'+ cellData[0] +'_destroy_link"></a>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade merge-ticket-modal" aria-hidden="true" aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Merge <span id="ticket_ids_info"></span></h4>
+      </div>
+      <%=form_tag merge_support_index_path, method: :post, id: 'mergeTicketForm' do%>
+        <%=hidden_field_tag :source_ticket_ids%>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-sm-4 control-label mt10">Merge into Ticket ID <span class="asterisk">*</span></label>
+            <div class="col-sm-8">
+                <%=text_field_tag :ticket_id, nil, class: 'form-control', placeholder: '259', style:'width: 25%' %>
+                <!-- <div class="error" style="display:none;"></div> -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label mt10">Target comment <span class="asterisk">*</span></label>
+            <div class="col-sm-8">
+                <%=text_area_tag :target_comment, nil, class: 'form-control', placeholder: 'What are you merging?' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label mt10">Source comment <span class="asterisk">*</span></label>
+            <div class="col-sm-8">
+                <%=text_area_tag :source_comment, nil, class: 'form-control', placeholder: 'Why are you merging?' %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">
+              Confirm &amp; Merge
+          </button>
+           <a class="btn btn-default close_modal" href="javascript:void(0);">Cancel</a>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

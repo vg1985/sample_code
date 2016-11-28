@@ -1,0 +1,119 @@
+<% provide :title, "Payment Gateway Settings" %>
+<%= form_tag save_settings_payment_gateways_path, id: "payment_settings" do %>
+  <div class="col-sm-6">
+    <div class="panel">
+      <div class="panel-body" id="paypal_settings">
+        <div class="form-group">
+          <label class="col-sm-5 control-label">
+            Paypal Express
+          </label>
+          <div class="col-sm-4">
+            <!-- - if @paypal.active
+            -->
+            <!--   .btn.btn-xs.btn-warning Turn Off
+            -->
+            <!-- - else
+            -->
+            <!--   .btn.btn-xs.btn-success Turn On
+            -->
+            <!-- = hidden_field_tag 'paypal[active]', @paypal.active
+            -->
+            <%= select_tag 'paypal[active]', options_for_select([["ON", true], ["OFF", false]], @paypal.active), { class: "form-control input-sm"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Login</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "paypal[credentials][login]", @paypal.credentials["login"], class: "form-control input-sm" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Password</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "paypal[credentials][password]", @paypal.credentials["password"], class: "form-control input-sm" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Signature</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "paypal[credentials][signature]", @paypal.credentials["signature"], class: "form-control input-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel">
+      <div class="panel-body" id="credit_card_settings">
+        <div class="form-group">
+          <label class="col-sm-5 control-label">
+            Credit Card Payment
+          </label>
+          <div class="col-sm-4">
+            <!-- - if !PaymentGateway.active_credit_card.blank?
+            -->
+            <!--   .btn.btn-xs.btn-warning Turn Off
+            -->
+            <!-- - else
+            -->
+            <!--   .btn.btn-xs.btn-success Turn On
+            -->
+            <!-- = hidden_field_tag 'credit_card[active]', nil
+            -->
+            <%= select_tag 'credit_card[active]', options_for_select([["ON", true], ["OFF", false]], PaymentGateway.has_active_credit_card?), { class: "form-control input-sm"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">
+            Payment Gateway
+            <br/>
+          </label>
+          <div class="col-sm-6">
+            <%= select_tag 'credit_card[gateway]', options_for_select(PaymentGateway.credit_card_selection), { class: "form-control input-sm"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Allowed Amounts</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "allowed_amounts", (YAML.load(@paypal.allowed_amounts).join(',') rescue ""), class: "form-control input-sm", id: 'tags' %>
+          </div>
+        </div>
+        <hr/>
+        <h4>USA ePay</h4>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Source Key</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "usaepay[credentials][source_key]", @usaepay.credentials[:source_key], class: "form-control input-sm" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Pin</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "usaepay[credentials][pin]", @usaepay.credentials[:pin], class: "form-control input-sm" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Credit card authorization form template</label>
+          <div class="col-sm-6">
+            <%= text_field_tag "usaepay[credentials][pin]", @usaepay.credentials[:pin], class: "form-control input-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6">
+      <div class="pull-right">
+        <%= submit_tag 'Save', class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#tags').tagsInput({width:'auto'});
+});
+  
+</script>
+  

@@ -1,0 +1,12 @@
+App.overlayModal.hide();
+<%if @result['cdrs'].size > 0%>
+	jQuery('#report_data_container').html('<%=escape_javascript(render partial: 'cdr_search_table')%>');
+	App.CdrSearchReportHandler.initDatatable('#reports_table', <%=@result['total']%>);
+<%else%>
+	jQuery('#report_data_container').html('<p class="text-info text-center">No data found for this search criteria.</p>');
+<%end%>
+<%if params['sel_cols'].blank? -%>
+App.CdrSearchReportHandler.selectCols(<%=cdr_search_default_cols.to_json.html_safe%>);
+<%end -%>
+App.ProfitReportHandler.minimizeFilter();
+jQuery('.reports-container .panel-body').show();

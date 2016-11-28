@@ -1,0 +1,28 @@
+<% provide(:title, 'Resend Confirmation Instructions') %>
+
+<%=content_for :javascripts do %>
+  <%= javascript_include_tag 'carriers'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.CarrierChangePassHandler.init();
+<%end%>
+<div class="row">
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, id: 'resendConfirmationCarrierForm' }) do |f| %>
+        <%
+            messages = resource.errors.full_messages.to_sentence
+        %>
+        <%if messages.present?%>
+            <div class="error">Error: <%=messages%></div>
+        <%end%>
+      <div class="form-group">
+      	<%= f.label :email %><br />
+    	<%= f.email_field :email, autofocus: true, style: 'width: 75%' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.submit 'Resend confirmation instructions', class: 'btn btn-success' %>
+      </div>
+    <% end %>
+</div>
+

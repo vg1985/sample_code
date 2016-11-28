@@ -1,0 +1,3 @@
+did,description,call_limit,max_duration,pdd_timeout,ring_timeout,area,country,sell_rate,sell_activation,sell_monthly,sell_bill_start,sell_bill_increment,dest_1_type,dest_1_val,dest_1_description,dest_2_type,dest_2_val,dest_2_description,dest_3_type,dest_3_val,dest_3_description,dest_4_type,dest_4_val,dest_4_description,dest_5_type,dest_5_val,dest_5_description
+3333333,this is a description,200,7200,60,30,,,0.012,,,12,6,ip,sip@1.2.3.2:4000,:),tr,2,:(,tr,1,:-/,tr,4,:S,cf,245678945678,:-O
+2222222,this is a description,200,7200,60,30,,,0.012,,,12,6,,,,,,,,,,,,,,,

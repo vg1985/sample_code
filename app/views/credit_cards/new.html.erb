@@ -1,0 +1,158 @@
+<% provide(:title, 'Finance - Add Credit Card') %>
+
+<%=content_for :breadcrumb do%>
+  <li>Finance</li>
+  <li><%=link_to "Credit Cards", credit_cards_path%></li>
+  <li class="active">Add</li>
+<%end%>
+                                    
+<%=content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'dropzone', media: 'all', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :javascripts do %>
+  <%=javascript_include_tag 'dropzone.min', 'finance', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+  App.NewCreditCardHandler.init(["<%=upload_authorization_credit_cards_path%>", "<%=remove_authorization_credit_cards_path%>"]);
+<%end%>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Add new credit card</h4>
+    </div>
+    <%=form_for @credit_card, {html: {id: "new_creditcard_form", class: "form-bordered", multipart: true}} do |f|%>
+    <div class="panel-body panel-body-nopadding">
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Friendly name of card <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=f.text_field :nickname, class: 'form-control', maxlength: 20%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Type</label>
+            <div class="col-sm-3 mt10">
+                <%
+                    if params[:cc_cloud][:brand].present?
+                        dimmer_style = ''
+                        case(params[:cc_cloud][:brand])
+                            when 'visa'
+                                dimmer_style = "background-position: 0 -23px"
+                            when 'master'
+                                dimmer_style = "background-position: 0 -46px"
+                            when 'american_express'
+                                dimmer_style = "background-position: 0 -69px"
+                            when 'discover'
+                                dimmer_style = "background-position: 0 -92px"
+                            else
+                                dimmer_style = "background-position: 0 0px"
+                        end
+                    end
+                %>
+                <div id="cctypedimmer" style="<%=dimmer_style%>">  
+                    Credit card icons.  
+                    <%=hidden_field_tag "cc_cloud[brand]", params[:cc_cloud][:brand] %>
+                </div>
+                <%# text_field_tag "credit_card[brand]", params[:credit_card][:brand], class: "form-control" %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Credit Card Number <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=text_field_tag "cc_cloud[number]", params[:cc_cloud][:number], class: 'form-control', maxlength: 30%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">CVV / CVV2 <span class='asterisk'>*</span></label>
+            <div class="col-sm-1">
+                <%=password_field_tag "cc_cloud[verification_value]", params[:cc_cloud][:verification_value], class: 'form-control', maxlength: 4%>
+            </div>
+        </div>
+        <div class="form-group">
+            <%
+                selected_date = nil
+                if params[:cc_cloud][:month].present? && params[:cc_cloud][:year].present?
+                    selected_date = Date.new(params[:cc_cloud][:year].to_i, params[:cc_cloud][:month].to_i)
+                end
+            %>
+            <label class="col-sm-2 control-label mt10">Expiry Date <span class='asterisk'>*</span></label>
+            <div class="col-sm-1">
+                <%=select_month(selected_date || Date.today, {use_short_month: true}, {name: "cc_cloud[month]", class: "form-control"}) %>
+            </div>
+            <div class="col-sm-2 text-left">
+               <%= select_year(selected_date || Date.today, {start_year: Date.today.year + 6, end_year: Date.today.year, field_name: 'year'}, {name: "cc_cloud[year]", class: "form-control", style: "width:50%"}) %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">First Name <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=text_field_tag "cc_cloud[first_name]", params[:cc_cloud][:first_name], class: 'form-control', maxlength: 250%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Last Name <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=text_field_tag "cc_cloud[last_name]", params[:cc_cloud][:last_name], class: 'form-control', maxlength: 250%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Address <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=f.text_area :address, class: 'form-control'%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">State <span class='asterisk'>*</span></label>
+            <div class="col-sm-3">
+                <%=f.select :city_state, US_STATES, {}, {class: "city_state_select", data:{placeholder: "Choose State..."}} %>
+            </div>
+            <div class="col-sm-3" id="other_city_state" style="display:none;">
+                <%=f.text_field :other_city_state, class: 'form-control', placeholder: 'Type state here', maxlength: 250%>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Zip Code <span class='asterisk'>*</span></label>
+            <div class="col-sm-2">
+                <%=f.text_field :zip_code, class: 'form-control', maxlength: 15%>
+            </div>
+        </div>
+        <%if Setting.find_by(uid: 'finance').finance_auth_file_name.present? %>
+        <div class="form-group">
+            <label class="col-sm-2 control-label mt10">Supporting Document Template</label>
+            <div class="col-sm-3 mt10">
+                <%=link_to "Download Template", '/settings/download_auth_sample' %>
+            </div>
+        </div>
+        <%end%>
+        <div class="form-group" id="custom_type">
+            <label class="col-sm-2 control-label mt10">Supporting Documents:
+            <h6 class="help-block">
+                Max. files allowed: <span class="text-primary">3</span> <br/>
+                File max. size: <span class="text-primary">5MB </span> <br />
+                Allowed Formats: <br /> <span class="text-primary"> *.png, *.jpg, *.gif, *.pdf
+                </span> 
+            </h6>
+            </label>
+            <div class="col-sm-6 dropzone" id="auth_files" style="min-height:130px;">
+                <div class='dz-message'><h4>Drop Files here</h4> or click here to upload.</h4></div>
+                <div class="fallback">
+                    Your system does not support File Drag 'n' Drop. Please select files to upload.
+                    <%=f.fields_for :documents, [Document.new, Document.new, Document.new] do |d| %>
+                        <%=d.file_field :content %><br />
+                    <%end%>
+                </div>
+            </div>
+            <%=hidden_field_tag :uploaded_docs %>
+        </div>
+    </div><!-- panel-body -->
+    
+    <div class="panel-footer">
+        <label class="col-sm-2"></label>
+        <button class="btn btn-primary add-cc-btn">
+            Add Credit Card
+        </button>
+        <%=link_to 'Cancel', credit_cards_path, class: 'btn btn-default' %>
+    </div><!-- panel-footer -->
+    <%end%>
+</div>

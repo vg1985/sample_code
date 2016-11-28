@@ -1,0 +1,12 @@
+<tr>
+    <td>
+        <div class='text-primary'>
+            <strong><%=number%></strong>
+        </div>
+    </td>
+    <td>$<%=@order.rate_info[:activation]%></td>
+    <td>$<%=@order.rate_info[:monthly]%></td>
+    <td>$<%=@order.rate_info[:per_minute]%>/min.</td>
+    <td>$<%=@order.rate_info[:unit_price]%></td>
+    <td><%=status.html_safe%></td>
+</tr>

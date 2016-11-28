@@ -1,0 +1,52 @@
+<table id="reports_table" cellspacing="0" border='1'>
+  <thead>
+    <tr>
+        <th rowspan="2" style="width:16%; vertical-align: middle;">
+           <%=group_by_title(@data['id_group'] || @data['date_group'])%>
+        </th>
+        <th colspan="2" style="width:23%">Duration</th>
+        <th colspan="2" style="width:21%">Profit</th>
+        <th rowspan="2" style="width:12%; vertical-align: middle;">Ingress Cost</th>
+        <th rowspan="2" style="width:12%; vertical-align: middle;">Egress Cost</th>
+        <th colspan="2" style="width:22%">No. of Calls</th>
+    </tr>
+    <tr>
+      <th>Raw</th>
+      <th>Billed</th>
+      <th>Value</th>
+      <th>Percent</th>
+      <th>Total</th>
+      <th>Non-zero</th>
+    </tr>
+  </thead>
+  <tfoot>
+      <tr>
+          <th>Total:</th>
+          <th><%=@result['total_duration']%></th>
+          <th><%=@result['total_billtime']%></th>
+          <th><%=@result['total_profit']%></th>
+          <th><%=@result['avg_profit_percent']%></th>
+          <th><%=@result['total_ingress_cost']%></th>
+          <th><%=@result['total_egress_cost']%></th>
+          <th><%=@result['total_calls']%></th>
+          <th><%=@result['total_nonzero']%></th>
+      </tr>
+  </tfoot>
+  <tbody>
+    <%@result['group'].each do |group| -%>
+      <tr>
+        <td style="text-align:center;">
+          <%=group_by_col_val(@data['id_group'] || @data['date_group'], group['id'])%>
+        </td>
+        <td style="text-align:center;"><%=group['duration']%></td>
+        <td style="text-align:center;"><%=group['billtime']%></td>
+        <td style="text-align:center;"><%=group['profit']%></td>
+        <td style="text-align:center;"><%=group['profit_percent']%></td>
+        <td style="text-align:center;"><%=group['ingress_cost']%></td>
+        <td style="text-align:center;"><%=group['egress_cost']%></td>
+        <td style="text-align:center;"><%=group['calls']%></td>
+        <td style="text-align:center;"><%=group['nonzero']%></td>
+      </tr>
+    <%end -%>
+  </tbody>
+</table>

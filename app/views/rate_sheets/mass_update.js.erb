@@ -1,0 +1,7 @@
+<% if @message == true %>
+  $("#apply-all").modal('hide');
+  $("#apply-selected").modal('hide');
+  window.location.href = "<%= rate_sheet_path(@rate_sheet) %>";
+<% else %>
+  $('#apply-all .error, #apply-selected .error').html("<%= @message %>");
+<% end %>

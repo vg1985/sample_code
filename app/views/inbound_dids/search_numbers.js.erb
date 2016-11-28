@@ -1,0 +1,8 @@
+<%if @tollfree_page%>
+	jQuery("div#tf_search_result").html("<%=escape_javascript(render(:partial => 'numbers'))%>");
+	App.tfSearchFormHandler.startTimer(['<%=cancel_purchase_orders_path%>'], 300);
+<%else%>
+	jQuery("div#local_search_result").html("<%=escape_javascript(render(:partial => 'numbers'))%>");
+	App.LocalSearchFormHandler.startTimer(['<%=cancel_purchase_orders_path%>'], 300);
+<%end%>
+

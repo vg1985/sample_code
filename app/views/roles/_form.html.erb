@@ -1,0 +1,299 @@
+<div class="panel-heading">
+    <h4 class="panel-title">
+      <%if @role.new_record?%>
+        Create Role
+      <%else%>
+        Modify Role
+      <%end%>
+    </h4>
+</div>
+<%=form_for @role, remote: true, html: {class: 'form-bordered', id: (@role.new_record? ? 'newRoleForm' : 'editRoleForm')} do |f| %>
+<%unless @role.new_record?%>
+  <%=f.hidden_field :id%>
+<%end%>
+<div class="panel-body panel-body-nopadding">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-3 control-label mt10">Name:</label>
+                <div class="col-sm-6">
+                    <%=f.text_field :name, class: 'form-control', placeholder: 'Reseller', disabled: @role.internal?%>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label mt10">Select Carriers:</label>
+                <div class="col-sm-6">
+                    <div class="ckbox ckbox-default">
+                        <%=f.check_box :carrier_ids, {id: 'all_carriers_cb', name: 'role[carrier_ids][]', disabled: @role.internal?}, '-10', '' %>
+                        <label for="all_carriers_cb">All Carriers</label>
+                    </div>
+                    <%=f.select :carrier_ids, Carrier.for_roles, {}, { placeholder: 'Select Carriers', id: 'carriers_select', multiple: true, disabled: @role.internal? } %>
+                    <div id="no_carrier_msg" style="display:none; color:#b94a48">This field is required.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%for_internal_use = @role.id != Role::CARRIER%>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan="2" width="20%" class='text-center'>Modules</th>
+                    <th width="80%" class="text-left">Permissions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if for_internal_use%>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :carriers, OpenStruct.new(perm.object.carriers || {})  do |carrier|%>
+                            <td><%=carrier.check_box :module, data: {module: :carrier}, class: 'module-enabler'%></td>
+                            <td>Carrier</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=carrier.check_box :list, class: 'module-carrier' %> List </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :create, class: 'module-carrier'%> Create </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :update, class: 'module-carrier'%> Update </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :delete, class: 'module-carrier'%> Delete </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :disable, class: 'module-carrier'%> Disable </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :enable, class: 'module-carrier'%> Enable </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=carrier.check_box :masquerade, class: 'module-carrier'%> Masquerade </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+                <%end%>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :ingress_trunks, OpenStruct.new(perm.object.ingress_trunks || {})  do |ingress_trunk|%>
+                            <td><%=ingress_trunk.check_box :module, data: {module: :ingress_trunk}, class: 'module-enabler'%></td>
+                            <td>Ingress Trunks</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=ingress_trunk.check_box :list, class: 'module-ingress_trunk' %> List </label>
+                                        </div>
+                                    </div>
+                                    <%if for_internal_use%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=ingress_trunk.check_box :create, class: 'module-ingress_trunk'%> Create </label>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=ingress_trunk.check_box :update, class: 'module-ingress_trunk'%> Update </label>
+                                        </div>
+                                    </div>
+                                    <%if for_internal_use%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=ingress_trunk.check_box :delete, class: 'module-ingress_trunk'%> Delete </label>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=ingress_trunk.check_box :deactivate, class: 'module-ingress_trunk'%> Deactivate </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=ingress_trunk.check_box :activate, class: 'module-ingress_trunk'%> Activate </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :egress_trunks, OpenStruct.new(perm.object.egress_trunks || {})  do |egress_trunk|%>
+                            <td><%=egress_trunk.check_box :module, data: {module: :egress_trunk}, class: 'module-enabler'%></td>
+                            <td>Egress Trunks</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=egress_trunk.check_box :list, class: 'module-egress_trunk' %> List </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=egress_trunk.check_box :create, class: 'module-egress_trunk'%> Create </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=egress_trunk.check_box :update, class: 'module-egress_trunk'%> Update </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=egress_trunk.check_box :delete, class: 'module-egress_trunk'%> Delete </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=egress_trunk.check_box :deactivate, class: 'module-egress_trunk'%> Deactivate </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=egress_trunk.check_box :activate, class: 'module-egress_trunk'%> Activate </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :support, OpenStruct.new(perm.object.support || {})  do |support|%>
+                            <td><%=support.check_box :module, data: {module: :support}, class: 'module-enabler'%></td>
+                            <td>Support</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=support.check_box :create_ticket, class: 'module-support' %> Create Ticket </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=support.check_box :update_ticket, class: 'module-support' %> Update Ticket </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=support.check_box :delete_tickets, class: 'module-support'%> Delete Ticket </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=support.check_box :close_tickets, class: 'module-support'%> Close Ticket </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=support.check_box :add_tags, class: 'module-support'%> Add Tags </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+                <%if for_internal_use%>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :administrations, OpenStruct.new(perm.object.administrations || {})  do |administration|%>
+                            <td><%=administration.check_box :module, data: {module: :administration}, class: 'module-enabler'%></td>
+                            <td>Administration</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=administration.check_box :masquerade, class: 'module-administration' %> Admin Masquerade </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+                <%end%>
+                <tr>
+                    <%=f.fields_for :perms, OpenStruct.new(f.object.perms|| {})  do |perm|%>
+                        <%=perm.fields_for :reports, OpenStruct.new(perm.object.reports || {})  do |report|%>
+                            <td><%=report.check_box :module, data: {module: :reporting}, class: 'module-enabler'%></td>
+                            <td>Reports</td>
+                            <td>
+                                <div class="row">
+                                    <%if for_internal_use%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=report.check_box :profit_report, class: 'module-reporting' %>Profit Report</label>
+                                        </div>
+                                    </div>
+                                    <%end%>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=report.check_box :summary_report, class: 'module-reporting' %>Summary Report</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=report.check_box :did_report, class: 'module-reporting' %>DID Report</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label><%=report.check_box :sms_report, class: 'module-reporting' %>SMS Report</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=report.check_box :cdr_search, class: 'module-reporting'%>CDR Search</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="perms-cbox block">
+                                            <label> <%=report.check_box :cdr_logs, class: 'module-reporting'%>CDR Logs</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        <%end%>
+                    <%end%>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- panel-body -->
+<div class="panel-footer">
+    <label class="col-sm-2"></label>
+    <%if @role.new_record?%>
+      <%= f.submit 'Create', class: 'btn btn-primary submit-btn' %>
+    <%else%>
+      <%= f.submit 'Update', class: 'btn btn-primary submit-btn' %>
+    <%end%>
+    <%=link_to 'Cancel', roles_path, class: 'btn btn-white'%>
+</div><!-- panel-footer -->
+<%end%>

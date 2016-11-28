@@ -1,0 +1,92 @@
+<%plans_in_use = Routing.plans_in_use%>
+
+<%@routings.each do |routing| -%>
+	<div class="panel panel-default routing-plan-container" id="routing_<%=routing.id%>_container">
+		<div class="panel-heading">
+			<div class="panel-btns">
+				<%if params[:q].present?%>
+					<a class="minimize" href="#" title="Collapse/Expand">−</a>
+				<%else%>
+					<a class="minimize maximize" href="#" title="Collapse/Expand">+</a>
+				<%end%>
+				
+				<%if plans_in_use.include?(routing.id)%>
+					<%=link_to '#', data: {toggle: 'modal', target: '.delete-routing-info-dlg'}, title: 'Delete' do%>
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					<%end%>
+				<%else%>
+					<%=link_to '#', data: {routing_id: routing.id}, class: 'routing-destroy', title: 'Delete' do%>
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					<%end%>
+					<%=link_to '', routing_path(routing), method: :delete, remote: true, id: "routing_#{routing.id}_destroy_link"%>
+				<%end%>
+				
+				<%=link_to edit_routing_path(routing), class: 'routing_edit', title: 'Modify' do%>
+					<span class="glyphicon glyphicon-edit"></span>
+				<%end%>
+				
+	  		</div><!-- panel-btns -->
+	  		<h3 class="panel-title" id="routing_<%=routing.id%>_name"><a class="no-text-change minimize maximize" href="#"><%=routing.name%> - <%=routing.routing_type%></a></h3>
+	  		<p>
+	  			<em><%=routing.description.present? ? routing.description : 'Modify routing plan to edit description'%></em>
+	  		</p>
+		</div>
+		<div class="panel-body" style="<%=params[:q].present? ? '' : 'display:none;'%>">
+			<h4>Egress trunk(s) within this routing plan</h4>
+			<span id="routing_table_<%=routing.id%>">
+				<%=render partial: 'routing_plan_table', locals: {routing: routing}%>
+			</span>
+
+			<h4>Ingress trunk(s) within this routing plan</h4>
+			<%unless routing.ingress_trunks.exists?%>
+				<p>This routing plan is not linked with any ingress trunk(s).</p>
+			<%else%>
+				<%trunk_size = routing.ingress_trunks.size%>
+				<div class="table-responsive">
+			      <table class="table table-hover">
+			        <thead>
+			            <tr>
+			              <th width="15%">&nbsp;</th>
+			              <th width="25%">Carrier</th>
+			              <th width="20%">Ingress Trunk</th>
+			              <th width="20%">Status</th>
+			              <th>&nbsp;</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			          <%trunks = routing.ingress_trunks%>
+			            <% trunks.each_with_index do |trunk, i| -%>
+			            <tr>
+			              <td><%=i + 1%></td>
+			              <td><%=trunk.carrier.company_name%></td>
+			              <td><%=trunk.name%></td>
+			              <td>
+			                <%if trunk.is_active?%>
+			                  <span class="label label-success">Activated</span>
+			                <%else%>
+			                  <span class="label label-warning">Deactivated</span>
+			                <%end%>
+			              </td>
+			              <td>&nbsp;</td>
+			            </tr>
+			          <% end %>
+			        </tbody>
+			      </table>
+			    </div>
+			<%end%>			    
+  		</div> 
+	</div>
+<%end%>
+
+<div class="panel panel-default">
+  <div class="panel-body ">
+  	<div class="row">
+  		<div class='col-md-6 text-left' style="margin: 5px 0px;">
+  			<%= page_entries_info @routings, entry_name: 'routing plans' %> 	
+  		</div>
+  		<div class='col-md-6 text-right'>
+  			<%= paginate @routings, :remote => true %>
+  		</div>
+  	</div>
+  </div>
+</div>

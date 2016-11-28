@@ -1,0 +1,96 @@
+<% provide(:title, 'Settings - Support') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li>Support</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.ZendeskSettingsHandler.init([<%=@zendesk_setting.zendesk_enable == '1' ? 'true' : 'false'%>]);
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<%=form_for @zendesk_setting, url: settings_update_zendesk_settings_path, remote: true, method: :patch, html: {class: 'zendesk_settings_form form-bordered'} do |f|%>
+				<%=f.hidden_field :uid%>
+				<%=hidden_field_tag :action, '', name: 'form[action]' %>
+			<div class="panel-heading">
+				<h4 class="panel-title"><%=@zendesk_setting.label%></h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group" style="margin-top: 0px;">
+					<label class="col-sm-2 control-label">Enable Zendesk Support:</label>
+					<div class="col-sm-3 control-label">
+						<div class="toggle-primary" id="zendesk_activation_tgl"></div>
+						<%=f.check_box :zendesk_enable, {style: 'opacity:0; position:absolute; top:0px;', id: 'zendesk_activation_tgl_chkbox'}%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Zendesk URL:</label>
+					<div class="col-sm-3">
+						<%=f.url_field :zendesk_url, class: 'form-control'%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Zendesk Username:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :zendesk_username, class: 'form-control'%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Authentication Method:</label>
+					<div class="col-sm-3">
+						<div class="radio"><label><%=f.radio_button :zendesk_auth_method, 'basic'%> Basic</label></div>
+						<div class="radio"><label><%=f.radio_button :zendesk_auth_method, 'token'%> Token</label></div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Zendesk Password:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :zendesk_password, class: 'form-control'%>
+						<span class="help-block">* Required, if Authentication Method is "Basic"</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Zendesk Token:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :zendesk_token, class: 'form-control'%>
+						<span class="help-block">* Required, if Authentication Method is "Token"</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Default Assignee Group:</label>
+					<div class="col-sm-3">
+						<span id="zendesk_assignees_list">
+						<%=f.select :zendesk_default_assignee, Setting.zendesk_grp_options, {include_blank: true}, {class: '', data: {placeholder: 'Choose Assignee...'}} %>
+						</span>&nbsp; <span><%=link_to '', '/settings/refresh_zendesk_assignees', class: 'glyphicon glyphicon-refresh', title: 'Refresh List', remote: true%></span>
+						<span class="help-block">* Tickets will be assigned to this group by default.</span>
+					</div>
+				</div>
+			</div><!-- panel-body -->
+			<div class="panel-footer">
+				<label class="col-sm-2"></label>
+				<button type="submit" class="btn btn-primary" id="updateBtn">
+					Update
+				</button>
+				<button type="submit" class="btn btn-white" id="testBtn">
+					Test
+				</button>
+				<a href="javascript:void(0)" title="Export missing users and carriers to Zendesk. Use if Zendesk modules was disabled for sometime. DOES NOT export already existing users and carriers." id="export_ne_users" class="btn btn-white">Export Non-Existing</a>
+				<a href="javascript:void(0)" title="Export ALL users and carriers to Zendesk. Use if Zendesk URL has changed. Note, this will DELETE all the old Zendesk data." id="export_all_users" class="btn btn-warning">Export ALL</a>
+				<span class="text-muted zendesk_settings_form_msg" style="margin-left:10px;"></span>
+			</div><!-- panel-footer -->
+			<%end%>
+		</div><!-- panel-default -->
+	</div>
+</div>

@@ -1,0 +1,98 @@
+<%if @comments.present?%>
+<ul class="media-list comment-list">
+    <%@comments.each do |comment|%>
+        <%user_data = @users[comment.author_id.to_s]%>
+        <%if comment.public || policy(:support).allow_internal_comment? -%>
+        <li class="media">
+            <a href="javascript:void(0);" class="pull-left">
+                <img alt="<%=user_data[0]%>" src="<%=user_data[2]%>" class="media-object">
+            </a>
+            <%if comment.public%>
+                <div class="media-body">
+            <%else%>
+                <div class="media-body-internal alert alert-warning">
+            <%end%>
+                <!--<a class="btn btn-default btn-xs pull-right reply" href=""><i class="fa fa-reply"></i></a>-->
+                <h4><%=user_data[0]%>: <%=user_data[1]%></h4>
+                <small class="text-muted"><%=comment.created_at.in_time_zone(@timezone).to_s(:carrier)%></small>
+                <p><%=simple_format(h(comment.body))%></p>
+            </div>
+            <%if comment.attachments.present?%>
+                <div class="attachments pull-right">
+                    <%comment.attachments.each do |attachment|%>
+                        <span class="glyphicon glyphicon-paperclip"></span>
+                        <a href="<%=attachment.content_url%>"><%=attachment.file_name%></a> <%=number_to_human_size(attachment.size)%>
+                        <%if (comment.attachments.last != attachment)%>
+                            &nbsp;|&nbsp;
+                        <%end%>
+                    <%end%>
+                </div>
+            <%end%>
+        </li><!-- media -->
+        <%end -%>
+    <%end%>
+</ul>
+<%else%>
+    <div class="text-center">No comment(s) found</div>
+<%end%>
+<br />
+
+<%=form_for :comment, url: make_comment_support_path(params[:id]), html: {id: 'make_comment_form', class: 'no-print'} do |f|%>
+    <%=f.hidden_field :status%>
+    <%=f.hidden_field :uploads %>
+    <div class='form-group'>
+        <label class="control-label col-sm-1"><img alt="<%=@users[current_user.zendesk_id.to_s][0]%>" src="<%=@users[current_user.zendesk_id.to_s][2]%>" class="media-object" height="50"></label>
+        <div class='col-sm-10'>
+            <%=f.text_area :body, rows: 2, class: 'form-control', placeholder: 'Add Comment'%>
+        </div>
+    </div>
+    <%if policy(:support).allow_internal_comment?%>
+        <div class='form-group'>
+            <div class='col-sm-offset-1' style="padding-left:10px;">
+                <div class="ckbox ckbox-warning">
+                    <%=f.check_box :internal%>
+                    <label for="comment_internal">Internal Note</label>
+                </div>
+            </div>
+        </div>
+    <%end%>
+    <div class="form-group">
+        <div class='col-sm-offset-1 col-sm-10' style="padding-left:10px;">
+            <div class="dropzone" id="attachments_cont" style="min-height:130px;">
+                <div class='dz-message'><h4>Drop Files here</h4> or click here to upload.</h4></div>
+                <div class="fallback">
+                    Your system does not support File Drag 'n' Drop. Please select files to upload.
+                    <%#f.fields_for :documents, Array.new(max_files, Document.new) do |d| %>
+                        <%#d.file_field :content %><br />
+                    <%#end%>
+                </div>
+            </div>
+            <span class='helptext text-warning'>Note*: Only <%#max_files%> file(s) of size 1 MB can be uploaded. You can upload images and pdf files.</span>
+        </div>
+    </div>  
+<%end%>
+<div class='form-group no-print'>
+    <button type="button" class="btn btn-primary col-sm-offset-1" id="submit_btn">
+        Submit</span>
+    </button>
+
+    <div class="btn-group" style='padding: 10px 0px 0px 10px;'>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="submitas_btn">
+            Change Status &amp; Submit <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a class='make-comment' href="javascript:void(0);" data-status='open'>Open</a></li>
+            <li><a class='make-comment' href="javascript:void(0);" data-status='pending'>Pending</a></li>
+            <li><a class='make-comment' href="javascript:void(0);" data-status='solved'>Solved</a></li>
+            <li><a class='make-comment' href="javascript:void(0);" data-status='close'>Closed</a></li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    <%if policy(:support).select_carrier?%>
+        App.AdminViewTicketHandler.initAttachmentsDZ();
+    <%else%>
+        App.CarrierViewTicketHandler.initAttachmentsDZ();
+    <%end%>
+</script>

@@ -1,0 +1,4 @@
+<label class="col-sm-2 control-label mt10">Select Credit Card:</label>
+<div class="col-sm-3">
+    <%=select :credit_card, :storage_id, options_for_select(CreditCard.for_select(carrier, include_other)), {include_blank: true}, {class: "", data: {placeholder: "Choose Credit Card..."}} %>
+</div>

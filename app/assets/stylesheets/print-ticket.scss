@@ -1,0 +1,28 @@
+section div.leftpanel {
+	display: none;
+}
+
+section div.mainpanel {
+	margin-left: 0px;
+    min-height: 0px;
+
+	div.headerbar {
+		display: none;
+	}
+
+	div.pageheader {
+		div.breadcrumb-wrapper {
+			display: none;
+		}
+	}
+
+	div.contentpanel .no-print {
+		display: none;
+
+		div#comments {
+			div.media-body p.text-warning {
+				color: #636e7b;
+			}
+		}
+	}
+}

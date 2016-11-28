@@ -1,0 +1,54 @@
+<div class="modal fade" id="apply-selected" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Apply changes to selected rate(s)?</h3>
+			</div>
+      <div class="modal-body">
+        <span class='error'></span>
+        <p>Are you sure you want to proceed? This operation is irreversible.</p>
+			</div>
+      <div class="modal-footer">
+        <%= submit_tag "Yes", name: "submit", class: "btn btn-xs btn-success" %>
+        <a class="btn" data-dismiss="modal" href: "#"> No</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="delete-selected" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3><%= "Delete selected rate(s) #{@rate_sheet.name}?" %></h3>
+			</div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete all selected rates? This operation is irreversible.</p>
+			</div>
+      <div class="modal-footer">
+        <%= submit_tag "Yes", name: "delete_selected", class: "btn btn-xs btn-danger" %>
+        <a class="btn" data-dismiss="modal" href: "#"> No</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="apply-all" tabindex: "-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Apply changes to all rates?</h3>
+			</div>
+      <div class="modal-body">
+        <span class='error'></span>
+        <p>Are you sure you want to proceed? This operation is irreversible.</p>
+      <div class="modal-footer">
+        <%= submit_tag "Yes", name: "apply_all", class: "btn btn-xs btn-success" %>
+        <a class="btn" data-dismiss="modal" href: "#"> No</a>
+			</div>
+		</div>
+	</div>
+</div>

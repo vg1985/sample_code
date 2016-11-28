@@ -1,0 +1,179 @@
+<% provide(:title, 'Profit Report') %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Reports</li>
+  <li class="active">Profit Report</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'reports'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  App.ProfitReportHandler.init();
+<%end%>
+
+<div class="row">
+  <div class="col-md-12 mb30">
+      <div class="panel panel-default">
+        <%=form_tag '/reports/profit', method: :get, id: 'include_all_form' do%>
+          <%=hidden_field_tag :include_all%>
+        <%end%>
+
+        <%=form_tag '/reports/get_profit', id: 'adv_crit_form' do%>
+        <%=hidden_field_tag :format, 'pdf' %>
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="#" class="adv-crit">−</a>
+          </div><!-- panel-btns -->
+          <div class="row">
+          <div class='col-sm-1 mt10 text-center' style="width:8%;">
+              Report Type:
+            </div>
+            <div class='col-sm-2'>
+              <%= select_tag :report_Type, options_for_select({'Origination': :orig, 'Termnation': :term}), {include_blank: false, id: 'report_type_select' } %>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%;">
+              Period:
+            </div>
+            <div class='col-sm-2'>
+              <%= select_tag :date_range, options_for_select(date_range_options), {include_blank: 'Custom', id: 'date_range_select' } %>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              From:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :from_date, Time.now.in_time_zone.strftime('%Y-%m-%d 00:00:00'), id: 'from_date', class: 'form-control', readonly: false%>
+            </div>
+            <div class='col-sm-1 mt10 text-center' style="width:6%">
+              To:
+            </div>
+            <div class='col-sm-2'>
+              <%=text_field_tag :to_date, Time.now.in_time_zone.strftime('%Y-%m-%d 23:59:59'), id: 'to_date', class: 'form-control', readonly: false%>
+            </div>
+          </div>
+        </div>
+        <div style="display: block;" class="panel-body">
+          <div class='row'>
+            <div class='col-sm-4'>
+              <h4>Ingress</h4>
+            </div>
+            <div class='col-sm-4'>
+              <h4>Egress</h4>
+            </div>
+            <div class='col-sm-4'>
+              <h4>Group By</h4>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-sm-1 mt10'>
+              Carrier
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :ingress_carrier_id, options_for_select(@carriers), {prompt: 'All Carriers', id: 'ingress_carrier_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Carrier
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :egress_carrier_id, options_for_select(@carriers), {prompt: 'All Carriers', id: 'egress_carrier_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Option
+            </div>
+            <div class='col-sm-3' id="orig_group_options">
+              <%= select_tag :orig_group_by, grouped_options_for_select(profit_group_by_options1), {include_blank: 'None', id: 'group_option1_select'} %>
+            </div>
+            <div class='col-sm-3' id="term_group_options" style="display:none;">
+              <%= select_tag :term_group_by, grouped_options_for_select(profit_group_by_options2), {include_blank: 'None', id: 'group_option2_select'} %>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              Ingress Trunks
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :ingress_trunk_id, options_for_select(@ingress_trunks), {prompt: 'All Ingress Trunks', id: 'ingress_trunk_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Egress Trunks
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :egress_trunk_id, options_for_select(@egress_trunks), {prompt: 'All Egress Trunks', id: 'egress_trunk_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              <h4>Other</h4>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              Rate Table
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :ingress_rate_id, options_for_select(@rate_sheets), {prompt: 'All Rates', id: 'ingress_rate_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Rate Table
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :egress_rate_id, options_for_select(@rate_sheets), {prompt: 'All Rates', id: 'egress_rate_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Use TZone:
+            </div>
+            <div class='col-sm-2'>
+              <%=time_zone_select('', 'time_zone', ActiveSupport::TimeZone.all.sort, {default: 'UTC'}, {id: 'tz_select'})%>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              Tech Prefix
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :ingress_techprefix_id, options_for_select(@ingress_tech_prefixes), {prompt: 'All Tech Prefixes', id: 'ingress_techprefix_select'} %>
+            </div>
+            <div class='col-sm-1 mt10'>
+              Tech Prefix
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :egress_techprefix_id, options_for_select(@egress_tech_prefixes), {prompt: 'All Tech Prefixes', id: 'egress_techprefix_select'} %>
+            </div>
+            <div class='col-sm-3 mt10'>
+              <div class="ckbox ckbox-primary">
+                <%=check_box_tag :include_all_chk, 1, params[:include_all] == '1'%>
+                <label for="include_all_chk">Show all disabled/deleted.</label>
+              </div>
+            </div>
+          </div>
+          <div class='row mt10'>
+            <div class='col-sm-1 mt10'>
+              Routing Plan
+            </div>
+            <div class='col-sm-3'>
+              <%= select_tag :ingress_routing_id, options_for_select(@routings), {prompt: 'All Routings', id: 'ingress_routing_select'} %>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer"> 
+          <div class='row'>
+            <div class='col-sm-12 text-center'>
+              <%=link_to 'Generate Report', 'javascript:void(0);', class: 'btn btn-primary submit-btn' %>
+              <!--<input type="submit" name="action" value="Generate Report" class='btn btn-primary submit-btn' />-->
+              <%=link_to 'Reset', '/reports/profit', class: 'btn btn-white', onclick: 'App.overlayModal.show();' %>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+      <div class="panel panel-default reports-container">
+        <div class="panel-body" style="display:none;">
+          <div class="row">
+            <div class="col-sm-6 text-right"></div>
+          </div>
+          <div class="table-responsive sip-style-selectable" id="report_data_container">
+            
+          </div>
+        </div>
+      </div>
+  </div>    
+</div>

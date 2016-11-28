@@ -1,0 +1,6 @@
+{
+  "draw": <%=params[:draw]%>,
+  "recordsTotal": <%=@charges.total_count%>,
+  "recordsFiltered": <%=@charges.total_count%>,
+  "data": <%=@data.to_json.html_safe%>
+}

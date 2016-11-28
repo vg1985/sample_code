@@ -1,0 +1,29 @@
+<div class="panel-body">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Enable Credit Card Payment</label>
+    <div class="col-sm-1 control-label">
+      <div class="toggle toggle-default toggle_allow_cc" data-selector='allow_cc'></div>
+      <%=f.check_box :allow_cc, style: 'opacity:0; position:absolute;'%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Enable Paypal Payment</label>
+    <div class="col-sm-1 control-label">
+      <div class="toggle toggle-default toggle_allow_paypal" data-selector='allow_paypal'></div>
+      <%=f.check_box :allow_paypal, style: 'opacity:0; position:absolute;'%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Enable Paypal Mass Payments</label>
+    <div class="col-sm-1 control-label">
+      <div class="toggle toggle-default toggle_allow_paypal_ipn" data-selector='allow_paypal_ipn'></div>
+      <%=f.check_box :allow_paypal_ipn, style: 'opacity:0; position:absolute;'%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	var po_switch_statuses = [<%=po_toggle_init(carrier).join(',').html_safe%>];
+</script>

@@ -1,0 +1,15 @@
+var gritter_opts = {
+	title: 'Zendesk Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if 'export_non_existing' == controller.action_name -%>
+	gritter_opts.text = "Process to export all non-existing users and carriers have been started.";
+<%else -%>
+	gritter_opts.text = "Process to export ALL users and carriers have been started.";
+<%end -%>
+gritter_opts.class_name = 'growl-success';
+
+jQuery("span.zendesk_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

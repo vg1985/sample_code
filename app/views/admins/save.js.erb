@@ -1,0 +1,5 @@
+<% if @user.errors.blank? %>
+  window.location.href = "<%= admins_path %>";
+<% else %>
+  App.ErrorHandler.add_errors("#new_admin", "<%= j(raw(@user.errors.to_json)) %>");
+<% end %>

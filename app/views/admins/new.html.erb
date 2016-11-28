@@ -1,0 +1,21 @@
+<% provide(:title, 'New Administrator') %>
+<div class="" id="carrier-panel">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-btns">
+        <a href="#" class="panel-close">&times;</a>
+        <a href="#" class="minimize">&minus;</a>
+      </div>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#carrier-panel" data-target="#carrier-panel1" href="javascript:void(0)">
+          New Admin
+        </a>
+      </h4>
+    </div>
+    <div id="carrier-panel1" class="panel-collapse collapse in">
+      <div id="formBlock">
+        <%= render partial: "form", locals: { admin: @admin } %>
+      </div>
+    </div>
+  </div>
+</div>

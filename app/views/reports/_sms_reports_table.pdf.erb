@@ -1,0 +1,59 @@
+<table id="reports_table" cellspacing="0" border='1' cellpadding="2">
+  <thead>
+      <th><%=group_by_title(params[:group_by])%></th>
+      <th>Total</th>
+      <th>Outgoing</th>
+      <th>Incoming</th>
+      <th>Forwarded</th>
+      <th>Outgoing Cost</th>
+      <th>Incoming Cost</th>
+      <th>Forwarded Cost</th>
+      <th>Total Cost</th>
+      <th>Successful</th>
+      <th>Failed</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <%grand_total = Array.new(10, 0)
+    @sms_logs.each do |log| -%>
+      <tr class="text-center">
+        <td>
+          <%if 'sms_carrier_id' == params[:group_by]%>
+            <%=log.company_name%>
+          <%else%>
+          <%=log.sdate%>
+          <%end%>
+        </td>
+        <%grand_total[0] += log.total_sms%> 
+        <td class="text-center"><%=log.total_sms%></td>
+        <%grand_total[1] += log.outgoing%>
+        <td class="text-center"><%=log.outgoing%></td>
+        <%grand_total[2] += log.incoming%>
+        <td class="text-center"><%=log.incoming%></td>
+        <%grand_total[3] += log.forwarded%>
+        <td class="text-center"><%=log.forwarded%></td>
+        <%grand_total[4] += log.outgoing_cost%>
+        <td class="text-center"><%=log.outgoing_cost%></td>
+        <%grand_total[5] += log.incoming_cost%>
+        <td class="text-center"><%=log.incoming_cost%></td>
+        <%grand_total[6] += log.forwarded_cost%>
+        <td class="text-center"><%=log.forwarded_cost%></td>
+        <%grand_total[7] += log.total_cost%>
+        <td class="text-center"><%=log.total_cost%></td>
+        <%grand_total[8] += log.successful%>
+        <td class="text-center"><%=log.successful%></td>
+        <%grand_total[9] += log.failed%>
+        <td class="text-center"><%=log.failed%></td>
+      </tr> 
+    <%end -%>
+  </tbody>
+  <tfoot>
+      <tr>
+          <th class="text-center">Total:</th>
+          <%grand_total.each do |val|%>
+            <th class="text-center"><%=val%></th>
+          <%end%>
+      </tr>
+  </tfoot>
+</table>

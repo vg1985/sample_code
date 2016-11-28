@@ -1,0 +1,203 @@
+<% provide(:title, 'Settings - Finance') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Finance</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.PaymentGatewaysHandler.init([<%=@paypal_setting.paypal_enable == '1' ? "true" : "false"%>, <%=@cc_setting.cc_enable == '1' ? "true" : "false"%>, <%=@paypal_setting.paypal_deduct_commission == '1' ? "true" : "false"%>]);
+	App.FinanceSettingsHandler.init();
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<!--<h5 class="subtitle mb5">Basic Tabs</h5>
+		<p>
+			We should add some explanation here regarding this page.
+		</p>-->
+		<br />
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#paypal" data-toggle="tab"><strong>Paypal</strong></a>
+			</li>
+			<li>
+				<a href="#credit_card" data-toggle="tab"><strong>Credit Card</strong></a>
+			</li>
+			<li>
+				<a href="#other" data-toggle="tab"><strong>Other</strong></a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="paypal">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<%=form_for @paypal_setting, url: settings_update_payment_settings_path, remote: true, method: :patch, html: {class: 'paypal_settings_form form-bordered'} do |f|%>
+								<%=f.hidden_field :uid%>
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@paypal_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group" style="margin-top: 0px;">
+									<label class="col-sm-2 control-label">Enable Paypal Express:</label>
+									<div class="col-sm-3 control-label">
+										<div class="toggle-primary" id="paypal_activation_tgl"></div>
+										<%=f.check_box :paypal_enable, {class: 'toggle-hidden-cb', id: "paypal_activation_tgl_chkbox"}%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Login:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :paypal_login, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Password:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :paypal_password, class: 'form-control'%>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10" >Signature:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :paypal_signature, class: 'form-control'%>
+									</div>
+								</div>
+								<div class="form-group" style="margin-top: 0px;">
+									<label class="col-sm-2 control-label">Deduct Paypal Commissions:</label>
+									<div class="col-sm-3 control-label">
+										<div class="toggle-primary" id="paypal_deduct_commission_tgl"></div>
+										<%=f.check_box :paypal_deduct_commission, {style: "opacity:0; position:absolute; top:0px;", id: "paypal_deduct_commission_tgl_chkbox"}%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted paypal_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+							<%end%>
+						</div><!-- panel-default -->
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="credit_card">
+				<div class="row">
+					<%=form_for @cc_setting, url: settings_update_payment_settings_path, remote: true, method: :patch, html: {class: 'cc_settings_form form-bordered'} do |f|%>
+						<%=f.hidden_field :uid%>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@cc_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Credit Card Payment:</label>
+									<div class="col-sm-3 control-label">
+										<div class="toggle-primary" id="cc_activation_tgl"></div>
+										<%=f.check_box :cc_enable, {style: "opacity:0; position:absolute; top:0px;", id: "cc_activation_tgl_chkbox"}%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Payment Gateway:</label>
+									<div class="col-sm-3">
+										<%=f.select :cc_gateway, options_for_select(PaymentGateway::CC_GATEWAYS.invert, @cc_setting.cc_gateway), {include_blank: "Please Select"}, {class: 'cc_gateway_select2'}%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer first-update-btn" style="<%=@cc_setting.cc_gateway.blank? ? '' : 'display:none;'%>">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted cc_payment_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+						<div class="panel panel-default usa_epay_settings_cont" style="<%=@cc_setting.cc_gateway == 'usaepay' ? '' : 'display:none;'%>">
+							<div class="panel-heading">
+								<h4 class="panel-title">USA ePay Setting</h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Source Key:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :cc_epay_source_key, class: 'form-control'%>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label mt10">Pin:</label>
+									<div class="col-sm-3">
+										<%=f.text_field :cc_epay_pin, class: 'form-control'%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted cc_payment_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+						</div><!-- panel-default -->
+					</div>
+					<%end%>
+				</div>
+			</div>
+			<div class="tab-pane" id="other">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<%=form_for @finance_setting, url: settings_update_finance_settings_path, method: :patch, html: { multipart:true, class: 'finance_settings_form form-bordered' } do |f|%>
+								<%=f.hidden_field :uid%>
+							<div class="panel-heading">
+								<h4 class="panel-title"><%=@finance_setting.label%></h4>
+							</div>
+							<div class="panel-body">
+								<div class="form-group" style="margin-top: 0px;">
+									<label class="col-sm-3 control-label">Allowed Amounts:
+									<h6 class="help-block">Enter comma-sepearted amounts e.g. 500, 1000, 1500 </h6></label>
+
+									<div class="col-sm-3 control-label">
+										<%=f.text_field :finance_allowed_amounts, class: 'form-control'%>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label mt10">Credit card authorization form template:</label>
+									<div class="col-sm-4">
+										<%if @finance_setting.finance_auth_file_name.present? %>
+											<%=link_to "Download Template", '/settings/download_auth_sample' %> (<%=@finance_setting.finance_auth_file_name%>). <br />To update new template click 'Browse'
+										<%end%>
+										<%=file_field(:setting, :sample_auth_form, style: "margin-top:10px;")%>
+									</div>
+								</div>
+							</div><!-- panel-body -->
+							<div class="panel-footer">
+								<label class="col-sm-2"></label>
+								<button class="btn btn-primary">
+									Update
+								</button>
+								<span class="text-muted finance_settings_form_msg" style="margin-left:10px;"></span>
+							</div><!-- panel-footer -->
+							<%end%>
+						</div><!-- panel-default -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

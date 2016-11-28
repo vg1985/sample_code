@@ -1,0 +1,239 @@
+<% provide(:title, "Support-View Ticket##{@ticket.id}") %>
+
+<%=content_for :breadcrumb do-%>
+  <li>Support</li>
+  <li class="active">View Ticket</li>
+<%end%>
+
+<%=content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'dropzone', media: 'all'%>
+  <%= stylesheet_link_tag 'print-ticket', media: 'print'%>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'dropzone.min', 'support'%>
+<%end%>
+
+<%=content_for :js_init do %>
+  <%if policy(:support).select_carrier?%>
+    App.AdminViewTicketHandler.setUrls(['<%= comments_support_path(@ticket.id)%>',
+        '<%=attach_file_support_index_path%>', 
+        '<%=detach_file_support_index_path%>',
+        '<%=edit_support_path(@ticket.id)%>']);
+    App.AdminViewTicketHandler.init();
+  <%else%>
+     App.CarrierViewTicketHandler.setUrls(['<%= comments_support_path(@ticket.id)%>',
+        '<%=attach_file_support_index_path%>', 
+        '<%=detach_file_support_index_path%>',
+        '<%=edit_support_path(@ticket.id)%>']);
+     App.CarrierViewTicketHandler.init();
+  <%end%>
+<%end%>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title"><%=@ticket.subject%></div>
+    </div><!-- panel-heading-->
+    <div class="panel-body">
+        <div class="btn-group mr10 no-print">
+            <%if policy(:support).update_ticket?%>
+                <button class="btn btn-primary edit_ticket" type="button"><i class="fa fa-pencil mr5"></i> Edit</button>
+            <%end%>
+            <a class="btn btn-primary" type="button"  href="#make_comment_form"><i class="fa fa-comments mr5"></i> Comment</a>
+            <%if policy(:support).destroy?%>
+                <button class="btn btn-danger" type="button" data-target=".delete-ticket-confirm-dlg" data-toggle="modal"><i class="fa fa-trash-o mr5"></i> Delete</
+                button>
+            <%end%>
+        </div>
+        <div class="btn-group mr10 no-print">
+            <%=link_to 'Resolve Ticket', status_support_path(@ticket.id, status: 'solved'), class: 'btn btn-default'%>
+            <%if policy(:support).close_ticket?%>
+                <%=link_to 'Close Ticket', status_support_path(@ticket.id, status: 'closed'), class: 'btn btn-default'%>
+            <%end%>
+        </div>
+        
+        <div class="btn-group mr10 no-print">
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                More
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Assign</a></li>
+                <li><a href="#">Attach File</a></li>
+                <li><a href="#">Watch Issue</a></li>
+                <li><a href="#">Watchers</a></li>
+                <li><a href="#">Labels</a></li>
+            </ul>
+        </div>
+        
+        <div class="btn-group no-print">
+            <button class="btn btn-primary print-ticket" type="button"><i class="fa fa-print mr5"></i>Print</button>
+        </div>
+
+        <%if policy(:support).show_on_zendesk?%>
+            <div style="float:right;" class="no-print">
+                <a href="https://sipsurge.zendesk.com/agent/tickets/<%=@ticket.id%>" title="Show on Zendesk" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+            </div>
+        <%end%>
+        <br class="no-print" /><br class="no-print"/>
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <h5 class="subtitle subtitle-lined">Details</h5>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row mb10">
+                            <div class="col-xs-6">Priority</div>
+                            <div class="col-xs-6"><%=priority_label(@ticket.priority).html_safe%></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Carrier</div>
+                            <div class="col-xs-6">
+                                <%if @ticket.organization_id.present?%>
+                                    <%=Carrier.find_by(zendesk_id: @ticket.organization_id).try(:company_name)%>
+                                <%else%>
+                                    --
+                                <%end%>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Type</div>
+                            <div class="col-xs-6">
+                                <%if @ticket.type.present?%>
+                                    <%=@ticket.type.try(:titlecase)%>
+                                <%else%>
+                                    --
+                                <%end%>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-xs-6">Created on</div>
+                            <div class="col-xs-6"><%=@ticket.created_at.in_time_zone(@timezone).to_s(:carrier)%></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Updated on</div>
+                            <div class="col-xs-6"><%=@ticket.updated_at.in_time_zone(@timezone).to_s(:carrier)%></div>
+                        </div>
+                    </div><!-- col-sm-6 -->
+                    <div class="col-sm-6">
+                        <div class="row mb10">
+                            <div class="col-xs-6">Status</div>
+                            <div class="col-xs-6"><%=status_label(@ticket.status).html_safe%></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">CC To</div>
+                            <div class="col-xs-6">
+                                <%if @ticket.collaborator_ids.present?
+                                    @ticket.collaborator_ids.each do |c|
+                                        if @ticket.collaborator_ids.size > 1
+                                            if @ticket.collaborator_ids.last == c %>
+                                                and
+                                            <%else%>
+                                                <%if @ticket.collaborator_ids.first != c %>
+                                                ,
+                                                <%end
+                                            end%>
+                                            <a href="javascript:void(0);" title="<%=@users[c.to_s][1]%>"><%=@users[c.to_s][0]%></a>
+                                        <%else%>
+                                            <a href="javascript:void(0);" title="<%=@users[c.to_s][1]%>"><%=@users[c.to_s][0]%></a>
+                                        <%end
+                                    end
+                                else%>
+                                    --
+                                <%end%>    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Requester</div>
+                            <div class="col-xs-6">
+                                <a href="javascript:void(0);" title="<%=@users[@ticket.requester_id.to_s][1]%>">
+                                    <%=@users[@ticket.requester_id.to_s][0]%>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Assignee</div>
+                            <div class="col-xs-6">
+                                <%if @group.present?%>
+                                    <a href="javascript:void(0)" title="<%=@group.name%>"><%=@group.name%></a>
+                                <%else%>
+                                    Not assigned yet
+                                <%end%>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">Submitter</div>
+                            <div class="col-xs-6"><a href="javascript:void(0)" title="<%=@users[@ticket.submitter_id.to_s][1]%>"><%=@users[@ticket.submitter_id.to_s][0]%></a></div>
+                        </div>
+                        <%if policy(:support).add_tags?%>
+                        <div class="row">
+                            <div class="col-xs-6">Tags</div>
+                            <div class="col-xs-6"><%=@ticket.tags.collect(&:id).join(', ')%></div>
+                        </div>
+                        <%end%>
+                    </div><!-- col-sm-6 -->
+                </div><!-- row -->
+                
+                <br class='no-print' /><br class='no-print' />
+                
+                <!-- <h5 class="subtitle subtitle-lined">Description</h5>
+                <p><%#simple_format(h(@ticket.description))%></p> -->
+                
+                <!-- <br /><br /> -->
+                
+                <!-- <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#all"><strong>All</strong></a></li>
+                    <li class="active"><a data-toggle="tab" href="#comments"><strong>Comments</strong></a></li>
+                    <li><a data-toggle="tab" href="#worklog"><strong>Work Log</strong></a></li>
+                    <li><a data-toggle="tab" href="#history"><strong>History</strong></a></li>
+                    <li><a data-toggle="tab" href="#activity"><strong>Activity</strong></a></li>
+                </ul> -->
+                <br class='no-print' />
+                <div class="tab-content noshadow">
+                    <!-- <div id="all" class="tab-pane">
+                        All activity goes here...
+                    </div> -->
+                    <div id="comments" class="tab-pane active">
+                        <div class="loader text-center"></div>
+                    </div><!-- tab-pane -->
+                    <!-- <div id="worklog" class="tab-pane">
+                        Work log goes here...
+                    </div>
+                    <div id="history" class="tab-pane">
+                        History goes here...
+                    </div>
+                    <div id="activity" class="tab-pane">
+                        Activity goes here...
+                    </div> -->
+                </div><!-- tab-content -->
+                
+            </div>
+        </div><!-- row -->
+        
+    </div><!-- panel-body -->
+</div><!-- panel -->
+
+<div class="modal fade delete-ticket-confirm-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title"><span class="glyphicon glyphicon-thumbs-up"></span> Confirmation</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+              <div class="panel-body panel-body-nopadding">
+                <div class="row">
+              <div style='text-align:center;'>
+                <h4>Are you sure you want to delete this ticket? This action is irreversible.</h4>
+                <%=link_to support_path(@ticket.id), method: :delete, class: 'btn btn-danger' do -%>
+                  OK
+                <%end-%>
+                <a href="javascript:void(0);" class="btn btn-default close_modal">Cancel</a>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+</div>

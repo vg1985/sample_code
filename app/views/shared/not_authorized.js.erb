@@ -1,0 +1,8 @@
+var gritter_opts = {
+	title: 'Not Authorized',
+	sticky: false,
+	time: '5000'
+};
+gritter_opts.text = '<%=@error%>';
+gritter_opts.class_name = 'growl-danger';	   
+jQuery.gritter.add(gritter_opts);

@@ -1,0 +1,39 @@
+<div class="settings-err-msg text-danger" style="display:none;"> </div>
+<table style="width:100%" id="host_headings">
+  <thead>
+    <tr>
+      <th width="33%">Host</th>
+      <th width="33%">Subnet</th>
+      <th width="30%">Port</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+</table>
+<div id="add_host_warning" class="text-warning" style="display:none; margin:5px 0 5px">Please click "Add Host" to add a Host/IP.</div>
+<%= f.fields_for :hosts, setup_objects(trunk, :hosts) do |hs| %>
+<div class="panel-body form-inline row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= hs.text_field :host_ip, placeholder: "Host", class: "form-control input-sm ip_address tooltips", style: "width:90%", data: {placement: 'top', toggle: 'tooltip'}, title: 'Required. Should be valid IP4 Address.'  %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= hs.text_field :subnet, placeholder: "Subnet", class: "form-control input-sm subnet tooltips", style: "width:90%", data: {placement: 'top', toggle: 'tooltip'}, title: "Required. Should be between 0 and 32 inclusive." %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <%= hs.text_field :port, placeholder: "Port", class: "form-control input-sm port tooltips", style: "width:90%", data: {placement: 'top', toggle: 'tooltip'}, title: "Required. Should be between 0 and 65535 inclusive." %>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="form-group type" style="margin-top:10px;">
+      <%= hs.link_to_remove raw("<i class='fa fa-times-circle'></i>") %>
+    </div>
+  </div>
+</div>
+<% end %>
+<div>
+  <%= f.link_to_add "Add Host", :hosts, class: "btn btn-success btn-xs" %>
+</div>

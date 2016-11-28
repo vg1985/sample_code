@@ -1,0 +1,14 @@
+var gritter_opts = {
+	title: 'Manage Routing Plans',
+	sticky: false,
+	time: '5000'
+};
+
+gritter_opts.text = '<%=@message%>';
+gritter_opts.class_name = 'growl-success';
+
+
+   
+jQuery('span#routing_table_<%=@routing.id%>').html("<%=escape_javascript(render partial: 'routing_plan_table', locals:{routing: @routing})%>");
+
+jQuery.gritter.add(gritter_opts);

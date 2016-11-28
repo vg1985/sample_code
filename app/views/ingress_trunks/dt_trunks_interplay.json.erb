@@ -1,0 +1,12 @@
+{
+  "draw": <%=params[:draw]%>,
+  <%if @ingress_trunks.blank?%>
+  "recordsTotal": 0,
+  "recordsFiltered": 0,
+  <%else%>
+  "recordsTotal": <%=@ingress_trunks.total_count%>,
+  "recordsFiltered": <%=@ingress_trunks.total_count%>,
+  <%end%>
+  
+  "data": <%=@data.to_json.html_safe%>
+}

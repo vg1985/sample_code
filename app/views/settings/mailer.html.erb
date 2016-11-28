@@ -1,0 +1,82 @@
+<% provide(:title, 'Settings - Mailer') %>
+
+<%=content_for :breadcrumb do%>
+	<li>Settings</li>
+	<li class="active">Mailer</li>
+<%end%>
+
+<%=content_for :javascripts do %>
+	<%= javascript_include_tag 'settings'%>
+<%end%>
+
+<%=content_for :js_init do %>	
+	App.MailerSettingsHandler.init([<%=@mailer_setting.mailer_enable == '1' ? "true" : "false"%>]);
+<%end%>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<%=form_for @mailer_setting, url: settings_update_mailer_settings_path, remote: true, method: :patch, html: {class: 'mailer_settings_form form-bordered'} do |f|%>
+				<%=f.hidden_field :uid%>
+			<div class="panel-heading">
+				<h4 class="panel-title"><%=@mailer_setting.label%></h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group" style="margin-top: 0px;">
+					<label class="col-sm-2 control-label">Enable:</label>
+					<div class="col-sm-3 control-label">
+						<div class="toggle-primary" id="mailer_activation_tgl"></div>
+						<%=f.check_box :mailer_enable, {style: "opacity:0; position:absolute; top:0px;", id: "mailer_activation_tgl_chkbox"}%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Mail Server Address:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_server_address, class: 'form-control'%>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10">Port:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_port, class: 'form-control'%>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10" >Domain:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_domain, class: 'form-control'%>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10" >Sender's Email:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_email, class: 'form-control'%>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10" >Username:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_username, class: 'form-control'%>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label mt10" >Password:</label>
+					<div class="col-sm-3">
+						<%=f.text_field :mailer_password, class: 'form-control'%>
+					</div>
+				</div>
+			</div><!-- panel-body -->
+			<div class="panel-footer">
+				<label class="col-sm-2"></label>
+				<button class="btn btn-primary">
+					Update
+				</button>
+				<span class="text-muted mailer_settings_form_msg" style="margin-left:10px;"></span>
+			</div><!-- panel-footer -->
+			<%end%>
+		</div><!-- panel-default -->
+	</div>
+</div>

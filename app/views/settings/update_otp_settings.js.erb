@@ -1,0 +1,22 @@
+var gritter_opts = {
+	title: 'OTP Settings',
+	sticky: false,
+	time: '5000'
+};
+
+<%if @otp_setting.present? %>
+	<%unless @otp_setting.errors.any?%>
+		gritter_opts.text = "OTP settings have been updated.";
+		gritter_opts.class_name = 'growl-success';
+		
+	<%else%>
+		gritter_opts.text = "The data seems to be invalid. Failed to update the OTP settings.";
+		gritter_opts.class_name = 'growl-danger';
+	<%end%>
+<%else%>
+		gritter_opts.text = "This seems to be a invalid request. Aborting now.";
+		gritter_opts.class_name = 'growl-danger';
+<%end%>	
+
+jQuery("span.otp_settings_form_msg").html('');
+jQuery.gritter.add(gritter_opts);

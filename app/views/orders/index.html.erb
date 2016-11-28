@@ -1,0 +1,90 @@
+<% provide(:title, 'Orders') %>
+
+<%=content_for :breadcrumb do-%>
+	<li>Inbound DID</li>
+	<li class="active">Orders</li>
+<%end%>
+
+<%=content_for :javascripts do -%>
+    <%= javascript_include_tag 'orders', 'data-turbolinks-track' => true %>
+<%end%>
+
+<%=content_for :js_init do %> 
+<%if policy(:payment).select_carrier? -%>
+    App.AdminOrdersHandler.setUrls(['<%=dt_orders_interplay_orders_path%>']);
+    App.AdminOrdersHandler.init();
+<%else -%>
+    App.CarrierOrdersHandler.setUrls(['<%=dt_orders_interplay_orders_path%>']);
+    App.CarrierOrdersHandler.init();
+<%end -%>
+    
+<%end%>
+<div class="row">
+  <div class="col-md-12">
+      <%= form_tag payments_path, class: 'form-inline' do %>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <div class="panel-btns">
+                      <a class="minimize" href="">−</a>
+                  </div>
+                  <h4 class="panel-title">Filters</h4>
+              </div>
+              <div class="panel-body">
+                  <%if policy(:order).select_carrier? -%>
+                  <div class="form-group" style="margin-right:15px;">
+                      <label class="sr-only" for="carrier_select">Carrier</label>
+                      <%= select_tag :carrier_id, options_from_collection_for_select(@carriers, :id, :carrier_balance), {prompt: 'All Carriers', class: "select2", id: "carrier_select"} %>
+                  </div>
+                  <% end -%>
+                  <div class="form-group" style="margin-right:15px; min-width:120px;">
+                      <label class="sr-only" for="payment_status">Status</label>
+                      <%= select_tag :status, options_for_select(Order::STATUS_NAMES.dup.invert), {prompt: 'All Statuses', class: "select2", id: 'order_status' } %>
+                  </div>
+                  <div class="form-group mr10" style="margin-right:15px; min-width:120px;">
+                      <label class="sr-only" for="payment_type">Payment Type</label>
+                      <%= select_tag :payment_type, options_for_select(['Purchase', 'Release']), {prompt: "All Order Types", class: "select2", id: 'order_type'} %>
+                  </div>
+                  <div class="form-group mr10" style="margin-right:15px; min-width:120px;">
+                      <label class="sr-only" for="">DID</label>
+                      <%= text_field_tag :dids, nil, id: 'search_did', placeholder: 'Search DID', class: 'form-control'%>
+                  </div>
+              </div>
+          </div>
+      <% end %>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Orders</h4>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="orders" class="table table-striped dataTable table-hover table-bordered">
+            <thead>
+              <tr>
+                <%if policy(:order).select_carrier? -%>
+                  <th width="13%">Carrier</th>
+                  <th width="10%">Order ID</th>
+                  <th width="15%">Creation Date</th>
+                  <th width="10%">Status</th>
+                  <th width="12%">Order Type</th>
+                  <th widht="15%">DIDs Type</th>
+                  <th width="14%">Number of DIDs</th>
+                  <th width="10%">Placed By</th>
+                <%else%>
+                  <th width="12%">Order Type</th>
+                  <th width="14%">Order ID</th>
+                  <th width="16%">Placed On</th>
+                  <th width="12%">Status</th>
+                  <th width="12%">DIDs Type</th>
+                  <th width="13%">DIDs ordered</th>
+                  <th>Email</th>
+                <%end%>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

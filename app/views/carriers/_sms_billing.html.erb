@@ -1,0 +1,87 @@
+<div class='row'>
+	<div class="col-md-6">
+		<h4>SMS Rates</h4>
+		<div class="well form-horizontal form-bordered">
+    		<%=f.fields_for :did_sms_rate do |dsr|%>
+				<div class="form-group sms_activation_spinner_group">
+					<label class="col-sm-3 control-label">Activation</label>
+					<div class="col-sm-4">
+						<%=dsr.text_field :activation, id: 'sms_activation_spinner', title: t(:activation_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips', style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="sms_activation_tgl" data-spinner="sms_activation_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="sms_activation_tgl_val" id="sms_activation_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="sms_activation_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group sms_monthly_spinner_group">
+					<label class="col-sm-3 control-label">Monthly</label>
+					<div class="col-sm-4">
+						<%=dsr.text_field :monthly, id: 'sms_monthly_spinner', title: t(:monthly_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips' , style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="sms_monthly_tgl" data-spinner="sms_monthly_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="sms_monthly_tgl_val" id="sms_monthly_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="sms_monthly_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group sms_monthly_spinner_group">
+					<label class="col-sm-3 control-label">Outbound</label>
+					<div class="col-sm-4">
+						<%=dsr.text_field :outbound, id: 'sms_outbound_spinner', title: t(:outbound_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips' , style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="sms_outbound_tgl" data-spinner="sms_outbound_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="sms_outbound_tgl_val" id="sms_outbound_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="sms_outbound_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group sms_monthly_spinner_group">
+					<label class="col-sm-3 control-label">Inbound</label>
+					<div class="col-sm-4">
+						<%=dsr.text_field :inbound, id: 'sms_inbound_spinner', title: t(:inbound_helptext), data: {placement: 'top', toggle: 'tooltip'}, class: 'tooltips' , style: 'width:75%'%>
+					</div>
+					<label class="col-sm-3 control-label">Use Default</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="sms_inbound_tgl" data-spinner="sms_inbound_spinner"></div>
+	                	<input type="checkbox" style="opacity:0; position:absolute;" name="sms_inbound_tgl_val" id="sms_inbound_tgl_chkbox">
+	                </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-offset-3">
+						<span class="error" id="sms_inbound_spinner_error"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">Charge Failed SMS</label>
+	                <div class="col-sm-2 control-label">
+	                	<div class="toggle-default" id="sms_charge_failed_tgl"></div>
+	                	<%=dsr.check_box :charge_failed, id: 'sms_charge_failed_tgl_chkbox', style: 'opacity:0; position:absolute;'%>
+	                </div>
+				</div>
+
+			<%end%>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var sms_did_defaults = [<%=@dsr_defaults.to_arr.join(',').html_safe%>];
+	var sms_did = [<%=spinner_init_values(@carrier_dsr).join(',').html_safe%>];
+	var sms_switch_statuses = [<%=toggleswitch_init_format(@carrier_dsr).join(',').html_safe%>];
+</script>
